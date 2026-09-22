@@ -23,6 +23,7 @@ class HtmlParser:
         "topics", "topic", "general information", "application", "application process", "procedure",
         "scope", "evaluation", "grading", "contact", "important information", "submission requirements",
         "process of the project study", "execution of the project study", "durchführung des projektstudiums",
+        "modalities of the project study idp",
         "bewertung", "themen", "bewerbung", "recent proposals", "project modules",
         "aktuelle projektstudien", "vergangene projektstudien",
         "project studies and interdisciplinary projects for informatics idp",

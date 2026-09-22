@@ -86,14 +86,15 @@ def _load_registry() -> tuple[ChairAdapter, ...]:
         "management-of-digital-food-businesses": ("/project_studies/project_study_",),
     }
     known_direct = {"economics-of-innovation", "management-accounting", "corporate-governance-and-capital-markets-law",
-                    "corporate-management", "controlling", "technology-and-innovation-management",
+                    "corporate-management", "controlling", "technology-and-innovation-management", "marketing-and-technology",
                     "family-business-culture-and-ownership", "digital-marketing"}
     adapters = tuple(ChairAdapter(
         slug=_slug(row["chair_name"]), name=row["chair_name"], department=row["department"],
         source_urls=(row["project_study_url"],), family=_family(row["project_study_url"]),
+        excluded_markers=(tuple(marker for marker in ChairAdapter.excluded_markers if marker != "idp")
+                          if row["chair_name"] == "Marketing and Technology" else ChairAdapter.excluded_markers),
         child_url_patterns=audited_children.get(_slug(row["chair_name"]), ()),
-        state=(SourceState.broken if row["chair_name"] == "Marketing and Technology" else
-               SourceState.active if _slug(row["chair_name"]) in known_direct or _slug(row["chair_name"]) in audited_children else
+        state=(SourceState.active if _slug(row["chair_name"]) in known_direct or _slug(row["chair_name"]) in audited_children else
                SourceState.empty),
     ) for row in rows)
     if len({a.slug for a in adapters}) != 32 or len({a.source_urls[0] for a in adapters}) != 32:

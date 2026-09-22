@@ -7,7 +7,9 @@ def test_all_32_chairs_have_dedicated_entries():
     assert sorted(Counter(a.department for a in REGISTRY).values()) == [5, 6, 7, 7, 7]
     assert all(a.source_urls and a.stable_key(a.source_urls[0], "A") for a in REGISTRY)
     assert BY_SLUG["economics-of-innovation"].source_urls == ("https://www.ep.mgt.tum.de/en/eoi/teaching/project-studies/",)
-    assert BY_SLUG["marketing-and-technology"].state == SourceState.broken
+    assert BY_SLUG["marketing-and-technology"].source_urls == ("https://www.msl.mgt.tum.de/en/mt/teaching-student-matters/project-studies-idp/",)
+    assert BY_SLUG["marketing-and-technology"].state == SourceState.active
+    assert "idp" not in BY_SLUG["marketing-and-technology"].excluded_markers
     assert {a.family for a in REGISTRY} == {"typo3", "squarespace", "legacy_html"}
     assert BY_SLUG["financial-accounting"].child_url_patterns
     assert BY_SLUG["governance-in-international-agribusiness"].state == SourceState.empty

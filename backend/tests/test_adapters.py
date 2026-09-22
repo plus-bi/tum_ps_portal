@@ -15,3 +15,9 @@ def test_every_chair_has_fixture_backed_discovery_contract(adapter):
     assert len(candidates) == 1
     assert adapter.name in candidates[0].title
     assert candidates[0].application_url.endswith(f"/apply/{adapter.slug}.pdf")
+
+
+def test_project_study_modalities_heading_is_not_an_offer():
+    adapter = next(adapter for adapter in REGISTRY if adapter.slug == "marketing-and-technology")
+    html = b"<html><body><article><h2>Modalities of the Project Study/IDP</h2><p>General information.</p></article></body></html>"
+    assert parser_for(adapter).discover(adapter, adapter.source_urls[0], html) == []
