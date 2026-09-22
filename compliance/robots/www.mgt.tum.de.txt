@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# folders
+Disallow: /typo3/
+Disallow: /typo3conf/
+Allow: /_assets/
+Allow: /typo3temp/
+
+# Don't index the search folder
+Disallow: /search/*
+
+# parameters
+Disallow: /*tx_form_formframework    # no forms
+
+# sitemap
+Sitemap: https://www.mgt.tum.de/sitemap.xml
+Sitemap: https://www.mgt.tum.de/sitemap.xml?sitemap=pages&cHash=85b35d5df31dece3b4ca15ac7a5671d3
+# Sitemap: https://www.mgt.tum.de/sitemap.xml?sitemap=news&cHash=7a6e0800b7705eefdbe30d37cd25f357
+Sitemap: https://www.mgt.tum.de/sitemap.xml?sitemap=downloads&cHash=112f18cf64a1f6b73969dcdcdfb7ef7a
+Sitemap: https://www.mgt.tum.de/sitemap.xml?sitemap=events&cHash=513872c5e7339943ed286a2c7dda132d
+Sitemap: https://www.mgt.tum.de/sitemap.xml?sitemap=research&cHash=de4de9a5d0affbdc03e488ae155e819c
+Sitemap: https://www.mgt.tum.de/sitemap.xml?sitemap=stories&cHash=ae1011727568a654212609c36afde8f5
+Sitemap: https://www.mgt.tum.de/sitemap.xml?sitemap=professors&cHash=8d20268b7ea2eb10e09359e7afd20e8f

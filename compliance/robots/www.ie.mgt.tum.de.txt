@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.ie.mgt.tum.de/competition/sitemap.xml
+Sitemap: https://www.ie.mgt.tum.de/ent/sitemap.xml
+Sitemap: https://www.ie.mgt.tum.de/fbco/sitemap.xml
+Sitemap: https://www.ie.mgt.tum.de/ie/sitemap.xml
+Sitemap: https://www.ie.mgt.tum.de/jura/sitemap.xml
+Sitemap: https://www.ie.mgt.tum.de/sustainability/sitemap.xml
+Sitemap: https://www.ie.mgt.tum.de/tim/sitemap.xml
+###Sitemaps-End###

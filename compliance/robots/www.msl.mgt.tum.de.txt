@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.msl.mgt.tum.de/brm/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/dm/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/mcr/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/msl/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/mt/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/oegl/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/psy/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/rm/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/simanagement/sitemap.xml
+Sitemap: https://www.msl.mgt.tum.de/strategy/sitemap.xml
+###Sitemaps-End###

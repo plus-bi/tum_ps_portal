@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.fa.mgt.tum.de/accounting/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/cefs/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/cm/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/controlling/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/df/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/ef/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/entfin/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/fa/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/fm/sitemap.xml
+Sitemap: https://www.fa.mgt.tum.de/law/sitemap.xml
+###Sitemaps-End###

@@ -1,0 +1,29 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.hs.mh.tum.de/be/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/behavscihealth/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/bewegungswissenschaft/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/biomechanik/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/chronobiology/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/digitalhealth/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/epidemiologie/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/exercisebiology/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/exercisenutrition/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/healthliteracy/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/kro/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/mgt/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/mh/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/nd/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/php/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/praeventive-paediatrie/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/sdh/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/spomekom/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/sportdidaktik/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/sportpsychologie/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/trainingswissenschaft/sitemap.xml
+Sitemap: https://www.hs.mh.tum.de/weiterbildung/sitemap.xml
+###Sitemaps-End###

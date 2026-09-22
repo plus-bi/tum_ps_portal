@@ -1,0 +1,427 @@
+{
+  "generated_at": "2026-09-22T13:23:52.063130+00:00",
+  "user_agent": "TUM-Project-Studies-Portal",
+  "origins": [
+    {
+      "origin": "https://eco.cs.tum.de",
+      "robots_url": "https://eco.cs.tum.de/robots.txt",
+      "status": 404,
+      "final_url": "https://eco.cs.tum.de/robots.txt",
+      "sha256": "ead85d09bdae9b7092a80d2a094df0f20fe0530b5740410a2b386fa819016109",
+      "policy": "allow_all_no_policy",
+      "compliant": true,
+      "urls": [
+        {
+          "url": "https://eco.cs.tum.de/en/project-studies-idps",
+          "allowed": true
+        }
+      ]
+    },
+    {
+      "origin": "https://ede.cs.tum.de",
+      "robots_url": "https://ede.cs.tum.de/robots.txt",
+      "status": 404,
+      "final_url": "https://ede.cs.tum.de/robots.txt",
+      "sha256": "ead85d09bdae9b7092a80d2a094df0f20fe0530b5740410a2b386fa819016109",
+      "policy": "allow_all_no_policy",
+      "compliant": true,
+      "urls": [
+        {
+          "url": "https://ede.cs.tum.de/en/teaching/theses-and-internships",
+          "allowed": true
+        }
+      ]
+    },
+    {
+      "origin": "https://mediatum.ub.tum.de",
+      "robots_url": "https://mediatum.ub.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://mediatum.ub.tum.de/robots.txt",
+      "sha256": "3cb0cdab97c206798265124568c4270b0971a9ec0370f6aafe405c9bada563f4",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1575380/6xleach3yut50zxd52g4ej5nq.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1575381/l3ody4q77qz50tj1t26w2s744.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1621022/a3uqny5wsoeo2ah6zkw543dvz.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1699966/8fwiqa8onqgdail0kgkcbn10c.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1699967/81in9wtdfjq7f2ajor5oc2aq3.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1747541/quomwz47su8is8b14q93twhaw.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1793522/gtuyl9vb8movrm64zf3mvtco8.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1834953/4zqlrau32gucu4ibrrqm56yxt.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1849823/m46regio0b749vnm7d2ccbojj.PS%20Zooplus_parcel%20forecasting.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1856972/cr38x6qii2oi3jm427ddi66s1.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1859843/7s972sbn3fn9o6em4gh3qbs4k.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1863551/lesqe09bvsdvabfgqlppq0toq.20260918_Realog_TUM_Projektstudium_Word.pdf",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.bwl.wi.tum.de",
+      "robots_url": "https://www.bwl.wi.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.bwl.wi.tum.de/robots.txt",
+      "sha256": "ea90fb011afc6ab2776b3dd787c1310272cec9e7bd5c08fad137223bcc48a3f7",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.bwl.wi.tum.de/lehre/projektstudien/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.ep.mgt.tum.de",
+      "robots_url": "https://www.ep.mgt.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.ep.mgt.tum.de/robots.txt",
+      "sha256": "ee9f2f7fc89435bf1bf7113e11106b93d88dab2efe996eb8ec40da6fe8b8078d",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/open-project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ep.mgt.tum.de/econometrics/teaching/project-studies-idps/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ep.mgt.tum.de/en/eoi/teaching/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ep.mgt.tum.de/en/gia/theses-and-research-projects/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.fa.mgt.tum.de",
+      "robots_url": "https://www.fa.mgt.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.fa.mgt.tum.de/robots.txt",
+      "sha256": "f7cb6b6f3c57a7e1777e987b545b691311f86d2697b4890eb8a795beb88889cf",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.fa.mgt.tum.de/accounting/teaching/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/cm/teaching/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/controlling/lehre/projektstudien/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/ef/teaching/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/en/controlling/teaching/projektstudien/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/en/law/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/2024-08LOTARO_Projektstudium.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/Projektstudie_KI_HR-Tech.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/2025_12_Oncera_Project_Study_Funding.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/2025_12_Oncera_Project_Study_Go-to-Market.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/Projektstudium_AI_Powered_Commercial_Planning%40Bogner.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/Projektstudium_KI_in_der_Arztpraxis_1.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/list-of-open-project-studies/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.hs.mh.tum.de",
+      "robots_url": "https://www.hs.mh.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.hs.mh.tum.de/robots.txt",
+      "sha256": "92fde5a3d3aac32d9303716e60d75d57f3ce4aebf80a4b9ccf5173689f928568",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.hs.mh.tum.de/en/mgt/studies/project-studies/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.ie.mgt.tum.de",
+      "robots_url": "https://www.ie.mgt.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.ie.mgt.tum.de/robots.txt",
+      "sha256": "bcc228f3c35ca1df215be9d9dfbebace8a8f0f3b305c4a04a7dede2169c76a39",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.ie.mgt.tum.de/competition/stellenangebote/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ie.mgt.tum.de/en/ent/teaching/project-studies-and-idps/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ie.mgt.tum.de/en/sustainability/teaching/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ie.mgt.tum.de/en/tim/teaching/project-studiesidp/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ie.mgt.tum.de/fbco/lehre/projektstudien/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.mgt.tum.de",
+      "robots_url": "https://www.mgt.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.mgt.tum.de/robots.txt",
+      "sha256": "0e7663f1c7522b2c13cc1dfc10844bc6d26cb930a4cc781c12dcb77c8f95cc9f",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_AI-Driven_Reallocation_of_Labor.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_Everyday_Use_of_AI.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_Token-based_Cost_and_Performance_Allocation.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.mgt.tum.de/global-center-for-family-enterprise",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.msl.mgt.tum.de",
+      "robots_url": "https://www.msl.mgt.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.msl.mgt.tum.de/robots.txt",
+      "sha256": "acd699969e527a3f2ca7e5cc7569b5c204636456e0ba10c7418bca25f2039af2",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.msl.mgt.tum.de/en/dm/teaching/project-studies-idp/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.msl.mgt.tum.de/en/mcr/teaching/theses-and-projects/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.msl.mgt.tum.de/en/mt/teaching-student-matters/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.msl.mgt.tum.de/en/rm/teaching/project-studies-final-theses/project-studies/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.ot.mgt.tum.de",
+      "robots_url": "https://www.ot.mgt.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.ot.mgt.tum.de/robots.txt",
+      "sha256": "0183063d3c3ee7a650f541d19a18d35ec2610c8086c4c09d90a6a9abd0cdfafa",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.ot.mgt.tum.de/dfb/education/project-studies-idps/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/en/or/teaching/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/en/osm/education/theses-projects/project-modules/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_Andean_Options.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_EVANIUM.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_OrgEnX.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_PLNT_CORE.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/osm/documents/2025_Project_Study_Unit-based_Pricing_in_AI_Integration.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/scm/Project_studies/230207_Projektstudium_Arcaris.pdf",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/log/education/theses-project-studies-idps/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/om/teaching-overview/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-companies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/#content",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/#topbar",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.tum.de",
+      "robots_url": "https://www.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.tum.de/robots.txt",
+      "sha256": "c80728e6bfe0af5a664dab9b7b94d9ef18fa6e86ff1054b62fedbaaef2a4d229",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.tumcso.com",
+      "robots_url": "https://www.tumcso.com/robots.txt",
+      "status": 200,
+      "final_url": "https://www.tumcso.com/robots.txt",
+      "sha256": "82c6b487b2f339f3d9f4ca51291232d1019c4a1c2e8517332867f007dfbc0ff4",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master",
+          "allowed": true
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster",
+          "allowed": true
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    }
+  ]
+}

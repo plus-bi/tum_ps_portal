@@ -1,0 +1,15 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.ot.mgt.tum.de/dfb/sitemap.xml
+Sitemap: https://www.ot.mgt.tum.de/log/sitemap.xml
+Sitemap: https://www.ot.mgt.tum.de/manufacturing/sitemap.xml
+Sitemap: https://www.ot.mgt.tum.de/om/sitemap.xml
+Sitemap: https://www.ot.mgt.tum.de/or/sitemap.xml
+Sitemap: https://www.ot.mgt.tum.de/osm/sitemap.xml
+Sitemap: https://www.ot.mgt.tum.de/ot/sitemap.xml
+Sitemap: https://www.ot.mgt.tum.de/scm/sitemap.xml
+###Sitemaps-End###
