@@ -2,9 +2,30 @@
 
 This runbook deploys the portal as the existing Docker Compose stack on one Compute Engine VM. Caddy is the only public container; Next.js, FastAPI, PostgreSQL, Redis, Celery Worker, and Celery Beat stay on the private Compose network.
 
-## Important ingestion status
+## Daily ingestion behavior
 
-Celery Beat is configured to enqueue `app.tasks.ingest_all` every day at 03:00 Europe/Berlin. The current ingestion service reads the audited frozen fixtures in `backend/tests/fixtures/chairs`; it does **not yet download live chair pages**. Before treating the schedule as a production live crawler, connect `ingest_all` to the robots-aware fetcher and add the planned PostgreSQL advisory lock. Do not run both Celery Beat and a second external scheduler for the same task.
+Celery Beat enqueues `app.tasks.ingest_all` every day at 03:00 Europe/Berlin. The task fetches the live chair sources through the cached robots policy, follows only adapter-scoped child links, extracts supported HTML/PDF/DOCX content, and writes results through the Celery worker. A PostgreSQL advisory lock prevents overlapping full or manual ingestion runs. Do not run a second external scheduler for the same task.
+
+HTTP requests use per-domain throttling, timeouts, retries, redirect-policy checks, response-size limits, and conditional `ETag`/`Last-Modified` headers for chair pages. Configure these with the `CRAWLER_*` values in `.env`.
+
+Every source attempt creates a `crawl_runs` record with status `success`, `not_modified`, `partial`, or `failed`. Failures are also emitted as structured JSON log messages. A failed or partial crawl never increments a listing's missing count, so a temporary source problem cannot archive a project. Administrators can inspect `/api/v1/admin/source-health` and `/api/v1/admin/crawl-history`, then queue a single-source retry with `POST /api/v1/admin/sources/{source_id}/rescrape`.
+
+For manual inspection directly on the VM:
+
+```bash
+docker compose exec -T postgres psql -U portal -d portal -c \
+  "SELECT started_at, status, source_id, error FROM crawl_runs WHERE status IN ('failed','partial') ORDER BY started_at DESC LIMIT 50;"
+docker compose logs --since=24h worker | grep -E 'source_crawl_failed|child_fetch_failed'
+```
+
+Retry one chair by its registry slug after correcting or auditing the failure:
+
+```bash
+docker compose exec -T worker celery -A app.tasks call app.tasks.ingest_source \
+  --args='["economics-of-innovation"]'
+```
+
+Docker JSON logs are rotated at 10 MB with five files retained per service. The database crawl history remains available after log rotation.
 
 ## 1. Create the VM and DNS
 

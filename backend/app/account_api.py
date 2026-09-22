@@ -4,6 +4,8 @@ from fastapi import APIRouter, Depends, HTTPException, Request, Response
 from .auth import User, admin_user, current_user
 from .schemas import SavedSearchCreate
 from .config import settings
+from .db import Chair, CrawlRun, Source, session_factory
+from sqlalchemy import select
 
 router = APIRouter(prefix="/api/v1")
 _bookmarks: dict[str, set[str]] = {}
@@ -60,16 +62,46 @@ async def resend_webhook(request: Request):
     return {"accepted": True}
 
 @router.get("/admin/source-health")
-def source_health(user: User = Depends(admin_user)): return {"sources": [], "summary": {"healthy": 0, "failing": 0}}
+def source_health(user: User = Depends(admin_user)):
+    with session_factory()() as session:
+        rows = session.execute(select(Source, Chair).join(Chair, Source.chair_id == Chair.id).order_by(Chair.name)).all()
+        sources = []
+        for source, chair in rows:
+            latest = session.scalar(select(CrawlRun).where(CrawlRun.source_id == source.id)
+                                    .order_by(CrawlRun.started_at.desc()).limit(1))
+            sources.append({"id": source.id, "chair": chair.name, "chair_slug": chair.slug, "url": source.url,
+                            "enabled": source.enabled, "consecutive_failures": source.consecutive_failures,
+                            "last_status": latest.status if latest else None,
+                            "last_started_at": latest.started_at if latest else None,
+                            "last_error": latest.error if latest else None})
+    failing = sum(row["consecutive_failures"] > 0 for row in sources)
+    return {"sources": sources, "summary": {"healthy": len(sources) - failing, "failing": failing}}
 
 @router.get("/admin/crawl-history")
-def crawl_history(user: User = Depends(admin_user)): return []
+def crawl_history(limit: int = 100, status: str | None = None, user: User = Depends(admin_user)):
+    limit = min(max(limit, 1), 500)
+    with session_factory()() as session:
+        statement = select(CrawlRun, Source, Chair).join(Source, CrawlRun.source_id == Source.id).join(Chair, Source.chair_id == Chair.id)
+        if status: statement = statement.where(CrawlRun.status == status)
+        rows = session.execute(statement.order_by(CrawlRun.started_at.desc()).limit(limit)).all()
+        return [{"id": run.id, "source_id": source.id, "chair": chair.name, "chair_slug": chair.slug,
+                 "url": source.url, "status": run.status, "stats": run.stats, "error": run.error,
+                 "started_at": run.started_at, "finished_at": run.finished_at}
+                for run, source, chair in rows]
 
 @router.get("/admin/reviews")
 def reviews(user: User = Depends(admin_user)): return []
 
 @router.post("/admin/sources/{source_id}/rescrape", status_code=202)
-def rescrape(source_id: UUID, user: User = Depends(admin_user)): return {"source_id": source_id, "status": "queued"}
+def rescrape(source_id: UUID, user: User = Depends(admin_user)):
+    with session_factory()() as session:
+        row = session.execute(select(Source, Chair).join(Chair, Source.chair_id == Chair.id)
+                              .where(Source.id == source_id)).one_or_none()
+        if row is None: raise HTTPException(404, "Source not found")
+        _, chair = row
+    from .tasks import app as celery_app
+    task = celery_app.send_task("app.tasks.ingest_source", args=[chair.slug])
+    return {"source_id": source_id, "chair_slug": chair.slug, "status": "queued", "task_id": task.id}
 
 @router.post("/admin/projects/{listing_id}/archive")
 def archive(listing_id: UUID, user: User = Depends(admin_user)): return {"listing_id": listing_id, "status": "archived"}

@@ -1,10 +1,14 @@
 from celery import Celery
 from celery.schedules import crontab
 from .config import settings
-from .ingestion.service import ingest_department as run_department_ingestion
+from .ingestion.live import run_live
+from .ingestion.registry import BY_SLUG, DEPARTMENTS, REGISTRY
 
 app = Celery("portal", broker=settings().redis_url)
 app.conf.timezone = "Europe/Berlin"
+app.conf.enable_utc = True
+app.conf.task_track_started = True
+app.conf.worker_prefetch_multiplier = 1
 app.conf.beat_schedule = {
     "daily-ingestion": {"task": "app.tasks.ingest_all", "schedule": crontab(hour=3, minute=0)},
     "daily-alerts": {"task": "app.tasks.deliver_alerts", "schedule": crontab(hour=7, minute=0)},
@@ -14,13 +18,19 @@ app.conf.beat_schedule = {
 
 @app.task
 def ingest_all():
-    from .ingestion.registry import DEPARTMENTS
-    return [run_department_ingestion(name) for name in DEPARTMENTS.values()]
+    return run_live(REGISTRY)
 
 
 @app.task(name="app.tasks.ingest_department")
 def ingest_department(department: str):
-    return run_department_ingestion(department)
+    if department not in DEPARTMENTS.values(): raise ValueError(f"Unknown department: {department}")
+    return run_live(adapter for adapter in REGISTRY if adapter.department == department)
+
+
+@app.task(name="app.tasks.ingest_source")
+def ingest_source(chair_slug: str):
+    if chair_slug not in BY_SLUG: raise ValueError(f"Unknown chair: {chair_slug}")
+    return run_live((BY_SLUG[chair_slug],))
 
 
 @app.task

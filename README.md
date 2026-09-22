@@ -21,6 +21,8 @@ python -m pytest -q
 
 The audited chair inventory is `tum_project_study_chairs.json`; it is validated into 32 dedicated adapters by `backend/app/ingestion/registry.py`. Run `python -u scripts/audit_chair_sources.py` to refresh frozen source fixtures and their hash manifest. The current fixture set contains 31 successful captures and records the known Marketing and Technology 404 without inventing content.
 
+The production Celery task fetches live sources daily at 03:00 Europe/Berlin. Frozen fixtures are retained exclusively for deterministic parser tests and manual audits. Each live attempt is recorded in `crawl_runs`; failed or partial crawls do not advance missing-listing archival state.
+
 Run `python -u scripts/audit_robots.py` before production crawls to refresh `compliance/robots/`. The fetcher fails closed when an origin has no cached policy, when robots retrieval was unavailable, or when the requested path is disallowed.
 
 Adapters share three parser families (`typo3`, `squarespace`, and `legacy_html`) while retaining chair-owned source URLs, candidate selectors, inclusion/exclusion markers, and narrowly scoped child-link patterns. The live fixtures intentionally contain source material only and must never be served by the public application.

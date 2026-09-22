@@ -1,3 +1,9 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 services:
   caddy:
     image: caddy:2.8-alpine
@@ -12,32 +18,48 @@ services:
       - "caddy_data:/data"
       - "caddy_config:/config"
     restart: unless-stopped
+    logging: *default-logging
     depends_on: [web, api]
   web:
     build: {context: ., dockerfile: frontend/Dockerfile}
     environment: {NEXT_PUBLIC_API_URL: "http://api:8000/api/v1"}
     restart: unless-stopped
+    logging: *default-logging
   api:
     build: {context: ., dockerfile: backend/Dockerfile}
     env_file:
       - path: .env
         required: false
     restart: unless-stopped
+    logging: *default-logging
+    depends_on:
+      postgres:
+        condition: service_healthy
     healthcheck: {test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"], interval: 30s, timeout: 5s, retries: 3}
   worker:
     build: {context: ., dockerfile: backend/Dockerfile}
-    command: ["celery", "-A", "app.tasks", "worker", "--loglevel=INFO"]
+    command: ["celery", "-A", "app.tasks", "worker", "--loglevel=INFO", "--concurrency=${CELERY_WORKER_CONCURRENCY:-2}"]
     env_file:
       - path: .env
         required: false
     restart: unless-stopped
+    logging: *default-logging
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
   beat:
     build: {context: ., dockerfile: backend/Dockerfile}
-    command: ["celery", "-A", "app.tasks", "beat", "--loglevel=INFO"]
+    command: ["celery", "-A", "app.tasks", "beat", "--loglevel=INFO", "--schedule=/tmp/celerybeat-schedule"]
     env_file:
       - path: .env
         required: false
     restart: unless-stopped
+    logging: *default-logging
+    depends_on:
+      redis:
+        condition: service_healthy
   postgres:
     image: postgres:17-alpine
     environment:
@@ -46,10 +68,12 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-portal}"
     volumes: ["postgres_data:/var/lib/postgresql/data"]
     restart: unless-stopped
+    logging: *default-logging
     healthcheck: {test: ["CMD-SHELL", "pg_isready -U portal"], interval: 10s, timeout: 5s, retries: 5}
   redis:
     image: redis:7-alpine
     restart: unless-stopped
+    logging: *default-logging
     healthcheck: {test: ["CMD", "redis-cli", "ping"], interval: 10s, timeout: 5s, retries: 5}
 volumes:
   postgres_data: {}
