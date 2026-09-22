@@ -15,7 +15,7 @@ def test_catalog_and_reference_endpoints():
     assert client.get("/api/v1/admin/source-health").status_code == 401
 
 def test_required_route_surface_is_registered():
-    paths = {route.path for route in app.routes}
+    paths = set(app.openapi()["paths"])
     assert {"/api/v1/bookmarks", "/api/v1/saved-searches", "/api/v1/webhooks/clerk",
             "/api/v1/webhooks/resend", "/api/v1/admin/source-health",
             "/api/v1/admin/crawl-history", "/api/v1/admin/reviews"} <= paths
