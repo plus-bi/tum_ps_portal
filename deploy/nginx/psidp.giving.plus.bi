@@ -1,7 +1,7 @@
 server {
     listen 80;
     listen [::]:80;
-    server_name ps.plus.bi;
+    server_name psidp.giving.plus.bi;
 
     location / {
         proxy_pass http://127.0.0.1:8080;
