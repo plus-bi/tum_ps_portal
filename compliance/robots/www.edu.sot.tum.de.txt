@@ -1,0 +1,26 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.edu.sot.tum.de/bpaed/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/ddi/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/ddp/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/dichem/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/edu/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/fdls/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/fil/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/hctl/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/isearchlab/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/leaps/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/lldm/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/lsdesign/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/ma/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/paedpsych/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/psyll/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/td/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/tumlab/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/wipaed/sitemap.xml
+Sitemap: https://www.edu.sot.tum.de/wisskom/sitemap.xml
+###Sitemaps-End###

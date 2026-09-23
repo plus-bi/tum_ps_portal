@@ -1,6 +1,6 @@
-# TUM Project Studies Portal
+# TUM Project Opportunities Portal
 
-Independent, bilingual discovery portal for Project Studies advertised by the 32 TUM School of Management chairs in Munich. The repository contains a FastAPI ingestion/API service, a Next.js web app, PostgreSQL/Redis/Celery deployment configuration, and deterministic scraper contracts.
+Independent, bilingual discovery portal for Project Studies advertised by 32 TUM School of Management chairs and Informatics Interdisciplinary Projects (IDPs) published by the official CIT hub and its linked chair sources. The repository contains a FastAPI ingestion/API service, a Next.js web app, PostgreSQL/Redis/Celery deployment configuration, and deterministic scraper contracts.
 
 ## Quick start
 
@@ -19,7 +19,7 @@ For local backend checks without Docker:
 python -m pytest -q
 ```
 
-The audited chair inventory is `tum_project_study_chairs.json`; it is validated into 32 dedicated adapters by `backend/app/ingestion/registry.py`. Run `python -u scripts/audit_chair_sources.py` to refresh frozen source fixtures and their hash manifest. The current fixture set contains 31 successful captures and records the known Marketing and Technology 404 without inventing content.
+The audited Project Study inventory is `tum_project_study_chairs.json`. `tum_idp_sources.json` records the 31 chair links currently published by the [official Informatics IDP hub](https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/), alongside the hub itself. Both are validated into dedicated adapters by `backend/app/ingestion/registry.py`. Run `python -u scripts/audit_chair_sources.py` to refresh frozen source fixtures and their hash manifest.
 
 The production Celery task fetches live sources daily at 03:00 Europe/Berlin. Frozen fixtures are retained exclusively for deterministic parser tests and manual audits. Each live attempt is recorded in `crawl_runs`; failed or partial crawls do not advance missing-listing archival state.
 
@@ -29,7 +29,7 @@ Adapters share three parser families (`typo3`, `squarespace`, and `legacy_html`)
 
 ## Safety and lifecycle guarantees
 
-- Only candidates with explicit Project Study terminology are accepted; theses, IDPs, jobs, internships, and completed/archive sections are rejected.
+- Only candidates with explicit Project Study or IDP terminology are accepted; theses, jobs, internships, and completed/archive sections are rejected. The official IDP hub's dedicated project-document list is the sole source whose position supplies the IDP context when an individual document title omits it.
 - Failed crawls never change listing status.
 - A listing is archived only after two consecutive successful crawls in which it is absent.
 - Same-chair source keys are consolidated; cross-chair listings remain independent.

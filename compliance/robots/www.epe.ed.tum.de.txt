@@ -1,0 +1,24 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.epe.ed.tum.de/ant/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/apt/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/biose/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/biovt/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/ees/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/emt/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/ens/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/epe/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/es/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/ewt/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/hlu/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/hsa/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/ntech/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/ptd/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/res/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/sbt/sitemap.xml
+Sitemap: https://www.epe.ed.tum.de/wind/sitemap.xml
+###Sitemaps-End###

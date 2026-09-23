@@ -15,6 +15,11 @@ class Freshness(StrEnum):
     undated = "undated"
 
 
+class OpportunityType(StrEnum):
+    project_study = "project_study"
+    idp = "idp"
+
+
 class Topic(StrEnum):
     ai_data = "ai_data"
     marketing_sales = "marketing_sales"
@@ -61,6 +66,7 @@ class Project(BaseModel):
     summary: str | None = None
     department: str
     chair: str
+    opportunity_type: OpportunityType = OpportunityType.project_study
     company: str | None = None
     language: str | None = None
     topics: list[Topic] = []

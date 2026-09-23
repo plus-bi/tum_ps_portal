@@ -1,6 +1,6 @@
 from datetime import date
 from fastapi import APIRouter, Depends, HTTPException, Query
-from .ingestion.registry import DEPARTMENTS, REGISTRY
+from .ingestion.registry import ALL_REGISTRY, DEPARTMENTS
 from .schemas import Freshness, Project, Status, Topic
 from .db import Chair, Department, Listing, session_factory
 from .ingestion.lifecycle import freshness
@@ -24,6 +24,7 @@ def persisted_projects() -> list[Project]:
             rows = session.execute(select(Listing, Chair, Department).join(Chair, Listing.chair_id == Chair.id).join(Department, Chair.department_id == Department.id)).all()
             return [Project(slug=listing.slug, title=listing.title, summary=listing.summary,
                             department=department.name, chair=chair.name,
+                            opportunity_type=listing.normalized.get("opportunity_type", "project_study"),
                             company=listing.normalized.get("company"), language=listing.normalized.get("language"),
                             topics=listing.normalized.get("topics", []), location=listing.normalized.get("location"),
                             application_url=listing.normalized.get("application_url"), source_url=listing.normalized["source_url"],
@@ -67,7 +68,7 @@ def departments(): return [{"slug": key, "name": value} for key, value in DEPART
 
 
 @router.get("/chairs")
-def chairs(): return [{"slug": a.slug, "name": a.name, "department": a.department, "source_state": a.state} for a in REGISTRY]
+def chairs(): return [{"slug": a.slug, "name": a.name, "department": a.department, "source_state": a.state} for a in ALL_REGISTRY]
 
 
 @router.get("/facets")

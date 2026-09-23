@@ -1,0 +1,2843 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+
+<meta charset="utf-8">
+<!-- 
+	This website is powered by TYPO3 - inspiring people to share!
+	TYPO3 is a free open source Content Management Framework initially created by Kasper Skaarhoj and licensed under GNU/GPL.
+	TYPO3 is copyright 1998-2026 of Kasper Skaarhoj. Extensions are copyright of their respective owners.
+	Information and contribution at https://typo3.org/
+-->
+
+
+
+<title>TUM School of Computation, Information and Technology - TUM School of Computation, Information and Technology</title>
+<meta name="generator" content="TYPO3 CMS">
+<meta name="description" content="Wir sind die TUM School of Computation, Information and Technology der Technischen Universität München! Alles über unsere Lehre und Forschung.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="TUM School of Computation, Information and Technology">
+<meta property="og:description" content="Wir sind die TUM School of Computation, Information and Technology der Technischen Universität München! Alles über unsere Lehre und Forschung.">
+<meta property="og:site_name" content="TUM School of Computation, Information and Technology">
+<meta name="twitter:title" content="TUM School of Computation, Information and Technology">
+<meta name="twitter:description" content="Wir sind die TUM School of Computation, Information and Technology der Technischen Universität München! Alles über unsere Lehre und Forschung.">
+<meta name="twitter:card" content="summary_large_image">
+
+
+<link rel="stylesheet" href="/typo3temp/assets/compressed/7015c8c4ac5ff815b57530b221005fc6-39e02ac30ed45776f94981d05d963125.css?1789386946" media="all" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA">
+<link rel="stylesheet" href="/typo3temp/assets/compressed/tum-icons.min-ee9b66c6ece226624bc853c1e2eac530.css?1789386946" media="all" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA">
+<link href="/_frontend/bundled/assets/main-B0HurUpK.css?1789384289" rel="stylesheet" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA" >
+<link href="/_frontend/bundled/assets/media2click-JdfiqIsP.css?1789384289" rel="stylesheet" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA" >
+<link href="/_frontend/bundled/assets/news-list-default-CztNPxH_.css?1789384289" rel="stylesheet" >
+<link href="/_frontend/bundled/assets/news-list-layout5-C7Ctm8Uj.css?1789384289" rel="stylesheet" >
+
+
+
+
+<script nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA">let TUM = {
+        hp: "/cit/startseite/",
+        pid: 6,
+        lid: 0,
+        search: {
+            box: 1,
+            path: "/cit/suche/"
+        },
+        video: [],
+        loadOnce: {}
+    };
+    
+    
+    document.querySelector('html').classList.remove('no-js');
+    document.querySelector('html').classList.add('js');</script>
+<script nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA">
+    const m2cCookieLifetime = "7";
+</script>
+
+<link rel="icon" type="image/png" href="/_frontend/favicon/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/_frontend/favicon/favicon.svg" />
+<link rel="shortcut icon" href="/_frontend/favicon/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/_frontend/favicon/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="TUM" />
+<link rel="manifest" href="/_frontend/favicon/site.webmanifest" /><script data-ignore="1" data-cookieconsent="statistics" type="text/plain"></script>
+
+
+
+<link rel="canonical" href="https://www.cit.tum.de/cit/startseite/"/>
+
+<link rel="alternate" hreflang="de-DE" href="https://www.cit.tum.de/cit/startseite/"/>
+<link rel="alternate" hreflang="en-US" href="https://www.cit.tum.de/en/cit/home/"/>
+<link rel="alternate" hreflang="x-default" href="https://www.cit.tum.de/cit/startseite/"/>
+<script type="application/ld+json" id="ext-schema-jsonld">{"@context":"https://schema.org/","@graph":[{"@type":"WebPage"},{"@type":"Article","datePublished":"2026-09-09T09:00:00+02:00","description":"Reto Achermann, neuer Professor an der TUM School of Computation, Information and Technology, erforscht widerstandsfähige Computersysteme, die auch unter komplexen Bedingungen zuverlässig funktionieren. Damit schafft er die Basis für digitale Infrastrukturen, auf die Menschen im Alltag vertrauen.","headline":"NewIn: Reto Achermann","image":"/fileadmin/w00byx/cit/0012_News/New%40CIT/Reto_Achermann.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-03T13:07:58+02:00","description":"Zwei Forschende der TUM School of Computation, Information and Technology erhalten dieses Jahr ERC Starting Grants des Europäischen Forschungsrats (ERC). Mit dieser Förderung unterstützt die EU exzellente Forschende, die am Beginn ihrer Karriere stehen. ","headline":"ERC Starting Grants für Tobias Vogl und Violetta Weger","image":"/fileadmin/w00byx/cit/0012_News/Vogl_Weger.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-02T09:00:00+02:00","description":"Technische Innovationen allein reichen nicht aus. Warum Menschen und Organisationen entscheidend für nachhaltige Informationssysteme sind, erklärt der neu berufene Professor für Information Systems Engineering an der Technischen Universität München (TUM) in der Interview-Reihe „New@CIT“.","headline":"Willkommen, Professor Sebastian Werner","image":"/fileadmin/w00byx/cit/0012_News/New%40CIT/Sebastian_Werner_AH.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-08-12T14:40:42+02:00","description":"Professor Tim Hoffmann von der TUM School of Computation, Information and Technology und seine Mitautoren erhalten für ihre Arbeit zur Lösung eines jahrzehntealten Geometrieproblems den Frontiers of Science Award 2026 vom International Congress of Basic Science (ICBS). Lesen Sie mehr zum Paper.","headline":"Frontiers of Science Award 2026 für Tim Hoffmann","image":"/fileadmin/w00byx/cit/0012_News/Erstes_kompaktes_Bonnet-Paar_gefunden.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-08-12T09:00:00+02:00","description":"Am 17. und 18. Juli 2026 verabschiedete die TUM School of Computation, Information and Technology ihre Graduierten der Bachelor- und Masterstudiengänge aus den Fachbereichen Mathematik, Informatik sowie Elektrotechnik und Informationstechnik. Ein Rückblick.","headline":"CIT Abschlussfeier für Bachelor und Master 2026","image":"/fileadmin/w00byx/cit/0012_News/TUM_Graduation_18-07026_by_C._Gramann_202.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-22T10:00:00+02:00","description":"Der 4. Internationale Workshop Mathematical Modeling and Scientific Computing (MMSC) zu Ehren von Nikolai Botkin findet vom 22. bis 25. September 2026 an der TUM statt. Er vereint internationale Expert:innen zu Modellierung, Computing, Kontrolltheorie sowie Material- und Biowissenschaften.","headline":"Workshop on Mathematical Modeling and Scientific Computing","image":"/fileadmin/w00byx/cit/0012_News/Flaggen_Mathematik_Informatik_Gebaeude.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-03T10:19:00+02:00","description":"Am 3. Oktober öffnet die TUM School of Computation, Information and Technology ihre Türen am Forschungscampus Garching. Freuen Sie sich auf spannende Vorträge, interaktive Experimente, Robotik, KI, Laborführungen und abwechslungsreiche Mitmachangebote für die ganze Familie.","headline":"Tag der offenen Tür am Forschungscampus Garching","image":"/fileadmin/w00byx/cit/0011_Events/Tag_der_offenen_Tuer/TdoT2024_WebBanner_19200x1080_kompr_KV.png","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T09:00:00+02:00","description":"Zum Start in die Vorlesungszeit erwartet die Studierenden der TUM ein besonderes Highlight: Am 8. Oktober 2026 um 11 Uhr lädt die TUM School of Computation, Information and Technology (CIT) zu einer Vorlesung über die spannende Geschichte der Kryptografie ein.","headline":"Jubiläumsvorlesung: 2500 Jahre Kryptografie","image":"/fileadmin/_processed_/f/b/csm_Vigenere_Chiffre_MS_Copilot_661cfbd4fd.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T09:20:00+02:00","description":"Am 8. und 9. Oktober finden an der TUM School of Computation, Information and Technology die Munich Risk and Insurance Days 2026 statt. Sie richten sich an Fachleute der Versicherungsmathematik, Finanzmathematik und verwandten Bereichen wie Aktuarwesen, Risikomanagement und Finanzingenieurwesen.","headline":"Munich Risk and Insurance Days 2026","image":"/fileadmin/w00byx/cit/0011_Events/analysis-4937349_1280.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T15:30:00+02:00","description":"Wo \"Technically Single\" gedreht wurde, wird die Serie nun gezeigt: Am 8. Oktober 2026 um 15:30 Uhr kehrt die preisgekrönte Webserie in den Hörsaal 1200 der TUM zurück. Ein besonderes Wiedersehen mit Campusleben, Studium und TUM Geschichte. Die Vorführung ist für Studierende der TUM offen.","headline":"Zurück an den Drehort: \"Technically Single\" im Hörsaal 1200","image":"/fileadmin/w00byx/cit/0011_Events/150_Jahre_EI/teaser.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-17T18:40:00+02:00","description":"Technikgeschichte zum Anfassen: Bei der Langen Nacht der Münchner Museen öffnet die Sammlung Telekommunikation der TUM am 17. Oktober 2026 ab 18 Uhr ihre Türen. Von Fernschreiber bis Telefonzentrale entdecken Sie Kommunikationstechnik der letzten 150 Jahre.","headline":"Eine Nacht voller Technikgeschichte: Sammlung Telekommunikation","image":"/fileadmin/w00byx/cit/0011_Events/150_Jahre_EI/Kommunikationsmuseum_2.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-26T08:00:00+01:00","description":"Von 26. bis 29. Oktober 2026 bringt die Large Scale Dynamics Conference Expertinnen und Experten aus Quanten-, klassischer und stochastischer Dynamik zusammen. Freuen Sie sich auf spannende Plenarvorträge und Posterbeiträge am TUM Institute for Advanced Study auf dem Forschungscampus Garching.","headline":"Large Scale Dynamics Conference: Quantum, Classical & Stochastic","image":"/fileadmin/w00byx/cit/0012_News/TUM_Institute_for_Advanced_Study.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-29T09:00:00+01:00","description":"Branchenvorträge, Unternehmensstände und Einzelgespräche: Die Munich Career Fair AI and Data Science richtet sich an Studierende und Unternehmen mit Interesse an Künstlicher Intelligenz, Maschinellem Lernen und Data Science. Die Veranstaltung findet am 29. Oktober 2026 bei TranslaTUM statt.","headline":"Munich Career Fair AI and Data Science","image":"/fileadmin/_processed_/e/9/csm_TranslaTUM_andreas_heddergott_9bec431d5a.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-30T09:00:00+01:00","description":"Sie studieren an der TUM und interessieren sich für die Branchen Finance, Insurance, IT oder Consulting? Treffen Sie die Kooperationspartner der Initiative Fit for TUMorrow zu Workshops, persönlichen Gesprächen und auf der Unternehmensmesse am Fit for TUMorrow Day 2026. Jetzt anmelden!","headline":"Fit for TUMorrow Day 2026","image":"/fileadmin/w00byx/cit/0011_Events/Fit_for_TUJMorrow.png","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-11-27T09:00:00+01:00","description":"Der Hackathon des Department of Computer Science der Technischen Universität München findet dieses Jahr zum 11ten Mal statt. Seitdem hat sich hackaTUM zu einem der größten Hackathons in Europa entwickelt. Das Event findet vom 27. bis 29. November 2026 statt.","headline":"hackaTUM","image":"/fileadmin/w00byx/cit/0011_Events/hackatUM.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}}]}</script>
+</head>
+<body class="" data-pid="6">
+
+
+
+
+
+
+    
+
+
+
+
+
+<header>
+    
+
+<div id="topbar" class="c-topbar py-1">
+	<div class="container">
+		<a class="c-skiplink"
+           id="skipnav"
+           href="#content"
+           title="Zum Inhalt springen"
+           aria-label="Zum Inhalt springen"
+        >
+			Zum Inhalt springen
+		</a>
+
+        <div class="d-flex justify-content-md-end justify-content-between">
+
+            <div class="d-flex">
+
+                
+
+                
+                
+                
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                
+
+                
+                    <div class="c-languagenav">
+                        
+                                    <ul class="list-inline  c-languagenav__list">
+                                        
+                                            
+                                            
+                                            <li class="list-inline-item  c-languagenav__item">
+                                                
+                                                        <strong>
+                                                            <abbr lang="de" title="Deutsch">de</abbr>
+                                                        </strong>
+                                                    
+                                            </li>
+                                            
+                                        
+                                            
+                                            
+                                            <li class="list-inline-item  c-languagenav__item">
+                                                
+                                                        
+                                                                <a class="c-languagenav__link" href="/en/cit/home/" hreflang="en-US">
+                                                                    <abbr lang="en" title="English">en</abbr>
+                                                                </a>
+                                                            
+                                                    
+                                            </li>
+                                            
+                                        
+                                    </ul>
+                                
+                    </div>
+                
+
+                
+                    
+                        
+                        <div class="c-global-search">
+                            <button class="btn c-global-search__toggle js-search-toggle"
+                                    data-testid="search-dialog-opener"
+                                    type="button"
+                                    aria-controls="global-search-overlay"
+                                    aria-haspopup="dialog"
+                            >
+                                <span>Google Suche</span>
+                                <svg width="18px" height="18px" viewBox="-2 -2 20 20">
+                                    <path
+                                        transform="translate(-1015.000000, -9.000000)"
+                                        stroke-width="1"
+                                        stroke="currentColor"
+                                        fill="currentColor"
+                                        d="M1015,16 C1015,19.866 1018.134,23.001 1022,23.001 C1023.753,23.001 1025.351,22.352 1026.579,21.287 L1032,26.707 L1032.707,26.001 L1027.286,20.58 C1028.351,19.352 1029,17.753 1029,16 C1029,12.134 1025.866,9 1022,9 C1018.134,9 1015,12.134 1015,16 L1015,16 Z M1016,16 C1016,12.692 1018.692,10 1022,10 C1025.308,10 1028,12.692 1028,16 C1028,19.309 1025.308,22 1022,22 C1018.692,22 1016,19.309 1016,16 L1016,16 Z"
+                                    ></path>
+                                </svg>
+                            </button>
+                            <span class="c-global-search__search">
+						        <span id="cse-stub"></span>
+					        </span>
+                        </div>
+                    
+                
+
+            </div>
+
+            <div class="d-md-none">
+                <button id="menutoggle" class="c-menu-mobile navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sitenav" aria-expanded="false" title="Navigation öffnen" aria-label="Navigation öffnen">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="c-menu-mobile__text">Menü</span>
+                </button>
+            </div>
+
+            
+
+            <template id="global-search-popup">
+                <dialog id="global-search-overlay"
+                        class="c-global-search-overlay js-gsc-dialog px-5 py-4 bg-body shadow"
+                        aria-labelledby="global-search-popup-title"
+                        aria-describedby="global-search-popup-desc"
+                >
+                    <h2 id="global-search-popup-title" class="fs-1 border-0">Google Custom Search</h2>
+                    <p id="global-search-popup-desc">
+                        Wir verwenden Google für unsere Suche. Mit Klick auf „Suche aktivieren“ aktivieren Sie das Suchfeld und akzeptieren die Nutzungsbedingungen.
+                    </p>
+                    <p>
+                        <a href="/cit/datenschutz/#GoogleCustomSearch" title="Datenschutz">
+                            Hinweise zum Einsatz der Google Suche
+                        </a>
+                    </p>
+                    <form method="dialog">
+                        <button class="btn btn-primary c-global-search__button c-global-search__accept js-search-activate js-search-close"
+                                type="button"
+                        >
+                            Suche aktivieren
+                        </button>
+                        <button class="btn-close position-absolute top-0 end-0 p-2 js-search-close"
+                                type="button"
+                                aria-label="Popup schliessen"
+                        >
+                        </button>
+                    </form>
+                </dialog>
+            </template>
+
+        </div>
+
+	</div>
+</div>
+
+    
+
+
+<div class="c-siteorg ">
+    <div class="container c-siteorg__grid">
+        
+        <div class="nav clearfix">
+            <ul class="c-siteorg__list">
+                
+                    <li class="l_this">
+                        <a href="/cit/startseite/" title="Startseite TUM School of Computation, Information and Technology">
+                            TUM School of Computation, Information and Technology
+                        </a>
+                    </li>
+                
+
+                
+                        
+                        
+                    
+                
+
+                
+                    <li class="l_top">
+                        <a href="https://www.tum.de/" title="Startseite Technische Universität München">
+                            Technische Universität München
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <div>
+            <a href="https://www.tum.de/" title="Startseite www.tum.de">
+                <img src="/_assets/32ebf5255105e66824f82cb2d7e14490/Icons/Org/tum-logo.png?neu" alt="Technische Universität München" />
+            </a>
+        </div>
+    </div>
+</div>
+
+
+</header>
+
+    <main id="page-body" class="c-page-intro">
+        
+    
+        <div class="navbar navbar-expand-md">
+            <nav id="sitenav" class="c-page-intro__nav navbar-collapse collapse">
+                <ul class="c-page-intro__nav-list navbar-nav">
+                    
+                        <li class="c-page-intro__nav-item nav-item">
+                            <a href="/cit/startseite/" class="c-page-intro__nav-link nav-link">Startseite</a>
+                        </li>
+                    
+                        <li class="c-page-intro__nav-item nav-item">
+                            <a href="/cit/studium/" class="c-page-intro__nav-link nav-link">Studium</a>
+                        </li>
+                    
+                        <li class="c-page-intro__nav-item nav-item">
+                            <a href="/cit/forschung/" class="c-page-intro__nav-link nav-link">Forschung</a>
+                        </li>
+                    
+                        <li class="c-page-intro__nav-item nav-item">
+                            <a href="/cit/school/" class="c-page-intro__nav-link nav-link">School</a>
+                        </li>
+                    
+                        <li class="c-page-intro__nav-item nav-item">
+                            <a href="/cit/internationales/" class="c-page-intro__nav-link nav-link">Internationales</a>
+                        </li>
+                    
+                        <li class="c-page-intro__nav-item nav-item">
+                            <a href="/cit/aktuelles-events/" class="c-page-intro__nav-link nav-link">Aktuelles</a>
+                        </li>
+                    
+                </ul>
+            </nav>
+        </div>
+    
+    <div id="intromedia" class="intro-carousel">
+        
+
+	
+
+			
+
+					<div id="c13" class="frame 
+ frame-type-carousel frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+                                
+
+
+
+                            
+                            
+    
+    
+
+    
+            
+                                
+    
+    
+    <section id="carousel13" class="ce-carousel carousel slide carousel-fade"
+                 aria-roledescription="Carousel"  data-bs-ride="carousel"
+        data-bs-interval="5000" data-bs-pause="hover" data-testid="carousel-section"
+        ><div role="group" aria-label="Steuerung zum Abspielen und Pausieren der Carousel-Animation" class="carousel-cycle-controls"><button type="button" class="carousel-control-cycle show"
+                    data-bs-target="#carousel13" data-bs-cycle="pause"><span class="ti ti-pause-fill" aria-hidden="true"></span><span class="visually-hidden">
+                    Carousel pausieren
+                </span></button><button type="button" class="carousel-control-cycle"
+                    data-bs-target="#carousel13" data-bs-cycle="cycle"><span class="ti ti-play-fill" aria-hidden="true"></span><span class="visually-hidden">
+                    Carousel starten
+                </span></button></div><div role="group" aria-label="Indikatoren zur Anzeige und Auswahl der Carousel-Position" class="carousel-indicators"><button type="button" data-bs-target="#carousel13" data-bs-slide-to="0"
+                    aria-label="Slide 1 (Aktuelles Element)"
+                    tabindex="0" class="active" aria-current="true"></button><button type="button" data-bs-target="#carousel13" data-bs-slide-to="1"
+                    aria-label="Slide 2"
+                    tabindex="0"></button><button type="button" data-bs-target="#carousel13" data-bs-slide-to="2"
+                    aria-label="Slide 3"
+                    tabindex="0"></button><button type="button" data-bs-target="#carousel13" data-bs-slide-to="3"
+                    aria-label="Slide 4"
+                    tabindex="0"></button></div><div class="carousel-inner"><div class="carousel-item active"><figure><img src="/fileadmin/w00byx/cit/00_Startseite/20200625_Ars_legendi_Krusche_AE_-786.jpg"
+                 data-carousel="carousel13"
+                 class="d-block mx-auto w-100"
+                 loading="eager"
+                 srcset="/fileadmin/_processed_/a/b/csm_20200625_Ars_legendi_Krusche_AE_-786_16a14d340f.jpg 520w,
+                        /fileadmin/_processed_/a/b/csm_20200625_Ars_legendi_Krusche_AE_-786_f37995337d.jpg 801w,
+                        /fileadmin/_processed_/a/b/csm_20200625_Ars_legendi_Krusche_AE_-786_ddc0d66fd9.jpg 950w,
+                        /fileadmin/_processed_/a/b/csm_20200625_Ars_legendi_Krusche_AE_-786_95fa93b58a.jpg 1280w,
+                        /fileadmin/_processed_/a/b/csm_20200625_Ars_legendi_Krusche_AE_-786_222d173252.jpg 1400w,
+                        /fileadmin/_processed_/a/b/csm_20200625_Ars_legendi_Krusche_AE_-786_fdebafc207.jpg 1920w,"
+                 alt="Blick über den Forschungscampus Garching aus dem Gebäude der Fakultäten für Informatik und Mathematik"
+                 sizes="100vw"
+                 width="2500"
+                 height="833"
+            ><figcaption class="carousel-caption text-center has-title has-description"><p class="carousel-caption-title">Blick über den Forschungscampus Garching</p><p>Foto: Astrid Eckert / TUM</p></figcaption></figure></div><div class="carousel-item"><figure><img src="/fileadmin/w00byx/cit/00_Startseite/1684823-AH_01.jpg"
+                 data-carousel="carousel13"
+                 class="d-block mx-auto w-100"
+                 loading="lazy"
+                 srcset="/fileadmin/_processed_/b/5/csm_1684823-AH_01_93c73ebfa6.jpg 520w,
+                        /fileadmin/_processed_/b/5/csm_1684823-AH_01_e73c360fe3.jpg 801w,
+                        /fileadmin/_processed_/b/5/csm_1684823-AH_01_1e9142cd85.jpg 950w,
+                        /fileadmin/_processed_/b/5/csm_1684823-AH_01_9f184fc674.jpg 1280w,
+                        /fileadmin/_processed_/b/5/csm_1684823-AH_01_0e53192707.jpg 1400w,
+                        /fileadmin/_processed_/b/5/csm_1684823-AH_01_de08c96761.jpg 1920w,"
+                 alt="Studierende und Mitarbeitende im Foyer des Neubaus EI am TUM Campus Garching"
+                 sizes="100vw"
+                 width="2500"
+                 height="833"
+            ><figcaption class="carousel-caption text-center has-title has-description"><p class="carousel-caption-title">Foyer des Neubaus Electrical Engineering</p><p>Foto: Andreas Heddergott / TUM</p></figcaption></figure></div><div class="carousel-item"><figure><img src="/fileadmin/w00byx/cit/00_Startseite/20180421_Architektur_AH-30053.jpg"
+                 data-carousel="carousel13"
+                 class="d-block mx-auto w-100"
+                 loading="lazy"
+                 srcset="/fileadmin/_processed_/a/d/csm_20180421_Architektur_AH-30053_4e6029980e.jpg 520w,
+                        /fileadmin/_processed_/a/d/csm_20180421_Architektur_AH-30053_917291fe81.jpg 801w,
+                        /fileadmin/_processed_/a/d/csm_20180421_Architektur_AH-30053_83b6ca2d64.jpg 950w,
+                        /fileadmin/_processed_/a/d/csm_20180421_Architektur_AH-30053_14f4ea83c2.jpg 1280w,
+                        /fileadmin/_processed_/a/d/csm_20180421_Architektur_AH-30053_754223717a.jpg 1400w,
+                        /fileadmin/_processed_/a/d/csm_20180421_Architektur_AH-30053_d041f6f9d5.jpg 1920w,"
+                 alt="Innenhof U-Trakt (Hörsaalgebäude), Theresienstraße 90 in München"
+                 sizes="100vw"
+                 width="2500"
+                 height="833"
+            ><figcaption class="carousel-caption text-center has-title has-description"><p class="carousel-caption-title">TUM Campus München: Department Computer Engineering</p><p>Foto: Andreas Heddergott / TUM</p></figcaption></figure></div><div class="carousel-item"><figure><img src="/fileadmin/w00byx/cit/00_Startseite/AH20101022703.jpg"
+                 data-carousel="carousel13"
+                 class="d-block mx-auto w-100"
+                 loading="lazy"
+                 srcset="/fileadmin/_processed_/0/c/csm_AH20101022703_1cfc3a47b4.jpg 520w,
+                        /fileadmin/_processed_/0/c/csm_AH20101022703_47551f3bc1.jpg 801w,
+                        /fileadmin/_processed_/0/c/csm_AH20101022703_e41466e737.jpg 950w,
+                        /fileadmin/_processed_/0/c/csm_AH20101022703_ecb472d695.jpg 1280w,
+                        /fileadmin/_processed_/0/c/csm_AH20101022703_4f52d07097.jpg 1400w,
+                        /fileadmin/_processed_/0/c/csm_AH20101022703_d9dc51d7e1.jpg 1920w,"
+                 alt="Gebäude der Mathematik und Informatik auf dem Forschungscampus Garching"
+                 sizes="100vw"
+                 width="2500"
+                 height="833"
+            ><figcaption class="carousel-caption text-center has-title has-description"><p class="carousel-caption-title">Gebäude für die Fachbereiche Mathematik und Informatik</p><p>Foto: Andreas Heddergott / TUM</p></figcaption></figure></div></div><div role="group" aria-label="Navigation zum Vor- und Zurückblättern der Carousel-Bilder" class="carousel-control"><button type="button" class="carousel-control-prev" data-bs-target="#carousel13" data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="visually-hidden">
+                Vorheriger Slide
+            </span></button><button type="button" class="carousel-control-next" data-bs-target="#carousel13" data-bs-slide="next" data-testid="carousel-next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="visually-hidden">
+                Nächster Slide
+            </span></button></div><div class="liveregion visually-hidden" aria-live="polite" aria-atomic="true"
+                 data-content-pattern="Slide %1s von %2s">
+                    Slide 1 von  4
+            </div></section>
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+    </div>
+
+
+        <div class="container  c-content-area  c-content-area--intro">
+            <div id="normal" class="row">
+                <div class="js-link-checker">
+                    
+                    
+<div id="content" class="c-main">
+
+	
+			
+
+	
+
+			
+
+					<div id="c1499" class="frame 
+ frame-type-textmedia frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+	
+
+
+		
+				
+			
+
+
+	
+				
+
+    
+				
+
+	
+			
+	
+			<h1>
+				TUM School of Computation, Information and Technology
+			</h1>
+		
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+		
+				
+				
+
+
+
+		
+				
+
+
+
+    
+
+
+
+	
+
+
+                            
+    
+    
+
+    
+            
+                                
+
+	
+			
+					
+                    <p>Vernetzte Forschung und zukunftsorientierte Studienprofile: Die <strong>TUM</strong>&nbsp;<strong>School of Computation, Information and Technology (CIT)</strong> der Technischen Universität München (TUM) vereint die Disziplinen <strong>Mathematik</strong>, <strong>Informatik</strong> sowie <strong>Elektrotechnik und Informationstechnik</strong>. Wir forschen und lehren ein breites Spektrum von der Theorie bis zur Anwendung. Gemäß <a href="/cit/school/organisation/leitbild/">unserem Leitbild</a> konzentrieren wir uns fachübergreifend auf die großen Herausforderungen unserer Zeit wie die Digitalisierung. Gleichzeitig sind wir fachlich in unseren Basisdisziplinen verankert.</p>
+				
+		
+
+
+	
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+
+	
+
+			
+
+					<div id="c33" class="frame [ c-card  c-card--box  c-card--33  c-card--left ]
+ frame-type-textmedia frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+	
+
+
+		
+				
+			
+
+
+	
+				
+
+
+
+	
+
+
+                            
+    
+    
+
+    
+            
+                                
+
+	
+			
+			
+			
+
+			
+					
+				
+
+			<div
+				class="ce-textpic ce-left ce-above"
+			>
+
+				
+					
+
+	<div class="ce-gallery  "
+			 data-ce-columns="1"
+			 data-ce-images="1"
+	>
+		
+
+		
+					
+						
+							
+								
+
+        
+
+<figure class="image">
+	
+			<a href="/cit/school/" title="Wer wir sind" class="ti ti-link">
+				<picture><source media="(min-width: 1400px)" srcset="/fileadmin/_processed_/8/5/csm_20140917_Studentenfeature_IAS_AE_75021_a9988524e6.webp" type="image/webp"><source srcset="/fileadmin/_processed_/8/5/csm_20140917_Studentenfeature_IAS_AE_75021_cbd4d21699.webp 435w,
+                        /fileadmin/_processed_/8/5/csm_20140917_Studentenfeature_IAS_AE_75021_551f65cfcc.webp 371w,
+                        /fileadmin/_processed_/8/5/csm_20140917_Studentenfeature_IAS_AE_75021_c173db8284.webp 656w,
+                        /fileadmin/_processed_/8/5/csm_20140917_Studentenfeature_IAS_AE_75021_fd8557ae85.webp 481w
+                "
+                sizes="
+                    (min-width: 1200px) 435px,
+                    (min-width: 768px) 435px,
+                    calc(100vw - 24px)"
+                type="image/webp"><img class="image-embed-item" title="Wer wir sind" alt="Vier Personen von oben an einem Tisch" loading="lazy" src="/fileadmin/_processed_/8/5/csm_20140917_Studentenfeature_IAS_AE_75021_cb5f67a064.webp" width="656" height="492" /></picture>
+
+			</a>
+		
+	<figcaption class="image-caption">Foto: Astrid Eckert / TUM</figcaption>
+</figure>
+
+
+    
+
+
+							
+						
+					
+				
+
+		
+	</div>
+
+
+
+				
+
+				
+						<div class="ce-bodytext">
+							
+							<h2><a href="/cit/school/" class="internal-link">Wer wir sind</a></h2>
+						</div>
+					
+
+				
+			</div>
+		
+
+
+	
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+
+	
+
+			
+
+					<div id="c20" class="frame [ c-card  c-card--box  c-card--33  c-card--center ]
+ frame-type-textmedia frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+	
+
+
+		
+				
+			
+
+
+	
+				
+
+
+
+	
+
+
+                            
+    
+    
+
+    
+            
+                                
+
+	
+			
+			
+			
+
+			
+					
+				
+
+			<div
+				class="ce-textpic ce-left ce-above"
+			>
+
+				
+					
+
+	<div class="ce-gallery  "
+			 data-ce-columns="1"
+			 data-ce-images="1"
+	>
+		
+
+		
+					
+						
+							
+								
+
+        
+
+<figure class="image">
+	
+			<a href="/cit/studium/" title="Bei uns studieren" class="ti ti-link">
+				<picture><source media="(min-width: 1400px)" srcset="/fileadmin/_processed_/3/b/csm_20140917_Studentenfeature_IAS_AE_74481_a6e4cdc5e5.webp" type="image/webp"><source srcset="/fileadmin/_processed_/3/b/csm_20140917_Studentenfeature_IAS_AE_74481_31b0b769ff.webp 435w,
+                        /fileadmin/_processed_/3/b/csm_20140917_Studentenfeature_IAS_AE_74481_bcdaf3f183.webp 371w,
+                        /fileadmin/_processed_/3/b/csm_20140917_Studentenfeature_IAS_AE_74481_93f88c15f0.webp 656w,
+                        /fileadmin/_processed_/3/b/csm_20140917_Studentenfeature_IAS_AE_74481_09f593fa25.webp 481w
+                "
+                sizes="
+                    (min-width: 1200px) 435px,
+                    (min-width: 768px) 435px,
+                    calc(100vw - 24px)"
+                type="image/webp"><img class="image-embed-item" title="Bei uns studieren" alt="Drei Studierende am Whiteboard" loading="lazy" src="/fileadmin/_processed_/3/b/csm_20140917_Studentenfeature_IAS_AE_74481_e2aeacfb1c.webp" width="656" height="492" /></picture>
+
+			</a>
+		
+	<figcaption class="image-caption">Foto: Astrid Eckert / TUM</figcaption>
+</figure>
+
+
+    
+
+
+							
+						
+					
+				
+
+		
+	</div>
+
+
+
+				
+
+				
+						<div class="ce-bodytext">
+							
+							<h2><a href="/cit/studium/" class="internal-link">Bei uns studieren</a></h2>
+						</div>
+					
+
+				
+			</div>
+		
+
+
+	
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+
+	
+
+			
+
+					<div id="c18" class="frame [ c-card  c-card--box  c-card--33  c-card--right ]
+ frame-type-textmedia frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+	
+
+
+		
+				
+			
+
+
+	
+				
+
+
+
+	
+
+
+                            
+    
+    
+
+    
+            
+                                
+
+	
+			
+			
+			
+
+			
+					
+				
+
+			<div
+				class="ce-textpic ce-left ce-above"
+			>
+
+				
+					
+
+	<div class="ce-gallery  "
+			 data-ce-columns="1"
+			 data-ce-images="1"
+	>
+		
+
+		
+					
+						
+							
+								
+
+        
+
+<figure class="image">
+	
+			<a href="/cit/forschung/" title="Woran wir forschen" class="ti ti-link">
+				<picture><source media="(min-width: 1400px)" srcset="/fileadmin/_processed_/8/c/csm_1618656_c99ebd6753.webp" type="image/webp"><source srcset="/fileadmin/_processed_/8/c/csm_1618656_533adb8a45.webp 435w,
+                        /fileadmin/_processed_/8/c/csm_1618656_2c97e53ebc.webp 371w,
+                        /fileadmin/_processed_/8/c/csm_1618656_785a715d37.webp 656w,
+                        /fileadmin/_processed_/8/c/csm_1618656_80f8c5ad12.webp 481w
+                "
+                sizes="
+                    (min-width: 1200px) 435px,
+                    (min-width: 768px) 435px,
+                    calc(100vw - 24px)"
+                type="image/webp"><img class="image-embed-item" title="Woran wir forschen" alt="Johanna Baehr mit dem TUM Post-Quanten-Chip" loading="lazy" src="/fileadmin/_processed_/8/c/csm_1618656_9ed5a1ee74.webp" width="656" height="492" /></picture>
+
+			</a>
+		
+	<figcaption class="image-caption">Foto: Astrid Eckert / TUM</figcaption>
+</figure>
+
+
+    
+
+
+							
+						
+					
+				
+
+		
+	</div>
+
+
+
+				
+
+				
+						<div class="ce-bodytext">
+							
+							<h2><a href="/cit/forschung/" class="internal-link">Woran wir forschen</a></h2>
+						</div>
+					
+
+				
+			</div>
+		
+
+
+	
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+		<div class="clearfix"></div>
+	
+
+
+
+
+
+	
+
+			
+
+					<div id="c12366" class="frame 
+ frame-type-textmedia frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+	
+
+
+		
+				
+			
+
+
+	
+				
+
+
+
+	
+
+
+                            
+    
+    
+
+    
+            
+                                
+
+	
+			
+			
+			
+
+			
+					
+				
+
+			<div
+				class="ce-textpic ce-center ce-above"
+			>
+
+				
+					
+
+	<div class="ce-gallery   ce-gallery-full"
+			 data-ce-columns="1"
+			 data-ce-images="1"
+	>
+		
+			<div class="ce-outer float-none">
+				<div class="ce-inner float-none">
+		
+
+		
+					
+						
+							
+								
+
+        
+<figure class="video"
+		style="width: 1416px;"
+>
+	<div class="video-embed">
+		
+<div class="media2click-wrap">
+
+<div class="media2click-placeholder media2click-placeholder-video media2click-haspreview"
+    style="width:1416px;height:796px;"
+     aria-label="Was treibt dich an? - TUM School of Computation, Information and Technology"
+    data-host="YouTube">
+
+    
+        <img src="/typo3temp/assets/_processed_/8/1/csm_youtube_83daca6f82a4c3623da3f13c8fb7b473_4d9c6e2474.jpg" aria-hidden="true"/>
+    
+    
+    
+    <div class="media2click-placeholder-inner">
+        
+        
+            <div class="media2click-title">Was treibt dich an? - TUM School of Computation, Information and Technology</div>
+        
+        
+                <div class="media2click-content">
+                    
+                    
+                    Durch Klicken erklären Sie sich mit der <a href="https://policies.google.com/privacy?hl=de" target="_blank">Datenschutzerklärung</a> von Google und unserer Datenschutzerklärung einverstanden.
+                    
+                        <br><a href="/cit/datenschutz/">Mehr Informationen</a>
+                    
+                </div>
+            
+    </div>
+    <div class="media2click-controls">
+        <button class="media2click-button media2click-once" data-host="YouTube">Einmalig aktivieren</button>
+        
+            <button class="media2click-button media2click-permanent" data-host="YouTube">Dauerhaft aktivieren</button>
+        
+    </div>
+
+</div>
+
+<div data-attributes='{"src": "https://www.youtube-nocookie.com/embed/vDPfoPdwIUk?autohide=1\u0026amp;controls=1\u0026amp;enablejsapi=1\u0026amp;origin=https%3A%2F%2Fwww.cit.tum.de","allowfullscreen": "","width": "1416","height": "796","class": "media2click-iframe video-embed-item","title": "Was treibt dich an? - TUM School of Computation, Information and Technology","allow": "fullscreen"}' class="media2click-iframedata"></div></div>
+
+
+	</div>
+	
+		<figcaption class="video-caption">
+			
+				Video: Juri & Aki Films / TUM
+			
+		</figcaption>
+	
+</figure>
+
+
+    
+
+
+							
+						
+					
+				
+
+		
+				</div>
+			</div>
+		
+	</div>
+
+
+
+				
+
+				
+						
+					
+
+				
+			</div>
+		
+
+
+	
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+
+	
+
+			
+
+					<div id="c804" class="frame 
+ frame-type-div frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+                            
+    
+    
+
+    
+            
+                                
+
+    <hr class="ce-div" />
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+
+	
+
+			
+
+					<div id="c10" class="frame 
+ frame-type-news_newsliststicky frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+                                
+
+    
+				
+
+	
+			
+	
+			<h2>
+				Neuigkeiten aus der TUM School of Computation, Information and Technology
+			</h2>
+		
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+		
+				
+				
+
+
+
+		
+				
+
+
+
+    
+
+
+
+                            
+                            
+    
+    
+
+    
+            
+                                
+
+    
+    
+
+<div class="news news--layout-default">
+	
+    
+            
+        
+	<!--TYPO3SEARCH_end-->
+	
+			<div class="news-list-view" id="news-container-10">
+				
+						
+							
+
+
+
+
+<div class="article articletype-0 mb-3 topnews" data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            
+        
+                <div class="news-img-wrap">
+                    
+                        
+                            <a aria-hidden="true" tabindex="-1" title="NewIn: Reto Achermann" href="/cit/aktuelles/article/newin-reto-achermann/">
+
+                                
+            <picture>
+                
+        
+                
+            
+        
+            <source media="(min-width: 1200px)" srcset="/fileadmin/_processed_/7/5/csm_Reto_Achermann_076535be0b.webp" type="image/webp" />
+            <source srcset="/fileadmin/_processed_/7/5/csm_Reto_Achermann_5abb732f14.webp 427w,
+                            /fileadmin/_processed_/7/5/csm_Reto_Achermann_484c5d6bbb.webp 421w,
+                            /fileadmin/_processed_/7/5/csm_Reto_Achermann_5f982ec81a.webp 351w,
+                            /fileadmin/_processed_/7/5/csm_Reto_Achermann_96b5d6c534.webp 626w,
+                            /fileadmin/_processed_/7/5/csm_Reto_Achermann_4577f630e0.webp 526w,
+                            /fileadmin/_processed_/7/5/csm_Reto_Achermann_50e6428ee7.webp 472w,
+                            /fileadmin/_processed_/7/5/csm_Reto_Achermann_fd4581e2d3.webp 281w,
+
+                "
+                    sizes="(min-width: 992px) 427px,
+                           (min-width: 751px) 351px,
+                           (min-width: 576px) 626px,
+                           calc(100vw - 24px)"
+                    type="image/webp">
+        
+    
+                <img title="Reto Achermann" alt="Reto Achermann, Professor für Widerstandsfähige Rechensysteme an der TUM School of Computation, Information and Technology" src="/fileadmin/_processed_/7/5/csm_Reto_Achermann_fe253d1098.webp" width="400" height="225" />
+            </picture>
+        
+
+                            </a>
+                        
+                        
+                        
+                    
+                </div>
+            
+    
+            <div class="header">
+                <div class="catdate">
+                    
+						<span class="categories">
+							
+									NewIn
+							
+						</span>
+                        |
+                    
+                    <time datetime="2026.09.09">
+                        09.09.2026
+                    </time>
+                </div>
+                <h3>
+                    <a title="NewIn: Reto Achermann" href="/cit/aktuelles/article/newin-reto-achermann/">
+                        NewIn: Reto Achermann
+                        <span class="ti ti-link" aria-hidden="true"></span>
+                    </a>
+                </h3>
+
+                
+        
+        <div class="teaser-text">
+            
+                <p>
+                    Reto Achermann, neuer Professor an der TUM School of Computation, Information and Technology, erforscht widerstandsfähige Computersysteme, die auch unter komplexen Bedingungen zuverlässig funktionieren. Damit schafft er die Basis für digitale Infrastrukturen, auf die Menschen im Alltag vertrauen.
+                    <span class="news-list-morelink">
+                        <a aria-hidden="true" tabindex="-1" title="NewIn: Reto Achermann" href="/cit/aktuelles/article/newin-reto-achermann/">
+                            [weiterlesen]
+                        </a>
+                    </span>
+                </p>
+            
+        </div>
+    
+    
+            </div>
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-0 mb-3 topnews" data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            
+        
+                <div class="news-img-wrap">
+                    
+                        
+                            <a aria-hidden="true" tabindex="-1" title="ERC Starting Grants für Tobias Vogl und Violetta Weger" href="/cit/aktuelles/article/erc-starting-grants-tobias-vogl-violetta-weger/">
+
+                                
+            <picture>
+                
+        
+                
+            
+        
+            <source media="(min-width: 1200px)" srcset="/fileadmin/_processed_/3/3/csm_Vogl_Weger_7a073ba598.webp" type="image/webp" />
+            <source srcset="/fileadmin/_processed_/3/3/csm_Vogl_Weger_920d1d7191.webp 427w,
+                            /fileadmin/_processed_/3/3/csm_Vogl_Weger_b82027b30f.webp 421w,
+                            /fileadmin/_processed_/3/3/csm_Vogl_Weger_ff1fbc65b8.webp 351w,
+                            /fileadmin/_processed_/3/3/csm_Vogl_Weger_aba22661f9.webp 626w,
+                            /fileadmin/_processed_/3/3/csm_Vogl_Weger_77ee2b3ed1.webp 526w,
+                            /fileadmin/_processed_/3/3/csm_Vogl_Weger_00ff706a7a.webp 472w,
+                            /fileadmin/_processed_/3/3/csm_Vogl_Weger_1cacc43379.webp 281w,
+
+                "
+                    sizes="(min-width: 992px) 427px,
+                           (min-width: 751px) 351px,
+                           (min-width: 576px) 626px,
+                           calc(100vw - 24px)"
+                    type="image/webp">
+        
+    
+                <img title="ERC Starting Grants: Tobias Vogl und Violetta Weger" alt="Professor Tobias Vogl und Professorin Violetta Weger" src="/fileadmin/_processed_/3/3/csm_Vogl_Weger_c1a5d61622.webp" width="400" height="225" />
+            </picture>
+        
+
+                            </a>
+                        
+                        
+                        
+                    
+                </div>
+            
+    
+            <div class="header">
+                <div class="catdate">
+                    
+						<span class="categories">
+							
+									Forschung,
+							
+									Auszeichnungen
+							
+						</span>
+                        |
+                    
+                    <time datetime="2026.09.03">
+                        03.09.2026
+                    </time>
+                </div>
+                <h3>
+                    <a title="ERC Starting Grants für Tobias Vogl und Violetta Weger" href="/cit/aktuelles/article/erc-starting-grants-tobias-vogl-violetta-weger/">
+                        ERC Starting Grants für Tobias Vogl und Violetta Weger
+                        <span class="ti ti-link" aria-hidden="true"></span>
+                    </a>
+                </h3>
+
+                
+        
+        <div class="teaser-text">
+            
+                <p>
+                    Zwei Forschende der TUM School of Computation, Information and Technology erhalten dieses Jahr ERC Starting Grants des Europäischen Forschungsrats (ERC). Mit dieser Förderung unterstützt die EU exzellente Forschende, die am Beginn ihrer Karriere stehen. 
+                    <span class="news-list-morelink">
+                        <a aria-hidden="true" tabindex="-1" title="ERC Starting Grants für Tobias Vogl und Violetta Weger" href="/cit/aktuelles/article/erc-starting-grants-tobias-vogl-violetta-weger/">
+                            [weiterlesen]
+                        </a>
+                    </span>
+                </p>
+            
+        </div>
+    
+    
+            </div>
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-0 mb-3 topnews" data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            
+        
+                <div class="news-img-wrap">
+                    
+                        
+                            <a aria-hidden="true" tabindex="-1" title="Willkommen, Professor Sebastian Werner" href="/cit/aktuelles/article/professor-sebastian-werner/">
+
+                                
+            <picture>
+                
+        
+                
+            
+        
+            <source media="(min-width: 1200px)" srcset="/fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_3a5d433b17.webp" type="image/webp" />
+            <source srcset="/fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_5e9123aae0.webp 427w,
+                            /fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_625411d710.webp 421w,
+                            /fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_d96bcddbff.webp 351w,
+                            /fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_5dd2707402.webp 626w,
+                            /fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_783a59953e.webp 526w,
+                            /fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_2f74a9c76f.webp 472w,
+                            /fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_1bcd0b1b8b.webp 281w,
+
+                "
+                    sizes="(min-width: 992px) 427px,
+                           (min-width: 751px) 351px,
+                           (min-width: 576px) 626px,
+                           calc(100vw - 24px)"
+                    type="image/webp">
+        
+    
+                <img title="New@CIT: Sebastian Werner" alt="Professor Sebastian Werner" src="/fileadmin/_processed_/c/5/csm_Sebastian_Werner_AH_5cb47f345f.webp" width="400" height="226" />
+            </picture>
+        
+
+                            </a>
+                        
+                        
+                        
+                    
+                </div>
+            
+    
+            <div class="header">
+                <div class="catdate">
+                    
+						<span class="categories">
+							
+									New@CIT
+							
+						</span>
+                        |
+                    
+                    <time datetime="2026.09.02">
+                        02.09.2026
+                    </time>
+                </div>
+                <h3>
+                    <a title="Willkommen, Professor Sebastian Werner" href="/cit/aktuelles/article/professor-sebastian-werner/">
+                        Willkommen, Professor Sebastian Werner
+                        <span class="ti ti-link" aria-hidden="true"></span>
+                    </a>
+                </h3>
+
+                
+        
+        <div class="teaser-text">
+            
+                <p>
+                    Technische Innovationen allein reichen nicht aus. Warum Menschen und Organisationen entscheidend für nachhaltige Informationssysteme sind, erklärt der neu berufene Professor für Information Systems Engineering an der Technischen Universität München (TUM) in der Interview-Reihe „New@CIT“.
+                    <span class="news-list-morelink">
+                        <a aria-hidden="true" tabindex="-1" title="Willkommen, Professor Sebastian Werner" href="/cit/aktuelles/article/professor-sebastian-werner/">
+                            [weiterlesen]
+                        </a>
+                    </span>
+                </p>
+            
+        </div>
+    
+    
+            </div>
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-0 mb-3 topnews" data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            
+        
+                <div class="news-img-wrap">
+                    
+                        
+                            <a aria-hidden="true" tabindex="-1" title="Frontiers of Science Award 2026 für Tim Hoffmann" target="_blank" href="https://www.tum.de/aktuelles/alle-meldungen/pressemitteilungen/details/jahrzehnte-altes-problem-der-klassischen-geometrie-geloest">
+
+                                
+            <picture>
+                
+        
+                
+            
+        
+            <source media="(min-width: 1200px)" srcset="/fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_f9e625dc95.webp" type="image/webp" />
+            <source srcset="/fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_d4cb31690d.webp 427w,
+                            /fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_204191210d.webp 421w,
+                            /fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_d5e6f5b7ae.webp 351w,
+                            /fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_a0e3d08a82.webp 626w,
+                            /fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_760703153d.webp 526w,
+                            /fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_bd9fdf99fb.webp 472w,
+                            /fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_be252b3855.webp 281w,
+
+                "
+                    sizes="(min-width: 992px) 427px,
+                           (min-width: 751px) 351px,
+                           (min-width: 576px) 626px,
+                           calc(100vw - 24px)"
+                    type="image/webp">
+        
+    
+                <img title="Erstes kompaktes Bonnet-Paar gefunden" alt="Die Ansicht auf einem Bildschirm zeigt, dass selbst bei geschlossenen, donutartigen Oberflächen lokale Messdaten nicht zwingend eine einzige globale Form festlegen." src="/fileadmin/_processed_/5/d/csm_Erstes_kompaktes_Bonnet-Paar_gefunden_dcdacb7c71.webp" width="400" height="225" />
+            </picture>
+        
+
+                            </a>
+                        
+                        
+                        
+                    
+                </div>
+            
+    
+            <div class="header">
+                <div class="catdate">
+                    
+						<span class="categories">
+							
+									Forschung,
+							
+									Auszeichnungen
+							
+						</span>
+                        |
+                    
+                    <time datetime="2026.08.12">
+                        12.08.2026
+                    </time>
+                </div>
+                <h3>
+                    <a title="Frontiers of Science Award 2026 für Tim Hoffmann" target="_blank" href="https://www.tum.de/aktuelles/alle-meldungen/pressemitteilungen/details/jahrzehnte-altes-problem-der-klassischen-geometrie-geloest">
+                        Frontiers of Science Award 2026 für Tim Hoffmann
+                        <span class="ti ti-link-ext" aria-hidden="true"></span>
+                    </a>
+                </h3>
+
+                
+        
+        <div class="teaser-text">
+            
+                <p>
+                    Professor Tim Hoffmann von der TUM School of Computation, Information and Technology und seine Mitautoren erhalten für ihre Arbeit zur Lösung eines jahrzehntealten Geometrieproblems den Frontiers of Science Award 2026 vom International Congress of Basic Science (ICBS). Lesen Sie mehr zum Paper.
+                    <span class="news-list-morelink">
+                        <a aria-hidden="true" tabindex="-1" title="Frontiers of Science Award 2026 für Tim Hoffmann" target="_blank" href="https://www.tum.de/aktuelles/alle-meldungen/pressemitteilungen/details/jahrzehnte-altes-problem-der-klassischen-geometrie-geloest">
+                            [weiterlesen]
+                        </a>
+                    </span>
+                </p>
+            
+        </div>
+    
+    
+            </div>
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-0 mb-3 topnews" data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            
+        
+                <div class="news-img-wrap">
+                    
+                        
+                            <a aria-hidden="true" tabindex="-1" title="CIT Abschlussfeier für Bachelor und Master 2026" href="/cit/aktuelles/article/abschlussfeier-2026/">
+
+                                
+            <picture>
+                
+        
+                
+            
+        
+            <source media="(min-width: 1200px)" srcset="/fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_46e8600680.webp" type="image/webp" />
+            <source srcset="/fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_c24f86dde6.webp 427w,
+                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_4dcf5356ce.webp 421w,
+                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_e157bad80d.webp 351w,
+                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_6db5dc177c.webp 626w,
+                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_baa18007c7.webp 526w,
+                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_b039078120.webp 472w,
+                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_fc52a81f0e.webp 281w,
+
+                "
+                    sizes="(min-width: 992px) 427px,
+                           (min-width: 751px) 351px,
+                           (min-width: 576px) 626px,
+                           calc(100vw - 24px)"
+                    type="image/webp">
+        
+    
+                <img title="CIT-Abschlussfeier 2026" alt="Absolventinnen und Absolventen bei der CIT-Abschlussfeier 2026 auf dem Forschungscampus Garching" src="/fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_e364ca4fe8.webp" width="400" height="226" />
+            </picture>
+        
+
+                            </a>
+                        
+                        
+                        
+                    
+                </div>
+            
+    
+            <div class="header">
+                <div class="catdate">
+                    
+						<span class="categories">
+							
+									Studium,
+							
+									School
+							
+						</span>
+                        |
+                    
+                    <time datetime="2026.08.12">
+                        12.08.2026
+                    </time>
+                </div>
+                <h3>
+                    <a title="CIT Abschlussfeier für Bachelor und Master 2026" href="/cit/aktuelles/article/abschlussfeier-2026/">
+                        CIT Abschlussfeier für Bachelor und Master 2026
+                        <span class="ti ti-link" aria-hidden="true"></span>
+                    </a>
+                </h3>
+
+                
+        
+        <div class="teaser-text">
+            
+                <p>
+                    Am 17. und 18. Juli 2026 verabschiedete die TUM School of Computation, Information and Technology ihre Graduierten der Bachelor- und Masterstudiengänge aus den Fachbereichen Mathematik, Informatik sowie Elektrotechnik und Informationstechnik. Ein Rückblick.
+                    <span class="news-list-morelink">
+                        <a aria-hidden="true" tabindex="-1" title="CIT Abschlussfeier für Bachelor und Master 2026" href="/cit/aktuelles/article/abschlussfeier-2026/">
+                            [weiterlesen]
+                        </a>
+                    </span>
+                </p>
+            
+        </div>
+    
+    
+            </div>
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+					
+			</div>
+            
+		
+	<!--TYPO3SEARCH_begin-->
+
+</div>
+
+
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+
+	
+
+			
+
+					<div id="c2044" class="frame 
+ frame-type-news_newsliststicky frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+                                
+
+    
+				
+
+	
+			
+	
+			<h2>
+				Veranstaltungen der TUM School of Computation, Information and Technology
+			</h2>
+		
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+		
+				
+				
+
+
+
+		
+				
+
+
+
+    
+
+
+
+                            
+                            
+    
+    
+
+    
+            
+                                
+
+    
+    
+
+<div class="news news--layout5">
+	
+    
+            
+        
+	<!--TYPO3SEARCH_end-->
+	
+			<div class="news-list-view" id="news-container-2044">
+				
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.09.22">
+                <span class="day">22</span>		<!--day -->
+                <span class="month">Sep</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Forschung
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Workshop on Mathematical Modeling and Scientific Computing" target="_blank" href="https://easychair.org/cfp/MMSC-2026">Workshop on Mathematical Modeling and Scientific Computing</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.03">
+                <span class="day">03</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Forschung
+                                |
+                            
+                                School
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Tag der offenen Tür am Forschungscampus Garching" href="/cit/aktuelles-events/tag-der-offenen-tuer/">Tag der offenen Tür am Forschungscampus Garching</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.08">
+                <span class="day">08</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Studium
+                                |
+                            
+                                150 Jahre Elektro- und Informationstechnik
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Jubiläumsvorlesung: 2500 Jahre Kryptografie" href="/cit/aktuelles/article/jubilaeumsvorlesung-2500-jahre-kryptografie/">Jubiläumsvorlesung: 2500 Jahre Kryptografie</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.08">
+                <span class="day">08</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Studium
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Munich Risk and Insurance Days 2026" target="_blank" href="https://www.math.cit.tum.de/mathfinance/events/munich-risk-and-insurance-days/">Munich Risk and Insurance Days 2026</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.08">
+                <span class="day">08</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Studium
+                                |
+                            
+                                150 Jahre Elektro- und Informationstechnik
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Zurück an den Drehort: &quot;Technically Single&quot; im Hörsaal 1200" href="/cit/aktuelles/article/zurueck-am-drehort-technically-single/">Zurück an den Drehort: &quot;Technically Single&quot; im Hörsaal 1200</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.17">
+                <span class="day">17</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                150 Jahre Elektro- und Informationstechnik
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Eine Nacht voller Technikgeschichte: Sammlung Telekommunikation" href="/cit/aktuelles/article/sammlung-telekommunikation/">Eine Nacht voller Technikgeschichte: Sammlung Telekommunikation</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.26">
+                <span class="day">26</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Forschung
+                                |
+                            
+                                School
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Large Scale Dynamics Conference: Quantum, Classical &amp; Stochastic" target="_blank" href="https://sites.google.com/view/largescaledynamics2026/home">Large Scale Dynamics Conference: Quantum, Classical &amp; Stochastic</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.29">
+                <span class="day">29</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Studium
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Munich Career Fair AI and Data Science" target="_blank" href="https://collab.dvb.bayern/spaces/TUMrelai/pages/2750926831/Registration+Munich+Career+Fair+AI+Data+Science+2026">Munich Career Fair AI and Data Science</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.10.30">
+                <span class="day">30</span>		<!--day -->
+                <span class="month">Okt</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                Studium
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="Fit for TUMorrow Day 2026" target="_blank" href="https://www.math.cit.tum.de/mathfinance/fit-for-tumorrow/fit-for-tumorrow-day/">Fit for TUMorrow Day 2026</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-5 mb-1 " data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            <time datetime="2026.11.27">
+                <span class="day">27</span>		<!--day -->
+                <span class="month">Nov</span>	<!--month -->
+                <span class="year">&nbsp;2026</span>	<!--year -->
+            </time>
+            
+                    <div class="right">
+                        <div class="category">
+                            
+                                School
+                                
+                            
+                        </div>
+                        <h3 class="title">
+                            <a title="hackaTUM" target="_blank" href="https://hack.tum.de/">hackaTUM</a>
+                        </h3>
+                    </div>
+                
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+					
+			</div>
+            
+		
+	<!--TYPO3SEARCH_begin-->
+
+</div>
+
+
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+
+	
+
+			
+
+					<div id="c992" class="frame 
+ frame-type-textmedia frame-layout-0">
+                        
+                        
+    
+    
+    
+            
+                            
+                            
+                            
+                            
+                                
+
+
+
+                            
+                            
+	
+
+
+		
+				
+			
+
+
+	
+				
+
+
+
+	
+
+
+                            
+    
+    
+
+    
+            
+                                
+
+	
+			
+					
+                    <p><a href="/cit/aktuelles-events/" class="internal-link">Zur News- und Event-Übersicht</a></p>
+				
+		
+
+
+	
+
+
+                            
+        
+
+                            
+                                
+
+
+
+                            
+                        
+        
+
+
+
+						
+					</div>
+
+				
+		
+	
+
+
+
+
+
+		
+
+</div>
+
+<div class="c-link-to-top  js-link-to-top">
+	<a href="#topbar" title="nach oben springen">
+		To top
+	</a>
+</div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+	<footer class="c-footer">
+
+        <div class="c-footer__legal">
+            <nav class="container" aria-label="legal links">
+                <ul class="list-inline"><li class="list-inline-item"><a href="/cit/datenschutz/">Datenschutz</a></li><li class="list-inline-item"><a href="/cit/impressum/">Impressum</a></li><li class="list-inline-item"><a href="/cit/erklaerung-barrierefreiheit/">Barrierefreiheit</a></li></ul>
+                <img aria-hidden="true" src="https://tum.de/hsts/default" height="1" width="1" />
+            </nav>
+        </div>
+
+        
+
+	</footer>
+
+
+
+
+    
+    
+    <!-- Matomo Partial -->
+    <script data-ignore="1" data-cookieconsent="statistics" type="text/plain" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA">
+        var _paq = window._paq = window._paq || [];
+       _paq.push(['trackPageView']);
+       _paq.push(['enableLinkTracking']);
+
+       (function () {
+           var u = "//webstat.srv.tum.de/";
+           _paq.push(['setTrackerUrl', u + 'matomo.php']);
+           _paq.push(['setSiteId', '177']);
+
+           var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+           g.type = 'text/javascript';
+           g.async = true;
+           g.defer = true;
+           g.src = u + 'js/';
+           s.parentNode.insertBefore(g, s);
+       })();
+    </script>
+    <!-- End Matomo -->
+
+<script type="module" src="/_frontend/bundled/assets/main-pHWgMXGO.js?1789384289" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA"></script>
+<script type="module" src="/_frontend/bundled/assets/mathjax-CXIPnYGz.js?1789384289" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA"></script>
+<script type="module" src="/_frontend/bundled/assets/carousel-DSoJ3zu-.js?1789384289" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA"></script>
+<script type="module" src="/_frontend/bundled/assets/media2click-C3gLqQTr.js?1789384289" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA"></script>
+<script data-ignore="1" data-dp-cookiedesc="layout" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA" type="text/plain">
+    
+        Diese Webseite verwendet Cookies und Matomo, um die Bedienfreundlichkeit zu erhöhen.
+    
+
+
+    <a aria-label="Weitere Informationen zu unseren verwendeten Cookies"
+       class="cc-link"
+       href="/cit/datenschutz/#AktiveKomponenten"
+       rel="noopener noreferrer nofollow"
+       target="_blank"
+    >
+        Weitere Informationen
+    </a>
+
+
+</script>
+<script data-ignore="1" data-dp-cookieselect="layout" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA" type="text/plain">
+    <div class="dp--cookie-check" xmlns:f="http://www.w3.org/1999/html">
+    <label for="dp--cookie-required">
+        <input class="dp--check-box" id="dp--cookie-required" tabindex="-1" type="checkbox" name="" value="" checked disabled>
+        Notwendig
+    </label>
+    <label for="dp--cookie-statistics">
+        <input class="dp--check-box" id="dp--cookie-statistics" tabindex="1" type="checkbox" name="" value="">
+        Statistiken
+    </label>
+		
+</div>
+
+</script>
+<script data-ignore="1" data-dp-cookierevoke="layout" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA" type="text/plain">
+    <button type="button"
+        aria-label="Cookie Consent widerrufen"
+        class="dp--revoke {{classes}}"
+>
+    <i class="dp--icon-fingerprint"></i>
+    <span class="dp--hover">Cookies</span>
+</button>
+
+</script>
+<script data-ignore="1" data-dp-cookieiframe="layout" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA" type="text/plain">
+    <div class="dp--overlay-inner" data-nosnippet>
+    <div class="dp--overlay-header">{{notice}}</div>
+    <div class="dp--overlay-description">{{desc}}</div>
+    <div class="dp--overlay-button">
+        <button class="db--overlay-submit" onclick="window.DPCookieConsent.forceAccept(this)"
+                data-cookieconsent="{{type}}">
+        {{btn}}
+        </button>
+    </div>
+</div>
+
+</script>
+<script data-ignore="1" nonce="-TR9aD2zyQ84JJS-hXbvAr_FK4no8i9l_LCRfyvID94Twrko8b6DTA" type="text/javascript">
+    window.cookieconsent_options = {
+        overlay: {
+            notice: true,
+            box: {
+                background: 'rgba(48,112,179,.75)',
+            text: '#fff'
+            },
+            btn: {
+                background: '#b81839',
+            text: '#fff'
+            }
+            },
+            content: {
+                message:'Diese Webseite verwendet Cookies und Matomo, um die Bedienfreundlichkeit zu erhöhen.',
+            dismiss:'Cookies zulassen!',
+            allow:'Speichern',
+            deny: 'notwendige <span></span>Cookies',
+            link:'Weitere Informationen',
+            href:'/cit/datenschutz/',
+            target:'_blank',
+            'allow-all': 'Alle akzeptieren!',
+            config: 'Anpassen',
+            'config-header':  'Einstellungen für die Zustimmung anpassen',
+
+
+            cookie: 'Cookies',
+            duration: 'Duration',
+            vendor: 'Vendor',
+
+            media: {
+                notice: 'Cookie-Hinweis',
+            desc: 'Durch das Laden dieser Ressource wird eine Verbindung zu externen Servern hergestellt, die Cookies und andere Tracking-Technologien verwenden, um die Benutzererfahrung zu personalisieren und zu verbessern. Weitere Informationen finden Sie in unserer Datenschutzerklärung.',
+            btn: 'Erlaube Cookies und lade diese Ressource',
+            },
+            },
+            theme: 'basic',
+            position: 'bottom-right',
+            type: 'opt-in',
+            revokable: true,
+            reloadOnRevoke: false,
+            checkboxes: {"statistics":"false","marketing":"false"},
+            cookies: [],
+            palette: {
+                popup: {
+                    background: 'rgba(48,112,179,1)',
+            text: '#fff'
+            },
+            button: {
+                background: '#b81839',
+            text: '#fff',
+            }
+        }
+    };
+</script>
+<!--
+  ~ Copyright (c) 2021.
+  ~
+  ~ @category   TYPO3
+  ~
+  ~ @copyright  2021 Dirk Persky (https://github.com/DirkPersky)
+  ~ @author     Dirk Persky <info@dp-wired.de>
+  ~ @license    MIT
+  -->
+
+
+<!-- Begin Cookie Consent plugin by Dirk Persky - https://github.com/DirkPersky/typo3-dp_cookieconsent -->
+
+
+
+
+
+
+<!-- End Cookie Consent plugin -->
+</body>
+</html>

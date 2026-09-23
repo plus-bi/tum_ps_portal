@@ -24,6 +24,8 @@ class ChairAdapter:
     department: str
     source_urls: tuple[str, ...]
     family: str
+    opportunity_type: str = "project_study"
+    source_implies_active_type: bool = False
     state: SourceState = SourceState.needs_audit
     candidate_selectors: tuple[str, ...] = ("article", ".news-list-item", ".news-single", ".frame", ".accordion-item", "li")
     child_link_markers: tuple[str, ...] = ("project stud", "projektstud", "open project", ".pdf", ".docx")
@@ -46,6 +48,7 @@ DEPARTMENTS = {
     "innovation-entrepreneurship": "Innovation and Entrepreneurship",
     "marketing-strategy-leadership": "Marketing, Strategy and Leadership",
     "operations-technology": "Operations and Technology",
+    "interdisciplinary-projects": "Interdisciplinary Projects",
 }
 
 
@@ -61,15 +64,15 @@ def _family(url: str) -> str:
     return "typo3"
 
 
-def _inventory_path() -> Path:
-    candidates = (Path(__file__).resolve().parents[3] / "tum_project_study_chairs.json", Path("tum_project_study_chairs.json"))
+def _inventory_path(filename: str) -> Path:
+    candidates = (Path(__file__).resolve().parents[3] / filename, Path(filename))
     for path in candidates:
         if path.is_file(): return path
-    raise RuntimeError("tum_project_study_chairs.json is required for the chair registry")
+    raise RuntimeError(f"{filename} is required for the chair registry")
 
 
 def _load_registry() -> tuple[ChairAdapter, ...]:
-    rows = json.loads(_inventory_path().read_text(encoding="utf-8"))
+    rows = json.loads(_inventory_path("tum_project_study_chairs.json").read_text(encoding="utf-8"))
     required = {"department", "chair_name", "project_study_url"}
     if len(rows) != 32 or any(set(row) != required for row in rows):
         raise RuntimeError("Chair inventory must contain exactly 32 normalized records")
@@ -99,10 +102,51 @@ def _load_registry() -> tuple[ChairAdapter, ...]:
     ) for row in rows)
     if len({a.slug for a in adapters}) != 32 or len({a.source_urls[0] for a in adapters}) != 32:
         raise RuntimeError("Chair slugs and source URLs must be unique")
-    if set(a.department for a in adapters) != set(DEPARTMENTS.values()):
+    if set(a.department for a in adapters) != set(DEPARTMENTS.values()) - {DEPARTMENTS["interdisciplinary-projects"]}:
         raise RuntimeError("Unexpected department in chair inventory")
     return adapters
 
 
 REGISTRY = _load_registry()
 BY_SLUG = {adapter.slug: adapter for adapter in REGISTRY}
+
+
+IDP_HUB_URL = "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/"
+IDP_MARKERS = ("idp", "interdisciplinary project", "interdisziplinäres projekt")
+
+
+def _load_idp_registry() -> tuple[ChairAdapter, ...]:
+    """Load the chair links published by the official Informatics IDP hub.
+
+    These sources are intentionally a separate, versioned inventory: the hub is an
+    announcement source itself, while individual chairs remain responsible for
+    their own narrowly scoped pages.
+    """
+    rows = json.loads(_inventory_path("tum_idp_sources.json").read_text(encoding="utf-8"))
+    required = {"chair_name", "idp_url"}
+    if any(set(row) != required for row in rows):
+        raise RuntimeError("IDP inventory contains invalid records")
+    hub = ChairAdapter(
+        slug="informatics-idp-hub", name="Informatics IDP Hub", department=DEPARTMENTS["interdisciplinary-projects"],
+        source_urls=(IDP_HUB_URL,), family="typo3", opportunity_type="idp", source_implies_active_type=True,
+        # Offer links are extracted directly from the hub page.  Do not download
+        # every linked PDF during a daily listing crawl.
+        candidate_selectors=(".ce-uploads li",),
+        active_markers=IDP_MARKERS,
+    )
+    chairs = tuple(ChairAdapter(
+        slug=f"idp-{_slug(row['chair_name'])}", name=row["chair_name"], department=DEPARTMENTS["interdisciplinary-projects"],
+        source_urls=(row["idp_url"],), family=_family(row["idp_url"]), opportunity_type="idp",
+        active_markers=IDP_MARKERS,
+        excluded_markers=tuple(marker for marker in ChairAdapter.excluded_markers if marker != "idp"),
+        state=SourceState.active,
+    ) for row in rows)
+    adapters = (hub, *chairs)
+    if len(adapters) != 32 or len({adapter.slug for adapter in adapters}) != len(adapters):
+        raise RuntimeError("IDP inventory must contain the hub and 31 unique chair records")
+    return adapters
+
+
+IDP_REGISTRY = _load_idp_registry()
+ALL_REGISTRY = (*REGISTRY, *IDP_REGISTRY)
+ALL_BY_SLUG = {adapter.slug: adapter for adapter in ALL_REGISTRY}

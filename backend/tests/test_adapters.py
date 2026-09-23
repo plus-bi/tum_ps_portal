@@ -1,6 +1,6 @@
 import pytest
 from app.ingestion.adapters import parser_for
-from app.ingestion.registry import REGISTRY
+from app.ingestion.registry import IDP_REGISTRY, REGISTRY
 
 
 @pytest.mark.parametrize("adapter", REGISTRY, ids=lambda adapter: adapter.slug)
@@ -20,4 +20,19 @@ def test_every_chair_has_fixture_backed_discovery_contract(adapter):
 def test_project_study_modalities_heading_is_not_an_offer():
     adapter = next(adapter for adapter in REGISTRY if adapter.slug == "marketing-and-technology")
     html = b"<html><body><article><h2>Modalities of the Project Study/IDP</h2><p>General information.</p></article></body></html>"
+    assert parser_for(adapter).discover(adapter, adapter.source_urls[0], html) == []
+
+
+def test_informatics_idp_hub_accepts_announced_pdf_even_when_its_title_omits_idp():
+    adapter = IDP_REGISTRY[0]
+    html = b'''<html><body><ul class="ce-uploads"><li><a href="/fileadmin/w00byx/cit/IDP/offer.pdf">[01.09.2026] Human interaction in physical workspaces</a></li></ul></body></html>'''
+    candidates = parser_for(adapter).discover(adapter, adapter.source_urls[0], html)
+    assert len(candidates) == 1
+    assert candidates[0].title.endswith("physical workspaces")
+    assert candidates[0].source_url.endswith("offer.pdf")
+
+
+def test_idp_adapter_rejects_thesis_only_content():
+    adapter = IDP_REGISTRY[1]
+    html = b"<article><h2>Master thesis: data science</h2><a href='/thesis.pdf'>Details</a></article>"
     assert parser_for(adapter).discover(adapter, adapter.source_urls[0], html) == []

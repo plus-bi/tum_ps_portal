@@ -1,0 +1,42 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.ce.cit.tum.de/aidx/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/aip/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/aipd/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/aipro/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/air/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/bai/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/caos/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/caps/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/ce/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/cm/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/cps/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/eda/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/eisec/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/esi/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/hcr/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/hndss/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/ibrs/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/ics/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/itr/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/ldv/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/lis/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/lkn/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/lmt/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/lnt/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/lsr/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/lsy/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/lti/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/mli/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/mmk/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/msv/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/nhcr/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/pins/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/qcs/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/rm/sitemap.xml
+Sitemap: https://www.ce.cit.tum.de/rsi/sitemap.xml
+###Sitemaps-End###

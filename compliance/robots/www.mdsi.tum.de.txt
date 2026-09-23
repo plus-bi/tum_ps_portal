@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.mdsi.tum.de/amc/sitemap.xml
+Sitemap: https://www.mdsi.tum.de/di-lab/sitemap.xml
+Sitemap: https://www.mdsi.tum.de/gni/sitemap.xml
+Sitemap: https://www.mdsi.tum.de/mdsi/sitemap.xml
+###Sitemaps-End###

@@ -1,0 +1,36 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.asg.ed.tum.de/aas/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/asg/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/bole/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/coa/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/eav/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/esm/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/fesg/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/gds/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/gis/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/hsp/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/ht/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/hyp/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/iapg/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/lcc/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/lfk/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/lls/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/lmf/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/lpe/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/lrt/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/ltf/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/pf/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/rsa/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/scc/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/sfm/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/sipeo/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/slr/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/smp/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/sps/sitemap.xml
+Sitemap: https://www.asg.ed.tum.de/tsg/sitemap.xml
+###Sitemaps-End###

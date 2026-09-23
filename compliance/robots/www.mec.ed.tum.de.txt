@@ -1,0 +1,22 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.mec.ed.tum.de/ais/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/am/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/amx/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/cps/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/fml/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/fzg/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/iwb/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/lbam/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/lfe/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/lpl/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/mec/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/mimed/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/mmi/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/spgm/sitemap.xml
+Sitemap: https://www.mec.ed.tum.de/utg/sitemap.xml
+###Sitemaps-End###

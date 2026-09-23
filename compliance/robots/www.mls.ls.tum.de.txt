@@ -1,0 +1,47 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.mls.ls.tum.de/anm/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/bc/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/bgk/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/bina/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/bioinf/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/btr/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/cls/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/cmb/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/compms/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/compneuro/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/cpb/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/cpm/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/cropphys/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/daisybio/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/fbs/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/inmb/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/intos/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/ipat/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/lms/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/mbio/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/mdi/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/metabolism/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/micphys/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/mls/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/mnm/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/nutrim/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/osb/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/pbch/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/pcb/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/pgen/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/physio/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/plantbreeding/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/plantdev/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/plasysbio/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/pmd/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/pp/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/proteomics/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/rsi/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/tnm/sitemap.xml
+Sitemap: https://www.mls.ls.tum.de/zoologie/sitemap.xml
+###Sitemaps-End###

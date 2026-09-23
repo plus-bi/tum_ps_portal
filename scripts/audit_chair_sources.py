@@ -9,14 +9,14 @@ sys.path.insert(0, str(ROOT / "backend"))
 from app.ingestion.adapters import parser_for
 from app.ingestion.documents import extract
 from app.ingestion.fetcher import PoliteFetcher
-from app.ingestion.registry import REGISTRY
+from app.ingestion.registry import ALL_REGISTRY
 
 FIXTURES = ROOT / "backend/tests/fixtures/chairs"
 
 async def audit():
     FIXTURES.mkdir(parents=True, exist_ok=True)
     fetcher = PoliteFetcher(delay_seconds=1.0, timeout_seconds=30); manifest = []
-    for adapter in REGISTRY:
+    for adapter in ALL_REGISTRY:
         url = adapter.source_urls[0]; row = {"slug": adapter.slug, "name": adapter.name, "url": url, "family": adapter.family}
         try:
             fetched = await asyncio.wait_for(fetcher.fetch(url), timeout=35); suffix = ".html" if "html" in fetched.media_type else ".bin"

@@ -1,0 +1,44 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.cs.cit.tum.de/ac/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/ais/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/algo/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/bio/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/bpm/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/camp/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/cde/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/cg/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/ciam/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/cmm/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/coma/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/cs/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/ct/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/cvg/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/daml/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/dast/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/dis/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/dss/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/ercs/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/far/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/ii/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/infs/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/isdo/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/ise/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/lt/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/ndx/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/pl/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/prog/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/qc/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/sccs/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/scml/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/se/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/seai/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/sebis/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/sse/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/tcs/sitemap.xml
+Sitemap: https://www.cs.cit.tum.de/tfai/sitemap.xml
+###Sitemaps-End###

@@ -1,0 +1,21 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.epc.ed.tum.de/aer/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/cfd/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/cm/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/ddmm/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/efd/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/epc/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/lnm/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/mfm/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/mhpc/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/rt/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/sam/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/td/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/tfd/sitemap.xml
+Sitemap: https://www.epc.ed.tum.de/vib/sitemap.xml
+###Sitemaps-End###

@@ -1,7 +1,23 @@
 {
-  "generated_at": "2026-09-22T13:23:52.063130+00:00",
+  "generated_at": "2026-09-23T07:30:36.415092+00:00",
   "user_agent": "TUM-Project-Studies-Portal",
   "origins": [
+    {
+      "origin": "http://www.mmk.ei.tum.de",
+      "robots_url": "http://www.mmk.ei.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/cit/startseite/",
+      "sha256": "930b27ae2331d41d2644aee5258f673dbe0da3a3390bc195ce97b999f834f0c1",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "http://www.mmk.ei.tum.de/studentische-arbeiten/themen-fuer-studentische-arbeiten/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
     {
       "origin": "https://eco.cs.tum.de",
       "robots_url": "https://eco.cs.tum.de/robots.txt",
@@ -93,6 +109,22 @@
       "compliant": true
     },
     {
+      "origin": "https://www.asg.ed.tum.de",
+      "robots_url": "https://www.asg.ed.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.asg.ed.tum.de/robots.txt",
+      "sha256": "16f49049f854ada00f3c1bb26c89fd7ba92494e8c1ee2b88e8541ae44ccb834e",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.asg.ed.tum.de/en/rsa/teaching/courses/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
       "origin": "https://www.bwl.wi.tum.de",
       "robots_url": "https://www.bwl.wi.tum.de/robots.txt",
       "status": 200,
@@ -103,6 +135,105 @@
       "urls": [
         {
           "url": "https://www.bwl.wi.tum.de/lehre/projektstudien/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.ce.cit.tum.de",
+      "robots_url": "https://www.ce.cit.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.ce.cit.tum.de/robots.txt",
+      "sha256": "fc83a3f8f567c3eaa8f8ddd51d8315e9d617ca56d3100fb2eeedc0da1b61095d",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.ce.cit.tum.de/en/eisec/studentische-arbeiten/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ce.cit.tum.de/en/lmt/student-thesis/ongoing-thesis/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.cit.tum.de",
+      "robots_url": "https://www.cit.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/robots.txt",
+      "sha256": "0078e4f169d0374805eb61e0eeb22ad16305bd343466df3f1d0bb704bef993a7",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.cs.cit.tum.de",
+      "robots_url": "https://www.cs.cit.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.cs.cit.tum.de/robots.txt",
+      "sha256": "58d8dadf9f4c197a466c529a556e892dad619dcbd5ea1a031cd6556280091de8",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.cs.cit.tum.de/cmm/jobs-theses/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.edu.sot.tum.de",
+      "robots_url": "https://www.edu.sot.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.edu.sot.tum.de/robots.txt",
+      "sha256": "1d63dedd32ba7b5c725f4ed116c398898fe82777eac6771cb71bbdc84a58e3ea",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.edu.sot.tum.de/hctl/lehre/interdisciplinary-projects/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.ef.wi.tum.de",
+      "robots_url": "https://www.ef.wi.tum.de/robots.txt",
+      "status": 404,
+      "final_url": "https://www.fa.mgt.tum.de/ef//robots.txt",
+      "sha256": "605855884205cf6f43722e7041e3963de10d622a1b68096877faea461d398810",
+      "policy": "allow_all_no_policy",
+      "compliant": true,
+      "urls": [
+        {
+          "url": "https://www.ef.wi.tum.de/index.php?id=118",
+          "allowed": true
+        }
+      ]
+    },
+    {
+      "origin": "https://www.ei.tum.de",
+      "robots_url": "https://www.ei.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/cit/startseite/",
+      "sha256": "8e2160cbf175d103276c608bff1d517304b1ee3a3bd2ccc553e7f441f28f54c2",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.ei.tum.de/ldv/studentische-arbeiten/",
           "allowed": true
         }
       ],
@@ -141,6 +272,50 @@
       "compliant": true
     },
     {
+      "origin": "https://www.epc.ed.tum.de",
+      "robots_url": "https://www.epc.ed.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.epc.ed.tum.de/robots.txt",
+      "sha256": "098ce87b342fdf386d6c3f3594491af90260397586658ab1c987be6a38b8455f",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.epc.ed.tum.de/en/aer/semester-papers-idp/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.epc.ed.tum.de/en/mfm/open-positions-student-thesis-projects/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.epe.ed.tum.de",
+      "robots_url": "https://www.epe.ed.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.epe.ed.tum.de/robots.txt",
+      "sha256": "cf4603c5233cb6a2db2ca872cc2fc65ac3b5ec56ff055f3167bc5173b22e9a46",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.epe.ed.tum.de/biose/studentenarbeiten/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.epe.ed.tum.de/emt/lehre/interdisziplinaeres-projekt/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.epe.ed.tum.de/en/ens/teaching/student-theses/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
       "origin": "https://www.fa.mgt.tum.de",
       "robots_url": "https://www.fa.mgt.tum.de/robots.txt",
       "status": 200,
@@ -149,6 +324,10 @@
       "policy": "rules_applied",
       "crawl_delay": null,
       "urls": [
+        {
+          "url": "https://www.fa.mgt.tum.de/accounting/teaching/idp/",
+          "allowed": true
+        },
         {
           "url": "https://www.fa.mgt.tum.de/accounting/teaching/project-studies/",
           "allowed": true
@@ -257,6 +436,62 @@
       "compliant": true
     },
     {
+      "origin": "https://www.in.tum.de",
+      "robots_url": "https://www.in.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/cit/startseite/",
+      "sha256": "68712b41f6d9fbd3ad1c505cef573ab14b7a05b1f022c33cef615de2ef8d5d38",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.in.tum.de/i17/news/news-single-view/article/student-projects-and-theses-develop-a-business-game/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.mdsi.tum.de",
+      "robots_url": "https://www.mdsi.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.mdsi.tum.de/robots.txt",
+      "sha256": "7130d2f680759104412b753c6eeabc77593f67605ed9395a8794da46ad2db44f",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.mdsi.tum.de/en/di-lab/projects/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.mec.ed.tum.de",
+      "robots_url": "https://www.mec.ed.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.mec.ed.tum.de/robots.txt",
+      "sha256": "ae1553776414120c14510be911562e1b40579f413846dc92cfc72277752deb45",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.mec.ed.tum.de/en/fml/courses/student-assistant-final-thesis-and-term-paper/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.mec.ed.tum.de/en/iwb/studies/hiwi-jobs-and-research-papers-1/interdisciplinary-projects/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.mec.ed.tum.de/spgm/abschlussarbeiten/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
       "origin": "https://www.mgt.tum.de",
       "robots_url": "https://www.mgt.tum.de/robots.txt",
       "status": 200,
@@ -279,6 +514,38 @@
         },
         {
           "url": "https://www.mgt.tum.de/global-center-for-family-enterprise",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.mls.ls.tum.de",
+      "robots_url": "https://www.mls.ls.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.mls.ls.tum.de/robots.txt",
+      "sha256": "0de377a29458616eb2e23b41c3ed6c311753d46181133079093ac3bef6b452aa",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.mls.ls.tum.de/proteomics/research/projects/available-bi-projects/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.mos.ed.tum.de",
+      "robots_url": "https://www.mos.ed.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.mos.ed.tum.de/robots.txt",
+      "sha256": "45275c107be1573d68295cf06be8e61fe28bea8b19576a27c7193b666a07ec9d",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.mos.ed.tum.de/en/ftm/teaching/informatics/",
           "allowed": true
         }
       ],
@@ -313,6 +580,22 @@
       "compliant": true
     },
     {
+      "origin": "https://www.notion.so",
+      "robots_url": "https://www.notion.so/robots.txt",
+      "status": 200,
+      "final_url": "https://www.notion.so/robots.txt",
+      "sha256": "f4a0f8257adb7d21c0ca560855d756d848f87eab9091fadb45005910f893f113",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.notion.so/IDP-s-and-Theses-at-cartken-4009d4a6db2b48bb821d6577a9606789",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
       "origin": "https://www.ot.mgt.tum.de",
       "robots_url": "https://www.ot.mgt.tum.de/robots.txt",
       "status": 200,
@@ -323,6 +606,10 @@
       "urls": [
         {
           "url": "https://www.ot.mgt.tum.de/dfb/education/project-studies-idps/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/en/or/teaching/interdisciplinary-project-idp/",
           "allowed": true
         },
         {
@@ -362,7 +649,15 @@
           "allowed": true
         },
         {
+          "url": "https://www.ot.mgt.tum.de/om/teaching-overview/idp/",
+          "allowed": true
+        },
+        {
           "url": "https://www.ot.mgt.tum.de/om/teaching-overview/project-studies/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/osm/education/idps/",
           "allowed": true
         },
         {
@@ -387,6 +682,41 @@
         }
       ],
       "compliant": true
+    },
+    {
+      "origin": "https://www.professors.wi.tum.de",
+      "robots_url": "https://www.professors.wi.tum.de/robots.txt",
+      "status": 200,
+      "final_url": "https://www.mgt.tum.de/",
+      "sha256": "cb3e58ce3e6350832b713d9e6f4be0ab0c73e1e11052d4d635a681adf6fad999",
+      "policy": "rules_applied",
+      "crawl_delay": null,
+      "urls": [
+        {
+          "url": "https://www.professors.wi.tum.de/fm/teaching/idp/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.professors.wi.tum.de/scm/education/idp/",
+          "allowed": true
+        }
+      ],
+      "compliant": true
+    },
+    {
+      "origin": "https://www.tim.wi.tum.de",
+      "robots_url": "https://www.tim.wi.tum.de/robots.txt",
+      "status": 404,
+      "final_url": "https://www.ie.mgt.tum.de/tim//robots.txt",
+      "sha256": "b40ff921848eb333e7e2c5c020a6296ed001999a772f502918b3409b396db0cd",
+      "policy": "allow_all_no_policy",
+      "compliant": true,
+      "urls": [
+        {
+          "url": "https://www.tim.wi.tum.de/index.php?id=211",
+          "allowed": true
+        }
+      ]
     },
     {
       "origin": "https://www.tum.de",

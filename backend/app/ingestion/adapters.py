@@ -50,12 +50,14 @@ class HtmlParser:
             if not classify(text, adapter, in_archive=self._under_archive_heading(block, adapter)).accepted: continue
             heading = block.find(["h1", "h2", "h3", "h4", "h5"])
             offer_link = next((a for a in block.find_all("a", href=True)
-                               if any(marker in " ".join(a.stripped_strings).casefold() for marker in adapter.active_markers)), None)
+                               if adapter.source_implies_active_type or any(
+                                   marker in f"{' '.join(a.stripped_strings)} {a['href']}".casefold()
+                                   for marker in adapter.active_markers)), None)
             if heading is None and offer_link is None: continue
             title = " ".join((heading or offer_link).stripped_strings)
             normalized_title = " ".join(title.casefold().replace("&", " ").replace("/", " ").split()).strip(":")
             if normalized_title in self._generic_titles: continue
-            if not any(marker in normalized_title for marker in adapter.active_markers): continue
+            if not adapter.source_implies_active_type and not any(marker in normalized_title for marker in adapter.active_markers): continue
             if any(noise in normalized_title for noise in ("registration form", "information sheet", "report", "submission", "submisson", "submit your", "overview", "contact person")): continue
             links = [urljoin(source_url, a.get("href")) for a in block.find_all("a", href=True)]
             detail = (urljoin(source_url, offer_link.get("href")) if offer_link is not None else

@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /typo3/
+Disallow: /typo3_src/
+Allow: /typo3/sysext/frontend/Resources/Public/*
+
+###Sitemaps-Start###
+Sitemap: https://www.cit.tum.de/cit/sitemap.xml
+Sitemap: https://www.cit.tum.de/ito/sitemap.xml
+###Sitemaps-End###

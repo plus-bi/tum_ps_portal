@@ -20,7 +20,7 @@ from ..schemas import Status
 from .adapters import Candidate, parser_for
 from .documents import extract
 from .fetcher import Fetched, PoliteFetcher
-from .registry import ChairAdapter, DEPARTMENTS, REGISTRY
+from .registry import ALL_REGISTRY, ChairAdapter, DEPARTMENTS
 from .service import publication_from_title
 
 logger = logging.getLogger(__name__)
@@ -174,7 +174,8 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
             artifact_url = candidate.source_url if candidate.source_url != listing_page_url else None
             normalized = {"department": adapter.department, "chair": adapter.name,
                           "source_url": listing_page_url, "artifact_url": artifact_url,
-                          "application_url": None, "topics": [], "language": None}
+                          "application_url": None, "topics": [], "language": None,
+                          "opportunity_type": adapter.opportunity_type}
             listing = session.scalar(select(Listing).where(
                 Listing.chair_id == chair_id, Listing.stable_source_key == candidate.stable_source_key,
             ))
@@ -294,7 +295,7 @@ def ingestion_lock():
         connection.close()
 
 
-async def ingest_live(adapters: Iterable[ChairAdapter] = REGISTRY, fetcher: PoliteFetcher | None = None) -> dict:
+async def ingest_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY, fetcher: PoliteFetcher | None = None) -> dict:
     Base.metadata.create_all(engine())
     selected = tuple(adapters)
     if fetcher is None:
@@ -326,5 +327,5 @@ async def ingest_live(adapters: Iterable[ChairAdapter] = REGISTRY, fetcher: Poli
         return summary
 
 
-def run_live(adapters: Iterable[ChairAdapter] = REGISTRY) -> dict:
+def run_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY) -> dict:
     return asyncio.run(ingest_live(adapters))

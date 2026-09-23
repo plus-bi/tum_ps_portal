@@ -7,8 +7,8 @@ client = TestClient(app)
 def test_catalog_and_reference_endpoints():
     assert client.get("/health").status_code == 200
     assert client.get("/api/v1/projects").json()["total"] == 1
-    assert len(client.get("/api/v1/chairs").json()) == 32
-    assert len(client.get("/api/v1/departments").json()) == 5
+    assert len(client.get("/api/v1/chairs").json()) == 64
+    assert len(client.get("/api/v1/departments").json()) == 6
     assert client.get("/api/v1/projects/missing").status_code == 404
     assert "artifact_url" in client.get("/api/v1/projects/example-project-study").json()
     assert client.get("/api/v1/bookmarks").status_code == 401

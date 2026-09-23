@@ -16,6 +16,6 @@ def classify(text: str, adapter: ChairAdapter, *, in_archive: bool = False) -> C
         return Classification(False, True, "archive section")
     if any(marker in normalized for marker in adapter.excluded_markers):
         return Classification(False, True, "excluded opportunity type")
-    if any(marker in normalized for marker in adapter.active_markers):
-        return Classification(True, True, "explicit Project Study marker")
+    if adapter.source_implies_active_type or any(marker in normalized for marker in adapter.active_markers):
+        return Classification(True, True, f"explicit {adapter.opportunity_type} marker")
     return Classification(False, False, "opportunity type is uncertain")

@@ -15,7 +15,7 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
 from app.ingestion.adapters import parser_for
-from app.ingestion.registry import REGISTRY
+from app.ingestion.registry import ALL_REGISTRY
 
 OUTPUT = ROOT / "compliance/robots"
 FIXTURES = ROOT / "backend/tests/fixtures/chairs"
@@ -23,11 +23,11 @@ USER_AGENT = "TUM-Project-Studies-Portal"
 
 
 def crawl_urls() -> set[str]:
-    urls = {adapter.source_urls[0] for adapter in REGISTRY}
+    urls = {adapter.source_urls[0] for adapter in ALL_REGISTRY}
     manifest_path = FIXTURES / "manifest.json"
     if not manifest_path.exists(): return urls
     rows = {row["slug"]: row for row in json.loads(manifest_path.read_text())["sources"]}
-    for adapter in REGISTRY:
+    for adapter in ALL_REGISTRY:
         row = rows.get(adapter.slug, {})
         fixture = row.get("fixture")
         if not fixture or not fixture.endswith(".html") or not adapter.child_url_patterns: continue
