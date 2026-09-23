@@ -15,7 +15,10 @@ class Settings(BaseSettings):
     clerk_issuer: str | None = None
     resend_api_key: str | None = None
     resend_webhook_secret: str | None = None
-    crawler_delay_seconds: float = 1.0
+    # Keep requests to the same origin deliberately sparse. Increase this for
+    # manual audits of larger source sets or when a site's robots policy asks
+    # for a longer crawl delay.
+    crawler_delay_seconds: float = 3.0
     crawler_timeout_seconds: float = 30.0
     crawler_max_attempts: int = 3
     crawler_max_content_bytes: int = 25_000_000

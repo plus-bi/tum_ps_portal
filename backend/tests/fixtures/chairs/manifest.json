@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-09-22T13:16:36.026160+00:00",
+  "captured_at": "2026-09-23T14:31:35.742219+00:00",
   "sources": [
     {
       "slug": "economics-of-innovation",
@@ -9,10 +9,11 @@
       "status": 200,
       "final_url": "https://www.ep.mgt.tum.de/en/eoi/teaching/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "63ee9646f617a9442947f90f68aefe7068c1ee9c672e8aa0345c21abe448b8e5",
+      "sha256": "8687a9b66aea2ef7c60c03052df2841712011d21676d30878bafa3f055051a00",
       "fixture": "economics-of-innovation.html",
       "candidates": 1,
-      "child_links": 2
+      "child_links": 2,
+      "children": []
     },
     {
       "slug": "global-center-for-family-enterprise",
@@ -25,7 +26,39 @@
       "sha256": "49dce924ee4410fe30d13d4c9de9a5b3cc7092e04a455e359a3de7cfe37e30cc",
       "fixture": "global-center-for-family-enterprise.html",
       "candidates": 0,
-      "child_links": 3
+      "child_links": 3,
+      "children": [
+        {
+          "url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_AI-Driven_Reallocation_of_Labor.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_AI-Driven_Reallocation_of_Labor.pdf",
+          "media_type": "application/pdf",
+          "sha256": "3f22fcc0e878318d59fdae473b13c5aec6ac4a6b3321da3491e3e3f569036130",
+          "fixture": "global-center-for-family-enterprise/3f22fcc0e878318d.pdf",
+          "text_chars": 5760
+        },
+        {
+          "url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_Everyday_Use_of_AI.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_Everyday_Use_of_AI.pdf",
+          "media_type": "application/pdf",
+          "sha256": "f8f8549d6afeb61ed293d1ad4482264d39b89a2611509daad02558b5644f9345",
+          "fixture": "global-center-for-family-enterprise/f8f8549d6afeb61e.pdf",
+          "text_chars": 5903
+        },
+        {
+          "url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_Token-based_Cost_and_Performance_Allocation.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.mgt.tum.de/fileadmin/mgt.tum.de/campus_heilbronn/global_center_for_family_enterprise/project_studies/20260820_Project_Study_KfW_Bankengruppe_Token-based_Cost_and_Performance_Allocation.pdf",
+          "media_type": "application/pdf",
+          "sha256": "bd981366c7c9a792e12ee6c9af179c6b45354c1bbe859b381c4bd53204e266a0",
+          "fixture": "global-center-for-family-enterprise/bd981366c7c9a792.pdf",
+          "text_chars": 5687
+        }
+      ]
     },
     {
       "slug": "governance-in-international-agribusiness",
@@ -35,10 +68,11 @@
       "status": 200,
       "final_url": "https://www.ep.mgt.tum.de/en/gia/theses-and-research-projects/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "838d1311708cb12ccfa096d3fe80409e5fcfb86867c51fef86561940e2c32889",
+      "sha256": "138473bd2e578cd71579287efb885834717db06caf8caadc788c47e1e2c62888",
       "fixture": "governance-in-international-agribusiness.html",
       "candidates": 0,
-      "child_links": 0
+      "child_links": 0,
+      "children": []
     },
     {
       "slug": "economics-of-energy-markets",
@@ -48,10 +82,42 @@
       "status": 200,
       "final_url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "604ab8017f9aafe2b4bcc6e92d5df0d805fd1a55016681708388cde2e4fb617d",
+      "sha256": "420a2555a31077d2e5ddbd3a97283df46318377f994388c3ba78fbea3d6cf82b",
       "fixture": "economics-of-energy-markets.html",
       "candidates": 0,
-      "child_links": 1
+      "child_links": 1,
+      "children": [
+        {
+          "url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/open-project-studies/",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/open-project-studies/",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "8870a589872b0ad91528c2aae8770f91a7e2827d42e8e94478ee285e130bda73",
+          "fixture": "economics-of-energy-markets/8870a589872b0ad9.html",
+          "candidates": 5
+        },
+        {
+          "url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/open-project-studies/#content",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/open-project-studies/#content",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "420c9358027bb879497f6bc8d0d51009d9670dbe2644bcaa711cf21e061aee84",
+          "fixture": "economics-of-energy-markets/420c9358027bb879.html",
+          "candidates": 5
+        },
+        {
+          "url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/open-project-studies/#topbar",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.ep.mgt.tum.de/cem/teaching/project-studies-1/open-project-studies/#topbar",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "5dbe95b30a7843c3dc15064932117adfd9698ee53bde04a4d57d99d71dc0c096",
+          "fixture": "economics-of-energy-markets/5dbe95b30a7843c3.html",
+          "candidates": 5
+        }
+      ]
     },
     {
       "slug": "applied-econometrics",
@@ -61,10 +127,11 @@
       "status": 200,
       "final_url": "https://www.ep.mgt.tum.de/econometrics/teaching/project-studies-idps/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "5227588ed1b4be5b29fa9a59ebd34540967752fcd9d266d549882eefc0ce61cc",
+      "sha256": "ba63800819c41f80a3a0d077a62a0d182d18e0633e2474ef7de1394ab58d18e7",
       "fixture": "applied-econometrics.html",
       "candidates": 0,
-      "child_links": 0
+      "child_links": 0,
+      "children": []
     },
     {
       "slug": "professorship-environmental-and-development-economics",
@@ -77,7 +144,8 @@
       "sha256": "b1f988d3c8a2729bcdc0f471902ede7f3ced75ec0649669a771d47ea3df202d6",
       "fixture": "professorship-environmental-and-development-economics.html",
       "candidates": 0,
-      "child_links": 1
+      "child_links": 1,
+      "children": []
     },
     {
       "slug": "professorship-economics-straubing",
@@ -90,7 +158,8 @@
       "sha256": "3ad9febea5d9972a2780a0013f9f7e853c4eba000e95d68e18a9d572432885c2",
       "fixture": "professorship-economics-straubing.html",
       "candidates": 0,
-      "child_links": 1
+      "child_links": 1,
+      "children": []
     },
     {
       "slug": "entrepreneurial-finance",
@@ -100,10 +169,11 @@
       "status": 200,
       "final_url": "https://www.fa.mgt.tum.de/ef/teaching/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "2c2fcd0f12ebec99524507bf04008201d6982bfebee051eab00098c46c91961c",
+      "sha256": "64cce203bb72bedb4995527163edea43c37ccb1d367846b333006abeac337db6",
       "fixture": "entrepreneurial-finance.html",
       "candidates": 0,
-      "child_links": 0
+      "child_links": 0,
+      "children": []
     },
     {
       "slug": "financial-accounting",
@@ -113,10 +183,72 @@
       "status": 200,
       "final_url": "https://www.fa.mgt.tum.de/accounting/teaching/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "ed26abd67f44d8db2d86fc5f785f1b65393be16dd0da221f2af917a48cf2d8b8",
+      "sha256": "0a6d4bdee5fbc2542d944c509ea869537a52adf9eab37ed834d9f704e33aec65",
       "fixture": "financial-accounting.html",
       "candidates": 0,
-      "child_links": 6
+      "child_links": 6,
+      "children": [
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/2024-08LOTARO_Projektstudium.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/2024-08LOTARO_Projektstudium.pdf",
+          "media_type": "application/pdf",
+          "sha256": "8a0cbba3cbad69374af44a4fac2748dfc9eba1006a63dcf4fa067d6695d5800e",
+          "fixture": "financial-accounting/8a0cbba3cbad6937.pdf",
+          "text_chars": 3215
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/Projektstudie_KI_HR-Tech.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/Projektstudie_KI_HR-Tech.pdf",
+          "media_type": "application/pdf",
+          "sha256": "9889e34ca2150e95c48fa50611ffcbf455a46eada662b34afedf95514e9064e5",
+          "fixture": "financial-accounting/9889e34ca2150e95.pdf",
+          "text_chars": 1818
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/2025_12_Oncera_Project_Study_Funding.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/2025_12_Oncera_Project_Study_Funding.pdf",
+          "media_type": "application/pdf",
+          "sha256": "5c53f76ff4e4bbc58f6f38c3c06cb27d52c63e27e193019f881e1ebe26166d96",
+          "fixture": "financial-accounting/5c53f76ff4e4bbc5.pdf",
+          "text_chars": 1705
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/2025_12_Oncera_Project_Study_Go-to-Market.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/2025_12_Oncera_Project_Study_Go-to-Market.pdf",
+          "media_type": "application/pdf",
+          "sha256": "6fcc63d84f4281dd4e7f526c74a892cb3369d04038c632af838a987a32d35a8b",
+          "fixture": "financial-accounting/6fcc63d84f4281dd.pdf",
+          "text_chars": 1824
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/Projektstudium_AI_Powered_Commercial_Planning%40Bogner.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/Projektstudium_AI_Powered_Commercial_Planning%40Bogner.pdf",
+          "media_type": "application/pdf",
+          "sha256": "f466ad20890e2c61b1da1049a39dd1cfff5603bc29759eaeb2a40f67ecb17fa8",
+          "fixture": "financial-accounting/f466ad20890e2c61.pdf",
+          "text_chars": 2651
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/Projektstudium_KI_in_der_Arztpraxis_1.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fileadmin/w00chf/accounting/pdf/Projektstudium_KI_in_der_Arztpraxis_1.pdf",
+          "media_type": "application/pdf",
+          "sha256": "26308b11f3e373adb39933fc8a347d91326362ad71d0e5c87b5f5ab6a5580cd8",
+          "fixture": "financial-accounting/26308b11f3e373ad.pdf",
+          "text_chars": 2690
+        }
+      ]
     },
     {
       "slug": "management-accounting",
@@ -126,10 +258,11 @@
       "status": 200,
       "final_url": "https://www.fa.mgt.tum.de/en/controlling/teaching/projektstudien/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "6cc620ad9e3b380eab5c16eafdca9b36c12f74cdb2ff749c64dd459ac191e1ba",
+      "sha256": "4fb30826e1179804388339236ca62128de76349b31dca853daf5a87b1a6f9594",
       "fixture": "management-accounting.html",
       "candidates": 1,
-      "child_links": 88
+      "child_links": 88,
+      "children": []
     },
     {
       "slug": "financial-management-and-capital-markets",
@@ -139,10 +272,42 @@
       "status": 200,
       "final_url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "e420b243bc850be34bedcf20914ba3b85c55000213cacaab6d154d71ae4d813b",
+      "sha256": "24196507abb87568f2e32f33a0fe2f5e4d1c57d90fbdca7e5f0924dd7be199f6",
       "fixture": "financial-management-and-capital-markets.html",
       "candidates": 0,
-      "child_links": 1
+      "child_links": 1,
+      "children": [
+        {
+          "url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/list-of-open-project-studies/",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/list-of-open-project-studies/",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "a088a0813be0bd38450b7c7f4b6cd77deedb0484713a6fcc9fbcd3835019df96",
+          "fixture": "financial-management-and-capital-markets/a088a0813be0bd38.html",
+          "candidates": 1
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/list-of-open-project-studies/#content",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/list-of-open-project-studies/#content",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "107d7be6ea35bec5efb7a29340f5cbd9a4644391771a93d1ce4b20f7b715b55a",
+          "fixture": "financial-management-and-capital-markets/107d7be6ea35bec5.html",
+          "candidates": 1
+        },
+        {
+          "url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/list-of-open-project-studies/#topbar",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.fa.mgt.tum.de/fm/teaching/project-studies/list-of-open-project-studies/#topbar",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "0f7cc72ddcfb34fe4abf438a0ac35fc6b1375b70170f14150feacb85d58b729f",
+          "fixture": "financial-management-and-capital-markets/0f7cc72ddcfb34fe.html",
+          "candidates": 1
+        }
+      ]
     },
     {
       "slug": "corporate-governance-and-capital-markets-law",
@@ -152,10 +317,11 @@
       "status": 200,
       "final_url": "https://www.fa.mgt.tum.de/en/law/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "a181a752f9abd1c83faa752cfa8862a00cbf4c6fb757f70e562d2fe0ff03cd45",
+      "sha256": "ba51fbf132b5c16f8fb146cfa687275164f29d999b92b5d024dd39a318d4d499",
       "fixture": "corporate-governance-and-capital-markets-law.html",
       "candidates": 1,
-      "child_links": 2
+      "child_links": 2,
+      "children": []
     },
     {
       "slug": "corporate-management",
@@ -165,10 +331,11 @@
       "status": 200,
       "final_url": "https://www.fa.mgt.tum.de/cm/teaching/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "8a4505b4f686b81d012990ae5bbbd384eb7d96ccecd1219f2c4eaaf31f9536a4",
+      "sha256": "bf8208b71f7d0cd30173c3380c7df1568d4dce7b067ffc58dad95366ded757b3",
       "fixture": "corporate-management.html",
-      "candidates": 26,
-      "child_links": 28
+      "candidates": 25,
+      "child_links": 28,
+      "children": []
     },
     {
       "slug": "controlling",
@@ -178,10 +345,11 @@
       "status": 200,
       "final_url": "https://www.fa.mgt.tum.de/controlling/lehre/projektstudien/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "43b760344f7dc55ff48c0c0326aca593335e7ec8f58dc1b8b13dc3e00b22955d",
+      "sha256": "3b01fe28a4bb1335bf6a04c34d948a90f5036bb70284a262b63f43f9946534b6",
       "fixture": "controlling.html",
       "candidates": 1,
-      "child_links": 95
+      "child_links": 95,
+      "children": []
     },
     {
       "slug": "tum-entrepreneurship-research-institute",
@@ -191,10 +359,11 @@
       "status": 200,
       "final_url": "https://www.ie.mgt.tum.de/en/ent/teaching/project-studies-and-idps/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "415246653e92a68b275d7b9412b9bc9942018162388c29d4bbd8760995432e3f",
+      "sha256": "b3f118479044fc14f31cad5492d3572e4f597307b90e1611a347727e8088d5aa",
       "fixture": "tum-entrepreneurship-research-institute.html",
       "candidates": 0,
-      "child_links": 0
+      "child_links": 0,
+      "children": []
     },
     {
       "slug": "corporate-sustainability-brewery-and-food-industry-management",
@@ -204,10 +373,11 @@
       "status": 200,
       "final_url": "https://www.ie.mgt.tum.de/en/sustainability/teaching/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "673d0fba9bfd811ac3e1801378f9bcb26fb176b04d7bd6f7d00b5f6f0ea615b5",
+      "sha256": "2e3c5f9a66a967cd223004d526dd65757db8cbfbe5804ad648414e9e7da47b7a",
       "fixture": "corporate-sustainability-brewery-and-food-industry-management.html",
       "candidates": 0,
-      "child_links": 0
+      "child_links": 0,
+      "children": []
     },
     {
       "slug": "technology-and-innovation-management",
@@ -217,10 +387,11 @@
       "status": 200,
       "final_url": "https://www.ie.mgt.tum.de/en/tim/teaching/project-studiesidp/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "d6028e672ee544638abaddbafb84269340caff962c081fce5c7f0a0877df655f",
+      "sha256": "ee1a3d3506153307b8d8404daca79ece4e2b0ab744d1197ef1b24dc508796cc5",
       "fixture": "technology-and-innovation-management.html",
       "candidates": 9,
-      "child_links": 11
+      "child_links": 11,
+      "children": []
     },
     {
       "slug": "law-of-digital-goods-commerce-and-competition",
@@ -230,10 +401,11 @@
       "status": 200,
       "final_url": "https://www.ie.mgt.tum.de/competition/stellenangebote/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "966626d20de0dc07af91a953816bcb0936f70324441af4c750e541fb570cfe79",
+      "sha256": "65ac3be2b09bfe26bbbcb1d8382b4df1d7f8c85ca9f7adf70c2b667b62e38784",
       "fixture": "law-of-digital-goods-commerce-and-competition.html",
       "candidates": 0,
-      "child_links": 0
+      "child_links": 0,
+      "children": []
     },
     {
       "slug": "family-business-culture-and-ownership",
@@ -243,10 +415,11 @@
       "status": 200,
       "final_url": "https://www.ie.mgt.tum.de/fbco/lehre/projektstudien/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "cac4c9cfb61c93f4c9e856b7c3b534bc6aa74d609f7ebccee4396d4110a3eda0",
+      "sha256": "1469694ddb0f2c687e23ec7adf59d2ad388b8689106f5b12266484cfa4131d8d",
       "fixture": "family-business-culture-and-ownership.html",
       "candidates": 4,
-      "child_links": 13
+      "child_links": 13,
+      "children": []
     },
     {
       "slug": "research-and-science-management",
@@ -256,10 +429,11 @@
       "status": 200,
       "final_url": "https://www.msl.mgt.tum.de/en/rm/teaching/project-studies-final-theses/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "09a0ef02995492c34a95b2e8548647ba816433891a656325242266845f97ce49",
+      "sha256": "81ec7ab5015a84651cfd76136f52e1677fe41bc2ad7b88ae1176f1da484d002d",
       "fixture": "research-and-science-management.html",
       "candidates": 0,
-      "child_links": 1
+      "child_links": 1,
+      "children": []
     },
     {
       "slug": "marketing-and-consumer-research",
@@ -269,10 +443,11 @@
       "status": 200,
       "final_url": "https://www.msl.mgt.tum.de/en/mcr/teaching/theses-and-projects/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "27a79fe0a4b8691e55040d1d6ec7f94f9b4891f2b0fd3ae78a9ff39e28e9e6e4",
+      "sha256": "95604ceec90c869c5af10f04b5c19c9aa213fabd0d4934abdc884c4b10c71e86",
       "fixture": "marketing-and-consumer-research.html",
       "candidates": 0,
-      "child_links": 7
+      "child_links": 7,
+      "children": []
     },
     {
       "slug": "strategy-and-organization",
@@ -282,10 +457,212 @@
       "status": 200,
       "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "84e244ce09316c6f0a0eb8edf094b8cea259383f5c85e451e3aa2ff3d1a180b6",
+      "sha256": "46b9bec3d7ad83786bea31fd24c58215ea9e84cab041d2ace2527236b70e2408",
       "fixture": "strategy-and-organization.html",
       "candidates": 0,
-      "child_links": 2
+      "child_links": 2,
+      "children": [
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-14d29b6dfa5c43d2bdbe08a46acb2d29",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-14d29b6dfa5c43d2bdbe08a46acb2d29",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-435ca407d3464a9fa75efb10bdcc7141",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-435ca407d3464a9fa75efb10bdcc7141",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-4f1131cea03a4a5d8cd416e783126897",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-4f1131cea03a4a5d8cd416e783126897",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-61a098e8b1d04f5b885534ec0464a623",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-61a098e8b1d04f5b885534ec0464a623",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-83482fdf2d724a02a90bc7fc9c12f2ed",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-83482fdf2d724a02a90bc7fc9c12f2ed",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-d4fa60dbf206438591c79c41a16f3f76",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-d4fa60dbf206438591c79c41a16f3f76",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-f0224b0e19dd474687b5996db4a5c2b8",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-f0224b0e19dd474687b5996db4a5c2b8",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-f8e3dcd0fdb24859ade34d2d68288bf5",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-f8e3dcd0fdb24859ade34d2d68288bf5",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-fd3051e1c1754a68951e8019786e154f",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-fintalo-where-every-deal-moves-faster#block-fd3051e1c1754a68951e8019786e154f",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "4f794a1a71ad42c02cbb5ffa7671a3a915b414696a6a7a7b20736692acf1fd50",
+          "fixture": "strategy-and-organization/4f794a1a71ad42c0.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-91e48feb2a274fec91178e834b66c867",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-91e48feb2a274fec91178e834b66c867",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-9fd0c959bb4b4ec58bc1cd34cd68605e",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-9fd0c959bb4b4ec58bc1cd34cd68605e",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-b5e3b49f93ce4c89ae2ed38a9f97ebbf",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-b5e3b49f93ce4c89ae2ed38a9f97ebbf",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-c2fb620e65bf419bb14797dfee732f62",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-c2fb620e65bf419bb14797dfee732f62",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-d0605751c9294c6ba5465ddfc0278ae9",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-d0605751c9294c6ba5465ddfc0278ae9",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-d1d12fa29a324ab8b8a7497f49528e18",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-d1d12fa29a324ab8b8a7497f49528e18",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-da4ca345f1114918bc87eed953169424",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-da4ca345f1114918bc87eed953169424",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-df7908fd091244cb84616485d554ff6f",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-df7908fd091244cb84616485d554ff6f",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-fe2ff8b903774f52b37c2874d20e7ed2",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.tumcso.com/teaching/final-theses-and-project-studies-bachelor-master/available-topics/projektstudium-im-pe-umfeld-strategische-entwicklung-eines-market-places#block-fe2ff8b903774f52b37c2874d20e7ed2",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "9bd4193551faa38fb8f9f9e7c51c31123a9f153fbc8dbf30235a6a7d02c6d794",
+          "fixture": "strategy-and-organization/9bd4193551faa38f.html",
+          "candidates": 0
+        }
+      ]
     },
     {
       "slug": "sport-and-health-management",
@@ -295,18 +672,25 @@
       "status": 200,
       "final_url": "https://www.hs.mh.tum.de/en/mgt/studies/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "517835a9ebc7ec4b59181e8a09b0fd5a72c895e9c8b0c15eda4a2bbc72e0149e",
+      "sha256": "45a4a69ad7bc2bfb42734ee9a92e9e25ec61c50f14dd9a3be5d02fcdb15dd488",
       "fixture": "sport-and-health-management.html",
       "candidates": 0,
-      "child_links": 3
+      "child_links": 3,
+      "children": []
     },
     {
       "slug": "marketing-and-technology",
       "name": "Marketing and Technology",
-      "url": "https://www.msl.mgt.tum.de/en/mt/teaching-student-matters/project-studies/",
+      "url": "https://www.msl.mgt.tum.de/en/mt/teaching-student-matters/project-studies-idp/",
       "family": "typo3",
-      "status": "error",
-      "error": "HTTPStatusError: Client error '404 Not Found' for url 'https://www.msl.mgt.tum.de/en/mt/teaching-student-matters/project-studies/'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
+      "status": 200,
+      "final_url": "https://www.msl.mgt.tum.de/en/mt/teaching-student-matters/project-studies-idp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "e0b419e5f0e6e8c9bc383530a71cd94f8c9f939697cfefbe84521dbdf347b0be",
+      "fixture": "marketing-and-technology.html",
+      "candidates": 1,
+      "child_links": 5,
+      "children": []
     },
     {
       "slug": "digital-marketing",
@@ -316,10 +700,11 @@
       "status": 200,
       "final_url": "https://www.msl.mgt.tum.de/en/dm/teaching/project-studies-idp/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "2c52ef1ed23389a313762d570e69cbd9f9dc09910a09d26236db206aafe5720a",
+      "sha256": "c49093bd5c07d106c07c5d91db906f8296ad93893ae3fe8c2ef8dcbe049aef47",
       "fixture": "digital-marketing.html",
       "candidates": 2,
-      "child_links": 21
+      "child_links": 21,
+      "children": []
     },
     {
       "slug": "production-and-supply-chain-management",
@@ -329,10 +714,102 @@
       "status": 200,
       "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "443aceca9161cd6f4fc50456fbff1b9ed8a17f76cf138c87b4f8440544e19cdb",
+      "sha256": "5a20260885c50dc008ed6ce8ae65f1785f066838e1cb81ca482afa3a86ddd73c",
       "fixture": "production-and-supply-chain-management.html",
       "candidates": 0,
-      "child_links": 6
+      "child_links": 6,
+      "children": [
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/scm/Project_studies/230207_Projektstudium_Arcaris.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/scm/Project_studies/230207_Projektstudium_Arcaris.pdf",
+          "media_type": "application/pdf",
+          "sha256": "3c057afa50195162488095b4eb6e0520e4009bec5a4685787745fc262c5d145e",
+          "fixture": "production-and-supply-chain-management/3c057afa50195162.pdf",
+          "text_chars": 3415
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "49b94fb48008dcf97d6e41aefe205982b16501a5de03e002d13710f3d46dd9d9",
+          "fixture": "production-and-supply-chain-management/49b94fb48008dcf9.html",
+          "candidates": 1
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-companies/",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-companies/",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "82b9ab96cc48d1c75a20dea36650654b9c023a63518aeb570eb36a794ad798fa",
+          "fixture": "production-and-supply-chain-management/82b9ab96cc48d1c7.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/#content",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/#content",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "821347f255b6d5ca5931a5db823b23fe4e1a318fc5c0bd4a1f14e1155f9544bd",
+          "fixture": "production-and-supply-chain-management/821347f255b6d5ca.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/#topbar",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-students/#topbar",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "0852deb3c1899a49fd504b4780d925940d9a44f1d4ba0143dee227647a0f220f",
+          "fixture": "production-and-supply-chain-management/0852deb3c1899a49.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/#content",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/#content",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "b0d2c911b8092b71fc5fc8b34d4e24253d3b974a8ee864b2081df499556dba7d",
+          "fixture": "production-and-supply-chain-management/b0d2c911b8092b71.html",
+          "candidates": 1
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/#topbar",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/#topbar",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "2ff2771a73c5fb4830bf97427234e1ea0487ade01c1b16a8515e26fa5b86f03e",
+          "fixture": "production-and-supply-chain-management/2ff2771a73c5fb48.html",
+          "candidates": 1
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-companies/#content",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-companies/#content",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "2b9b24c388f55b1068a86efe2517e1f67192549d063f65163802b48cf7726fb8",
+          "fixture": "production-and-supply-chain-management/2b9b24c388f55b10.html",
+          "candidates": 0
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-companies/#topbar",
+          "depth": 2,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/scm/education/project-study/information-for-companies/#topbar",
+          "media_type": "text/html; charset=utf-8",
+          "sha256": "7b7edb9908355ec5ae81996d477b0968999e2e1c4f67293ab0bc2295cd3b7703",
+          "fixture": "production-and-supply-chain-management/7b7edb9908355ec5.html",
+          "candidates": 0
+        }
+      ]
     },
     {
       "slug": "operations-management",
@@ -342,10 +819,132 @@
       "status": 200,
       "final_url": "https://www.ot.mgt.tum.de/om/teaching-overview/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "f1e8f19d795c5a420e6935c05ff8dfcd39025a3d9fdffacec3d4e8e17b97815f",
+      "sha256": "c482563f469fd22c2e5b190d24c42e746c993c96f5907aa1de61b0a4e02d5e3c",
       "fixture": "operations-management.html",
       "candidates": 0,
-      "child_links": 12
+      "child_links": 12,
+      "children": [
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1575380/6xleach3yut50zxd52g4ej5nq.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1575380/6xleach3yut50zxd52g4ej5nq.pdf",
+          "media_type": "application/pdf",
+          "sha256": "3399c60bd1ae356ef628d8ee4bb75b769c76e8a36b998c9b099bc8bb18855f0d",
+          "fixture": "operations-management/3399c60bd1ae356e.pdf",
+          "text_chars": 2291
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1575381/l3ody4q77qz50tj1t26w2s744.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1575381/l3ody4q77qz50tj1t26w2s744.pdf",
+          "media_type": "application/pdf",
+          "sha256": "ca06bc9fa335877baae4c7202f3f6046c7274739cf35929357aa29f266213870",
+          "fixture": "operations-management/ca06bc9fa335877b.pdf",
+          "text_chars": 2400
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1621022/a3uqny5wsoeo2ah6zkw543dvz.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1621022/a3uqny5wsoeo2ah6zkw543dvz.pdf",
+          "media_type": "application/pdf",
+          "sha256": "b7c17d1495cdfdb09f1aaa1fcf66a247e882bbb0b3e356495d6c799cda1d13a3",
+          "fixture": "operations-management/b7c17d1495cdfdb0.pdf",
+          "text_chars": 1725
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1699966/8fwiqa8onqgdail0kgkcbn10c.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1699966/8fwiqa8onqgdail0kgkcbn10c.pdf",
+          "media_type": "application/pdf",
+          "sha256": "0f6e4b3c2b79e2a26ebefdfa45d136917d0fa6c06cf41e2cb3b685844dc4b6d9",
+          "fixture": "operations-management/0f6e4b3c2b79e2a2.pdf",
+          "text_chars": 1802
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1699967/81in9wtdfjq7f2ajor5oc2aq3.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1699967/81in9wtdfjq7f2ajor5oc2aq3.pdf",
+          "media_type": "application/pdf",
+          "sha256": "1854c4e992cba3896154e72ecb18d9c4e7ef58ae5de0c783786c249834ac5539",
+          "fixture": "operations-management/1854c4e992cba389.pdf",
+          "text_chars": 1654
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1747541/quomwz47su8is8b14q93twhaw.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1747541/quomwz47su8is8b14q93twhaw.pdf",
+          "media_type": "application/pdf",
+          "sha256": "890b60ac4a8ba3c52aadeb98540abcb02bcbac5e7b05c98d8082cc6b691a7595",
+          "fixture": "operations-management/890b60ac4a8ba3c5.pdf",
+          "text_chars": 1330
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1793522/gtuyl9vb8movrm64zf3mvtco8.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1793522/gtuyl9vb8movrm64zf3mvtco8.pdf",
+          "media_type": "application/pdf",
+          "sha256": "5a8c76e028c81c7c1398e8444f6fff0e8dcffc1640a561650898240ecf16818b",
+          "fixture": "operations-management/5a8c76e028c81c7c.pdf",
+          "text_chars": 2194
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1834953/4zqlrau32gucu4ibrrqm56yxt.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1834953/4zqlrau32gucu4ibrrqm56yxt.pdf",
+          "media_type": "application/pdf",
+          "sha256": "13eef89b7f114d6f1e1ae9ea939e1456bea30302ff0e0b54f9de503d2d973049",
+          "fixture": "operations-management/13eef89b7f114d6f.pdf",
+          "text_chars": 1486
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1849823/m46regio0b749vnm7d2ccbojj.PS%20Zooplus_parcel%20forecasting.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1849823/m46regio0b749vnm7d2ccbojj.PS%20Zooplus_parcel%20forecasting.pdf",
+          "media_type": "application/pdf",
+          "sha256": "d6363976962b1151bc3582ea2c37234595146ae969ea29f69773f9f021999d11",
+          "fixture": "operations-management/d6363976962b1151.pdf",
+          "text_chars": 2648
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1856972/cr38x6qii2oi3jm427ddi66s1.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1856972/cr38x6qii2oi3jm427ddi66s1.pdf",
+          "media_type": "application/pdf",
+          "sha256": "0bad9e4d0bc7932be8f2be4c524abfc1963d08423323ab0afc89811a4de706d8",
+          "fixture": "operations-management/0bad9e4d0bc7932b.pdf",
+          "text_chars": 2298
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1859843/7s972sbn3fn9o6em4gh3qbs4k.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1859843/7s972sbn3fn9o6em4gh3qbs4k.pdf",
+          "media_type": "application/pdf",
+          "sha256": "a6e5bae29cfee1c776a501058adbc6ae71cb6858cb99a19e1188339da284ab0b",
+          "fixture": "operations-management/a6e5bae29cfee1c7.pdf",
+          "text_chars": 3259
+        },
+        {
+          "url": "https://mediatum.ub.tum.de/doc/1863551/lesqe09bvsdvabfgqlppq0toq.20260918_Realog_TUM_Projektstudium_Word.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://mediatum.ub.tum.de/doc/1863551/lesqe09bvsdvabfgqlppq0toq.20260918_Realog_TUM_Projektstudium_Word.pdf",
+          "media_type": "application/pdf",
+          "sha256": "525854f8b212a699995b93cb658cd30482fee79c985c4053b706a0cdfcfd3e33",
+          "fixture": "operations-management/525854f8b212a699.pdf",
+          "text_chars": 3795
+        }
+      ]
     },
     {
       "slug": "logistics-and-supply-chain-management",
@@ -355,10 +954,11 @@
       "status": 200,
       "final_url": "https://www.ot.mgt.tum.de/log/education/theses-project-studies-idps/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "a0a8bacc841dbd655ee4b47576f884609334949e7d32611b47681a0c8d1390c7",
+      "sha256": "c79facfefeaf5bc8be750a2b200ea3957df69008d5cd2987aee47ed03ca49ef8",
       "fixture": "logistics-and-supply-chain-management.html",
       "candidates": 0,
-      "child_links": 13
+      "child_links": 13,
+      "children": []
     },
     {
       "slug": "business-analytics-and-intelligent-systems",
@@ -368,10 +968,22 @@
       "status": 200,
       "final_url": "https://www.ot.mgt.tum.de/en/osm/education/theses-projects/project-modules/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "6269d5792774513d00878b9abb669b346e261a51580358a8aba2d11accd58814",
+      "sha256": "3d34a41e8246b47a484abed490261a62bb16fa194f310b36f6bd44710711c5ce",
       "fixture": "business-analytics-and-intelligent-systems.html",
       "candidates": 0,
-      "child_links": 1
+      "child_links": 1,
+      "children": [
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/osm/documents/2025_Project_Study_Unit-based_Pricing_in_AI_Integration.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/osm/documents/2025_Project_Study_Unit-based_Pricing_in_AI_Integration.pdf",
+          "media_type": "application/pdf",
+          "sha256": "12fc381f06aea2b2286d0e3c8bba1b51f08b3f7b3cc22789aaf3a731900d7f70",
+          "fixture": "business-analytics-and-intelligent-systems/12fc381f06aea2b2.pdf",
+          "text_chars": 5070
+        }
+      ]
     },
     {
       "slug": "operations-research",
@@ -381,10 +993,11 @@
       "status": 200,
       "final_url": "https://www.ot.mgt.tum.de/en/or/teaching/project-studies/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "e2be618b8548b7ba7e0285af45cbcd249aa60a58fe806b0ba74c8922ae72d4cc",
+      "sha256": "122a2fbb76985ae071153a1a249b744676a56c470bedeaef9f9062518d55c3d8",
       "fixture": "operations-research.html",
       "candidates": 0,
-      "child_links": 1
+      "child_links": 1,
+      "children": []
     },
     {
       "slug": "business-administration-corporate-management-logistics-und-manufacturing-n-n",
@@ -394,10 +1007,11 @@
       "status": 200,
       "final_url": "https://www.bwl.wi.tum.de/lehre/projektstudien/",
       "media_type": "text/html; charset=UTF-8",
-      "sha256": "f92c73748e7cce1b5cd954f2ae11d1e02dba4ccbd2cfdaccbd54f3bdcf14330c",
+      "sha256": "b2d3990fa761ea8aa024a95d6652e51581fd40bdd7fa14579407fd33723a7004",
       "fixture": "business-administration-corporate-management-logistics-und-manufacturing-n-n.html",
       "candidates": 0,
-      "child_links": 2
+      "child_links": 2,
+      "children": []
     },
     {
       "slug": "management-of-digital-food-businesses",
@@ -407,10 +1021,486 @@
       "status": 200,
       "final_url": "https://www.ot.mgt.tum.de/dfb/education/project-studies-idps/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "7c6f83e4ff9354737af30ec42f7031f402fc6e1ca6f6d55fe945c1ae6d4cbd65",
+      "sha256": "4d8743314acc9d22979d0474ed53e7aba0cea57887578596bad3ad1f8545da51",
       "fixture": "management-of-digital-food-businesses.html",
       "candidates": 0,
-      "child_links": 4
+      "child_links": 4,
+      "children": [
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_Andean_Options.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_Andean_Options.pdf",
+          "media_type": "application/pdf",
+          "sha256": "a8d93fa011ae24c8bd50b124dc514f5ff2d8ba0476d3cc92c3b4cc5a6a2f6330",
+          "fixture": "management-of-digital-food-businesses/a8d93fa011ae24c8.pdf",
+          "text_chars": 2955
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_EVANIUM.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_EVANIUM.pdf",
+          "media_type": "application/pdf",
+          "sha256": "05adabb535b6f298084eed29280b786303c32fdf4b992bb43216954a7566425a",
+          "fixture": "management-of-digital-food-businesses/05adabb535b6f298.pdf",
+          "text_chars": 3670
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_OrgEnX.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_OrgEnX.pdf",
+          "media_type": "application/pdf",
+          "sha256": "78f16db20ffa87cca392f935e5a3bb6150421e5b0a357d4bf6caf58c3fb4fad3",
+          "fixture": "management-of-digital-food-businesses/78f16db20ffa87cc.pdf",
+          "text_chars": 3231
+        },
+        {
+          "url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_PLNT_CORE.pdf",
+          "depth": 1,
+          "status": 200,
+          "final_url": "https://www.ot.mgt.tum.de/fileadmin/w00cjr/dfb/Project_studies/Project_study_PLNT_CORE.pdf",
+          "media_type": "application/pdf",
+          "sha256": "5dbc1cc9e1d95fcbb0743c1d5789a09a782b23bf57fa692a5d1fd292ddda0cee",
+          "fixture": "management-of-digital-food-businesses/5dbc1cc9e1d95fcb.pdf",
+          "text_chars": 1613
+        }
+      ]
+    },
+    {
+      "slug": "informatics-idp-hub",
+      "name": "Informatics IDP Hub",
+      "url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "37a8f965acb43151b478bbd2fcf891829713b58528de1ef52a735629b3d4bdbd",
+      "fixture": "informatics-idp-hub.html",
+      "candidates": 173,
+      "child_links": 71,
+      "children": []
+    },
+    {
+      "slug": "idp-applied-econometrics",
+      "name": "Applied Econometrics",
+      "url": "https://www.ep.mgt.tum.de/econometrics/teaching/project-studies-idps/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ep.mgt.tum.de/econometrics/teaching/project-studies-idps/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "26b9140798d6c18d5c6b46471536050f75b50e4ab26005196f7ef8d79fb98a90",
+      "fixture": "idp-applied-econometrics.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-associate-professorship-of-sport-equipment-and-sport-materials",
+      "name": "Associate Professorship of Sport Equipment and Sport Materials",
+      "url": "https://www.mec.ed.tum.de/spgm/abschlussarbeiten/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.mec.ed.tum.de/spgm/abschlussarbeiten/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "e54eda9b138f384574181f6dcb5e7a0489bf26577ccd561279d912c207f2d2b0",
+      "fixture": "idp-associate-professorship-of-sport-equipment-and-sport-materials.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-aerodynamics-and-fluid-mechanics",
+      "name": "Chair of Aerodynamics and Fluid Mechanics",
+      "url": "https://www.epc.ed.tum.de/en/aer/semester-papers-idp/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.epc.ed.tum.de/en/aer/semester-papers-idp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "ede97a9d3ed202bff0881fc40bb2980144b571ea12ec51280a59ebb020ec295a",
+      "fixture": "idp-chair-of-aerodynamics-and-fluid-mechanics.html",
+      "candidates": 1,
+      "child_links": 29,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-bioseperation-engineering",
+      "name": "Chair of Bioseperation Engineering",
+      "url": "https://www.epe.ed.tum.de/biose/studentenarbeiten/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.epe.ed.tum.de/biose/studentenarbeiten/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "6f8a286a0ff6c54eb9908aa2346c8d87aaaac2c122e24fdd24b764e0bb86b413",
+      "fixture": "idp-chair-of-bioseperation-engineering.html",
+      "candidates": 0,
+      "child_links": 41,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-computational-molecular-medicine",
+      "name": "Chair of Computational Molecular Medicine",
+      "url": "https://www.cs.cit.tum.de/cmm/jobs-theses/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.cs.cit.tum.de/cmm/jobs-theses/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "6421d035152c715e682bf83a6ea8bc9c0470bad5afe1273ab689218623326d90",
+      "fixture": "idp-chair-of-computational-molecular-medicine.html",
+      "candidates": 0,
+      "child_links": 1,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-for-data-processing",
+      "name": "Chair for Data Processing",
+      "url": "https://www.ei.tum.de/ldv/studentische-arbeiten/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/cit/startseite/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "4b7de86f932939ae84e501be97cd0b05b4a069eae42fe6c422ec157a50d5a4d8",
+      "fixture": "idp-chair-for-data-processing.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-for-entrepreneurial-finance",
+      "name": "Chair for Entrepreneurial Finance",
+      "url": "https://www.fa.mgt.tum.de/ef/teaching/project-studies/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.fa.mgt.tum.de/ef/teaching/project-studies/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "30abfaf1d204a831ccacba3d2629cedb84e083f81049954ef4000c6dd299da3c",
+      "fixture": "idp-chair-for-entrepreneurial-finance.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-financial-accounting",
+      "name": "Chair of Financial Accounting",
+      "url": "https://www.fa.mgt.tum.de/accounting/teaching/idp/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.fa.mgt.tum.de/accounting/teaching/idp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "08361f438af808b9615fd417f6f510e38a390101a18f84a5a144749c9717a66d",
+      "fixture": "idp-chair-of-financial-accounting.html",
+      "candidates": 1,
+      "child_links": 1,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-financial-management-and-capital-markets",
+      "name": "Chair of Financial Management and Capital Markets",
+      "url": "https://www.professors.wi.tum.de/fm/teaching/idp/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.fa.mgt.tum.de/fm/teaching/idp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "4e11205a5e2bf0ff487bd45e6cadb0a434e254cc1aa53d3231f25d28a75d20ce",
+      "fixture": "idp-chair-of-financial-management-and-capital-markets.html",
+      "candidates": 1,
+      "child_links": 2,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-human-machine-communication",
+      "name": "Chair of Human-Machine Communication",
+      "url": "http://www.mmk.ei.tum.de/studentische-arbeiten/themen-fuer-studentische-arbeiten/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/cit/startseite/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "42e563b176d3534d38b27b5832874454afba8ff8f321fdf04605cad6d93c41b4",
+      "fixture": "idp-chair-of-human-machine-communication.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-for-information-systems",
+      "name": "Chair for Information Systems",
+      "url": "https://www.in.tum.de/i17/news/news-single-view/article/student-projects-and-theses-develop-a-business-game/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.cit.tum.de/cit/startseite/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "e98f52136df2b47ba997d9b7f338a213543484e99e661a7fe6a2d8064e20e14a",
+      "fixture": "idp-chair-for-information-systems.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-media-technology",
+      "name": "Chair of Media Technology",
+      "url": "https://www.ce.cit.tum.de/en/lmt/student-thesis/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ce.cit.tum.de/en/lmt/student-thesis/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "0e13c7e9a915f364058f3994eb21b89579161e1a15a5e5148754f0214753ae43",
+      "fixture": "idp-chair-of-media-technology.html",
+      "candidates": 1,
+      "child_links": 1,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-operations-management",
+      "name": "Chair of Operations Management",
+      "url": "https://www.ot.mgt.tum.de/om/teaching-overview/idp/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ot.mgt.tum.de/om/teaching-overview/idp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "d7e5a9ef38acc981517f3c900ed00ce17135b6f043f565ba3df79a0ccced6a28",
+      "fixture": "idp-chair-of-operations-management.html",
+      "candidates": 3,
+      "child_links": 7,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-operations-research",
+      "name": "Chair of Operations Research",
+      "url": "https://www.ot.mgt.tum.de/en/or/teaching/interdisciplinary-project-idp/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ot.mgt.tum.de/en/or/teaching/interdisciplinary-project-idp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "df42868f85c71155eaf82440aa1a70085265af3a4ad5a25d5dc5e1bf4c52a4d8",
+      "fixture": "idp-chair-of-operations-research.html",
+      "candidates": 1,
+      "child_links": 1,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-proteomics-and-bioanalytics",
+      "name": "Chair of Proteomics and Bioanalytics",
+      "url": "https://www.mls.ls.tum.de/proteomics/research/projects/available-bi-projects/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.mls.ls.tum.de/proteomics/research/projects/available-bi-projects/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "14cb0126243955d3dbeb07292ae8064ac91cbad99945baf5d120409c40adf00f",
+      "fixture": "idp-chair-of-proteomics-and-bioanalytics.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-renewable-and-sustainable-energy-systems",
+      "name": "Chair of Renewable and Sustainable Energy Systems",
+      "url": "https://www.epe.ed.tum.de/en/ens/teaching/student-theses/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.epe.ed.tum.de/en/ens/teaching/student-theses/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "3a1cb0b01efd3a79515382a2972f781b0d28fc6e40ef97e75faeb799fee078ea",
+      "fixture": "idp-chair-of-renewable-and-sustainable-energy-systems.html",
+      "candidates": 0,
+      "child_links": 10,
+      "children": []
+    },
+    {
+      "slug": "idp-chair-of-security-in-information-technology",
+      "name": "Chair of Security in Information Technology",
+      "url": "https://www.ce.cit.tum.de/en/eisec/studentische-arbeiten/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ce.cit.tum.de/en/eisec/studentische-arbeiten/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "0490c6e7e426dd1192cc87f734bcd6e6688715a6f5369be0c42fc137a9ffeef0",
+      "fixture": "idp-chair-of-security-in-information-technology.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-dr-theo-sch-ller-stiftungslehrstuhl-f-r-technologie-und-innovationsmanagement",
+      "name": "Dr. Theo Sch\u00f6ller-Stiftungslehrstuhl f\u00fcr Technologie- und Innovationsmanagement",
+      "url": "https://www.ie.mgt.tum.de/en/tim/teaching/project-studiesidp/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ie.mgt.tum.de/en/tim/teaching/project-studiesidp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "eb097ea7fa2359781ef1092250d3496ea1ff5aaca6249b8a7ee5a995fd27fa73",
+      "fixture": "idp-dr-theo-sch-ller-stiftungslehrstuhl-f-r-technologie-und-innovationsmanagement.html",
+      "candidates": 5,
+      "child_links": 16,
+      "children": []
+    },
+    {
+      "slug": "idp-human-centered-technologies-for-learning",
+      "name": "Human-Centered Technologies for Learning",
+      "url": "https://www.edu.sot.tum.de/hctl/teaching/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.edu.sot.tum.de/hctl/teaching/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "ac882459686f79ed695a130b76e5813df2b67b25fe6bdde879151e54fbba520b",
+      "fixture": "idp-human-centered-technologies-for-learning.html",
+      "candidates": 1,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-institute-of-automotive-technology",
+      "name": "Institute of Automotive Technology",
+      "url": "https://www.mos.ed.tum.de/en/ftm/teaching/informatics/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.mos.ed.tum.de/en/ftm/teaching/informatics/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "40bf446ea2ad03449534ed040ed072ffd77b162b1ac97bf63631667593b9a8d4",
+      "fixture": "idp-institute-of-automotive-technology.html",
+      "candidates": 1,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-institute-for-machine-tools-and-industrial-management",
+      "name": "Institute for Machine Tools and Industrial Management",
+      "url": "https://www.mec.ed.tum.de/en/iwb/studies/hiwi-jobs-and-research-papers-1/interdisciplinary-projects/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.mec.ed.tum.de/en/iwb/studies/hiwi-jobs-and-research-papers-1/interdisciplinary-projects/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "60019877f9f72d5388c834271e79421598a07a2974d42d74b3f4a0d8ab7859ff",
+      "fixture": "idp-institute-for-machine-tools-and-industrial-management.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-institute-for-materials-handling-material-flow-logistics",
+      "name": "Institute for Materials Handling, Material Flow, Logistics",
+      "url": "https://www.mec.ed.tum.de/en/fml/courses/student-assistant-final-thesis-and-term-paper/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.mec.ed.tum.de/en/fml/courses/student-assistant-final-thesis-and-term-paper/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "db854a18458b309689f062b011d984c27372915b5e5e8afb146f5eeb77a426f5",
+      "fixture": "idp-institute-for-materials-handling-material-flow-logistics.html",
+      "candidates": 1,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-logistics-and-supply-chain-management",
+      "name": "Logistics and Supply Chain Management",
+      "url": "https://www.ot.mgt.tum.de/log/education/theses-project-studies-idps/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ot.mgt.tum.de/log/education/theses-project-studies-idps/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "1d46da3116f71d43e4e3f98978e438e03d38a77a61c7e49aa17dc1480f7e52e9",
+      "fixture": "idp-logistics-and-supply-chain-management.html",
+      "candidates": 2,
+      "child_links": 14,
+      "children": []
+    },
+    {
+      "slug": "idp-professorship-of-business-analytics-and-intelligent-systems",
+      "name": "Professorship of Business Analytics & Intelligent Systems",
+      "url": "https://www.ot.mgt.tum.de/en/osm/education/theses-projects/project-modules/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ot.mgt.tum.de/en/osm/education/theses-projects/project-modules/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "5e06fce51e1134a9f067cf9d4ad5f80fbf23732572c3260c3a9c529f9c335c52",
+      "fixture": "idp-professorship-of-business-analytics-and-intelligent-systems.html",
+      "candidates": 0,
+      "child_links": 1,
+      "children": []
+    },
+    {
+      "slug": "idp-professorship-of-energy-management-technologies",
+      "name": "Professorship of Energy Management Technologies",
+      "url": "https://www.epe.ed.tum.de/emt/lehre/interdisziplinaeres-projekt/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.epe.ed.tum.de/emt/lehre/interdisziplinaeres-projekt/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "6fafce0e15df3c11f6e4abb6136afc90f8f579762249824faed2e5784440d56f",
+      "fixture": "idp-professorship-of-energy-management-technologies.html",
+      "candidates": 1,
+      "child_links": 1,
+      "children": []
+    },
+    {
+      "slug": "idp-professorship-of-multiscale-modeling-of-fluid-materials",
+      "name": "Professorship of Multiscale Modeling of Fluid Materials",
+      "url": "https://www.epc.ed.tum.de/en/mfm/open-positions-student-thesis-projects/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.epc.ed.tum.de/en/mfm/open-positions-student-thesis-projects/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "54389f153dbe71c0e190f715fe7ed905032555274a5e58c200f5776726592821",
+      "fixture": "idp-professorship-of-multiscale-modeling-of-fluid-materials.html",
+      "candidates": 1,
+      "child_links": 4,
+      "children": []
+    },
+    {
+      "slug": "idp-professorship-of-remote-sensing-applications",
+      "name": "Professorship of Remote Sensing Applications",
+      "url": "https://www.asg.ed.tum.de/en/rsa/teaching/courses/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.asg.ed.tum.de/en/rsa/teaching/courses/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "04b28b3297c2be21907f2675d9a6c997cc137b67ec6f04fb6ba39c8fa514a6aa",
+      "fixture": "idp-professorship-of-remote-sensing-applications.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-production-and-supply-chain-management",
+      "name": "Production and Supply Chain Management",
+      "url": "https://www.professors.wi.tum.de/scm/education/idp/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ot.mgt.tum.de/scm/education/idp/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "202ff2c65a9fb4073a7829a5c385af7f4100d8dcb2ab0b638b04c68dd14101a8",
+      "fixture": "idp-production-and-supply-chain-management.html",
+      "candidates": 1,
+      "child_links": 1,
+      "children": []
+    },
+    {
+      "slug": "idp-tum-data-innovation-lab",
+      "name": "TUM Data Innovation Lab",
+      "url": "https://www.mdsi.tum.de/en/di-lab/projects/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.mdsi.tum.de/en/di-lab/projects/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "66b2904c43ccdca7fe6b440f8e4fb116e8bf7f86029b83bb31937e893a18625f",
+      "fixture": "idp-tum-data-innovation-lab.html",
+      "candidates": 0,
+      "child_links": 0,
+      "children": []
+    },
+    {
+      "slug": "idp-tum-entrepreneurship-research-institute",
+      "name": "TUM Entrepreneurship Research Institute",
+      "url": "https://www.ie.mgt.tum.de/en/ent/teaching/project-studies-and-idps/",
+      "family": "typo3",
+      "status": 200,
+      "final_url": "https://www.ie.mgt.tum.de/en/ent/teaching/project-studies-and-idps/",
+      "media_type": "text/html; charset=utf-8",
+      "sha256": "3f7272bf28c271b15468dd3bb5fd0737b2f0befad8c3d5f6422ed6c2a768dc48",
+      "fixture": "idp-tum-entrepreneurship-research-institute.html",
+      "candidates": 3,
+      "child_links": 11,
+      "children": []
     }
   ]
 }

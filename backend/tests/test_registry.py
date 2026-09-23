@@ -16,8 +16,8 @@ def test_all_32_chairs_have_dedicated_entries():
 
 
 def test_official_informatics_idp_hub_and_all_published_chair_sources_are_registered():
-    assert len(IDP_REGISTRY) == 32
-    assert len(ALL_REGISTRY) == 64
+    assert len(IDP_REGISTRY) == 31
+    assert len(ALL_REGISTRY) == 63
     hub = IDP_REGISTRY[0]
     assert hub.slug == "informatics-idp-hub"
     assert hub.opportunity_type == "idp"

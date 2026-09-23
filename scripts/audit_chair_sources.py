@@ -1,6 +1,7 @@
 """Capture frozen source fixtures and a machine-readable audit manifest."""
 from __future__ import annotations
 import asyncio, json, sys
+import argparse
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -13,10 +14,19 @@ from app.ingestion.registry import ALL_REGISTRY
 
 FIXTURES = ROOT / "backend/tests/fixtures/chairs"
 
-async def audit():
+async def audit(selected_slugs: set[str] | None = None):
     FIXTURES.mkdir(parents=True, exist_ok=True)
-    fetcher = PoliteFetcher(delay_seconds=1.0, timeout_seconds=30); manifest = []
+    registry_by_slug = {adapter.slug: adapter for adapter in ALL_REGISTRY}
+    selected = set(registry_by_slug) if selected_slugs is None else selected_slugs
+    unknown = selected - set(registry_by_slug)
+    if unknown:
+        raise ValueError(f"Unknown source slug(s): {', '.join(sorted(unknown))}")
+    manifest_path = FIXTURES / "manifest.json"
+    existing = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {"sources": []}
+    manifest_by_slug = {row["slug"]: row for row in existing.get("sources", []) if row.get("slug") in registry_by_slug}
+    fetcher = PoliteFetcher(delay_seconds=3.0, timeout_seconds=30); audited = []
     for adapter in ALL_REGISTRY:
+        if adapter.slug not in selected: continue
         url = adapter.source_urls[0]; row = {"slug": adapter.slug, "name": adapter.name, "url": url, "family": adapter.family}
         try:
             fetched = await asyncio.wait_for(fetcher.fetch(url), timeout=35); suffix = ".html" if "html" in fetched.media_type else ".bin"
@@ -51,9 +61,14 @@ async def audit():
                 children.append(child)
             row["children"] = children
         except Exception as error: row.update(status="error", error=f"{type(error).__name__}: {error}")
-        manifest.append(row); print(f"{adapter.slug}: {row['status']}", flush=True)
-        output = {"captured_at": datetime.now(timezone.utc).isoformat(), "sources": manifest}
-        (FIXTURES / "manifest.json").write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
-    return 1 if any(x["status"] == "error" for x in manifest) else 0
+        manifest_by_slug[adapter.slug] = row; audited.append(row)
+        output = {"captured_at": datetime.now(timezone.utc).isoformat(),
+                  "sources": [manifest_by_slug[a.slug] for a in ALL_REGISTRY if a.slug in manifest_by_slug]}
+        manifest_path.write_text(json.dumps(output, indent=2) + "\n", encoding="utf-8")
+    return 1 if any(x["status"] == "error" for x in audited) else 0
 
-if __name__ == "__main__": raise SystemExit(asyncio.run(audit()))
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--slug", action="append", dest="slugs", help="audit only this registry slug; repeat for a subset")
+    args = parser.parse_args()
+    raise SystemExit(asyncio.run(audit(set(args.slugs) if args.slugs else None)))

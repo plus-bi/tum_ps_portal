@@ -142,8 +142,8 @@ def _load_idp_registry() -> tuple[ChairAdapter, ...]:
         state=SourceState.active,
     ) for row in rows)
     adapters = (hub, *chairs)
-    if len(adapters) != 32 or len({adapter.slug for adapter in adapters}) != len(adapters):
-        raise RuntimeError("IDP inventory must contain the hub and 31 unique chair records")
+    if len(adapters) != 31 or len({adapter.slug for adapter in adapters}) != len(adapters):
+        raise RuntimeError("IDP inventory must contain the hub and 30 unique chair records")
     return adapters
 
 

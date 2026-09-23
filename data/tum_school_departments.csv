@@ -1,0 +1,30 @@
+school_slug,school,department_slug,department,source_url
+cit,TUM School of Computation, Information and Technology,mathematics,Mathematics,https://www.cit.tum.de/en/cit/school/organization/
+cit,TUM School of Computation, Information and Technology,computer-science,Computer Science,https://www.cit.tum.de/en/cit/school/organization/
+cit,TUM School of Computation, Information and Technology,computer-engineering,Computer Engineering,https://www.cit.tum.de/en/cit/school/organization/
+cit,TUM School of Computation, Information and Technology,electrical-engineering,Electrical Engineering,https://www.cit.tum.de/en/cit/school/organization/
+ed,TUM School of Engineering and Design,aerospace-geodesy,Aerospace & Geodesy,https://www.ed.tum.de/en/ed/about/
+ed,TUM School of Engineering and Design,architecture,Architecture,https://www.ed.tum.de/en/ed/about/
+ed,TUM School of Engineering and Design,civil-environmental-engineering,Civil & Environmental Engineering,https://www.ed.tum.de/en/ed/about/
+ed,TUM School of Engineering and Design,energy-process-engineering,Energy & Process Engineering,https://www.ed.tum.de/en/ed/about/
+ed,TUM School of Engineering and Design,engineering-physics-computation,Engineering Physics & Computation,https://www.ed.tum.de/en/ed/about/
+ed,TUM School of Engineering and Design,materials-engineering,Materials Engineering,https://www.ed.tum.de/en/ed/about/
+ed,TUM School of Engineering and Design,mechanical-engineering,Mechanical Engineering,https://www.ed.tum.de/en/ed/about/
+ed,TUM School of Engineering and Design,mobility-systems-engineering,Mobility Systems Engineering,https://www.ed.tum.de/en/ed/about/
+nat,TUM School of Natural Sciences,bioscience,Bioscience,https://www.nat.tum.de/en/nat/research/departments/
+nat,TUM School of Natural Sciences,chemistry,Chemistry,https://www.nat.tum.de/en/nat/research/departments/
+nat,TUM School of Natural Sciences,physics,Physics,https://www.nat.tum.de/en/nat/research/departments/
+ls,TUM School of Life Sciences,life-science-engineering,Life Science Engineering,https://www.ls.tum.de/en/ls/research/research-departments/
+ls,TUM School of Life Sciences,life-science-systems,Life Science Systems,https://www.ls.tum.de/en/ls/research/research-departments/
+ls,TUM School of Life Sciences,molecular-life-sciences,Molecular Life Sciences,https://www.ls.tum.de/en/ls/research/research-departments/
+mh,TUM School of Medicine and Health,preclinical-medicine,Preclinical Medicine,https://www.mh.tum.de/en/mh/tum-school/departments/
+mh,TUM School of Medicine and Health,clinical-medicine,Clinical Medicine,https://www.mh.tum.de/en/mh/tum-school/departments/
+mh,TUM School of Medicine and Health,health-sport-sciences,Health and Sport Sciences,https://www.mh.tum.de/en/mh/tum-school/departments/
+mgt,TUM School of Management,economics-policy,Economics & Policy,https://www.mgt.tum.de/faculty-research/academic-departments
+mgt,TUM School of Management,finance-accounting,Finance & Accounting,https://www.mgt.tum.de/faculty-research/academic-departments
+mgt,TUM School of Management,innovation-entrepreneurship,Innovation & Entrepreneurship,https://www.mgt.tum.de/faculty-research/academic-departments
+mgt,TUM School of Management,marketing-strategy-leadership,Marketing, Strategy & Leadership,https://www.mgt.tum.de/faculty-research/academic-departments
+mgt,TUM School of Management,operations-technology,Operations & Technology,https://www.mgt.tum.de/faculty-research/academic-departments
+sot,TUM School of Social Sciences and Technology,educational-sciences,Educational Sciences,https://www.sot.tum.de/en/sot/school/
+sot,TUM School of Social Sciences and Technology,governance,Governance,https://www.sot.tum.de/en/sot/school/
+sot,TUM School of Social Sciences and Technology,science-technology-society,"Science, Technology and Society",https://www.sot.tum.de/en/sot/school/
