@@ -2,6 +2,7 @@ FROM python:3.12-slim
 WORKDIR /app
 COPY pyproject.toml .
 COPY tum_project_study_chairs.json .
+COPY tum_idp_sources.json .
 COPY compliance /app/compliance
 COPY backend /app/backend
 RUN pip install --no-cache-dir .
