@@ -12,8 +12,13 @@ from .registry import DEPARTMENTS, REGISTRY
 FIXTURES = Path(__file__).resolve().parents[2] / "tests/fixtures/chairs"
 
 _PUBLISHED = re.compile(r"\s*\((?:published (?:at|on)|veröffentlicht am)\s+(\d{2}[/\.]\d{2}[/\.]\d{4})\)\s*$", re.IGNORECASE)
+_LEADING_PUBLICATION = re.compile(r"^\s*\[(\d{2}[/\.]\d{2}[/\.]\d{4})\]\s*")
 
 def publication_from_title(title: str) -> tuple[str, date | None]:
+    match = _LEADING_PUBLICATION.search(title)
+    if match:
+        value = match.group(1).replace(".", "/")
+        return title[match.end():].lstrip(), datetime.strptime(value, "%d/%m/%Y").date()
     match = _PUBLISHED.search(title)
     if not match: return title, None
     value = match.group(1).replace(".", "/")

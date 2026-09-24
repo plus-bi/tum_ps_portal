@@ -1,4 +1,5 @@
 from functools import lru_cache
+from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -22,6 +23,7 @@ class Settings(BaseSettings):
     crawler_timeout_seconds: float = 30.0
     crawler_max_attempts: int = 3
     crawler_max_content_bytes: int = 25_000_000
+    artifact_storage_path: Path = Path("/var/lib/portal/artifacts")
 
 
 @lru_cache

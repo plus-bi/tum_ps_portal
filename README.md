@@ -19,7 +19,7 @@ For local backend checks without Docker:
 python -m pytest -q
 ```
 
-The audited Project Study inventory is `tum_project_study_chairs.json`. `tum_idp_sources.json` records the 31 chair links currently published by the [official Informatics IDP hub](https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/), alongside the hub itself. Both are validated into dedicated adapters by `backend/app/ingestion/registry.py`. Run `python -u scripts/audit_chair_sources.py` to refresh frozen source fixtures and their hash manifest.
+The audited Project Study inventory is `tum_project_study_chairs.json`. `tum_idp_sources.json` records the 30 chair links currently published by the [official Informatics IDP hub](https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/), alongside the hub itself. Both are validated into dedicated adapters by `backend/app/ingestion/registry.py`. Run `python -u scripts/audit_chair_sources.py` to refresh frozen source fixtures and their hash manifest.
 
 The production Celery task fetches live sources daily at 03:00 Europe/Berlin. Frozen fixtures are retained exclusively for deterministic parser tests and manual audits. Each live attempt is recorded in `crawl_runs`; failed or partial crawls do not advance missing-listing archival state.
 

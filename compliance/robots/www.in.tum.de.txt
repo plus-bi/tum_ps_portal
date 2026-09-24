@@ -24,17 +24,17 @@
 <meta name="twitter:card" content="summary_large_image">
 
 
-<link rel="stylesheet" href="/typo3temp/assets/compressed/7015c8c4ac5ff815b57530b221005fc6-39e02ac30ed45776f94981d05d963125.css?1789386946" media="all" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ">
-<link rel="stylesheet" href="/typo3temp/assets/compressed/tum-icons.min-ee9b66c6ece226624bc853c1e2eac530.css?1789386946" media="all" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ">
-<link href="/_frontend/bundled/assets/main-B0HurUpK.css?1789384289" rel="stylesheet" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ" >
-<link href="/_frontend/bundled/assets/media2click-JdfiqIsP.css?1789384289" rel="stylesheet" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ" >
+<link rel="stylesheet" href="/typo3temp/assets/compressed/7015c8c4ac5ff815b57530b221005fc6-39e02ac30ed45776f94981d05d963125.css.gz?1789386946" media="all" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A">
+<link rel="stylesheet" href="/typo3temp/assets/compressed/tum-icons.min-ee9b66c6ece226624bc853c1e2eac530.css.gz?1789386946" media="all" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A">
+<link href="/_frontend/bundled/assets/main-B0HurUpK.css?1789384289" rel="stylesheet" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A" >
+<link href="/_frontend/bundled/assets/media2click-JdfiqIsP.css?1789384289" rel="stylesheet" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A" >
 <link href="/_frontend/bundled/assets/news-list-default-CztNPxH_.css?1789384289" rel="stylesheet" >
 <link href="/_frontend/bundled/assets/news-list-layout5-C7Ctm8Uj.css?1789384289" rel="stylesheet" >
 
 
 
 
-<script nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ">let TUM = {
+<script nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A">let TUM = {
         hp: "/cit/startseite/",
         pid: 6,
         lid: 0,
@@ -49,7 +49,7 @@
     
     document.querySelector('html').classList.remove('no-js');
     document.querySelector('html').classList.add('js');</script>
-<script nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ">
+<script nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A">
     const m2cCookieLifetime = "7";
 </script>
 
@@ -67,7 +67,7 @@
 <link rel="alternate" hreflang="de-DE" href="https://www.cit.tum.de/cit/startseite/"/>
 <link rel="alternate" hreflang="en-US" href="https://www.cit.tum.de/en/cit/home/"/>
 <link rel="alternate" hreflang="x-default" href="https://www.cit.tum.de/cit/startseite/"/>
-<script type="application/ld+json" id="ext-schema-jsonld">{"@context":"https://schema.org/","@graph":[{"@type":"WebPage"},{"@type":"Article","datePublished":"2026-09-09T09:00:00+02:00","description":"Reto Achermann, neuer Professor an der TUM School of Computation, Information and Technology, erforscht widerstandsfähige Computersysteme, die auch unter komplexen Bedingungen zuverlässig funktionieren. Damit schafft er die Basis für digitale Infrastrukturen, auf die Menschen im Alltag vertrauen.","headline":"NewIn: Reto Achermann","image":"/fileadmin/w00byx/cit/0012_News/New%40CIT/Reto_Achermann.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-03T13:07:58+02:00","description":"Zwei Forschende der TUM School of Computation, Information and Technology erhalten dieses Jahr ERC Starting Grants des Europäischen Forschungsrats (ERC). Mit dieser Förderung unterstützt die EU exzellente Forschende, die am Beginn ihrer Karriere stehen. ","headline":"ERC Starting Grants für Tobias Vogl und Violetta Weger","image":"/fileadmin/w00byx/cit/0012_News/Vogl_Weger.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-02T09:00:00+02:00","description":"Technische Innovationen allein reichen nicht aus. Warum Menschen und Organisationen entscheidend für nachhaltige Informationssysteme sind, erklärt der neu berufene Professor für Information Systems Engineering an der Technischen Universität München (TUM) in der Interview-Reihe „New@CIT“.","headline":"Willkommen, Professor Sebastian Werner","image":"/fileadmin/w00byx/cit/0012_News/New%40CIT/Sebastian_Werner_AH.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-08-12T14:40:42+02:00","description":"Professor Tim Hoffmann von der TUM School of Computation, Information and Technology und seine Mitautoren erhalten für ihre Arbeit zur Lösung eines jahrzehntealten Geometrieproblems den Frontiers of Science Award 2026 vom International Congress of Basic Science (ICBS). Lesen Sie mehr zum Paper.","headline":"Frontiers of Science Award 2026 für Tim Hoffmann","image":"/fileadmin/w00byx/cit/0012_News/Erstes_kompaktes_Bonnet-Paar_gefunden.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-08-12T09:00:00+02:00","description":"Am 17. und 18. Juli 2026 verabschiedete die TUM School of Computation, Information and Technology ihre Graduierten der Bachelor- und Masterstudiengänge aus den Fachbereichen Mathematik, Informatik sowie Elektrotechnik und Informationstechnik. Ein Rückblick.","headline":"CIT Abschlussfeier für Bachelor und Master 2026","image":"/fileadmin/w00byx/cit/0012_News/TUM_Graduation_18-07026_by_C._Gramann_202.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-22T10:00:00+02:00","description":"Der 4. Internationale Workshop Mathematical Modeling and Scientific Computing (MMSC) zu Ehren von Nikolai Botkin findet vom 22. bis 25. September 2026 an der TUM statt. Er vereint internationale Expert:innen zu Modellierung, Computing, Kontrolltheorie sowie Material- und Biowissenschaften.","headline":"Workshop on Mathematical Modeling and Scientific Computing","image":"/fileadmin/w00byx/cit/0012_News/Flaggen_Mathematik_Informatik_Gebaeude.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-03T10:19:00+02:00","description":"Am 3. Oktober öffnet die TUM School of Computation, Information and Technology ihre Türen am Forschungscampus Garching. Freuen Sie sich auf spannende Vorträge, interaktive Experimente, Robotik, KI, Laborführungen und abwechslungsreiche Mitmachangebote für die ganze Familie.","headline":"Tag der offenen Tür am Forschungscampus Garching","image":"/fileadmin/w00byx/cit/0011_Events/Tag_der_offenen_Tuer/TdoT2024_WebBanner_19200x1080_kompr_KV.png","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T09:00:00+02:00","description":"Zum Start in die Vorlesungszeit erwartet die Studierenden der TUM ein besonderes Highlight: Am 8. Oktober 2026 um 11 Uhr lädt die TUM School of Computation, Information and Technology (CIT) zu einer Vorlesung über die spannende Geschichte der Kryptografie ein.","headline":"Jubiläumsvorlesung: 2500 Jahre Kryptografie","image":"/fileadmin/_processed_/f/b/csm_Vigenere_Chiffre_MS_Copilot_661cfbd4fd.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T09:20:00+02:00","description":"Am 8. und 9. Oktober finden an der TUM School of Computation, Information and Technology die Munich Risk and Insurance Days 2026 statt. Sie richten sich an Fachleute der Versicherungsmathematik, Finanzmathematik und verwandten Bereichen wie Aktuarwesen, Risikomanagement und Finanzingenieurwesen.","headline":"Munich Risk and Insurance Days 2026","image":"/fileadmin/w00byx/cit/0011_Events/analysis-4937349_1280.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T15:30:00+02:00","description":"Wo \"Technically Single\" gedreht wurde, wird die Serie nun gezeigt: Am 8. Oktober 2026 um 15:30 Uhr kehrt die preisgekrönte Webserie in den Hörsaal 1200 der TUM zurück. Ein besonderes Wiedersehen mit Campusleben, Studium und TUM Geschichte. Die Vorführung ist für Studierende der TUM offen.","headline":"Zurück an den Drehort: \"Technically Single\" im Hörsaal 1200","image":"/fileadmin/w00byx/cit/0011_Events/150_Jahre_EI/teaser.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-17T18:40:00+02:00","description":"Technikgeschichte zum Anfassen: Bei der Langen Nacht der Münchner Museen öffnet die Sammlung Telekommunikation der TUM am 17. Oktober 2026 ab 18 Uhr ihre Türen. Von Fernschreiber bis Telefonzentrale entdecken Sie Kommunikationstechnik der letzten 150 Jahre.","headline":"Eine Nacht voller Technikgeschichte: Sammlung Telekommunikation","image":"/fileadmin/w00byx/cit/0011_Events/150_Jahre_EI/Kommunikationsmuseum_2.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-26T08:00:00+01:00","description":"Von 26. bis 29. Oktober 2026 bringt die Large Scale Dynamics Conference Expertinnen und Experten aus Quanten-, klassischer und stochastischer Dynamik zusammen. Freuen Sie sich auf spannende Plenarvorträge und Posterbeiträge am TUM Institute for Advanced Study auf dem Forschungscampus Garching.","headline":"Large Scale Dynamics Conference: Quantum, Classical & Stochastic","image":"/fileadmin/w00byx/cit/0012_News/TUM_Institute_for_Advanced_Study.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-29T09:00:00+01:00","description":"Branchenvorträge, Unternehmensstände und Einzelgespräche: Die Munich Career Fair AI and Data Science richtet sich an Studierende und Unternehmen mit Interesse an Künstlicher Intelligenz, Maschinellem Lernen und Data Science. Die Veranstaltung findet am 29. Oktober 2026 bei TranslaTUM statt.","headline":"Munich Career Fair AI and Data Science","image":"/fileadmin/_processed_/e/9/csm_TranslaTUM_andreas_heddergott_9bec431d5a.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-30T09:00:00+01:00","description":"Sie studieren an der TUM und interessieren sich für die Branchen Finance, Insurance, IT oder Consulting? Treffen Sie die Kooperationspartner der Initiative Fit for TUMorrow zu Workshops, persönlichen Gesprächen und auf der Unternehmensmesse am Fit for TUMorrow Day 2026. Jetzt anmelden!","headline":"Fit for TUMorrow Day 2026","image":"/fileadmin/w00byx/cit/0011_Events/Fit_for_TUJMorrow.png","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-11-27T09:00:00+01:00","description":"Der Hackathon des Department of Computer Science der Technischen Universität München findet dieses Jahr zum 11ten Mal statt. Seitdem hat sich hackaTUM zu einem der größten Hackathons in Europa entwickelt. Das Event findet vom 27. bis 29. November 2026 statt.","headline":"hackaTUM","image":"/fileadmin/w00byx/cit/0011_Events/hackatUM.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}}]}</script>
+<script type="application/ld+json" id="ext-schema-jsonld">{"@context":"https://schema.org/","@graph":[{"@type":"WebPage"},{"@type":"Article","datePublished":"2026-10-03T10:19:00+02:00","description":"Am 3. Oktober öffnet die TUM School of Computation, Information and Technology ihre Türen am Forschungscampus Garching. Freuen Sie sich auf spannende Vorträge, interaktive Experimente, Robotik, KI, Laborführungen und abwechslungsreiche Mitmachangebote für die ganze Familie.","headline":"Tag der offenen Tür am Forschungscampus Garching","image":"/fileadmin/w00byx/cit/0011_Events/Tag_der_offenen_Tuer/TdoT2024_WebBanner_19200x1080_kompr_KV.png","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-09T09:00:00+02:00","description":"Reto Achermann, neuer Professor an der TUM School of Computation, Information and Technology, erforscht widerstandsfähige Computersysteme, die auch unter komplexen Bedingungen zuverlässig funktionieren. Damit schafft er die Basis für digitale Infrastrukturen, auf die Menschen im Alltag vertrauen.","headline":"NewIn: Reto Achermann","image":"/fileadmin/w00byx/cit/0012_News/New%40CIT/Reto_Achermann.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-03T13:07:58+02:00","description":"Zwei Forschende der TUM School of Computation, Information and Technology erhalten dieses Jahr ERC Starting Grants des Europäischen Forschungsrats (ERC). Mit dieser Förderung unterstützt die EU exzellente Forschende, die am Beginn ihrer Karriere stehen. ","headline":"ERC Starting Grants für Tobias Vogl und Violetta Weger","image":"/fileadmin/w00byx/cit/0012_News/Vogl_Weger.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-02T09:00:00+02:00","description":"Technische Innovationen allein reichen nicht aus. Warum Menschen und Organisationen entscheidend für nachhaltige Informationssysteme sind, erklärt der neu berufene Professor für Information Systems Engineering an der Technischen Universität München (TUM) in der Interview-Reihe „New@CIT“.","headline":"Willkommen, Professor Sebastian Werner","image":"/fileadmin/w00byx/cit/0012_News/New%40CIT/Sebastian_Werner_AH.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-08-12T14:40:42+02:00","description":"Professor Tim Hoffmann von der TUM School of Computation, Information and Technology und seine Mitautoren erhalten für ihre Arbeit zur Lösung eines jahrzehntealten Geometrieproblems den Frontiers of Science Award 2026 vom International Congress of Basic Science (ICBS). Lesen Sie mehr zum Paper.","headline":"Frontiers of Science Award 2026 für Tim Hoffmann","image":"/fileadmin/w00byx/cit/0012_News/Erstes_kompaktes_Bonnet-Paar_gefunden.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-09-22T10:00:00+02:00","description":"Der 4. Internationale Workshop Mathematical Modeling and Scientific Computing (MMSC) zu Ehren von Nikolai Botkin findet vom 22. bis 25. September 2026 an der TUM statt. Er vereint internationale Expert:innen zu Modellierung, Computing, Kontrolltheorie sowie Material- und Biowissenschaften.","headline":"Workshop on Mathematical Modeling and Scientific Computing","image":"/fileadmin/w00byx/cit/0012_News/Flaggen_Mathematik_Informatik_Gebaeude.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-03T10:19:00+02:00","description":"Am 3. Oktober öffnet die TUM School of Computation, Information and Technology ihre Türen am Forschungscampus Garching. Freuen Sie sich auf spannende Vorträge, interaktive Experimente, Robotik, KI, Laborführungen und abwechslungsreiche Mitmachangebote für die ganze Familie.","headline":"Tag der offenen Tür am Forschungscampus Garching","image":"/fileadmin/w00byx/cit/0011_Events/Tag_der_offenen_Tuer/TdoT2024_WebBanner_19200x1080_kompr_KV.png","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T09:00:00+02:00","description":"Zum Start in die Vorlesungszeit erwartet die Studierenden der TUM ein besonderes Highlight: Am 8. Oktober 2026 um 11 Uhr lädt die TUM School of Computation, Information and Technology (CIT) zu einer Vorlesung über die spannende Geschichte der Kryptografie ein.","headline":"Jubiläumsvorlesung: 2500 Jahre Kryptografie","image":"/fileadmin/_processed_/f/b/csm_Vigenere_Chiffre_MS_Copilot_661cfbd4fd.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T09:20:00+02:00","description":"Am 8. und 9. Oktober finden an der TUM School of Computation, Information and Technology die Munich Risk and Insurance Days 2026 statt. Sie richten sich an Fachleute der Versicherungsmathematik, Finanzmathematik und verwandten Bereichen wie Aktuarwesen, Risikomanagement und Finanzingenieurwesen.","headline":"Munich Risk and Insurance Days 2026","image":"/fileadmin/w00byx/cit/0011_Events/analysis-4937349_1280.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-08T15:30:00+02:00","description":"Wo \"Technically Single\" gedreht wurde, wird die Serie nun gezeigt: Am 8. Oktober 2026 um 15:30 Uhr kehrt die preisgekrönte Webserie in den Hörsaal 1200 der TUM zurück. Ein besonderes Wiedersehen mit Campusleben, Studium und TUM Geschichte. Die Vorführung ist für Studierende der TUM offen.","headline":"Zurück an den Drehort: \"Technically Single\" im Hörsaal 1200","image":"/fileadmin/w00byx/cit/0011_Events/150_Jahre_EI/teaser.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-17T18:40:00+02:00","description":"Technikgeschichte zum Anfassen: Bei der Langen Nacht der Münchner Museen öffnet die Sammlung Telekommunikation der TUM am 17. Oktober 2026 ab 18 Uhr ihre Türen. Von Fernschreiber bis Telefonzentrale entdecken Sie Kommunikationstechnik der letzten 150 Jahre.","headline":"Eine Nacht voller Technikgeschichte: Sammlung Telekommunikation","image":"/fileadmin/w00byx/cit/0011_Events/150_Jahre_EI/Kommunikationsmuseum_2.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-26T08:00:00+01:00","description":"Von 26. bis 29. Oktober 2026 bringt die Large Scale Dynamics Conference Expertinnen und Experten aus Quanten-, klassischer und stochastischer Dynamik zusammen. Freuen Sie sich auf spannende Plenarvorträge und Posterbeiträge am TUM Institute for Advanced Study auf dem Forschungscampus Garching.","headline":"Large Scale Dynamics Conference: Quantum, Classical & Stochastic","image":"/fileadmin/w00byx/cit/0012_News/TUM_Institute_for_Advanced_Study.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-29T09:00:00+01:00","description":"Branchenvorträge, Unternehmensstände und Einzelgespräche: Die Munich Career Fair AI and Data Science richtet sich an Studierende und Unternehmen mit Interesse an Künstlicher Intelligenz, Maschinellem Lernen und Data Science. Die Veranstaltung findet am 29. Oktober 2026 bei TranslaTUM statt.","headline":"Munich Career Fair AI and Data Science","image":"/fileadmin/_processed_/e/9/csm_TranslaTUM_andreas_heddergott_9bec431d5a.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-10-30T09:00:00+01:00","description":"Sie studieren an der TUM und interessieren sich für die Branchen Finance, Insurance, IT oder Consulting? Treffen Sie die Kooperationspartner der Initiative Fit for TUMorrow zu Workshops, persönlichen Gesprächen und auf der Unternehmensmesse am Fit for TUMorrow Day 2026. Jetzt anmelden!","headline":"Fit for TUMorrow Day 2026","image":"/fileadmin/w00byx/cit/0011_Events/Fit_for_TUJMorrow.png","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}},{"@type":"Article","datePublished":"2026-11-27T09:00:00+01:00","description":"Der Hackathon des Department of Computer Science der Technischen Universität München findet dieses Jahr zum 11ten Mal statt. Seitdem hat sich hackaTUM zu einem der größten Hackathons in Europa entwickelt. Das Event findet vom 27. bis 29. November 2026 statt.","headline":"hackaTUM","image":"/fileadmin/w00byx/cit/0011_Events/hackatUM.jpg","publisher":{"@type":"Organization","name":"TUM School of Computation, Information and Technology"}}]}</script>
 </head>
 <body class="" data-pid="6">
 
@@ -1388,6 +1388,118 @@
                 <div class="news-img-wrap">
                     
                         
+                            <a aria-hidden="true" tabindex="-1" title="Tag der offenen Tür am Forschungscampus Garching" href="/cit/aktuelles-events/tag-der-offenen-tuer/">
+
+                                
+            <picture>
+                
+        
+                
+            
+        
+            <source media="(min-width: 1200px)" srcset="/fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_9377564518.webp" type="image/webp" />
+            <source srcset="/fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_eaaecdb10f.webp 427w,
+                            /fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_3ab286849d.webp 421w,
+                            /fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_4ccf4d5cb8.webp 351w,
+                            /fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_421f7d344a.webp 626w,
+                            /fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_bc9dc7cdb3.webp 526w,
+                            /fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_7b776b951d.webp 472w,
+                            /fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_004362b950.webp 281w,
+
+                "
+                    sizes="(min-width: 992px) 427px,
+                           (min-width: 751px) 351px,
+                           (min-width: 576px) 626px,
+                           calc(100vw - 24px)"
+                    type="image/webp">
+        
+    
+                <img title="Tag der offenen Tür 2024 Web-Teaser" alt="Key Visual vom Tag der offenen Tür auf dem Forschungscampus Garching" src="/fileadmin/_processed_/4/5/csm_TdoT2024_WebBanner_19200x1080_kompr_KV_fe61484710.webp" width="400" height="225" />
+            </picture>
+        
+
+                            </a>
+                        
+                        
+                        
+                    
+                </div>
+            
+    
+            <div class="header">
+                <div class="catdate">
+                    
+						<span class="categories">
+							
+									Forschung,
+							
+									School
+							
+						</span>
+                        |
+                    
+                    <time datetime="2026.10.03">
+                        03.10.2026
+                    </time>
+                </div>
+                <h3>
+                    <a title="Tag der offenen Tür am Forschungscampus Garching" href="/cit/aktuelles-events/tag-der-offenen-tuer/">
+                        Tag der offenen Tür am Forschungscampus Garching
+                        <span class="ti ti-link" aria-hidden="true"></span>
+                    </a>
+                </h3>
+
+                
+        
+        <div class="teaser-text">
+            
+                <p>
+                    Am 3. Oktober öffnet die TUM School of Computation, Information and Technology ihre Türen am Forschungscampus Garching. Freuen Sie sich auf spannende Vorträge, interaktive Experimente, Robotik, KI, Laborführungen und abwechslungsreiche Mitmachangebote für die ganze Familie.
+                    <span class="news-list-morelink">
+                        <a aria-hidden="true" tabindex="-1" title="Tag der offenen Tür am Forschungscampus Garching" href="/cit/aktuelles-events/tag-der-offenen-tuer/">
+                            [weiterlesen]
+                        </a>
+                    </span>
+                </p>
+            
+        </div>
+    
+    
+            </div>
+        
+
+    
+    
+
+    
+    
+    
+
+    
+
+</div>
+
+
+                            
+						
+							
+
+
+
+
+<div class="article articletype-0 mb-3 topnews" data-testid="news-item">
+    
+
+    
+
+    
+
+    
+            
+        
+                <div class="news-img-wrap">
+                    
+                        
                             <a aria-hidden="true" tabindex="-1" title="NewIn: Reto Achermann" href="/cit/aktuelles/article/newin-reto-achermann/">
 
                                 
@@ -1814,118 +1926,6 @@
 
                             
 						
-							
-
-
-
-
-<div class="article articletype-0 mb-3 topnews" data-testid="news-item">
-    
-
-    
-
-    
-
-    
-            
-        
-                <div class="news-img-wrap">
-                    
-                        
-                            <a aria-hidden="true" tabindex="-1" title="CIT Abschlussfeier für Bachelor und Master 2026" href="/cit/aktuelles/article/abschlussfeier-2026/">
-
-                                
-            <picture>
-                
-        
-                
-            
-        
-            <source media="(min-width: 1200px)" srcset="/fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_46e8600680.webp" type="image/webp" />
-            <source srcset="/fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_c24f86dde6.webp 427w,
-                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_4dcf5356ce.webp 421w,
-                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_e157bad80d.webp 351w,
-                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_6db5dc177c.webp 626w,
-                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_baa18007c7.webp 526w,
-                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_b039078120.webp 472w,
-                            /fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_fc52a81f0e.webp 281w,
-
-                "
-                    sizes="(min-width: 992px) 427px,
-                           (min-width: 751px) 351px,
-                           (min-width: 576px) 626px,
-                           calc(100vw - 24px)"
-                    type="image/webp">
-        
-    
-                <img title="CIT-Abschlussfeier 2026" alt="Absolventinnen und Absolventen bei der CIT-Abschlussfeier 2026 auf dem Forschungscampus Garching" src="/fileadmin/_processed_/2/d/csm_TUM_Graduation_18-07026_by_C._Gramann_202_e364ca4fe8.webp" width="400" height="226" />
-            </picture>
-        
-
-                            </a>
-                        
-                        
-                        
-                    
-                </div>
-            
-    
-            <div class="header">
-                <div class="catdate">
-                    
-						<span class="categories">
-							
-									Studium,
-							
-									School
-							
-						</span>
-                        |
-                    
-                    <time datetime="2026.08.12">
-                        12.08.2026
-                    </time>
-                </div>
-                <h3>
-                    <a title="CIT Abschlussfeier für Bachelor und Master 2026" href="/cit/aktuelles/article/abschlussfeier-2026/">
-                        CIT Abschlussfeier für Bachelor und Master 2026
-                        <span class="ti ti-link" aria-hidden="true"></span>
-                    </a>
-                </h3>
-
-                
-        
-        <div class="teaser-text">
-            
-                <p>
-                    Am 17. und 18. Juli 2026 verabschiedete die TUM School of Computation, Information and Technology ihre Graduierten der Bachelor- und Masterstudiengänge aus den Fachbereichen Mathematik, Informatik sowie Elektrotechnik und Informationstechnik. Ein Rückblick.
-                    <span class="news-list-morelink">
-                        <a aria-hidden="true" tabindex="-1" title="CIT Abschlussfeier für Bachelor und Master 2026" href="/cit/aktuelles/article/abschlussfeier-2026/">
-                            [weiterlesen]
-                        </a>
-                    </span>
-                </p>
-            
-        </div>
-    
-    
-            </div>
-        
-
-    
-    
-
-    
-    
-    
-
-    
-
-</div>
-
-
-                            
-						
 					
 			</div>
             
@@ -2100,7 +2100,7 @@
 
 
 
-<div class="article articletype-5 mb-1 " data-testid="news-item">
+<div class="article articletype-5 mb-1 topnews" data-testid="news-item">
     
 
     
@@ -2687,7 +2687,7 @@
     
     
     <!-- Matomo Partial -->
-    <script data-ignore="1" data-cookieconsent="statistics" type="text/plain" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ">
+    <script data-ignore="1" data-cookieconsent="statistics" type="text/plain" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A">
         var _paq = window._paq = window._paq || [];
        _paq.push(['trackPageView']);
        _paq.push(['enableLinkTracking']);
@@ -2707,11 +2707,11 @@
     </script>
     <!-- End Matomo -->
 
-<script type="module" src="/_frontend/bundled/assets/main-pHWgMXGO.js?1789384289" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ"></script>
-<script type="module" src="/_frontend/bundled/assets/mathjax-CXIPnYGz.js?1789384289" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ"></script>
-<script type="module" src="/_frontend/bundled/assets/carousel-DSoJ3zu-.js?1789384289" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ"></script>
-<script type="module" src="/_frontend/bundled/assets/media2click-C3gLqQTr.js?1789384289" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ"></script>
-<script data-ignore="1" data-dp-cookiedesc="layout" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ" type="text/plain">
+<script type="module" src="/_frontend/bundled/assets/main-pHWgMXGO.js?1789384289" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A"></script>
+<script type="module" src="/_frontend/bundled/assets/mathjax-CXIPnYGz.js?1789384289" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A"></script>
+<script type="module" src="/_frontend/bundled/assets/carousel-DSoJ3zu-.js?1789384289" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A"></script>
+<script type="module" src="/_frontend/bundled/assets/media2click-C3gLqQTr.js?1789384289" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A"></script>
+<script data-ignore="1" data-dp-cookiedesc="layout" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A" type="text/plain">
     
         Diese Webseite verwendet Cookies und Matomo, um die Bedienfreundlichkeit zu erhöhen.
     
@@ -2728,7 +2728,7 @@
 
 
 </script>
-<script data-ignore="1" data-dp-cookieselect="layout" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ" type="text/plain">
+<script data-ignore="1" data-dp-cookieselect="layout" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A" type="text/plain">
     <div class="dp--cookie-check" xmlns:f="http://www.w3.org/1999/html">
     <label for="dp--cookie-required">
         <input class="dp--check-box" id="dp--cookie-required" tabindex="-1" type="checkbox" name="" value="" checked disabled>
@@ -2742,7 +2742,7 @@
 </div>
 
 </script>
-<script data-ignore="1" data-dp-cookierevoke="layout" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ" type="text/plain">
+<script data-ignore="1" data-dp-cookierevoke="layout" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A" type="text/plain">
     <button type="button"
         aria-label="Cookie Consent widerrufen"
         class="dp--revoke {{classes}}"
@@ -2752,7 +2752,7 @@
 </button>
 
 </script>
-<script data-ignore="1" data-dp-cookieiframe="layout" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ" type="text/plain">
+<script data-ignore="1" data-dp-cookieiframe="layout" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A" type="text/plain">
     <div class="dp--overlay-inner" data-nosnippet>
     <div class="dp--overlay-header">{{notice}}</div>
     <div class="dp--overlay-description">{{desc}}</div>
@@ -2765,7 +2765,7 @@
 </div>
 
 </script>
-<script data-ignore="1" nonce="Ha8QWSLUMxEjMLsCGHsw1ibwMtute_oOkbFs2YS_Y2jmdDYwqQ0uDQ" type="text/javascript">
+<script data-ignore="1" nonce="p_0c3x6YnJq87PZBort0RVoiXBCibShFqIni9Rfl7msbBjPNrAS38A" type="text/javascript">
     window.cookieconsent_options = {
         overlay: {
             notice: true,

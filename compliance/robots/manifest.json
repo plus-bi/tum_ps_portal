@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T07:30:36.415092+00:00",
+  "generated_at": "2026-09-23T08:27:44.467187+00:00",
   "user_agent": "TUM-Project-Studies-Portal",
   "origins": [
     {
@@ -7,7 +7,7 @@
       "robots_url": "http://www.mmk.ei.tum.de/robots.txt",
       "status": 200,
       "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "sha256": "930b27ae2331d41d2644aee5258f673dbe0da3a3390bc195ce97b999f834f0c1",
+      "sha256": "e92accc2a064853008dd51b0c29c9468933cff5f3b6709aa92e535bb9d22d605",
       "policy": "rules_applied",
       "crawl_delay": null,
       "urls": [
@@ -154,7 +154,7 @@
           "allowed": true
         },
         {
-          "url": "https://www.ce.cit.tum.de/en/lmt/student-thesis/ongoing-thesis/",
+          "url": "https://www.ce.cit.tum.de/en/lmt/student-thesis/",
           "allowed": true
         }
       ],
@@ -202,33 +202,18 @@
       "crawl_delay": null,
       "urls": [
         {
-          "url": "https://www.edu.sot.tum.de/hctl/lehre/interdisciplinary-projects/",
+          "url": "https://www.edu.sot.tum.de/hctl/teaching/idp-projects/",
           "allowed": true
         }
       ],
       "compliant": true
     },
     {
-      "origin": "https://www.ef.wi.tum.de",
-      "robots_url": "https://www.ef.wi.tum.de/robots.txt",
-      "status": 404,
-      "final_url": "https://www.fa.mgt.tum.de/ef//robots.txt",
-      "sha256": "605855884205cf6f43722e7041e3963de10d622a1b68096877faea461d398810",
-      "policy": "allow_all_no_policy",
-      "compliant": true,
-      "urls": [
-        {
-          "url": "https://www.ef.wi.tum.de/index.php?id=118",
-          "allowed": true
-        }
-      ]
-    },
-    {
       "origin": "https://www.ei.tum.de",
       "robots_url": "https://www.ei.tum.de/robots.txt",
       "status": 200,
       "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "sha256": "8e2160cbf175d103276c608bff1d517304b1ee3a3bd2ccc553e7f441f28f54c2",
+      "sha256": "5e1d6ea14203049945c1baba9ff1caac6ba613fe79e701e6ea3cbaa00a30a6fd",
       "policy": "rules_applied",
       "crawl_delay": null,
       "urls": [
@@ -341,6 +326,10 @@
           "allowed": true
         },
         {
+          "url": "https://www.fa.mgt.tum.de/ef/teaching/idp/",
+          "allowed": true
+        },
+        {
           "url": "https://www.fa.mgt.tum.de/ef/teaching/project-studies/",
           "allowed": true
         },
@@ -431,6 +420,10 @@
         {
           "url": "https://www.ie.mgt.tum.de/fbco/lehre/projektstudien/",
           "allowed": true
+        },
+        {
+          "url": "https://www.ie.mgt.tum.de/tim/teaching/project-studiesidp/",
+          "allowed": true
         }
       ],
       "compliant": true
@@ -440,7 +433,7 @@
       "robots_url": "https://www.in.tum.de/robots.txt",
       "status": 200,
       "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "sha256": "68712b41f6d9fbd3ad1c505cef573ab14b7a05b1f022c33cef615de2ef8d5d38",
+      "sha256": "90a3bee3c565f89c96ab44c233bf21ff8d3e5aafb25b1b539a2407e10a5386c7",
       "policy": "rules_applied",
       "crawl_delay": null,
       "urls": [
@@ -580,22 +573,6 @@
       "compliant": true
     },
     {
-      "origin": "https://www.notion.so",
-      "robots_url": "https://www.notion.so/robots.txt",
-      "status": 200,
-      "final_url": "https://www.notion.so/robots.txt",
-      "sha256": "f4a0f8257adb7d21c0ca560855d756d848f87eab9091fadb45005910f893f113",
-      "policy": "rules_applied",
-      "crawl_delay": null,
-      "urls": [
-        {
-          "url": "https://www.notion.so/IDP-s-and-Theses-at-cartken-4009d4a6db2b48bb821d6577a9606789",
-          "allowed": true
-        }
-      ],
-      "compliant": true
-    },
-    {
       "origin": "https://www.ot.mgt.tum.de",
       "robots_url": "https://www.ot.mgt.tum.de/robots.txt",
       "status": 200,
@@ -657,7 +634,7 @@
           "allowed": true
         },
         {
-          "url": "https://www.ot.mgt.tum.de/osm/education/idps/",
+          "url": "https://www.ot.mgt.tum.de/osm/education/theses-projects/interdisciplinary-projects-idps/",
           "allowed": true
         },
         {
@@ -702,21 +679,6 @@
         }
       ],
       "compliant": true
-    },
-    {
-      "origin": "https://www.tim.wi.tum.de",
-      "robots_url": "https://www.tim.wi.tum.de/robots.txt",
-      "status": 404,
-      "final_url": "https://www.ie.mgt.tum.de/tim//robots.txt",
-      "sha256": "b40ff921848eb333e7e2c5c020a6296ed001999a772f502918b3409b396db0cd",
-      "policy": "allow_all_no_policy",
-      "compliant": true,
-      "urls": [
-        {
-          "url": "https://www.tim.wi.tum.de/index.php?id=211",
-          "allowed": true
-        }
-      ]
     },
     {
       "origin": "https://www.tum.de",

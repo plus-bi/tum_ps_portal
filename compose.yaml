@@ -51,10 +51,34 @@ services:
         required: false
     restart: unless-stopped
     logging: *default-logging
+    volumes: ["artifact_data:/var/lib/portal/artifacts"]
     depends_on:
+      artifact-init:
+        condition: service_completed_successfully
       postgres:
         condition: service_healthy
       redis:
+        condition: service_healthy
+  artifact-init:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    user: root
+    command: ["sh", "-c", "mkdir -p /var/lib/portal/artifacts && chown app:app /var/lib/portal/artifacts"]
+    volumes: ["artifact_data:/var/lib/portal/artifacts"]
+    restart: "no"
+  pdf-backfill:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    command: ["python", "-m", "app.ingestion.pdf_backfill", "--interval-seconds=30", "--jitter-seconds=10"]
+    env_file:
+      - path: .env
+        required: false
+    volumes: ["artifact_data:/var/lib/portal/artifacts"]
+    restart: "no"
+    profiles: ["maintenance"]
+    logging: *default-logging
+    depends_on:
+      artifact-init:
+        condition: service_completed_successfully
+      postgres:
         condition: service_healthy
   beat:
     build: {context: ., dockerfile: backend/Dockerfile}
@@ -86,3 +110,4 @@ volumes:
   postgres_data: {}
   caddy_data: {}
   caddy_config: {}
+  artifact_data: {}

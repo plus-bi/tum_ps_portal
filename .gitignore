@@ -42,6 +42,7 @@ celerybeat-schedule*
 *.log
 logs/
 backups/
+pdf-artifacts/
 caddy_data/
 caddy_config/
 compose.override.yaml

@@ -20,6 +20,7 @@ from ..schemas import Status
 from .adapters import Candidate, parser_for
 from .documents import extract
 from .fetcher import Fetched, PoliteFetcher
+from .pdf_backfill import is_pdf_url, store_pdf_url
 from .registry import ALL_REGISTRY, ChairAdapter, DEPARTMENTS
 from .service import publication_from_title
 
@@ -275,6 +276,12 @@ async def ingest_adapter_live(adapter: ChairAdapter, fetcher: PoliteFetcher) -> 
         outcome = (_persist_not_modified(adapter, source_id, chair_id, run_id, result, started_at)
                    if result.top.not_modified else
                    _persist_success(adapter, source_id, chair_id, run_id, result, started_at))
+        if not result.top.not_modified:
+            pdf_urls = {candidate.source_url for candidate in result.candidates if is_pdf_url(candidate.source_url)}
+            stored_pdfs = 0
+            for url in pdf_urls:
+                stored_pdfs += int(await store_pdf_url(url, fetcher))
+            outcome["pdf_artifacts_stored"] = stored_pdfs
         level = logging.WARNING if outcome["status"] == "partial" else logging.INFO
         log_event(level, "source_crawl_finished", **outcome)
         return outcome

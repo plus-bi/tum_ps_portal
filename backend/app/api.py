@@ -42,6 +42,7 @@ def projects(q: str | None = None, status: Status = Status.active, department: l
              chair: list[str] = Query(default=[]), topic: list[Topic] = Query(default=[]),
              sort: str = "relevance", page: int = Query(1, ge=1), page_size: int = Query(20, ge=1, le=100)):
     stored = persisted_projects()
+    last_updated_at = max((project.last_seen_at for project in stored), default=None)
     rows = [p for p in (stored or PROJECTS) if p.status == status]
     if q:
         needle = q.casefold(); rows = [p for p in rows if needle in f"{p.title} {p.summary or ''} {p.chair}".casefold()]
@@ -53,7 +54,8 @@ def projects(q: str | None = None, status: Status = Status.active, department: l
     elif sort == "deadline": rows.sort(key=lambda p: p.deadline or date.max)
     elif sort == "newest": rows.sort(key=lambda p: p.first_seen_at, reverse=True)
     start = (page - 1) * page_size
-    return {"items": rows[start:start + page_size], "total": len(rows), "page": page, "page_size": page_size}
+    return {"items": rows[start:start + page_size], "total": len(rows), "page": page, "page_size": page_size,
+            "last_updated_at": last_updated_at}
 
 
 @router.get("/projects/{slug}", response_model=Project)

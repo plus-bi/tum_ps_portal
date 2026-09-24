@@ -88,6 +88,28 @@ class SourceArtifact(Base):
     fetched_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
+class PDFArtifact(Base):
+    __tablename__ = "pdf_artifacts"
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    url: Mapped[str] = mapped_column(Text, unique=True)
+    content_hash: Mapped[str | None] = mapped_column(String(64))
+    storage_key: Mapped[str | None] = mapped_column(String(100))
+    byte_size: Mapped[int | None] = mapped_column(Integer)
+    media_type: Mapped[str | None] = mapped_column(String(100))
+    fetched_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    error: Mapped[str | None] = mapped_column(Text)
+
+
+class PDFAnalysis(Base):
+    __tablename__ = "pdf_analysis"
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    content_hash: Mapped[str] = mapped_column(String(64), unique=True)
+    classification: Mapped[str] = mapped_column(String(30), default="unknown")
+    classifier_version: Mapped[str] = mapped_column(String(80))
+    classified_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    details: Mapped[dict] = mapped_column(JSON, default=dict)
+
+
 class CrawlRun(Base):
     __tablename__ = "crawl_runs"
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

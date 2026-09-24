@@ -1,6 +1,6 @@
 # Robots.txt compliance audit
 
-Generated: `2026-09-23T07:30:36.415092+00:00`
+Generated: `2026-09-23T08:27:44.467187+00:00`
 
 Crawler token: `TUM-Project-Studies-Portal`
 
@@ -18,14 +18,13 @@ Robots rules are origin-specific. HTTP 4xx responses other than 401/403 are trea
 | https://www.cit.tum.de | 200 | rules_applied | 1 | 1/1 |
 | https://www.cs.cit.tum.de | 200 | rules_applied | 1 | 1/1 |
 | https://www.edu.sot.tum.de | 200 | rules_applied | 1 | 1/1 |
-| https://www.ef.wi.tum.de | 404 | allow_all_no_policy | 1 | 1/1 |
 | https://www.ei.tum.de | 200 | rules_applied | 1 | 1/1 |
 | https://www.ep.mgt.tum.de | 200 | rules_applied | 5 | 5/5 |
 | https://www.epc.ed.tum.de | 200 | rules_applied | 2 | 2/2 |
 | https://www.epe.ed.tum.de | 200 | rules_applied | 3 | 3/3 |
-| https://www.fa.mgt.tum.de | 200 | rules_applied | 15 | 15/15 |
+| https://www.fa.mgt.tum.de | 200 | rules_applied | 16 | 16/16 |
 | https://www.hs.mh.tum.de | 200 | rules_applied | 1 | 1/1 |
-| https://www.ie.mgt.tum.de | 200 | rules_applied | 5 | 5/5 |
+| https://www.ie.mgt.tum.de | 200 | rules_applied | 6 | 6/6 |
 | https://www.in.tum.de | 200 | rules_applied | 1 | 1/1 |
 | https://www.mdsi.tum.de | 200 | rules_applied | 1 | 1/1 |
 | https://www.mec.ed.tum.de | 200 | rules_applied | 3 | 3/3 |
@@ -33,10 +32,8 @@ Robots rules are origin-specific. HTTP 4xx responses other than 401/403 are trea
 | https://www.mls.ls.tum.de | 200 | rules_applied | 1 | 1/1 |
 | https://www.mos.ed.tum.de | 200 | rules_applied | 1 | 1/1 |
 | https://www.msl.mgt.tum.de | 200 | rules_applied | 4 | 4/4 |
-| https://www.notion.so | 200 | rules_applied | 1 | 1/1 |
 | https://www.ot.mgt.tum.de | 200 | rules_applied | 19 | 19/19 |
 | https://www.professors.wi.tum.de | 200 | rules_applied | 2 | 2/2 |
-| https://www.tim.wi.tum.de | 404 | allow_all_no_policy | 1 | 1/1 |
 | https://www.tum.de | 200 | rules_applied | 0 | 0/0 |
 | https://www.tumcso.com | 200 | rules_applied | 3 | 3/3 |
 
