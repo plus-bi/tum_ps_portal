@@ -11,6 +11,7 @@ router = APIRouter(prefix="/api/v1")
 # Demo data keeps the UI useful before the first database-backed crawl.
 PROJECTS = [Project(
     slug="example-project-study",
+    reference_code="ps-001",
     title="Example Project Study",
     summary="Run the ingestion worker to replace this development record with source-grounded listings.",
     department="Operations and Technology", chair="Operations Management",
@@ -22,7 +23,8 @@ def persisted_projects() -> list[Project]:
     try:
         with session_factory()() as session:
             rows = session.execute(select(Listing, Chair, Department).join(Chair, Listing.chair_id == Chair.id).join(Department, Chair.department_id == Department.id)).all()
-            return [Project(slug=listing.slug, title=listing.title, summary=listing.summary,
+            return [Project(slug=listing.slug, reference_code=listing.reference_code,
+                            title=listing.title, summary=listing.summary,
                             department=department.name, chair=chair.name,
                             opportunity_type=listing.normalized.get("opportunity_type", "project_study"),
                             company=listing.normalized.get("company"), language=listing.normalized.get("language"),
@@ -45,7 +47,7 @@ def projects(q: str | None = None, status: Status = Status.active, department: l
     last_updated_at = max((project.last_seen_at for project in stored), default=None)
     rows = [p for p in (stored or PROJECTS) if p.status == status]
     if q:
-        needle = q.casefold(); rows = [p for p in rows if needle in f"{p.title} {p.summary or ''} {p.chair}".casefold()]
+        needle = q.casefold(); rows = [p for p in rows if needle in f"{p.reference_code} {p.title} {p.summary or ''} {p.chair}".casefold()]
     if department: rows = [p for p in rows if p.department in department]
     if chair: rows = [p for p in rows if p.chair in chair]
     if topic: rows = [p for p in rows if set(topic) & set(p.topics)]

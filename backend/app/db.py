@@ -57,6 +57,7 @@ class Listing(Base):
     chair_id: Mapped[UUID] = mapped_column(ForeignKey("chairs.id"), index=True)
     stable_source_key: Mapped[str] = mapped_column(String(80))
     slug: Mapped[str] = mapped_column(String(320), unique=True)
+    reference_code: Mapped[str] = mapped_column(String(20), unique=True, index=True)
     title: Mapped[str] = mapped_column(String(300))
     summary: Mapped[str | None] = mapped_column(Text)
     normalized: Mapped[dict] = mapped_column(JSON, default=dict)

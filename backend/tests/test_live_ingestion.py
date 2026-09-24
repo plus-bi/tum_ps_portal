@@ -35,6 +35,7 @@ def test_failed_live_crawl_is_logged_without_changing_listing_lifecycle(tmp_path
         source = session.scalar(select(Source))
         runs = session.scalars(select(CrawlRun).order_by(CrawlRun.started_at)).all()
         assert listing.status == Status.active
+        assert listing.reference_code == "ps-001"
         assert listing.consecutive_misses == 0
         assert source.consecutive_failures == 1
         assert [run.status for run in runs] == ["success", "failed"]

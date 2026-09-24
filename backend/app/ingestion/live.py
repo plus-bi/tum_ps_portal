@@ -16,6 +16,7 @@ from ..db import (
     Base, Chair, CrawlRun, Department, Listing, ListingVersion, Source, SourceArtifact,
     engine, session_factory,
 )
+from ..listing_references import next_reference_code
 from ..schemas import Status
 from .adapters import Candidate, parser_for
 from .documents import extract
@@ -183,7 +184,8 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
             if listing is None:
                 listing = Listing(
                     chair_id=chair_id, stable_source_key=candidate.stable_source_key,
-                    slug=f"{adapter.slug}-{candidate.stable_source_key[:10]}", title=display_title,
+                    slug=f"{adapter.slug}-{candidate.stable_source_key[:10]}",
+                    reference_code=next_reference_code(session, adapter.opportunity_type), title=display_title,
                     summary=display_summary, normalized=normalized, content_hash=digest,
                     status=Status.active, published_at=title_date or summary_date,
                     first_seen_at=now, last_seen_at=now,

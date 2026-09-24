@@ -5,6 +5,7 @@ from pathlib import Path
 from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from ..db import Base, Chair, Department, Listing, Source, engine, session_factory
+from ..listing_references import next_reference_code
 from ..schemas import Status
 from .adapters import parser_for
 from .registry import DEPARTMENTS, REGISTRY
@@ -68,7 +69,8 @@ def ingest_department(department_name: str) -> dict:
                               "artifact_url": artifact_url, "application_url": None, "topics": [], "language": None}
                 if listing is None:
                     listing = Listing(chair_id=chair.id, stable_source_key=candidate.stable_source_key,
-                                      slug=f"{adapter.slug}-{candidate.stable_source_key[:10]}", title=display_title,
+                                      slug=f"{adapter.slug}-{candidate.stable_source_key[:10]}",
+                                      reference_code=next_reference_code(session, adapter.opportunity_type), title=display_title,
                                       summary=display_summary, normalized=normalized, content_hash=digest,
                                       status=Status.active, published_at=published_at, first_seen_at=now, last_seen_at=now)
                     session.add(listing); stats["created"] += 1

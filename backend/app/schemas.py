@@ -62,6 +62,7 @@ class ExtractedListing(BaseModel):
 
 class Project(BaseModel):
     slug: str
+    reference_code: str
     title: str
     summary: str | None = None
     department: str
