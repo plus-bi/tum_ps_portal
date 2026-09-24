@@ -32,6 +32,7 @@ class ChairAdapter:
     child_url_patterns: tuple[str, ...] = ()
     active_markers: tuple[str, ...] = ("project study", "project studies", "projektstudium", "projektstudien")
     archive_markers: tuple[str, ...] = ("archive", "completed", "past project", "abgeschlossen")
+    excluded_titles: tuple[str, ...] = ()
     excluded_markers: tuple[str, ...] = (
         "master thesis", "bachelor thesis", "internship", "job opening", "individual project",
         "masterarbeit", "bachelorarbeit", "praktikum", "stellenangebot", "idp",
@@ -113,6 +114,12 @@ BY_SLUG = {adapter.slug: adapter for adapter in REGISTRY}
 
 IDP_HUB_URL = "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/"
 IDP_MARKERS = ("idp", "interdisciplinary project", "interdisziplinäres projekt")
+IDP_EXCLUDED_TITLES = {
+    "Chair for Entrepreneurial Finance": ("idp: interdisciplinary project",),
+    "Dr. Theo Schöller-Stiftungslehrstuhl für Technologie- und Innovationsmanagement": (
+        "project studies and interdisciplinary projects (idps)",
+    ),
+}
 
 
 def _load_idp_registry() -> tuple[ChairAdapter, ...]:
@@ -138,6 +145,7 @@ def _load_idp_registry() -> tuple[ChairAdapter, ...]:
         slug=f"idp-{_slug(row['chair_name'])}", name=row["chair_name"], department=DEPARTMENTS["interdisciplinary-projects"],
         source_urls=(row["idp_url"],), family=_family(row["idp_url"]), opportunity_type="idp",
         active_markers=IDP_MARKERS,
+        excluded_titles=IDP_EXCLUDED_TITLES.get(row["chair_name"], ()),
         excluded_markers=tuple(marker for marker in ChairAdapter.excluded_markers if marker != "idp"),
         state=SourceState.active,
     ) for row in rows)

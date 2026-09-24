@@ -56,7 +56,7 @@ class HtmlParser:
             if heading is None and offer_link is None: continue
             title = " ".join((heading or offer_link).stripped_strings)
             normalized_title = " ".join(title.casefold().replace("&", " ").replace("/", " ").split()).strip(":")
-            if normalized_title in self._generic_titles: continue
+            if normalized_title in self._generic_titles or normalized_title in adapter.excluded_titles: continue
             if not adapter.source_implies_active_type and not any(marker in normalized_title for marker in adapter.active_markers): continue
             if any(noise in normalized_title for noise in ("registration form", "information sheet", "report", "submission", "submisson", "submit your", "overview", "contact person")): continue
             links = [urljoin(source_url, a.get("href")) for a in block.find_all("a", href=True)]

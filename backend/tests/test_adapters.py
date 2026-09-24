@@ -36,3 +36,31 @@ def test_idp_adapter_rejects_thesis_only_content():
     adapter = IDP_REGISTRY[1]
     html = b"<article><h2>Master thesis: data science</h2><a href='/thesis.pdf'>Details</a></article>"
     assert parser_for(adapter).discover(adapter, adapter.source_urls[0], html) == []
+
+
+def test_entrepreneurial_finance_rejects_generic_idp_invitation_but_keeps_offer():
+    adapter = next(adapter for adapter in IDP_REGISTRY if adapter.slug == "idp-chair-for-entrepreneurial-finance")
+    html = b"""<html><body>
+    <article><h2>IDP: Interdisciplinary Project</h2>
+    <p>The chair welcomes computer science students to complete their IDP with us.</p></article>
+    <article><h2>MEDTANK: Interdisciplinary project for informatics (IDP)</h2>
+    <a href='/fileadmin/ef/IDP/IDP_MEDTANK.pdf'>Project description</a></article>
+    </body></html>"""
+
+    candidates = parser_for(adapter).discover(adapter, adapter.source_urls[0], html)
+
+    assert [candidate.title for candidate in candidates] == ["MEDTANK: Interdisciplinary project for informatics (IDP)"]
+
+
+def test_tim_rejects_generic_overview_but_keeps_individual_idp():
+    adapter = next(adapter for adapter in IDP_REGISTRY if adapter.slug.startswith("idp-dr-theo-sch-ller"))
+    html = b"""<html><body>
+    <article><h2>Project Studies and Interdisciplinary Projects (IDPs)</h2>
+    <p>This page is primarily intended for students looking for an IDP or Project Study at our chair.</p></article>
+    <article><h2>IDP Agentic Document Processing &amp; Development</h2>
+    <a href='/tim/teaching/project-studiesidp/agentic-document-processing/'>Details</a></article>
+    </body></html>"""
+
+    candidates = parser_for(adapter).discover(adapter, adapter.source_urls[0], html)
+
+    assert [candidate.title for candidate in candidates] == ["IDP Agentic Document Processing & Development"]
