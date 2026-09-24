@@ -23,3 +23,21 @@ def test_official_informatics_idp_hub_and_all_published_chair_sources_are_regist
     assert hub.opportunity_type == "idp"
     assert hub.source_implies_active_type
     assert all(adapter.opportunity_type == "idp" for adapter in IDP_REGISTRY)
+
+
+def test_approved_placeholder_titles_are_excluded_by_their_owning_chairs():
+    expected = {
+        "idp-chair-of-financial-accounting": "idp",
+        "idp-chair-of-operations-research": "interdisciplinary project (idp)",
+        "idp-human-centered-technologies-for-learning": "idp projects",
+        "idp-logistics-and-supply-chain-management": "theses, project studies idps",
+        "idp-production-and-supply-chain-management": "idp offers",
+        "idp-professorship-of-business-analytics-and-intelligent-systems": "interdisciplinary projects (idps)",
+    }
+    by_slug = {adapter.slug: adapter for adapter in IDP_REGISTRY}
+    for slug, title in expected.items():
+        assert title in by_slug[slug].excluded_titles
+
+    ps_by_slug = {adapter.slug: adapter for adapter in REGISTRY}
+    assert "open project studies for students to apply" in ps_by_slug["economics-of-energy-markets"].excluded_titles
+    assert "project study (projektstudium)" in ps_by_slug["production-and-supply-chain-management"].excluded_titles

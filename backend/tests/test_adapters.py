@@ -5,12 +5,18 @@ from app.ingestion.registry import IDP_REGISTRY, REGISTRY
 
 @pytest.mark.parametrize("adapter", REGISTRY, ids=lambda adapter: adapter.slug)
 def test_every_chair_has_fixture_backed_discovery_contract(adapter):
-    html = f"""<html><body><nav>Project Study navigation</nav>
-    <article><h2>{adapter.name}: Project Study – Data Opportunity</h2>
-    <p>Applications are open for this Project Study.</p><a href='/apply/{adapter.slug}.pdf'>Details</a></article>
-    <article><h2>Master thesis</h2><p>Not available.</p></article>
-    <section><h2>Completed Project Studies archive</h2><article><h3>Old offer</h3></article></section>
-    </body></html>""".encode()
+    if adapter.title_selector:
+        html = f"""<html><body><nav>Project Study navigation</nav>
+        <div class='article' data-testid='news-item'><h2 class='news-header-headline'>
+        <a href='/apply/{adapter.slug}.pdf'>{adapter.name}: Project Study – Data Opportunity</a></h2>
+        <p>Applications are open for this Project Study.</p></div></body></html>""".encode()
+    else:
+        html = f"""<html><body><nav>Project Study navigation</nav>
+        <article><h2>{adapter.name}: Project Study – Data Opportunity</h2>
+        <p>Applications are open for this Project Study.</p><a href='/apply/{adapter.slug}.pdf'>Details</a></article>
+        <article><h2>Master thesis</h2><p>Not available.</p></article>
+        <section><h2>Completed Project Studies archive</h2><article><h3>Old offer</h3></article></section>
+        </body></html>""".encode()
     candidates = parser_for(adapter).discover(adapter, adapter.source_urls[0], html)
     assert len(candidates) == 1
     assert adapter.name in candidates[0].title
@@ -64,3 +70,49 @@ def test_tim_rejects_generic_overview_but_keeps_individual_idp():
     candidates = parser_for(adapter).discover(adapter, adapter.source_urls[0], html)
 
     assert [candidate.title for candidate in candidates] == ["IDP Agentic Document Processing & Development"]
+
+
+def test_aerodynamics_extracts_individual_idps_from_table_rows():
+    adapter = next(adapter for adapter in IDP_REGISTRY if adapter.slug == "idp-chair-of-aerodynamics-and-fluid-mechanics")
+    html = b"""<html><body><table class='ce-table'>
+    <tr><td><a href='/fileadmin/IDP_Scaling_JAX_SPH.pdf'>Scaling JAX-SPH</a></td><td>open</td></tr>
+    <tr><td><a href='/fileadmin/master_thesis.pdf'>Master thesis in CFD</a></td><td>open</td></tr>
+    </table></body></html>"""
+
+    candidates = parser_for(adapter).discover(adapter, adapter.source_urls[0], html)
+
+    assert [candidate.title for candidate in candidates] == ["Scaling JAX-SPH"]
+    assert candidates[0].source_url.endswith("IDP_Scaling_JAX_SPH.pdf")
+
+
+def test_operations_management_extracts_open_idps_but_not_ongoing_rows():
+    adapter = next(adapter for adapter in IDP_REGISTRY if adapter.slug == "idp-chair-of-operations-management")
+    html = b"""<html><body>
+    <h2>Open IDPs</h2>
+    <li class='list-group-item e2e-item'><span class='publication-title'>Airport Transfer Optimization</span>
+      <span>IDP-Arbeit</span><a class='full' href='/doc/open.pdf'>Download</a></li>
+    <h2>Ongoing IDPs</h2>
+    <li class='list-group-item e2e-item'><span class='publication-title'>Aircraft Turnaround</span>
+      <span>IDP-Arbeit</span><a class='full' href='/doc/ongoing.pdf'>Download</a></li>
+    </body></html>"""
+
+    candidates = parser_for(adapter).discover(adapter, adapter.source_urls[0], html)
+
+    assert [candidate.title for candidate in candidates] == ["Airport Transfer Optimization"]
+
+
+def test_entrepreneurship_news_items_are_split_by_opportunity_type():
+    idp_adapter = next(adapter for adapter in IDP_REGISTRY if adapter.slug == "idp-tum-entrepreneurship-research-institute")
+    ps_adapter = next(adapter for adapter in REGISTRY if adapter.slug == "tum-entrepreneurship-research-institute")
+    html = b"""<html><body>
+    <div class='article' data-testid='news-item'><h2 class='news-header-headline'>
+      <a href='/article/idp-scopezero/'>IDP: ScopeZero</a></h2><p>Build a software prototype.</p></div>
+    <div class='article' data-testid='news-item'><h2 class='news-header-headline'>
+      <a href='/article/project-study-ecoverity/'>Project Study: Ecoverity</a></h2><p>Develop a market strategy.</p></div>
+    </body></html>"""
+
+    idp_candidates = parser_for(idp_adapter).discover(idp_adapter, idp_adapter.source_urls[0], html)
+    ps_candidates = parser_for(ps_adapter).discover(ps_adapter, ps_adapter.source_urls[0], html)
+
+    assert [candidate.title for candidate in idp_candidates] == ["IDP: ScopeZero"]
+    assert [candidate.title for candidate in ps_candidates] == ["Project Study: Ecoverity"]

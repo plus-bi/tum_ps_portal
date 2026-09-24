@@ -47,19 +47,26 @@ class HtmlParser:
         results: dict[str, Candidate] = {}
         for block in blocks:
             text = " ".join(block.stripped_strings)
-            if not classify(text, adapter, in_archive=self._under_archive_heading(block, adapter)).accepted: continue
-            heading = block.find(["h1", "h2", "h3", "h4", "h5"])
-            offer_link = next((a for a in block.find_all("a", href=True)
-                               if adapter.source_implies_active_type or any(
-                                   marker in f"{' '.join(a.stripped_strings)} {a['href']}".casefold()
-                                   for marker in adapter.active_markers)), None)
+            anchors = block.find_all("a", href=True)
+            classification_text = (f"{text} {' '.join(a['href'] for a in anchors)}"
+                                   if adapter.classify_link_targets else text)
+            if not classify(classification_text, adapter, in_archive=self._under_archive_heading(block, adapter)).accepted: continue
+            heading = (block.select_one(adapter.title_selector) if adapter.title_selector
+                       else block.find(["h1", "h2", "h3", "h4", "h5"]))
+            offer_link = (block.select_one(adapter.offer_link_selector) if adapter.offer_link_selector
+                          else next((a for a in anchors
+                                     if adapter.source_implies_active_type or any(
+                                         marker in f"{' '.join(a.stripped_strings)} {a['href']}".casefold()
+                                         for marker in adapter.active_markers)), None))
             if heading is None and offer_link is None: continue
             title = " ".join((heading or offer_link).stripped_strings)
             normalized_title = " ".join(title.casefold().replace("&", " ").replace("/", " ").split()).strip(":")
             if normalized_title in self._generic_titles or normalized_title in adapter.excluded_titles: continue
-            if not adapter.source_implies_active_type and not any(marker in normalized_title for marker in adapter.active_markers): continue
+            title_marker_text = classification_text.casefold() if adapter.title_selector else normalized_title
+            if not adapter.source_implies_active_type and not any(
+                    marker in title_marker_text for marker in adapter.active_markers): continue
             if any(noise in normalized_title for noise in ("registration form", "information sheet", "report", "submission", "submisson", "submit your", "overview", "contact person")): continue
-            links = [urljoin(source_url, a.get("href")) for a in block.find_all("a", href=True)]
+            links = [urljoin(source_url, a.get("href")) for a in anchors]
             detail = (urljoin(source_url, offer_link.get("href")) if offer_link is not None else
                       next((link for link in links if any(m in link.casefold() for m in ("project", "projekt", ".pdf", ".docx"))), None))
             origin = detail or source_url; key = adapter.stable_key(origin, title)

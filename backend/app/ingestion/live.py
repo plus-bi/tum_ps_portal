@@ -17,6 +17,7 @@ from ..db import (
     engine, session_factory,
 )
 from ..listing_references import next_reference_code
+from ..listing_overrides import manual_text_overrides
 from ..schemas import Status
 from .adapters import Candidate, parser_for
 from .documents import extract
@@ -194,7 +195,9 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
                 created += 1
             else:
                 changed = listing.content_hash != digest
-                listing.title = display_title; listing.summary = display_summary
+                overrides = manual_text_overrides(session, listing.id)
+                listing.title = overrides.get("title", display_title)
+                listing.summary = overrides.get("summary", display_summary)
                 listing.normalized = normalized; listing.content_hash = digest
                 listing.published_at = title_date or summary_date
                 listing.status = Status.active; listing.last_seen_at = now; listing.consecutive_misses = 0

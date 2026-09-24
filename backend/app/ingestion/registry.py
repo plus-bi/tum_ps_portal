@@ -28,6 +28,9 @@ class ChairAdapter:
     source_implies_active_type: bool = False
     state: SourceState = SourceState.needs_audit
     candidate_selectors: tuple[str, ...] = ("article", ".news-list-item", ".news-single", ".frame", ".accordion-item", "li")
+    title_selector: str | None = None
+    offer_link_selector: str | None = None
+    classify_link_targets: bool = False
     child_link_markers: tuple[str, ...] = ("project stud", "projektstud", "open project", ".pdf", ".docx")
     child_url_patterns: tuple[str, ...] = ()
     active_markers: tuple[str, ...] = ("project study", "project studies", "projektstudium", "projektstudien")
@@ -92,14 +95,27 @@ def _load_registry() -> tuple[ChairAdapter, ...]:
     known_direct = {"economics-of-innovation", "management-accounting", "corporate-governance-and-capital-markets-law",
                     "corporate-management", "controlling", "technology-and-innovation-management", "marketing-and-technology",
                     "family-business-culture-and-ownership", "digital-marketing"}
+    excluded_titles = {
+        "Economics of Energy Markets": ("open project studies for students to apply",),
+        "Production and Supply Chain Management": ("project study (projektstudium)",),
+    }
+    source_overrides = {
+        "TUM Entrepreneurship Research Institute": {
+            "candidate_selectors": ("div.article[data-testid='news-item']",),
+            "title_selector": ".news-header-headline",
+            "offer_link_selector": ".news-header-headline a",
+        },
+    }
     adapters = tuple(ChairAdapter(
         slug=_slug(row["chair_name"]), name=row["chair_name"], department=row["department"],
         source_urls=(row["project_study_url"],), family=_family(row["project_study_url"]),
         excluded_markers=(tuple(marker for marker in ChairAdapter.excluded_markers if marker != "idp")
                           if row["chair_name"] == "Marketing and Technology" else ChairAdapter.excluded_markers),
         child_url_patterns=audited_children.get(_slug(row["chair_name"]), ()),
+        excluded_titles=excluded_titles.get(row["chair_name"], ()),
         state=(SourceState.active if _slug(row["chair_name"]) in known_direct or _slug(row["chair_name"]) in audited_children else
                SourceState.empty),
+        **source_overrides.get(row["chair_name"], {}),
     ) for row in rows)
     if len({a.slug for a in adapters}) != 32 or len({a.source_urls[0] for a in adapters}) != 32:
         raise RuntimeError("Chair slugs and source URLs must be unique")
@@ -115,10 +131,43 @@ BY_SLUG = {adapter.slug: adapter for adapter in REGISTRY}
 IDP_HUB_URL = "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/"
 IDP_MARKERS = ("idp", "interdisciplinary project", "interdisziplinäres projekt")
 IDP_EXCLUDED_TITLES = {
+    "Chair of Aerodynamics and Fluid Mechanics": ("interdisciplinary project (idp)",),
+    "Chair of Financial Accounting": ("idp",),
     "Chair for Entrepreneurial Finance": ("idp: interdisciplinary project",),
+    "Chair of Operations Management": ("ongoing idps", "open idps", "interdisciplinary projects (idp)"),
+    "Chair of Operations Research": ("interdisciplinary project (idp)",),
     "Dr. Theo Schöller-Stiftungslehrstuhl für Technologie- und Innovationsmanagement": (
         "project studies and interdisciplinary projects (idps)",
     ),
+    "Human-Centered Technologies for Learning": ("idp projects",),
+    "Logistics and Supply Chain Management": ("theses, project studies idps",),
+    "Production and Supply Chain Management": ("idp offers",),
+    "Professorship of Business Analytics & Intelligent Systems": ("interdisciplinary projects (idps)",),
+    "TUM Entrepreneurship Research Institute": (
+        "project studies and interdisciplinary projects for informatics (idp)",
+        "information for companies offering idps or project studies",
+        "available project studies and idp",
+    ),
+}
+
+IDP_SOURCE_OVERRIDES = {
+    "Chair of Aerodynamics and Fluid Mechanics": {
+        "candidate_selectors": ("table.ce-table tr",),
+        "title_selector": "td a",
+        "offer_link_selector": "td a",
+        "classify_link_targets": True,
+    },
+    "Chair of Operations Management": {
+        "candidate_selectors": ("li.list-group-item.e2e-item",),
+        "title_selector": ".publication-title",
+        "offer_link_selector": "a.full",
+        "archive_markers": (*ChairAdapter.archive_markers, "ongoing idps"),
+    },
+    "TUM Entrepreneurship Research Institute": {
+        "candidate_selectors": ("div.article[data-testid='news-item']",),
+        "title_selector": ".news-header-headline",
+        "offer_link_selector": ".news-header-headline a",
+    },
 }
 
 
@@ -140,6 +189,7 @@ def _load_idp_registry() -> tuple[ChairAdapter, ...]:
         # every linked PDF during a daily listing crawl.
         candidate_selectors=(".ce-uploads li",),
         active_markers=IDP_MARKERS,
+        excluded_markers=tuple(marker for marker in ChairAdapter.excluded_markers if marker != "idp"),
     )
     chairs = tuple(ChairAdapter(
         slug=f"idp-{_slug(row['chair_name'])}", name=row["chair_name"], department=DEPARTMENTS["interdisciplinary-projects"],
@@ -148,6 +198,7 @@ def _load_idp_registry() -> tuple[ChairAdapter, ...]:
         excluded_titles=IDP_EXCLUDED_TITLES.get(row["chair_name"], ()),
         excluded_markers=tuple(marker for marker in ChairAdapter.excluded_markers if marker != "idp"),
         state=SourceState.active,
+        **IDP_SOURCE_OVERRIDES.get(row["chair_name"], {}),
     ) for row in rows)
     adapters = (hub, *chairs)
     if len(adapters) != 31 or len({adapter.slug for adapter in adapters}) != len(adapters):

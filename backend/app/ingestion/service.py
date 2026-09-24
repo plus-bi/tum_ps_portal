@@ -6,6 +6,7 @@ from sqlalchemy import select
 from sqlalchemy.dialects.postgresql import insert
 from ..db import Base, Chair, Department, Listing, Source, engine, session_factory
 from ..listing_references import next_reference_code
+from ..listing_overrides import manual_text_overrides
 from ..schemas import Status
 from .adapters import parser_for
 from .registry import DEPARTMENTS, REGISTRY
@@ -75,7 +76,9 @@ def ingest_department(department_name: str) -> dict:
                                       status=Status.active, published_at=published_at, first_seen_at=now, last_seen_at=now)
                     session.add(listing); stats["created"] += 1
                 else:
-                    listing.title = display_title; listing.summary = display_summary
+                    overrides = manual_text_overrides(session, listing.id)
+                    listing.title = overrides.get("title", display_title)
+                    listing.summary = overrides.get("summary", display_summary)
                     listing.normalized = normalized; listing.content_hash = digest; listing.status = Status.active
                     listing.published_at = published_at
                     listing.last_seen_at = now; listing.consecutive_misses = 0; stats["updated"] += 1
