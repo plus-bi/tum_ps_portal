@@ -2,6 +2,8 @@ from datetime import date, datetime, timezone
 from enum import StrEnum
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, HttpUrl
 
+from .ingestion.project_profile import DocumentExtraction, EvidenceIssue, PdfTextCoverage
+
 
 class Status(StrEnum):
     pending_review = "pending_review"
@@ -83,11 +85,21 @@ class Project(BaseModel):
     application_email: str | None = None
     source_url: str
     artifact_url: str | None = None
+    has_profile: bool = False
     published_at: date | None = None
     first_seen_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     last_seen_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     status: Status = Status.active
     freshness: Freshness = Freshness.undated
+
+
+class ProjectProfileDetail(BaseModel):
+    project: Project
+    document: DocumentExtraction
+    coverage: PdfTextCoverage
+    evidence_issues: list[EvidenceIssue]
+    review_flags: list[str] = []
+    extracted_at: datetime
 
 
 class ProjectQuery(BaseModel):
