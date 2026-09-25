@@ -19,7 +19,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
   const [selectedChairs, setSelectedChairs] = useState<Set<string>>(() => new Set());
   const [query, setQuery] = useState("");
   const [selectedAgeBands, setSelectedAgeBands] = useState<Set<AgeBand>>(() => new Set());
-  const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set());
+  const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp"]));
   const [sortBy, setSortBy] = useState<SortBy>("publication_date");
   const [displayCount, setDisplayCount] = useState("20");
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,7 +32,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
       const daysOld = Math.floor((Date.now() - ageTimestamp) / 86_400_000);
       const ageBand = daysOld < 3 ? "lt3" : daysOld < 30 ? "lt30" : daysOld < 60 ? "lt60" : daysOld < 180 ? "lt180" : "gt180";
       const matchesAge = selectedAgeBands.size === 0 || selectedAgeBands.has(ageBand);
-      const matchesType = selectedTypes.size === 0 || selectedTypes.has(project.opportunity_type);
+      const matchesType = selectedTypes.has(project.opportunity_type);
       const text = `${project.reference_code} ${project.title} ${project.summary || ""} ${project.chair} ${project.department}`.toLocaleLowerCase();
       return matchesChair && matchesAge && matchesType && (!needle || text.includes(needle));
     });
