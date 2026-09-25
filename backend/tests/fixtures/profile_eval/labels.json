@@ -1,0 +1,884 @@
+{
+  "review_status": "draft",
+  "labeled_by": "claude-draft",
+  "format": "Categorical labels list every acceptable value; set labels list every acceptable set. Keys are lowercase substrings matched against extracted titles, emails and item values. An empty list for contact_emails or working_language expects the field to be unstated; an omitted key is not scored. deliverables_required lists groups of alternative keys, and each group must match an extracted deliverable; every extracted deliverable must match a required or deliverable_keys key. Deliverables follow the prompt rule: concrete named outputs are required, abstract approaches or strategies are only allowed, optional outputs are rejected. contact_emails are matched against the emails in contacts; when several are listed, contacts_complete expects all of them. Page text is not stored here except for synthetic documents.",
+  "documents": {
+    "ee5fddd48b6658ef44e31ccef38fb31844a89d7fb4d442f1a394590d0623dc5e": {
+      "case": "Fraunhofer FIT: 8 offers, one per page, contact changes at page 5",
+      "document_kind": [
+        "multi_offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [
+            "electricity-market design",
+            "electricity market design"
+          ],
+          "contact_emails": [
+            "martin.weibelzahl@fit.fraunhofer.de"
+          ],
+          "deliverables_required": [
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "lmp",
+            "market design model",
+            "visuali"
+          ]
+        },
+        {
+          "source_pages": [
+            2
+          ],
+          "title_keys": [
+            "participatory systems"
+          ],
+          "contact_emails": [
+            "martin.weibelzahl@fit.fraunhofer.de"
+          ],
+          "deliverables_required": [
+            [
+              "prototyp"
+            ],
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "visuali"
+          ]
+        },
+        {
+          "source_pages": [
+            3
+          ],
+          "title_keys": [
+            "is it a match"
+          ],
+          "contact_emails": [
+            "martin.weibelzahl@fit.fraunhofer.de"
+          ],
+          "deliverables_required": [
+            [
+              "prototyp"
+            ],
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "optimi",
+            "visuali"
+          ]
+        },
+        {
+          "source_pages": [
+            4
+          ],
+          "title_keys": [
+            "economic incentives"
+          ],
+          "contact_emails": [
+            "martin.weibelzahl@fit.fraunhofer.de"
+          ],
+          "deliverables_required": [
+            [
+              "tool"
+            ],
+            [
+              "simulation model"
+            ],
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "incentive model",
+            "visuali"
+          ]
+        },
+        {
+          "source_pages": [
+            5
+          ],
+          "title_keys": [
+            "zero-knowledge",
+            "zero knowledge"
+          ],
+          "contact_emails": [
+            "marc-fabian.koerner@fit.fraunhofer.de"
+          ],
+          "deliverables_required": [
+            [
+              "business model"
+            ],
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "prototyp",
+            "visuali"
+          ]
+        },
+        {
+          "source_pages": [
+            6
+          ],
+          "title_keys": [
+            "digital co2 proofs",
+            "co2 proofs"
+          ],
+          "contact_emails": [
+            "marc-fabian.koerner@fit.fraunhofer.de"
+          ],
+          "deliverables_required": [
+            [
+              "tool"
+            ],
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "visuali"
+          ]
+        },
+        {
+          "source_pages": [
+            7
+          ],
+          "title_keys": [
+            "towards transparency"
+          ],
+          "contact_emails": [
+            "marc-fabian.koerner@fit.fraunhofer.de"
+          ],
+          "programming_performed": [
+            "unknown"
+          ],
+          "deliverables_required": [
+            [
+              "business model"
+            ],
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "visuali"
+          ]
+        },
+        {
+          "source_pages": [
+            8
+          ],
+          "title_keys": [
+            "leading the way"
+          ],
+          "contact_emails": [
+            "marc-fabian.koerner@fit.fraunhofer.de"
+          ],
+          "deliverables_required": [
+            [
+              "solution"
+            ],
+            [
+              "presentation",
+              "präsentation"
+            ]
+          ],
+          "deliverable_keys": [
+            "prototyp",
+            "visuali"
+          ]
+        }
+      ],
+      "offer_defaults": {
+        "project_types": [
+          [
+            "project_study"
+          ]
+        ],
+        "degree_level": [
+          []
+        ],
+        "programming_performed": [
+          "unknown",
+          "some"
+        ],
+        "programming_required": [
+          "not_stated"
+        ],
+        "work_location_mode": [
+          "unknown"
+        ],
+        "start_date_normalized": [
+          "asap",
+          "flexible",
+          null
+        ],
+        "prerequisites": [
+          {
+            "key": "analytic",
+            "strength": "required"
+          },
+          {
+            "key": "communicat",
+            "strength": "required"
+          }
+        ],
+        "working_language": []
+      },
+      "review_notes": "No explicit working language. Each page requires 'Presentation and visualization of results'; publication is optional and rejected. Named outputs in 'Your Challenge' bullets are required (prototype, tool, business model, solution); page 1 only models a market design, so no artifact is required there. Page 4 also requires the simulation model ('a simulation model shall be developed')."
+    },
+    "30c37bdf0773517f71cad52919fff344b7524cc954f16d2670d32c1282840e07": {
+      "case": "Same offer in German (page 1) and English (page 2): one offer spanning both pages",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1,
+            2
+          ],
+          "title_keys": [
+            "baustellenprozess",
+            "construction site"
+          ],
+          "contact_emails": [
+            "markus.pointner@tum.de"
+          ],
+          "project_types": [
+            [
+              "idp"
+            ]
+          ],
+          "programming_performed": [
+            "central",
+            "some"
+          ],
+          "programming_required": [
+            "required"
+          ],
+          "work_modes_required": [
+            "modeling_simulation"
+          ],
+          "prerequisites": [
+            {
+              "key": "python",
+              "strength": "required"
+            },
+            {
+              "key": "optimi",
+              "strength": "recommended"
+            }
+          ],
+          "deliverable_keys": [
+            "handlungsempfehl",
+            "recommendation",
+            "ansatz",
+            "approach"
+          ],
+          "deliverables_required": [
+            [
+              "milp",
+              "modell",
+              "model"
+            ]
+          ],
+          "working_language": []
+        }
+      ],
+      "review_notes": "Header says 'Interdisziplinäres Projekt'. 'Formulierung und Implementierung eines MILP-Modells' names a required output; recommendations and the approach are allowed but not required. 'Sehr gute Deutsch- oder Englischkenntnisse' is a skill, not a working language."
+    },
+    "86677b36db01fd6aa3004d05c96f82aae3e158be47663b784a3dbe45bbf27993": {
+      "case": "Company offer over two pages, open to project study and IDP",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1,
+            2
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "info@fibclick.de"
+          ],
+          "project_types": [
+            [
+              "project_study",
+              "idp"
+            ]
+          ],
+          "programming_required": [
+            "not_stated"
+          ],
+          "work_location_mode": [
+            "unknown"
+          ],
+          "deliverables_required": [
+            [
+              "demonstrator"
+            ]
+          ]
+        }
+      ],
+      "review_notes": "'Wir sprechen Englisch, Deutsch und Französisch' describes the company, so working language is not scored."
+    },
+    "5dca0de4cc939858489651b6e44d94f52e046ec3d4ca0a6d59b55122a52edb85": {
+      "case": "Information slide deck, not an offer",
+      "document_kind": [
+        "not_an_offer"
+      ],
+      "offers": []
+    },
+    "4a55f9257b42df400136b84f6324385331c6cf8d5345cdb7feae58754d5d6a28": {
+      "case": "Three-page IDP offer",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1,
+            2,
+            3
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "chaima.ghaddab@tum.de"
+          ],
+          "project_types": [
+            [
+              "idp"
+            ]
+          ],
+          "programming_performed": [
+            "central"
+          ],
+          "programming_required": [
+            "required"
+          ],
+          "work_location_mode": [
+            "hybrid",
+            "remote"
+          ],
+          "prerequisites": [
+            {
+              "key": "python",
+              "strength": "required"
+            }
+          ],
+          "deliverables_required": [
+            [
+              "ocr pipeline",
+              "ocr-pipeline",
+              "ocr model"
+            ]
+          ],
+          "deliverable_keys": [
+            "testing pipeline",
+            "ocr model",
+            "pipeline"
+          ],
+          "working_language": []
+        }
+      ],
+      "review_notes": "'The goal of this interdisciplinary project' names the format only in prose; reviewer to confirm idp. The goal names an OCR pipeline and the tasks name the OCR model for the same artifact, so either counts; the testing pipeline is allowed."
+    },
+    "548db305b7aa678321da409c9b62452ae7a77c3b9181f0235bcaab87eaf66881": {
+      "case": "IDP with several contacts",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1,
+            2
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "michael.eggert",
+            "franz.muehle",
+            "carlo.bottasso"
+          ],
+          "project_types": [
+            [
+              "idp"
+            ]
+          ],
+          "programming_performed": [
+            "central"
+          ],
+          "programming_required": [
+            "required"
+          ],
+          "prerequisites": [
+            {
+              "key": "sql",
+              "strength": "required"
+            },
+            {
+              "key": "german",
+              "strength": "recommended"
+            }
+          ],
+          "deliverables_required": [
+            [
+              "web application",
+              "web app"
+            ]
+          ],
+          "deliverable_keys": [
+            "workflow"
+          ],
+          "working_language": []
+        }
+      ],
+      "review_notes": "Three named contacts; contacts_complete expects all three emails in contacts. 'You communicate effectively in English' is a skill, not a working language."
+    },
+    "885bf62fcae9b2b363115f1a8e448c2defa6afeae151417a3b387ea5dc97dae4": {
+      "case": "Notebook sample: German project study, remote with a planned coworking space",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "info@wiwamedia.com"
+          ],
+          "project_types": [
+            [
+              "project_study"
+            ]
+          ],
+          "degree_level": [
+            [
+              "master"
+            ]
+          ],
+          "programming_performed": [
+            "unknown"
+          ],
+          "programming_required": [
+            "not_stated"
+          ],
+          "work_location_mode": [
+            "remote"
+          ],
+          "work_modes_forbidden": [
+            "software_development"
+          ],
+          "deliverable_keys": [],
+          "working_language": []
+        }
+      ],
+      "review_notes": "The offer's Arbeitsmodell says remote with a coworking space in planning, so the current mode is remote (planned facilities do not make it hybrid). Deliverables are defined later with the team, so none is labeled. Students bring their own topic, so no work mode is required."
+    },
+    "010f18ee6272c81bfdf9871208afbf78c01786ce69886701676cf70f41197f3f": {
+      "case": "Notebook sample: English IDP (JAX-Fluids)",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "deniz.bezgin@tum.de"
+          ],
+          "project_types": [
+            [
+              "idp"
+            ]
+          ],
+          "programming_performed": [
+            "central"
+          ],
+          "programming_required": [
+            "required"
+          ],
+          "prerequisites": [
+            {
+              "key": "python",
+              "strength": "required"
+            },
+            {
+              "key": "jax",
+              "strength": "recommended"
+            }
+          ],
+          "deliverables_required": [
+            [
+              "kernel",
+              "implementation"
+            ]
+          ],
+          "deliverable_keys": [
+            "codebase",
+            "benchmark"
+          ],
+          "working_language": []
+        }
+      ],
+      "review_notes": "'Replacing identified subroutines with optimized NVIDIA Warp kernel implementations' names a required output."
+    },
+    "14ae909fda2b7aa67c33cd3eb06f46fbdd8c1b2dbc2020f757f74bf6d8f8737f": {
+      "case": "Notebook sample: IDP with a blank second page and a company HQ blurb",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "timo.schroeder@fidentis.de"
+          ],
+          "project_types": [
+            [
+              "idp"
+            ]
+          ],
+          "programming_performed": [
+            "central"
+          ],
+          "programming_required": [
+            "required"
+          ],
+          "start_date_normalized": [
+            "2024-10-01",
+            "2024-10"
+          ],
+          "prerequisites": [
+            {
+              "key": "plc",
+              "strength": "required"
+            },
+            {
+              "key": "python",
+              "strength": "required"
+            },
+            {
+              "key": "robot",
+              "strength": "recommended"
+            }
+          ],
+          "deliverables_required": [
+            [
+              "integration"
+            ]
+          ],
+          "deliverable_keys": [
+            "path planning",
+            "software"
+          ],
+          "working_language": []
+        }
+      ],
+      "review_notes": "'develop the software integration of our robot' names a required output."
+    },
+    "a731392cd830d79ab3d826ed684032907680aba89be899308a97d98ef92d579f": {
+      "case": "Short poster advertising the IDPX course and pointing to a website, without a defined project",
+      "document_kind": [
+        "not_an_offer"
+      ],
+      "offers": []
+    },
+    "0cad29151a7b72be4a2d8c6466f0c1bbc2020ba7815473d3a7c4126780acdeb3": {
+      "case": "Short thesis offer (bachelor, semester or master thesis)",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "application.tam.ftm@ed.tum.de"
+          ],
+          "project_types": [
+            [
+              "bachelor_thesis",
+              "semester_thesis",
+              "master_thesis"
+            ]
+          ],
+          "degree_level": [
+            [
+              "bachelor",
+              "master"
+            ]
+          ],
+          "programming_performed": [
+            "unknown",
+            "some"
+          ],
+          "start_date_normalized": [
+            "2024-10"
+          ],
+          "deliverables_required": [],
+          "working_language": []
+        }
+      ]
+    },
+    "12ce4c135827a5c9e3ffc978b191d5e256dd0449f9246af2007f977f323d7c43": {
+      "case": "Master or semester thesis with programming",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "niclas.klein@tum.de"
+          ],
+          "project_types": [
+            [
+              "master_thesis",
+              "semester_thesis"
+            ]
+          ],
+          "programming_performed": [
+            "central",
+            "some"
+          ],
+          "programming_required": [
+            "required"
+          ],
+          "work_location_mode": [
+            "hybrid",
+            "remote"
+          ],
+          "start_date_normalized": [
+            "asap"
+          ],
+          "prerequisites": [
+            {
+              "key": "python",
+              "strength": "required"
+            },
+            {
+              "key": "git",
+              "strength": "required"
+            },
+            {
+              "key": "operations research",
+              "strength": "recommended"
+            }
+          ],
+          "deliverables_required": [],
+          "deliverable_keys": [
+            "approach",
+            "strategy",
+            "ansatz",
+            "strategie"
+          ],
+          "working_language": [
+            "german",
+            "english",
+            "deutsch",
+            "englisch"
+          ]
+        }
+      ],
+      "review_notes": "'The thesis can be written either in German or English' states the working language. The optimization approach and strategy are abstract outputs, so they are allowed but not required."
+    },
+    "d5a4a3c3d805fdcbc383d7e5ee021b244351e994feb093e4df27765659783bc5": {
+      "case": "German company project study for Bachelor or Master; programming is a plus, not required",
+      "document_kind": [
+        "offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [],
+          "contact_emails": [
+            "lyudmyla.kovalenko@anding.company"
+          ],
+          "project_types": [
+            [
+              "project_study"
+            ]
+          ],
+          "degree_level": [
+            [
+              "bachelor",
+              "master"
+            ]
+          ],
+          "programming_performed": [
+            "central",
+            "some"
+          ],
+          "programming_required": [
+            "recommended"
+          ],
+          "work_location_mode": [
+            "on_site"
+          ],
+          "working_language": [
+            "de",
+            "german",
+            "deutsch"
+          ],
+          "deliverables_required": [
+            [
+              "tool"
+            ]
+          ]
+        }
+      ],
+      "review_notes": "'Sprache: Deutsch' states the working language; 'Fließende Deutsch- und Englischkenntnisse' is a skill."
+    },
+    "synthetic:two-offers-one-page": {
+      "case": "Synthetic: two offers on one page with a shared application paragraph; offer B explicitly involves no programming",
+      "pages": [
+        "# Chair of Example Studies: open project studies (winter term 2026/27)\n\n## A. Simulating heat flow in battery packs\n\nYou will extend our Python simulation of heat flow in battery packs and validate it against lab measurements. You will write and test simulation code throughout the project.\n\nRequirements: solid Python skills. Experience with numerical methods is a plus.\nDeliverable: a validated simulation module and a short report.\nContact: anna.beispiel@tum.de\n\n## B. Interview study on repair habits of e-bike owners\n\nYou will plan and run 15 semi-structured interviews with e-bike owners and analyse them qualitatively. This project involves no programming.\n\nRequirements: interest in qualitative research; very good German.\nDeliverable: an interview report with recommendations.\nContact: ben.muster@tum.de\n\n## How to apply\n\nBoth project studies start in October 2026. Send your CV and transcript of records to the contact of the project you choose."
+      ],
+      "document_kind": [
+        "multi_offer"
+      ],
+      "offers": [
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [
+            "heat flow"
+          ],
+          "contact_emails": [
+            "anna.beispiel@tum.de"
+          ],
+          "project_types": [
+            [
+              "project_study"
+            ]
+          ],
+          "programming_performed": [
+            "central"
+          ],
+          "programming_required": [
+            "required"
+          ],
+          "work_modes_required": [
+            "modeling_simulation"
+          ],
+          "start_date_normalized": [
+            "2026-10"
+          ],
+          "prerequisites": [
+            {
+              "key": "python",
+              "strength": "required"
+            },
+            {
+              "key": "numerical",
+              "strength": "recommended"
+            }
+          ],
+          "forbidden_keys": [
+            "interview",
+            "german",
+            "ben.muster"
+          ],
+          "deliverables_required": [
+            [
+              "simulation module"
+            ],
+            [
+              "report"
+            ]
+          ],
+          "working_language": []
+        },
+        {
+          "source_pages": [
+            1
+          ],
+          "title_keys": [
+            "repair habits",
+            "interview study"
+          ],
+          "contact_emails": [
+            "ben.muster@tum.de"
+          ],
+          "project_types": [
+            [
+              "project_study"
+            ]
+          ],
+          "programming_performed": [
+            "none"
+          ],
+          "programming_required": [
+            "not_stated"
+          ],
+          "work_modes_required": [
+            "empirical_user_research"
+          ],
+          "work_modes_forbidden": [
+            "software_development"
+          ],
+          "start_date_normalized": [
+            "2026-10"
+          ],
+          "prerequisites": [
+            {
+              "key": "german",
+              "strength": "required"
+            },
+            {
+              "key": "qualitative",
+              "strength": "required"
+            }
+          ],
+          "forbidden_keys": [
+            "python",
+            "simulation",
+            "anna.beispiel"
+          ],
+          "deliverables_required": [
+            [
+              "interview report",
+              "report"
+            ]
+          ],
+          "working_language": []
+        }
+      ]
+    }
+  }
+}

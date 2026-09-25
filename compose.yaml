@@ -80,6 +80,18 @@ services:
         condition: service_completed_successfully
       postgres:
         condition: service_healthy
+  profile-backfill:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    command: ["python", "-m", "app.ingestion.profile_backfill", "--dry-run"]
+    env_file:
+      - path: .env
+        required: false
+    restart: "no"
+    profiles: ["maintenance"]
+    logging: *default-logging
+    depends_on:
+      postgres:
+        condition: service_healthy
   beat:
     build: {context: ., dockerfile: backend/Dockerfile}
     command: ["celery", "-A", "app.tasks", "beat", "--loglevel=INFO", "--schedule=/tmp/celerybeat-schedule"]

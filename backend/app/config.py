@@ -10,6 +10,10 @@ class Settings(BaseSettings):
     public_url: str = "http://localhost:3000"
     openai_api_key: str | None = None
     openai_extraction_model: str = "gpt-5.6-luna"
+    azure_openai_api_key: str | None = None
+    azure_openai_endpoint: str | None = None
+    azure_openai_api_version: str = "2025-04-01-preview"
+    azure_openai_deployment: str = "gpt-6-luna"
     clerk_secret_key: str | None = None
     clerk_webhook_secret: str | None = None
     clerk_jwks_url: str | None = None

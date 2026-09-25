@@ -112,6 +112,28 @@ class PDFAnalysis(Base):
     extracted_markdown_pages: Mapped[list | None] = mapped_column(JSON)
 
 
+class PDFProfileExtraction(Base):
+    """One LLM project-profile extraction attempt per row; failures are added, never overwrite an ok row."""
+    __tablename__ = "pdf_profile_extractions"
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    content_hash: Mapped[str] = mapped_column(String(64), index=True)
+    schema_version: Mapped[str] = mapped_column(String(80))
+    prompt_version: Mapped[str] = mapped_column(String(80))
+    prompt_hash: Mapped[str] = mapped_column(String(64))
+    model_deployment: Mapped[str] = mapped_column(String(120))
+    reasoning_effort: Mapped[str] = mapped_column(String(20))
+    status: Mapped[str] = mapped_column(String(20))
+    attempts: Mapped[int] = mapped_column(Integer, default=0)
+    errors: Mapped[list] = mapped_column(JSON, default=list)
+    input_tokens: Mapped[int] = mapped_column(Integer, default=0)
+    output_tokens: Mapped[int] = mapped_column(Integer, default=0)
+    reasoning_tokens: Mapped[int] = mapped_column(Integer, default=0)
+    coverage: Mapped[dict | None] = mapped_column(JSON)
+    evidence_issues: Mapped[list] = mapped_column(JSON, default=list)
+    document: Mapped[dict | None] = mapped_column(JSON)
+    extracted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
 class CrawlRun(Base):
     __tablename__ = "crawl_runs"
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
