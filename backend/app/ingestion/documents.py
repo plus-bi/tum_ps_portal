@@ -11,9 +11,9 @@ def html_text(data: bytes) -> str:
 
 
 def pdf_text(data: bytes, *, ocr=None) -> str:
-    from pypdf import PdfReader
-    text = "\n".join((page.extract_text() or "") for page in PdfReader(BytesIO(data)).pages).strip()
-    if len(text) >= 40: return text
+    from .pdf_reader import USEFUL_TEXT_THRESHOLD, read_pdf, render_for_llm
+    result = read_pdf(data)
+    if result.native_text_length >= USEFUL_TEXT_THRESHOLD: return render_for_llm(result.pages).strip()
     if ocr is None: raise ValueError("PDF has no usable text and OCR is unavailable")
     return ocr(data)
 

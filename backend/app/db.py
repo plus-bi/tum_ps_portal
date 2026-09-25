@@ -109,6 +109,7 @@ class PDFAnalysis(Base):
     classifier_version: Mapped[str] = mapped_column(String(80))
     classified_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     details: Mapped[dict] = mapped_column(JSON, default=dict)
+    extracted_markdown_pages: Mapped[list | None] = mapped_column(JSON)
 
 
 class CrawlRun(Base):
