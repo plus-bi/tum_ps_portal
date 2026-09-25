@@ -199,7 +199,7 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
                 listing.title = overrides.get("title", display_title)
                 listing.summary = overrides.get("summary", display_summary)
                 listing.normalized = normalized; listing.content_hash = digest
-                listing.published_at = title_date or summary_date
+                listing.published_at = title_date or summary_date or listing.published_at
                 listing.status = Status.active; listing.last_seen_at = now; listing.consecutive_misses = 0
                 if changed: _version(session, listing, digest, normalized, candidate.source_text); updated += 1
                 else: unchanged += 1

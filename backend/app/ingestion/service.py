@@ -13,18 +13,26 @@ from .registry import DEPARTMENTS, REGISTRY
 
 FIXTURES = Path(__file__).resolve().parents[2] / "tests/fixtures/chairs"
 
-_PUBLISHED = re.compile(r"\s*\((?:published (?:at|on)|veröffentlicht am)\s+(\d{2}[/\.]\d{2}[/\.]\d{4})\)\s*$", re.IGNORECASE)
-_LEADING_PUBLICATION = re.compile(r"^\s*\[(\d{2}[/\.]\d{2}[/\.]\d{4})\]\s*")
+_SOURCE_DATE = r"(?:\d{1,2}[/.-]\d{1,2}[/.-]\d{4}|\d{4}-\d{2}-\d{2})"
+_PUBLISHED = re.compile(rf"\s*\((?:published (?:at|on)|veröffentlicht am)\s+({_SOURCE_DATE})\)\s*$", re.IGNORECASE)
+_LEADING_PUBLICATION = re.compile(
+    rf"^\s*(?:\[(?P<bracketed>{_SOURCE_DATE})\]|(?P<plain>{_SOURCE_DATE}))(?=\s|$)\s*"
+)
+
+
+def _publication_date(value: str) -> date:
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        return date.fromisoformat(value)
+    day, month, year = re.split(r"[/.-]", value)
+    return date(int(year), int(month), int(day))
 
 def publication_from_title(title: str) -> tuple[str, date | None]:
     match = _LEADING_PUBLICATION.search(title)
     if match:
-        value = match.group(1).replace(".", "/")
-        return title[match.end():].lstrip(), datetime.strptime(value, "%d/%m/%Y").date()
+        return title[match.end():].lstrip(), _publication_date(match.group("bracketed") or match.group("plain"))
     match = _PUBLISHED.search(title)
     if not match: return title, None
-    value = match.group(1).replace(".", "/")
-    return title[:match.start()].rstrip(), datetime.strptime(value, "%d/%m/%Y").date()
+    return title[:match.start()].rstrip(), _publication_date(match.group(1))
 
 
 def _fixture_rows() -> dict[str, dict]:
@@ -80,7 +88,7 @@ def ingest_department(department_name: str) -> dict:
                     listing.title = overrides.get("title", display_title)
                     listing.summary = overrides.get("summary", display_summary)
                     listing.normalized = normalized; listing.content_hash = digest; listing.status = Status.active
-                    listing.published_at = published_at
+                    listing.published_at = published_at or listing.published_at
                     listing.last_seen_at = now; listing.consecutive_misses = 0; stats["updated"] += 1
             existing = session.scalars(select(Listing).where(Listing.chair_id == chair.id, Listing.status == Status.active)).all()
             for listing in existing:
