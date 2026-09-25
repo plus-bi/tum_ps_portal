@@ -13,7 +13,7 @@ from ..config import settings
 from ..db import Base, PDFAnalysis, PDFArtifact, engine, session_factory
 from .pdf_reader import USEFUL_TEXT_THRESHOLD, read_pdf
 
-CLASSIFIER_VERSION = "pymupdf-native-markdown-v2"
+CLASSIFIER_VERSION = "pymupdf-native-markdown-v3"  # v3: unreadable text layers need OCR
 
 
 def classify_stored_pdfs() -> dict[str, int]:
@@ -37,7 +37,7 @@ def classify_stored_pdfs() -> dict[str, int]:
             classification = result.classification
             pages = result.pages
             details.update({"page_count": len(pages), "pages_with_usable_text":
-                            result.pages_with_usable_text})
+                            result.pages_with_usable_text, "unreadable_pages": result.unreadable_pages})
         except Exception as error:
             details["error_type"] = type(error).__name__
 
@@ -46,6 +46,10 @@ def classify_stored_pdfs() -> dict[str, int]:
             if analysis is None:
                 analysis = PDFAnalysis(content_hash=content_hash, classifier_version=CLASSIFIER_VERSION)
                 session.add(analysis)
+            elif pages is None and analysis.extracted_markdown_pages is not None:
+                # A read failure (e.g. a missing dependency) must not replace pages already extracted.
+                summary["unknown"] += 1
+                continue
             analysis.classification = classification
             analysis.classifier_version = CLASSIFIER_VERSION
             analysis.classified_at = datetime.now(timezone.utc)
