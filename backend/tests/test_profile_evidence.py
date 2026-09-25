@@ -72,3 +72,36 @@ def test_evidence_outside_an_offers_pages_is_flagged_as_possible_leakage():
 def test_source_pages_beyond_the_document_are_flagged():
     issues = check_profile_evidence(document(empty_offer(source_pages=[1, 3])), ["Offer"])
     assert [(issue.field, issue.page, issue.reason) for issue in issues] == [("source_pages", 3, "page_out_of_range")]
+
+
+def subject_quoted(excerpt: str):
+    return document(empty_offer(subjects=ListField[str](stated=True, items=[SourcedValue[str](
+        value="Topic", evidence=[Evidence(page=1, excerpt=excerpt)])])))
+
+
+def test_evidence_matches_words_split_by_spurious_strikethrough_marks():
+    # Observed on an IDP flyer whose Type3 font made pymupdf4llm mark "t" and "f" glyphs as struck out.
+    pages = ["## So ~~ft~~ ware Engineering Projec ~~t~~ \n\nWe deliver ~~f~~ as ~~t~~ & reliable answers"]
+    assert check_profile_evidence(subject_quoted("Software Engineering Project"), pages) == []
+    assert check_profile_evidence(subject_quoted("We deliver fast & reliable answers"), pages) == []
+
+
+def test_evidence_matches_ligatures_the_text_layer_could_not_map():
+    # Observed on a Word-exported Calibri PDF: "ti" and "tt" ligatures arrive as U+0018 or U+FFFD.
+    pages = ["improving the computa\x18onal \x18mes for laypeople with li�le experience"]
+    assert check_profile_evidence(subject_quoted("improving the computational times"), pages) == []
+    assert check_profile_evidence(subject_quoted("laypeople with little experience"), pages) == []
+    assert len(check_profile_evidence(subject_quoted("improving the computational costs"), pages)) == 1
+
+
+def test_evidence_matches_spacing_diaeresis_private_use_glyphs_and_table_cells():
+    # Observed as "Str¨omung" (separate diaeresis) and a private-use glyph for the dash in "2-4".
+    pages = ["Grundkenntnisse in Str¨omungsmechanik und Ans¨atze<br>für 2\ue0884 Studierende | Python |"]
+    assert check_profile_evidence(subject_quoted("Grundkenntnisse in Strömungsmechanik"), pages) == []
+    assert check_profile_evidence(subject_quoted("für 2–4 Studierende Python"), pages) == []
+
+
+def test_short_quotes_still_need_an_exact_match():
+    pages = ["We trust our partners"]
+    assert len(check_profile_evidence(subject_quoted("trus tour"), pages)) == 1
+    assert check_profile_evidence(subject_quoted("We trus tour partners"), pages) == []
