@@ -19,6 +19,8 @@ docker compose up --build                   # full stack at http://localhost:808
 docker compose --profile maintenance up pdf-backfill   # optional PDF backfill loop
 docker compose --profile maintenance run --rm profile-backfill   # LLM profile extraction, --dry-run by default
 docker compose --profile maintenance run --rm profile-backfill python -m app.ingestion.profile_backfill --limit 20   # real run (Azure OpenAI cost)
+docker compose --profile maintenance run --rm profile-backfill python -m app.ingestion.profile_backfill --recheck   # re-run citation checks on stored rows, no model calls
+docker compose --profile maintenance run --rm -v tum_ps_portal_artifact_data:/var/lib/portal/artifacts:ro profile-backfill python -m app.ingestion.pdf_analysis   # re-classify stored PDFs (the pdf-backfill image may lack pymupdf4llm until rebuilt)
 ```
 
 There is no Python linter configured. CI (`.github/workflows/ci.yml`) runs only `pytest` plus frontend `typecheck` and `build`.

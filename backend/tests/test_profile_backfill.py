@@ -6,7 +6,7 @@ from sqlalchemy import create_engine, select
 import app.db as db
 from app.db import Base, PDFAnalysis, PDFProfileExtraction
 from app.ingestion import profile_backfill
-from app.ingestion.project_profile import PdfTextCoverage, ProfileExtraction
+from app.ingestion.project_profile import Evidence, ListField, PdfTextCoverage, ProfileExtraction, SourcedValue
 from profile_builders import document, empty_offer
 
 SECRET_PAGE = "Secret project text about robotics. " * 20
@@ -64,7 +64,7 @@ def test_ok_result_is_stored_and_not_extracted_again(database):
     assert (summary["ok"], summary["input_tokens"], summary["output_tokens"]) == (1, 100, 50)
     [row] = rows()
     assert row.status == "ok" and row.document["document_kind"] == "offer"
-    assert row.coverage["status"] == "text_on_all_pages"
+    assert row.coverage["status"] == "text_on_all_pages" and row.review_flags == []
 
     summary = profile_backfill.run_profile_backfill(extract=extract)
     assert (summary["scheduled"], summary["already_done"]) == (0, 1)
@@ -142,3 +142,44 @@ def test_limit_and_dry_run(database):
     assert extract.calls == []
     summary = profile_backfill.run_profile_backfill(extract=extract, limit=2)
     assert (summary["pending"], summary["scheduled"], summary["ok"]) == (3, 2, 2)
+
+
+def test_recheck_updates_citation_issues_without_model_calls(database):
+    add_analysis("a" * 64, ["Software Engineering"])
+    offer = empty_offer(subjects=ListField[str](stated=True, items=[SourcedValue[str](
+        value="Software", evidence=[Evidence(page=1, excerpt="Software Engineering")])]))
+    stale = [{"offer_index": 0, "field": "subjects", "item_index": 0, "page": 1, "reason": "quote_not_found"}]
+    with db.session_factory()() as session:
+        session.add(PDFProfileExtraction(content_hash="a" * 64, **profile_backfill.current_version("low"),
+                                         status="ok", attempts=1, errors=[], evidence_issues=stale,
+                                         document=document(offer).model_dump(mode="json")))
+        session.add(PDFProfileExtraction(content_hash="a" * 64, **profile_backfill.current_version("low"),
+                                         status="failed", attempts=2, errors=["x"], evidence_issues=[], document=None))
+        session.commit()
+
+    summary = profile_backfill.recheck_evidence(dry_run=True)
+    assert (summary["documents"], summary["changed"], summary["issues_before"], summary["issues_after"]) == (1, 1, 1, 0)
+    assert rows()[0].evidence_issues == stale
+
+    profile_backfill.recheck_evidence()
+    assert rows()[0].evidence_issues == []
+
+
+def test_recheck_flags_unverified_citations_and_pages_that_now_need_ocr(database):
+    add_analysis("a" * 64, ["Software Engineering"])
+    add_analysis("b" * 64, [""])  # the reader blanked an unreadable text layer after extraction
+    offer = empty_offer(subjects=ListField[str](stated=True, items=[SourcedValue[str](
+        value="Rust", evidence=[Evidence(page=1, excerpt="Rust systems programming")])]))
+    with db.session_factory()() as session:
+        for content_hash in ("a" * 64, "b" * 64):
+            session.add(PDFProfileExtraction(content_hash=content_hash, **profile_backfill.current_version("low"),
+                                             status="ok", attempts=1, errors=[], evidence_issues=[],
+                                             document=document(offer).model_dump(mode="json")))
+        session.commit()
+
+    summary = profile_backfill.recheck_evidence()
+    assert summary["flags"] == {"unverified_citations": 2, "requires_ocr": 1}
+    assert rows("a" * 64)[0].review_flags == ["unverified_citations"]
+    [needs_ocr] = rows("b" * 64)
+    assert needs_ocr.review_flags == ["requires_ocr", "unverified_citations"]
+    assert needs_ocr.coverage["status"] == "no_text"

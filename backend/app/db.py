@@ -130,6 +130,7 @@ class PDFProfileExtraction(Base):
     reasoning_tokens: Mapped[int] = mapped_column(Integer, default=0)
     coverage: Mapped[dict | None] = mapped_column(JSON)
     evidence_issues: Mapped[list] = mapped_column(JSON, default=list)
+    review_flags: Mapped[list] = mapped_column(JSON, default=list, server_default="[]")
     document: Mapped[dict | None] = mapped_column(JSON)
     extracted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 

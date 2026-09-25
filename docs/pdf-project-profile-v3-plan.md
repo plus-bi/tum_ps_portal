@@ -388,3 +388,47 @@ on stored outputs.
     runs from overlapping.
   - `--dry-run` counts pending documents without calling the model.
 - Consumers should read the latest `ok` row per content hash for the chosen version.
+
+**First corpus run (2026-09-25).** 246 of 247 documents were extracted (the scanned one was
+skipped): 0 failures, 5 retries, 263 offers, 1.23M input and 0.75M output tokens in 30 minutes.
+
+- The first check flagged 167 citations in 36 documents. About 100 of them were PDF text-layer
+  artifacts, not model errors:
+  - strikethrough marks splitting words (`So ~~ft~~ ware`);
+  - unmapped ligature glyphs (`computa\x18onal`);
+  - separate diaeresis marks (`Str¨omung`);
+  - private-use glyphs for punctuation;
+  - `<br>`/`<sup>` tags and table pipes.
+- The checker now falls back to a letters-and-digits comparison that undoes these artifacts. This
+  applies to quotes of at least 12 characters, and a placeholder on the page can stand for a
+  ligature.
+- `profile_backfill --recheck` applied the new checker to the stored rows: 64 issues in 27
+  documents remain.
+- The remaining issues are real quote deviations:
+  - silent typo or grammar fixes;
+  - changed or dropped words;
+  - quotes stitched across columns or lines;
+  - paraphrases.
+- One PDF (`8f1506f7c3…`) has glyph codes without Unicode mappings on every page. It was
+  classified `digital_native` and extracted, but its citations cannot be checked, so it needs OCR.
+
+**Unreadable pages and review flags.**
+
+- The reader (classifier `pymupdf-native-markdown-v3`) now treats a page as unreadable when more
+  than 30% of its visible characters are unmapped glyphs. It lists such pages in
+  `details.unreadable_pages` and stores their markdown as blank, so they count as needing OCR.
+  Occasional broken ligatures stay below the threshold.
+- Re-classifying the corpus changed only `8f1506f7c3…`: it is now `scanned`, with pages 1–2
+  unreadable. The other 246 documents kept byte-identical pages and classifications. New scans of
+  documents like this are skipped as `requires_ocr` before any model call.
+- `pdf_profile_extractions.review_flags` (migration 0005) marks extractions that should not be
+  trusted without review:
+  - `requires_ocr`: no page has a readable text layer;
+  - `unverified_citations`: at least one quote was not found on its cited page (details in
+    `evidence_issues`).
+- The runner sets the flags when it stores a row. `--recheck` recomputes coverage, the evidence
+  issues and the flags from the current stored pages.
+- Current state: 219 unflagged, 26 with `unverified_citations` (52 issues), and 1 with both flags
+  (`8f1506f7c3…`, 12 issues).
+- A failed read in `pdf_analysis` no longer replaces pages extracted earlier. A stale image
+  without `pymupdf4llm` would otherwise blank every stored document.
