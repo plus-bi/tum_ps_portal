@@ -1,17 +1,29 @@
-.cardWithReference {
-  padding-right: 110px;
-  position: relative;
+.cardWithReference > h2,
+.cardWithReference > p:first-of-type {
+  padding-right: 90px;
 }
 
 .referenceCode {
   position: absolute;
   right: 24px;
   top: 24px;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  padding: 4px 7px;
-  color: #475c6f;
-  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-  font-size: 13px;
-  font-weight: 700;
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 3px 8px;
+  background: var(--background-deep);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .cardWithReference > h2 {
+    padding-right: 0;
+  }
+
+  .referenceCode {
+    right: 20px;
+    top: 20px;
+  }
 }

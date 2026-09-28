@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
-import AuthControls from "../../AuthControls";
+import SiteHeader from "../../SiteHeader";
+import {AlertIcon, ArrowLeftIcon, ExternalIcon, FileIcon} from "../../Icons";
 import type {Project} from "../../CatalogClient";
 import styles from "./ProfileDetail.module.css";
 
@@ -159,7 +160,7 @@ function EvidenceView({evidence, artifactUrl, issues, offerIndex, field, itemInd
         issue.item_index === (itemIndex ?? null) && issue.page === entry.page);
       return <li key={`${entry.page}-${index}`}>
         <span className={styles.quote}>“{entry.excerpt}”</span>{" "}
-        {link ? <a href={link} target="_blank" rel="noopener noreferrer">{copy.page} {entry.page} ↗</a> : <span>{copy.page} {entry.page}</span>}
+        {link ? <a href={link} target="_blank" rel="noopener noreferrer">{copy.page} {entry.page}<ExternalIcon size={12}/></a> : <span>{copy.page} {entry.page}</span>}
         {hasIssue && <span className={styles.issue}> {copy.issue}</span>}
       </li>;
     })}</ul>
@@ -224,7 +225,7 @@ function OfferView({offer, index, project, issues, copy, lang}: {
     <div className={styles.offerHeading}><div><p className={styles.eyebrow}>{copy.offer} {index + 1}</p><h2>{title}</h2></div>
       <div className={styles.pageBadges}>{offer.source_pages.map((page) => {
         const href = pageUrl(project.artifact_url, page);
-        return href ? <a key={page} href={href} target="_blank" rel="noopener noreferrer">{copy.page} {page} ↗</a>
+        return href ? <a key={page} href={href} target="_blank" rel="noopener noreferrer">{copy.page} {page}<ExternalIcon size={13}/></a>
           : <span key={page}>{copy.page} {page}</span>;
       })}</div>
     </div>
@@ -296,26 +297,22 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
   }).format(new Date(detail.extracted_at));
 
   return <>
-    <header className="top"><div className="shell"><Link className="brand" href={`/${lang}`}>{copy.brand}</Link>
-      <div className="top-actions"><nav className="lang" aria-label="Language">
-        <Link href={`/en/projects/${encodeURIComponent(slug)}`} lang="en">EN</Link>
-        <Link href={`/de/projects/${encodeURIComponent(slug)}`} lang="de">DE</Link>
-      </nav><AuthControls/></div></div></header>
+    <SiteHeader lang={lang} brand={copy.brand} enHref={`/en/projects/${encodeURIComponent(slug)}`} deHref={`/de/projects/${encodeURIComponent(slug)}`}/>
     <main className={styles.page}><div className="shell">
-      <Link className={styles.back} href={`/${lang}`}>← {copy.back}</Link>
+      <Link className={styles.back} href={`/${lang}`}><ArrowLeftIcon/>{copy.back}</Link>
       <div className={styles.intro}><p className={styles.eyebrow}>{detail.project.reference_code} · {detail.project.chair}</p>
         <h1>{detail.project.title}</h1><p>{copy.intro}</p>
-        <div className={styles.links}>{sourceUrl && <a href={sourceUrl} target="_blank" rel="noopener noreferrer">{copy.source} ↗</a>}
-          {artifactUrl && <a href={artifactUrl} target="_blank" rel="noopener noreferrer">{copy.document} ↗</a>}</div>
+        <div className={styles.links}>{artifactUrl && <a className={styles.primaryLink} href={artifactUrl} target="_blank" rel="noopener noreferrer"><FileIcon/>{copy.document}</a>}
+          {sourceUrl && <a href={sourceUrl} target="_blank" rel="noopener noreferrer">{copy.source}<ExternalIcon size={14}/></a>}</div>
         <p className={styles.documentMeta}>{copy.documentLanguage}: {label(detail.document.document_language, lang)} · {copy.pages}: {detail.coverage.page_count} · {copy.extracted}: {extractedAt}</p>
       </div>
-      {detail.coverage.status !== "text_on_all_pages" && badPages && <p className={styles.alert}>{copy.incomplete} {badPages}</p>}
-      {detail.review_flags.includes("unverified_citations") && <p className={styles.alert}>{copy.issues}</p>}
-      {detail.document.offers.length > 1 && <><p>{copy.multiple}</p><nav className={styles.offerNav} aria-label={copy.multiple}>
+      {detail.coverage.status !== "text_on_all_pages" && badPages && <p className={styles.alert}><AlertIcon/><span>{copy.incomplete} {badPages}</span></p>}
+      {detail.review_flags.includes("unverified_citations") && <p className={styles.alert}><AlertIcon/><span>{copy.issues}</span></p>}
+      {detail.document.offers.length > 1 && <><p className={styles.multiple}>{copy.multiple}</p><nav className={styles.offerNav} aria-label={copy.multiple}>
         {detail.document.offers.map((offer, index) => <a key={index} href={`#offer-${index + 1}`}>
           {offer.title.value || `${copy.offer} ${index + 1}`}</a>)}
       </nav></>}
-      {detail.document.offers.length === 0 && <p className={styles.alert}>{copy.noOffers}</p>}
+      {detail.document.offers.length === 0 && <p className={styles.alert}><AlertIcon/><span>{copy.noOffers}</span></p>}
       {detail.document.offers.map((offer, index) => <OfferView key={index} offer={offer} index={index} project={detail.project}
         issues={detail.evidence_issues} copy={copy} lang={lang}/>)}
     </div></main>
