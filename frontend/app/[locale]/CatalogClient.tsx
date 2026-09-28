@@ -2,6 +2,7 @@
 
 import {useMemo, useState} from "react";
 import Link from "next/link";
+import Disclaimer from "./Disclaimer";
 import SiteHeader from "./SiteHeader";
 import {ArrowRightIcon, ExternalIcon, FileIcon, FilterIcon, InfoIcon, LinkIcon, RefreshIcon, SearchIcon} from "./Icons";
 import styles from "./CatalogClient.module.css";
@@ -13,7 +14,7 @@ export type Chair = {slug: string; name: string; department: string; source_stat
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
 type OpportunityType = Project["opportunity_type"];
 type SortBy = "publication_date" | "recently_added";
-type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; notice: string; search: string; filters: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string};
+type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string};
 const ageBands: AgeBand[] = ["lt3", "lt30", "lt60", "lt180", "gt180"];
 
 export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, departments, chairs}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; departments: Department[]; chairs: Chair[]}) {
@@ -124,7 +125,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
           <li><LinkIcon/>{copy.trustSources}</li>
           {chairs.length > 0 && <li><FileIcon/>{chairs.length} {copy.trustChairs}</li>}
         </ul>
-        <p className="notice"><InfoIcon/><span>{copy.notice}</span></p>
+        <p className="notice"><InfoIcon/><span><Disclaimer lang={lang}/></span></p>
       </div></section>
       <div className="shell catalog">
         <aside className="filters">
@@ -170,6 +171,6 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
         </section>
       </div>
     </main>
-    <footer className="footer"><div className="shell">{copy.notice}</div></footer>
+    <footer className="footer"><div className="shell"><Disclaimer lang={lang}/></div></footer>
   </>;
 }

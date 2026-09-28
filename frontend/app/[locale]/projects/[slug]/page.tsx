@@ -1,5 +1,6 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
+import Disclaimer from "../../Disclaimer";
 import SiteHeader from "../../SiteHeader";
 import {AlertIcon, ArrowLeftIcon, ExternalIcon, FileIcon} from "../../Icons";
 import type {Project} from "../../CatalogClient";
@@ -58,9 +59,8 @@ type ProfileDetail = {
 
 const translations = {
   en: {
-    brand: "TUM Project Opportunities", back: "Back to projects", title: "Project details",
+    brand: "Project Opportunities from TU Munich", back: "Back to projects", title: "Project details",
     intro: "Automatically extracted from the linked project document. Check the original PDF before relying on a detail.",
-    notice: "This is not an official TUM website and is not endorsed by or associated with TUM. It is provided as a courtesy service by a TUM alumnus.",
     source: "Chair listing page", document: "Original PDF", page: "Page", pages: "Pages", evidence: "Source excerpt",
     unknown: "Not stated in the PDF", summary: "English summary", multiple: "This document contains several project offers.",
     noOffers: "No individual project offer was identified in this document.", incomplete: "Some PDF pages had no readable text:",
@@ -77,9 +77,8 @@ const translations = {
     language: "Working language", contacts: "Contacts", instructions: "How to apply", external: "Further information",
   },
   de: {
-    brand: "TUM-Projektportal", back: "Zurück zu den Projekten", title: "Projektdetails",
+    brand: "Projektangebote der TU München", back: "Zurück zu den Projekten", title: "Projektdetails",
     intro: "Automatisch aus dem verlinkten Projektdokument extrahiert. Prüfe wichtige Angaben im Original-PDF.",
-    notice: "Dies ist keine offizielle TUM-Website und wird weder von der TUM unterstützt noch mit ihr in Verbindung gebracht. Sie wird als kostenlose Serviceleistung von einem TUM-Alumnus bereitgestellt.",
     source: "Seite des Lehrstuhls", document: "Original-PDF", page: "Seite", pages: "Seiten", evidence: "Textstelle",
     unknown: "Im PDF nicht angegeben", summary: "Englische Zusammenfassung", multiple: "Dieses Dokument enthält mehrere Projektangebote.",
     noOffers: "In diesem Dokument wurde kein einzelnes Projektangebot erkannt.", incomplete: "Einige PDF-Seiten enthielten keinen lesbaren Text:",
@@ -316,6 +315,6 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
       {detail.document.offers.map((offer, index) => <OfferView key={index} offer={offer} index={index} project={detail.project}
         issues={detail.evidence_issues} copy={copy} lang={lang}/>)}
     </div></main>
-    <footer className="footer"><div className="shell">{copy.notice}</div></footer>
+    <footer className="footer"><div className="shell"><Disclaimer lang={lang}/></div></footer>
   </>;
 }

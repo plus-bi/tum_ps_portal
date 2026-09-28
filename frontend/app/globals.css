@@ -52,15 +52,12 @@ input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px
 }
 .top .shell { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading-stack); font-size: 18px; font-weight: 700; text-decoration: none; }
-.brand-mark {
-  display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px;
-  background: linear-gradient(135deg, hsl(168 100% 42%), hsl(168 80% 55%));
-  color: var(--primary-foreground); font-size: 12px; letter-spacing: .02em;
-}
+.brand-mark { display: block; width: 30px; height: 30px; flex: none; border-radius: 8px; }
 .top-actions, .auth-controls { display: flex; align-items: center; gap: 10px; }
 .lang { display: flex; padding: 3px; border: 1px solid var(--border); border-radius: 999px; }
-.lang a { padding: 5px 11px; border-radius: 999px; color: var(--muted-foreground); font-size: 13px; font-weight: 600; text-decoration: none; transition: color .2s var(--ease), background .2s var(--ease); }
+.lang a { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; color: var(--muted-foreground); font-size: 13px; font-weight: 600; text-decoration: none; transition: color .2s var(--ease), background .2s var(--ease); }
 .lang a:hover { color: var(--foreground); }
+.flag { width: 18px; height: 12px; flex: none; border-radius: 2px; box-shadow: 0 0 0 1px hsl(0 0% 100% / .15); }
 .lang a[aria-current] { background: var(--secondary); color: var(--foreground); }
 .auth-button {
   min-height: 38px; padding: 8px 14px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
@@ -104,6 +101,8 @@ h1 { font-size: clamp(36px, 5.5vw, 60px); line-height: 1.05; max-width: 860px; m
 .trust .icon { color: var(--primary); }
 .notice { display: flex; gap: 8px; justify-content: center; align-items: flex-start; max-width: 720px; margin: 22px auto 0; color: var(--muted-foreground); font-size: 13px; line-height: 1.5; }
 .notice .icon { margin-top: 2px; }
+.notice a, .footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
+.notice a:hover, .footer a:hover { text-decoration: underline; }
 
 /* Catalog layout */
 .catalog { display: grid; grid-template-columns: 280px minmax(0, 1fr); gap: 36px; padding-block: 36px 64px; align-items: start; }
