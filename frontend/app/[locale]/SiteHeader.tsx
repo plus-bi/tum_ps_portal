@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import AuthControls from "./AuthControls";
 import plusBiLogo from "./plus-bi-logo.png";
 
 function UsFlag() {
@@ -25,7 +24,6 @@ export default function SiteHeader({lang, brand, enHref, deHref}: {lang: "en" | 
         <Link href={enHref} lang="en" aria-current={lang === "en" ? "true" : undefined}><UsFlag/>EN</Link>
         <Link href={deHref} lang="de" aria-current={lang === "de" ? "true" : undefined}><DeFlag/>DE</Link>
       </nav>
-      <AuthControls/>
     </div>
   </div></header>;
 }

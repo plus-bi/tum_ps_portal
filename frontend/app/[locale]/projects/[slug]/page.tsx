@@ -50,18 +50,23 @@ type Offer = {
 
 type ProfileDetail = {
   project: Project;
+  source_kind: "pdf" | "html";
   document: {document_language: string; document_kind: string; offers: Offer[]};
   coverage: {status: string; blank_markdown_pages: number[]; page_count: number};
   evidence_issues: EvidenceIssue[];
   review_flags: string[];
   extracted_at: string;
 };
+type DescriptionDetail = {project: Project; markdown: string};
 
 const translations = {
   en: {
     brand: "Project Opportunities from TU Munich", back: "Back to projects", title: "Project details",
     intro: "Automatically extracted from the linked project document. Check the original PDF before relying on a detail.",
-    source: "Chair listing page", document: "Original PDF", page: "Page", pages: "Pages", evidence: "Source excerpt",
+    htmlIntro: "Automatically extracted from the chair's project description. Check the original page before relying on a detail.",
+    htmlDescription: "Chair project description",
+    source: "Original listing page", document: "Original PDF", page: "Page", pages: "Pages", evidence: "Source excerpt",
+    htmlUnknown: "Not stated on the project page", htmlIssues: "Some source excerpts could not be verified against the extracted page text.",
     unknown: "Not stated in the PDF", summary: "English summary", multiple: "This document contains several project offers.",
     noOffers: "No individual project offer was identified in this document.", incomplete: "Some PDF pages had no readable text:",
     issue: "This citation needs review.", issues: "Some source excerpts could not be verified against the extracted PDF text.",
@@ -75,11 +80,15 @@ const translations = {
     learning: "Learning opportunities", supportOffered: "Support offered", teamSize: "Team size", duration: "Duration",
     start: "Start", deadline: "Application deadline", location: "Work location", locationMode: "Location mode",
     language: "Working language", contacts: "Contacts", instructions: "How to apply", external: "Further information",
+    organizations: "Organizations", academicUnit: "TUM unit", projectPartner: "Project partner",
   },
   de: {
     brand: "Projektangebote der TU München", back: "Zurück zu den Projekten", title: "Projektdetails",
     intro: "Automatisch aus dem verlinkten Projektdokument extrahiert. Prüfe wichtige Angaben im Original-PDF.",
-    source: "Seite des Lehrstuhls", document: "Original-PDF", page: "Seite", pages: "Seiten", evidence: "Textstelle",
+    htmlIntro: "Automatisch aus der Projektbeschreibung des Lehrstuhls extrahiert. Prüfe wichtige Angaben auf der Originalseite.",
+    htmlDescription: "Projektbeschreibung des Lehrstuhls",
+    source: "Originale Angebotsseite", document: "Original-PDF", page: "Seite", pages: "Seiten", evidence: "Textstelle",
+    htmlUnknown: "Auf der Projektseite nicht angegeben", htmlIssues: "Einige Textstellen konnten im extrahierten Seitentext nicht überprüft werden.",
     unknown: "Im PDF nicht angegeben", summary: "Englische Zusammenfassung", multiple: "Dieses Dokument enthält mehrere Projektangebote.",
     noOffers: "In diesem Dokument wurde kein einzelnes Projektangebot erkannt.", incomplete: "Einige PDF-Seiten enthielten keinen lesbaren Text:",
     issue: "Diese Textstelle muss überprüft werden.", issues: "Einige Textstellen konnten im extrahierten PDF-Text nicht überprüft werden.",
@@ -93,6 +102,7 @@ const translations = {
     learning: "Lernmöglichkeiten", supportOffered: "Angebotene Betreuung", teamSize: "Teamgröße", duration: "Dauer",
     start: "Beginn", deadline: "Bewerbungsfrist", location: "Arbeitsort", locationMode: "Arbeitsmodus",
     language: "Arbeitssprache", contacts: "Kontaktpersonen", instructions: "Bewerbung", external: "Weitere Informationen",
+    organizations: "Organisationen", academicUnit: "TUM-Einheit", projectPartner: "Projektpartner",
   },
 };
 type Copy = typeof translations.en;
@@ -138,23 +148,24 @@ function safeHttpUrl(value: string | null | undefined): string | null {
   }
 }
 
-function pageUrl(artifactUrl: string | undefined, page: number): string | null {
+function pageUrl(artifactUrl: string | undefined, page: number, sourceKind: "pdf" | "html" = "pdf"): string | null {
   const safe = safeHttpUrl(artifactUrl);
   if (!safe) return null;
+  if (sourceKind === "html") return safe;
   const url = new URL(safe);
   url.hash = `page=${page}`;
   return url.toString();
 }
 
-function EvidenceView({evidence, artifactUrl, issues, offerIndex, field, itemIndex, copy}: {
-  evidence: Evidence[]; artifactUrl?: string; issues: EvidenceIssue[]; offerIndex: number;
+function EvidenceView({evidence, artifactUrl, sourceKind, issues, offerIndex, field, itemIndex, copy}: {
+  evidence: Evidence[]; artifactUrl?: string; sourceKind: "pdf" | "html"; issues: EvidenceIssue[]; offerIndex: number;
   field: string; itemIndex?: number; copy: Copy;
 }) {
   if (!evidence.length) return null;
   return <details className={styles.evidence}>
     <summary>{copy.evidence} · {evidence.map((entry) => `${copy.page} ${entry.page}`).join(", ")}</summary>
     <ul>{evidence.map((entry, index) => {
-      const link = pageUrl(artifactUrl, entry.page);
+      const link = pageUrl(artifactUrl, entry.page, sourceKind);
       const hasIssue = issues.some((issue) => issue.offer_index === offerIndex && issue.field === field &&
         issue.item_index === (itemIndex ?? null) && issue.page === entry.page);
       return <li key={`${entry.page}-${index}`}>
@@ -176,7 +187,7 @@ function TextRow({name, title, value, copy, context}: {
   </dd></div>;
 }
 
-type OfferContext = {artifactUrl?: string; issues: EvidenceIssue[]; offerIndex: number};
+type OfferContext = {artifactUrl?: string; sourceKind: "pdf" | "html"; issues: EvidenceIssue[]; offerIndex: number};
 
 function ListRow({name, title, value, copy, context, lang}: {
   name: string; title: string; value: ListField<string>; copy: Copy; context: OfferContext; lang: "en" | "de";
@@ -215,15 +226,25 @@ function ProfileSection({title, children}: {title: string; children: React.React
   return <section className={styles.section}><h3>{title}</h3><dl className={styles.fields}>{children}</dl></section>;
 }
 
-function OfferView({offer, index, project, issues, copy, lang}: {
-  offer: Offer; index: number; project: Project; issues: EvidenceIssue[]; copy: Copy; lang: "en" | "de";
+function DescriptionContent({markdown}: {markdown: string}) {
+  return <div className={styles.sourceMarkdown}>{markdown.split(/\n\s*\n/).map((part, index) => {
+    const line = part.trim();
+    if (!line || line.startsWith("# ")) return null;
+    if (line.startsWith("## ")) return <h3 key={index}>{line.slice(3)}</h3>;
+    if (line.startsWith("- ")) return <p key={index} className={styles.sourceBullet}>{line.slice(2)}</p>;
+    return <p key={index}>{line.replaceAll("**", "")}</p>;
+  })}</div>;
+}
+
+function OfferView({offer, index, project, sourceKind, issues, copy, lang}: {
+  offer: Offer; index: number; project: Project; sourceKind: "pdf" | "html"; issues: EvidenceIssue[]; copy: Copy; lang: "en" | "de";
 }) {
-  const context: OfferContext = {artifactUrl: project.artifact_url, issues, offerIndex: index};
+  const context: OfferContext = {artifactUrl: sourceKind === "html" ? project.source_url : project.artifact_url, sourceKind, issues, offerIndex: index};
   const title = offer.title.stated && offer.title.value ? offer.title.value : `${copy.offer} ${index + 1}`;
   return <article id={`offer-${index + 1}`} className={styles.offer}>
     <div className={styles.offerHeading}><div><p className={styles.eyebrow}>{copy.offer} {index + 1}</p><h2>{title}</h2></div>
       <div className={styles.pageBadges}>{offer.source_pages.map((page) => {
-        const href = pageUrl(project.artifact_url, page);
+        const href = pageUrl(context.artifactUrl, page, sourceKind);
         return href ? <a key={page} href={href} target="_blank" rel="noopener noreferrer">{copy.page} {page}<ExternalIcon size={13}/></a>
           : <span key={page}>{copy.page} {page}</span>;
       })}</div>
@@ -285,35 +306,71 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
   } catch {
     throw new Error("Project profile API is unavailable");
   }
-  if (response.status === 404) notFound();
+  if (response.status === 404) {
+    const descriptionResponse = await fetch(`${base}/projects/${encodeURIComponent(slug)}/description`, {cache: "no-store"});
+    if (descriptionResponse.status === 404) notFound();
+    if (!descriptionResponse.ok) throw new Error(`Project description API returned ${descriptionResponse.status}`);
+    const description = await descriptionResponse.json() as DescriptionDetail;
+    const sourceUrl = safeHttpUrl(description.project.source_url);
+    return <>
+      <SiteHeader lang={lang} brand={copy.brand} enHref={`/en/projects/${encodeURIComponent(slug)}`} deHref={`/de/projects/${encodeURIComponent(slug)}`}/>
+      <main className={styles.page}><div className="shell">
+        <Link className={styles.back} href={`/${lang}`}><ArrowLeftIcon/>{copy.back}</Link>
+        <div className={styles.intro}>
+          <p className={styles.eyebrow}>{description.project.reference_code} · {description.project.chair || description.project.source_name || copy.htmlDescription}</p>
+          <h1>{description.project.title}</h1><p>{copy.htmlIntro}</p>
+          <div className={styles.links}>{sourceUrl && <a className={styles.primaryLink} href={sourceUrl} target="_blank" rel="noopener noreferrer">{copy.source}<ExternalIcon size={14}/></a>}</div>
+        </div>
+        <section className={styles.section}><h2>{copy.htmlDescription}</h2><DescriptionContent markdown={description.markdown}/></section>
+      </div></main>
+      <footer className="footer"><div className="shell"><Disclaimer lang={lang}/></div></footer>
+    </>;
+  }
   if (!response.ok) throw new Error(`Project profile API returned ${response.status}`);
   const detail = await response.json() as ProfileDetail;
+  const isHtml = detail.source_kind === "html";
+  const detailCopy = isHtml ? {...copy, unknown: copy.htmlUnknown} : copy;
   const artifactUrl = safeHttpUrl(detail.project.artifact_url);
   const sourceUrl = safeHttpUrl(detail.project.source_url);
   const badPages = detail.coverage.blank_markdown_pages.join(", ");
   const extractedAt = new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-GB", {
     dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Berlin",
   }).format(new Date(detail.extracted_at));
+  const units = detail.project.academic_units || [];
+  const partners = detail.project.project_partners || [];
+  const organizationNames = [
+    ...partners.map((item) => item.canonical_name || item.name),
+    ...(units.length ? units.map((item) => item.canonical_name || item.name)
+      : detail.project.chair ? [detail.project.chair] : []),
+  ];
 
   return <>
     <SiteHeader lang={lang} brand={copy.brand} enHref={`/en/projects/${encodeURIComponent(slug)}`} deHref={`/de/projects/${encodeURIComponent(slug)}`}/>
     <main className={styles.page}><div className="shell">
       <Link className={styles.back} href={`/${lang}`}><ArrowLeftIcon/>{copy.back}</Link>
-      <div className={styles.intro}><p className={styles.eyebrow}>{detail.project.reference_code} · {detail.project.chair}</p>
-        <h1>{detail.project.title}</h1><p>{copy.intro}</p>
+      <div className={styles.intro}><p className={styles.eyebrow}>{detail.project.reference_code} · {organizationNames.join(" / ") || (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}</p>
+        <h1>{detail.project.title}</h1><p>{isHtml ? copy.htmlIntro : copy.intro}</p>
         <div className={styles.links}>{artifactUrl && <a className={styles.primaryLink} href={artifactUrl} target="_blank" rel="noopener noreferrer"><FileIcon/>{copy.document}</a>}
           {sourceUrl && <a href={sourceUrl} target="_blank" rel="noopener noreferrer">{copy.source}<ExternalIcon size={14}/></a>}</div>
         <p className={styles.documentMeta}>{copy.documentLanguage}: {label(detail.document.document_language, lang)} · {copy.pages}: {detail.coverage.page_count} · {copy.extracted}: {extractedAt}</p>
       </div>
+      {(units.length > 0 || partners.length > 0) && <section className={styles.organizationSummary}>
+        <h2>{copy.organizations}</h2>
+        <ul>{[
+          ...units.map((item) => ({...item, role: copy.academicUnit})),
+          ...partners.map((item) => ({...item, role: copy.projectPartner})),
+        ].map((item, index) => <li key={`${item.role}-${index}`}><strong>{item.role}: {item.canonical_name || item.name}</strong>
+          <span>{copy.page} {item.evidence.page}: {item.evidence.excerpt}</span></li>)}</ul>
+      </section>}
       {detail.coverage.status !== "text_on_all_pages" && badPages && <p className={styles.alert}><AlertIcon/><span>{copy.incomplete} {badPages}</span></p>}
-      {detail.review_flags.includes("unverified_citations") && <p className={styles.alert}><AlertIcon/><span>{copy.issues}</span></p>}
+      {detail.review_flags.includes("unverified_citations") && <p className={styles.alert}><AlertIcon/><span>{isHtml ? copy.htmlIssues : copy.issues}</span></p>}
       {detail.document.offers.length > 1 && <><p className={styles.multiple}>{copy.multiple}</p><nav className={styles.offerNav} aria-label={copy.multiple}>
         {detail.document.offers.map((offer, index) => <a key={index} href={`#offer-${index + 1}`}>
           {offer.title.value || `${copy.offer} ${index + 1}`}</a>)}
       </nav></>}
       {detail.document.offers.length === 0 && <p className={styles.alert}><AlertIcon/><span>{copy.noOffers}</span></p>}
       {detail.document.offers.map((offer, index) => <OfferView key={index} offer={offer} index={index} project={detail.project}
-        issues={detail.evidence_issues} copy={copy} lang={lang}/>)}
+        sourceKind={detail.source_kind} issues={detail.evidence_issues} copy={detailCopy} lang={lang}/>)}
     </div></main>
     <footer className="footer"><div className="shell"><Disclaimer lang={lang}/></div></footer>
   </>;

@@ -7,37 +7,103 @@ import SiteHeader from "./SiteHeader";
 import {ArrowRightIcon, ExternalIcon, FileIcon, FilterIcon, InfoIcon, LinkIcon, RefreshIcon, SearchIcon} from "./Icons";
 import styles from "./CatalogClient.module.css";
 
-export type Project = {slug: string; reference_code: string; title: string; summary?: string; department: string; chair: string; opportunity_type: "project_study" | "idp"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; published_at?: string; first_seen_at: string};
-export type Department = {slug: string; name: string};
+type ProfileFilters = {degree_level: ("bachelor" | "master" | "any")[] | null; work_modes: string[] | null; programming_performed: "none" | "some" | "central" | "unknown"; programming_required: "required" | "recommended" | "not_stated"; work_location_mode: "on_site" | "hybrid" | "remote" | "unknown"; working_language: ("en" | "de" | "other")[] | null};
+type ProfileField = keyof ProfileFilters;
+type OrganizationMention = {name: string; canonical_name: string | null; evidence: {page: number; excerpt: string}; method: string};
+export type Project = {slug: string; reference_code: string; title: string; summary?: string; department: string; chair: string | null; source_name?: string | null; academic_units?: OrganizationMention[]; project_partners?: OrganizationMention[]; opportunity_type: "project_study" | "idp"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; has_description?: boolean; filter_values?: ProfileFilters | null; published_at?: string; first_seen_at: string};
 export type Chair = {slug: string; name: string; department: string; source_state: string};
 
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
 type OpportunityType = Project["opportunity_type"];
 type SortBy = "publication_date" | "recently_added";
-type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string};
+type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; entitySearch: string; noEntities: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string};
 const ageBands: AgeBand[] = ["lt3", "lt30", "lt60", "lt180", "gt180"];
 
-export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, departments, chairs}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; departments: Department[]; chairs: Chair[]}) {
-  const [selectedChairs, setSelectedChairs] = useState<Set<string>>(() => new Set());
+type FacetOption = {value: string; en: string; de: string};
+const profileFacets: Record<ProfileField, {en: string; de: string; options: FacetOption[]}> = {
+  degree_level: {en: "Degree level", de: "Studienniveau", options: [
+    {value: "bachelor", en: "Bachelor", de: "Bachelor"}, {value: "master", en: "Master", de: "Master"},
+    {value: "any", en: "Any level", de: "Alle Studienniveaus"},
+  ]},
+  work_modes: {en: "Type of work", de: "Art der Arbeit", options: [
+    {value: "software_development", en: "Software development", de: "Softwareentwicklung"},
+    {value: "data_analysis_ml", en: "Data analysis / ML", de: "Datenanalyse / ML"},
+    {value: "modeling_simulation", en: "Modeling / simulation", de: "Modellierung / Simulation"},
+    {value: "hardware_lab", en: "Hardware / lab work", de: "Hardware / Laborarbeit"},
+    {value: "literature_research", en: "Literature research", de: "Literaturrecherche"},
+    {value: "empirical_user_research", en: "Empirical / user research", de: "Empirische / Nutzerforschung"},
+    {value: "business_strategy", en: "Business strategy", de: "Unternehmensstrategie"},
+    {value: "process_optimization", en: "Process optimization", de: "Prozessoptimierung"},
+    {value: "marketing_content", en: "Marketing / content", de: "Marketing / Inhalte"},
+    {value: "design_ux", en: "Design / UX", de: "Design / UX"},
+  ]},
+  programming_performed: {en: "Programming in the project", de: "Programmierung im Projekt", options: [
+    {value: "none", en: "No programming", de: "Keine Programmierung"},
+    {value: "some", en: "Some", de: "Etwas"}, {value: "central", en: "Central", de: "Zentral"},
+  ]},
+  programming_required: {en: "Programming prerequisite", de: "Programmierkenntnisse als Voraussetzung", options: [
+    {value: "required", en: "Required", de: "Erforderlich"},
+    {value: "recommended", en: "Recommended", de: "Empfohlen"},
+  ]},
+  work_location_mode: {en: "Work location", de: "Arbeitsort", options: [
+    {value: "on_site", en: "On site", de: "Vor Ort"},
+    {value: "hybrid", en: "Hybrid", de: "Hybrid"}, {value: "remote", en: "Remote", de: "Remote"},
+  ]},
+  working_language: {en: "Working language includes", de: "Arbeitssprache umfasst", options: [
+    {value: "en", en: "English", de: "Englisch"}, {value: "de", en: "German", de: "Deutsch"},
+    {value: "other", en: "Other stated language", de: "Andere angegebene Sprache"},
+  ]},
+};
+const profileFieldOrder: ProfileField[] = ["degree_level", "work_modes", "programming_performed", "programming_required", "work_location_mode", "working_language"];
+
+function organizationNames(project: Project): {name: string; role: "academic_unit" | "partner"}[] {
+  const units = project.academic_units?.length
+    ? project.academic_units.map((item) => item.canonical_name || item.name)
+    : project.chair ? [project.chair] : [];
+  const partners = (project.project_partners || []).map((item) => item.canonical_name || item.name);
+  return [...units.map((name) => ({name, role: "academic_unit" as const})),
+          ...partners.map((name) => ({name, role: "partner" as const}))];
+}
+
+function profileFieldValues(project: Project, field: ProfileField): string[] | null {
+  const profile = project.filter_values;
+  if (!profile) return null;
+  const value = profile[field];
+  if (Array.isArray(value)) return value;
+  if (value === null || value === "unknown" || value === "not_stated") return null;
+  return [value];
+}
+
+function matchesProfileFacet(project: Project, field: ProfileField, selected: Set<string>, includeUnknown: boolean): boolean {
+  if (selected.size === 0 && !includeUnknown) return true;
+  const values = profileFieldValues(project, field);
+  if (values === null) return includeUnknown;
+  if (field === "degree_level" && values.includes("any") && (selected.has("bachelor") || selected.has("master"))) return true;
+  return values.some((value) => selected.has(value));
+}
+
+export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, chairs, publishedProfileFilters}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; chairs: Chair[]; publishedProfileFilters: string[]}) {
   const [query, setQuery] = useState("");
   const [selectedAgeBands, setSelectedAgeBands] = useState<Set<AgeBand>>(() => new Set());
   const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp"]));
+  const [selectedProfileValues, setSelectedProfileValues] = useState<Record<ProfileField, Set<string>>>(() => Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
+  const [includeUnknown, setIncludeUnknown] = useState<Set<ProfileField>>(() => new Set());
   const [sortBy, setSortBy] = useState<SortBy>("publication_date");
   const [displayCount, setDisplayCount] = useState("20");
   const [currentPage, setCurrentPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const chairsByDepartment = useMemo(() => new Map(departments.map((department) => [department.name, chairs.filter((chair) => chair.department === department.name).sort((a, b) => a.name.localeCompare(b.name))])), [chairs, departments]);
+  const publishedFields = useMemo(() => profileFieldOrder.filter((field) => publishedProfileFilters.includes(field)), [publishedProfileFilters]);
   const displayedProjects = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
     const filtered = initialProjects.filter((project) => {
-      const matchesChair = selectedChairs.size === 0 || selectedChairs.has(project.chair);
       const ageTimestamp = project.published_at ? Date.parse(`${project.published_at}T00:00:00Z`) : Date.parse(project.first_seen_at);
       const daysOld = Math.floor((Date.now() - ageTimestamp) / 86_400_000);
       const ageBand = daysOld < 3 ? "lt3" : daysOld < 30 ? "lt30" : daysOld < 60 ? "lt60" : daysOld < 180 ? "lt180" : "gt180";
       const matchesAge = selectedAgeBands.size === 0 || selectedAgeBands.has(ageBand);
       const matchesType = selectedTypes.has(project.opportunity_type);
-      const text = `${project.reference_code} ${project.title} ${project.summary || ""} ${project.chair} ${project.department}`.toLocaleLowerCase();
-      return matchesChair && matchesAge && matchesType && (!needle || text.includes(needle));
+      const matchesProfile = publishedFields.every((field) => matchesProfileFacet(project, field, selectedProfileValues[field], includeUnknown.has(field)));
+      const text = `${project.reference_code} ${project.title} ${project.summary || ""} ${organizationNames(project).map(({name}) => name).join(" ")} ${project.source_name || ""} ${project.department}`.toLocaleLowerCase();
+      return matchesAge && matchesType && matchesProfile && (!needle || text.includes(needle));
     });
     return filtered.sort((a, b) => {
       if (sortBy === "recently_added") {
@@ -48,33 +114,13 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
       if (!b.published_at) return -1;
       return Date.parse(`${b.published_at}T00:00:00Z`) - Date.parse(`${a.published_at}T00:00:00Z`);
     });
-  }, [initialProjects, query, selectedAgeBands, selectedChairs, selectedTypes, sortBy]);
+  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, sortBy]);
   const pageSize = displayCount === "all" ? displayedProjects.length || 1 : Number(displayCount);
   const pageCount = Math.max(1, Math.ceil(displayedProjects.length / pageSize));
   const activePage = Math.min(currentPage, pageCount);
   const visibleProjects = displayCount === "all" ? displayedProjects : displayedProjects.slice((activePage - 1) * pageSize, activePage * pageSize);
   const date = (value: string) => new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-GB", {day: "numeric", month: "short", year: "numeric", timeZone: "UTC"}).format(new Date(value.includes("T") ? value : `${value}T00:00:00Z`));
   const lastUpdated = lastUpdatedAt ? new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-GB", {dateStyle: "medium", timeStyle: "short", timeZone: "Europe/Berlin"}).format(new Date(lastUpdatedAt)) : null;
-
-  function toggleChair(name: string, checked: boolean) {
-    setCurrentPage(1);
-    setSelectedChairs((current) => {
-      const next = new Set(current);
-      if (checked) next.add(name); else next.delete(name);
-      return next;
-    });
-  }
-
-  function toggleDepartment(departmentChairs: Chair[], checked: boolean) {
-    setCurrentPage(1);
-    setSelectedChairs((current) => {
-      const next = new Set(current);
-      for (const chair of departmentChairs) {
-        if (checked) next.add(chair.name); else next.delete(chair.name);
-      }
-      return next;
-    });
-  }
 
   function toggleAgeBand(band: AgeBand, checked: boolean) {
     setCurrentPage(1);
@@ -101,16 +147,54 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
     });
   }
 
+  function toggleProfileValue(field: ProfileField, value: string, checked: boolean) {
+    setCurrentPage(1);
+    setSelectedProfileValues((current) => {
+      const next = new Set(current[field]);
+      if (checked) next.add(value); else next.delete(value);
+      return {...current, [field]: next};
+    });
+  }
+
+  function toggleProfileUnknown(field: ProfileField, checked: boolean) {
+    setCurrentPage(1);
+    setIncludeUnknown((current) => {
+      const next = new Set(current);
+      if (checked) next.add(field); else next.delete(field);
+      return next;
+    });
+  }
+
   function resetFilters() {
     setCurrentPage(1);
     setQuery("");
-    setSelectedChairs(new Set());
     setSelectedAgeBands(new Set());
     setSelectedTypes(new Set(["project_study", "idp"]));
+    setSelectedProfileValues(Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
+    setIncludeUnknown(new Set());
   }
 
-  const filtersActive = query !== "" || selectedChairs.size > 0 || selectedAgeBands.size > 0 || selectedTypes.size !== 2;
+  const filtersActive = query !== "" || selectedAgeBands.size > 0 || selectedTypes.size !== 2 || publishedFields.some((field) => selectedProfileValues[field].size > 0 || includeUnknown.has(field));
   const ageLabels: Record<AgeBand, string> = {lt3: copy.under3, lt30: copy.under30, lt60: copy.under60, lt180: copy.under180, gt180: copy.over180};
+
+  function renderProfileFacet(field: ProfileField) {
+    const definition = profileFacets[field];
+    const label = lang === "de" ? definition.de : definition.en;
+    const unknownLabel = field === "programming_performed" || field === "work_location_mode"
+      ? (lang === "de" ? "Unbekannt einbeziehen" : "Include unknown")
+      : (lang === "de" ? "Nicht angegeben einbeziehen" : "Include not specified");
+    const count = (value: string | null) => initialProjects.filter((project) => {
+      if (value === null) return profileFieldValues(project, field) === null;
+      return matchesProfileFacet(project, field, new Set([value]), false);
+    }).length;
+    return <details className="department-filter profile-filter" key={field}><summary>{label}</summary><fieldset><legend className="visually-hidden">{label}</legend><div className="chips">
+      {definition.options.map((option) => <label className="chip" key={option.value}>
+        <input type="checkbox" checked={selectedProfileValues[field].has(option.value)} onChange={(event) => toggleProfileValue(field, option.value, event.target.checked)}/>
+        <span>{lang === "de" ? option.de : option.en} ({count(option.value)})</span>
+      </label>)}
+      <label className="chip"><input type="checkbox" checked={includeUnknown.has(field)} onChange={(event) => toggleProfileUnknown(field, event.target.checked)}/><span>{unknownLabel} ({count(null)})</span></label>
+    </div></fieldset></details>;
+  }
 
   return <>
     <SiteHeader lang={lang} brand={copy.brand} enHref="/en" deHref="/de"/>
@@ -136,13 +220,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
               <label className="chip"><input type="checkbox" checked={selectedTypes.has("idp")} onChange={(event) => toggleType("idp", event.target.checked)}/><span>IDP</span></label>
             </div></fieldset>
             <fieldset><legend>{copy.age}</legend><div className="chips">{ageBands.map((band) => <label className="chip" key={band}><input type="checkbox" checked={selectedAgeBands.has(band)} onChange={(event) => toggleAgeBand(band, event.target.checked)}/><span>{ageLabels[band]}</span></label>)}</div></fieldset>
-            <fieldset><legend>{copy.filters}</legend>{departments.map((department) => {
-              const departmentChairs = chairsByDepartment.get(department.name) || [];
-              const selectedCount = departmentChairs.filter((chair) => selectedChairs.has(chair.name)).length;
-              const allSelected = departmentChairs.length > 0 && selectedCount === departmentChairs.length;
-              const partlySelected = selectedCount > 0 && !allSelected;
-              return <details className="department-filter" key={department.slug}><summary><label className="department-label" onClick={(event) => event.stopPropagation()}><input type="checkbox" checked={allSelected} ref={(input) => { if (input) input.indeterminate = partlySelected; }} onChange={(event) => toggleDepartment(departmentChairs, event.target.checked)}/><span>{department.name}</span></label></summary><div className="chair-filter-list">{departmentChairs.map((chair) => <label className="chair-label" key={chair.slug}><input type="checkbox" checked={selectedChairs.has(chair.name)} onChange={(event) => toggleChair(chair.name, event.target.checked)}/><span>{chair.name}</span></label>)}</div></details>;
-            })}</fieldset>
+            {publishedFields.map(renderProfileFacet)}
             {filtersActive && <button type="button" className="reset" onClick={resetFilters}>{copy.reset}</button>}
           </div>
         </aside>
@@ -157,13 +235,13 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
           {visibleProjects.length === 0 && <div className="empty"><h2>{copy.noResults}</h2><p>{copy.noResultsHint}</p>{filtersActive && <button type="button" onClick={resetFilters}>{copy.reset}</button>}</div>}
           {visibleProjects.map((project) => <article className={`card ${styles.cardWithReference}`} key={project.slug}>
             <span className={styles.referenceCode}>{project.reference_code}</span>
-            <p className="meta">{project.department} · {project.chair}</p>
+            <p className="meta">{organizationNames(project).length ? organizationNames(project).map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
             <h2>{project.title}</h2>
             <p className="card-summary">{project.summary || copy.unknown}</p>
             <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
             <p className="links">
-              {project.has_profile && <Link className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}
-              <a className="source" href={project.source_url} target="_blank" rel="noopener noreferrer">{copy.source}<ExternalIcon size={14}/></a>
+              {(project.has_profile || project.has_description) && <Link className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}
+              <a className="source" href={project.source_url} target="_blank" rel="noopener noreferrer">{project.chair ? copy.source : (lang === "de" ? "Originale Angebotsseite" : "Original listing page")}<ExternalIcon size={14}/></a>
               {project.artifact_url && <a className="source" href={project.artifact_url} target="_blank" rel="noopener noreferrer">{copy.artifact}<ExternalIcon size={14}/></a>}
             </p>
           </article>)}

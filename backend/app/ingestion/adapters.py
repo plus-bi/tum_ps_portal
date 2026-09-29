@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dataclasses import dataclass
-from urllib.parse import urljoin
+from urllib.parse import parse_qs, urljoin, urlparse
 from bs4 import BeautifulSoup, Tag
 from .classifier import classify
 from .registry import ChairAdapter
@@ -13,6 +13,8 @@ class Candidate:
     source_url: str
     application_url: str | None
     source_text: str
+    description_markdown: str | None = None
+    pdf_url: str | None = None
 
 
 class HtmlParser:
@@ -94,4 +96,85 @@ class LegacyHtmlParser(HtmlParser): pass
 PARSERS = {"typo3": Typo3Parser(), "squarespace": SquarespaceParser(), "legacy_html": LegacyHtmlParser()}
 
 
-def parser_for(adapter: ChairAdapter) -> HtmlParser: return PARSERS[adapter.family]
+class LmtIdpParser(HtmlParser):
+    """The LMT offers are IDP-labelled accordions with descriptions and download endpoints."""
+
+    _legacy_title = (
+        "BA , MA , IDP , FP , IP , SHK : Multi-level Fingerprinting-based Indoor Localization Scheme"
+    )
+    _legacy_robot_title = (
+        "BA , IDP , FP , IP : Robot Learning from Demonstration - Designing the Data Collection Hardware"
+    )
+
+    @staticmethod
+    def _markdown(section: Tag) -> str:
+        lines: list[str] = []
+        for node in section.find_all(["h2", "h3", "h4", "p", "li"]):
+            if node.name == "p" and node.find_parent("li"):
+                continue
+            value = " ".join(node.stripped_strings)
+            if not value:
+                continue
+            if node.name in {"h2", "h3", "h4"}:
+                lines.append(f"## {value}")
+            elif node.name == "li":
+                lines.append(f"- {value}")
+            else:
+                lines.append(value)
+        return "\n\n".join(lines)
+
+    def discover(self, adapter: ChairAdapter, source_url: str, content: bytes) -> list[Candidate]:
+        soup = BeautifulSoup(content, "html.parser")
+        results: list[Candidate] = []
+        for block in soup.select(".tx-curlcontent-main > .accordion"):
+            button = block.select_one("h5 button")
+            collapse = block.select_one(".collapse")
+            if button is None or collapse is None:
+                continue
+            if not button.select('abbr[title="Interdisciplinary Project"]'):
+                continue
+            title_node = collapse.find("h2")
+            title = (" ".join(title_node.stripped_strings) if title_node else
+                     " ".join(button.stripped_strings).split(":", 1)[-1].strip())
+            if not title:
+                continue
+            pdf_url = None
+            for anchor in collapse.find_all("a", href=True):
+                url = urljoin(source_url, anchor["href"])
+                parsed = urlparse(url)
+                if (parsed.hostname == "tumanager.ei.tum.de" and parsed.path == "/service.php"
+                        and parse_qs(parsed.query).get("mode") == ["pdfdownload"]):
+                    pdf_url = url
+                    break
+            markdown = [f"# {title}"]
+            keywords = collapse.select_one(".keywords")
+            if keywords:
+                markdown.append(f"**{' '.join(keywords.stripped_strings)}**")
+            for heading in collapse.find_all("h4"):
+                if heading.find_parent(".description"):
+                    continue
+                section = heading.find_next_sibling("div")
+                if section is not None:
+                    body = self._markdown(section)
+                    if body:
+                        markdown.append(f"## {' '.join(heading.stripped_strings)}\n\n{body}")
+            short = next((node.parent for node in collapse.find_all("strong")
+                          if "short description" in node.get_text(" ", strip=True).casefold()), None)
+            if short:
+                markdown.insert(1, f"**{' '.join(short.stripped_strings)}**")
+            description_markdown = "\n\n".join(markdown).strip()
+            source_text = " ".join(description_markdown.replace("#", "").replace("**", "").split())
+            # Preserve the listing/reference code created by the former generic parser.
+            identity_title = {
+                "Multi-level Fingerprinting-based Indoor Localization Scheme": self._legacy_title,
+                "Robot Learning from Demonstration - Designing the Data Collection Hardware": self._legacy_robot_title,
+            }.get(title, title)
+            results.append(Candidate(adapter.stable_key(source_url, identity_title), title, source_url, None,
+                                     source_text, description_markdown, pdf_url))
+        return results
+
+
+def parser_for(adapter: ChairAdapter) -> HtmlParser:
+    if adapter.slug == "idp-chair-of-media-technology":
+        return LmtIdpParser()
+    return PARSERS[adapter.family]

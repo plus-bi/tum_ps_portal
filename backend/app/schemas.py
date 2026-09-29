@@ -1,8 +1,11 @@
 from datetime import date, datetime, timezone
 from enum import StrEnum
+from typing import Literal
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, HttpUrl
 
 from .ingestion.project_profile import DocumentExtraction, EvidenceIssue, PdfTextCoverage
+from .profile_filters import ProfileFilterValues
+from .ingestion.organization_attribution import OrganizationMention
 
 
 class Status(StrEnum):
@@ -68,7 +71,10 @@ class Project(BaseModel):
     title: str
     summary: str | None = None
     department: str
-    chair: str
+    chair: str | None
+    source_name: str | None = None
+    academic_units: list[OrganizationMention] = []
+    project_partners: list[OrganizationMention] = []
     opportunity_type: OpportunityType = OpportunityType.project_study
     company: str | None = None
     language: str | None = None
@@ -86,6 +92,8 @@ class Project(BaseModel):
     source_url: str
     artifact_url: str | None = None
     has_profile: bool = False
+    has_description: bool = False
+    filter_values: ProfileFilterValues | None = None
     published_at: date | None = None
     first_seen_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     last_seen_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -95,11 +103,17 @@ class Project(BaseModel):
 
 class ProjectProfileDetail(BaseModel):
     project: Project
+    source_kind: Literal["pdf", "html"] = "pdf"
     document: DocumentExtraction
     coverage: PdfTextCoverage
     evidence_issues: list[EvidenceIssue]
     review_flags: list[str] = []
     extracted_at: datetime
+
+
+class ProjectDescriptionDetail(BaseModel):
+    project: Project
+    markdown: str
 
 
 class ProjectQuery(BaseModel):

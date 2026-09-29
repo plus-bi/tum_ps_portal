@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     crawler_max_attempts: int = 3
     crawler_max_content_bytes: int = 25_000_000
     artifact_storage_path: Path = Path("/var/lib/portal/artifacts")
+    # Show unapproved organization candidates only in a local review session.
+    organization_attribution_preview: bool = False
 
 
 @lru_cache

@@ -135,6 +135,20 @@ class PDFProfileExtraction(Base):
     extracted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
+class OrganizationAttribution(Base):
+    """Versioned offer-level organization candidates; source ownership stays on Listing."""
+    __tablename__ = "organization_attributions"
+    __table_args__ = (UniqueConstraint("listing_id", "content_hash", "extractor_version"),)
+    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)
+    listing_id: Mapped[UUID] = mapped_column(ForeignKey("listings.id"), index=True)
+    content_hash: Mapped[str] = mapped_column(String(64), index=True)
+    extractor_version: Mapped[str] = mapped_column(String(80))
+    status: Mapped[str] = mapped_column(String(30), default="needs_review")
+    academic_units: Mapped[list] = mapped_column(JSON, default=list)
+    project_partners: Mapped[list] = mapped_column(JSON, default=list)
+    extracted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
 class CrawlRun(Base):
     __tablename__ = "crawl_runs"
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4)

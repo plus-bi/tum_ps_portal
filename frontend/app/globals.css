@@ -127,11 +127,16 @@ h1 { font-size: clamp(36px, 5.5vw, 60px); line-height: 1.05; max-width: 860px; m
 .department-filter summary::-webkit-details-marker { display: none; }
 .department-filter summary::after { content: ""; width: 7px; height: 7px; margin: 6px 4px 0 auto; flex: none; border-right: 2px solid var(--muted-foreground); border-bottom: 2px solid var(--muted-foreground); transform: rotate(-45deg); transition: transform .2s var(--ease); }
 .department-filter[open] summary::after { transform: rotate(45deg); }
-.department-label, .chair-label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; line-height: 1.35; }
-.department-label { font-size: 14px; font-weight: 600; }
-.chair-filter-list { padding: 0 0 10px 26px; }
-.chair-label { font-size: 13px; margin: 0 0 9px; color: var(--muted-foreground); }
-.chair-label:hover { color: var(--foreground); }
+.profile-filter fieldset { margin: 0 0 12px; }
+.entity-search { width: 100%; min-height: 40px; padding: 8px 10px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--background); color: var(--foreground); font: inherit; font-size: 14px; }
+.entity-search::placeholder { color: var(--muted-foreground); }
+.entity-search:focus { outline: 2px solid var(--primary); outline-offset: 2px; }
+.entity-filter-list { max-height: 280px; margin-top: 10px; overflow-y: auto; }
+.chair-label { display: flex; gap: 10px; align-items: flex-start; padding: 7px 2px; cursor: pointer; line-height: 1.35; font-size: 13px; color: var(--muted-foreground); }
+.chair-label:hover, .chair-label:has(input:checked) { color: var(--foreground); }
+.entity-count { margin-left: auto; color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
+.entity-role { display: block; margin-top: 2px; color: var(--muted-foreground); font-size: 11px; }
+.entity-empty { margin: 8px 2px; color: var(--muted-foreground); font-size: 13px; }
 .reset { width: 100%; margin-top: 18px; }
 
 .results-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }

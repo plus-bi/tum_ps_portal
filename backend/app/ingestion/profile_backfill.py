@@ -1,10 +1,10 @@
-"""Resumable batch extraction of LLM project profiles from stored PDF markdown.
+"""Resumable batch extraction of LLM project profiles from PDF or chair-description markdown.
 
     python -m app.ingestion.profile_backfill --dry-run      # count what a run would extract, no model calls
     python -m app.ingestion.profile_backfill --limit 20
     python -m app.ingestion.profile_backfill --recheck --dry-run   # citation checks only, no model calls
 
-Each document costs one or two Azure OpenAI calls. A document is skipped when it already has an ok
+Each source costs one or two Azure OpenAI calls. A source is skipped when it already has an ok
 row for the current schema, prompt, deployment and reasoning effort, so an interrupted run resumes.
 Every attempt adds a row: a failure never replaces an earlier ok result. Rows and logs carry
 document facts only in the `document` column; errors store validation messages or an error type.
@@ -22,11 +22,12 @@ from typing import Callable
 from sqlalchemy import select, text
 
 from ..config import settings
-from ..db import Base, PDFAnalysis, PDFProfileExtraction, engine, session_factory
+from ..db import Base, Listing, PDFAnalysis, PDFProfileExtraction, engine, session_factory
 from . import llm_client
 from .pdf_reader import render_for_llm
 from .profile_evidence import check_profile_evidence
 from .project_profile import SCHEMA_VERSION, DocumentExtraction, PdfTextCoverage, ProfileExtraction
+from .profile_sources import HtmlMarkdownAnalysis, html_description_hash
 
 logger = logging.getLogger(__name__)
 
@@ -72,13 +73,27 @@ def _done_hashes(version: dict[str, str]) -> set[str]:
         return set(session.scalars(query))
 
 
-def _analyses() -> list[PDFAnalysis]:
+def _analyses() -> list[PDFAnalysis | HtmlMarkdownAnalysis]:
     with session_factory()() as session:
-        return list(session.scalars(select(PDFAnalysis).where(PDFAnalysis.extracted_markdown_pages.is_not(None))
-                                    .order_by(PDFAnalysis.content_hash)))
+        sources: dict[str, PDFAnalysis | HtmlMarkdownAnalysis] = {
+            row.content_hash: row for row in session.scalars(
+                select(PDFAnalysis).where(PDFAnalysis.extracted_markdown_pages.is_not(None))
+            )
+        }
+        for (normalized,) in session.execute(select(Listing.normalized)):
+            if not isinstance(normalized, dict):
+                continue
+            markdown = normalized.get("description_markdown")
+            source_url = normalized.get("source_url")
+            content_hash = normalized.get("description_hash")
+            if (not isinstance(markdown, str) or not markdown.strip() or not isinstance(source_url, str)
+                    or content_hash != html_description_hash(source_url, markdown)):
+                continue
+            sources[content_hash] = HtmlMarkdownAnalysis(content_hash, [markdown])
+        return [sources[key] for key in sorted(sources)]
 
 
-def _skip_reason(analysis: PDFAnalysis) -> str | None:
+def _skip_reason(analysis: PDFAnalysis | HtmlMarkdownAnalysis) -> str | None:
     pages = analysis.extracted_markdown_pages
     if not isinstance(pages, list) or not pages:
         return "no_pages"
@@ -108,7 +123,7 @@ def _store(result: ProfileExtraction) -> None:
         session.commit()
 
 
-def _store_error(analysis: PDFAnalysis, version: dict[str, str], error: Exception) -> None:
+def _store_error(analysis: PDFAnalysis | HtmlMarkdownAnalysis, version: dict[str, str], error: Exception) -> None:
     """API or transport failure: the error type only, since provider messages may echo request content."""
     coverage = PdfTextCoverage.from_pages(analysis.classification, analysis.classifier_version,
                                           analysis.extracted_markdown_pages)
@@ -121,6 +136,7 @@ def _store_error(analysis: PDFAnalysis, version: dict[str, str], error: Exceptio
 
 def run_profile_backfill(*, effort: str = "low", limit: int | None = None, workers: int = 2,
                          max_consecutive_errors: int = 5, dry_run: bool = False,
+                         source_hashes: set[str] | None = None,
                          extract: Extract = llm_client.extract_project_profile_result_for_pages) -> dict:
     """Extract pending documents with bounded concurrency. Validation failures are model results
     and are stored as failed rows; the next run retries them. Stops early after
@@ -137,6 +153,8 @@ def run_profile_backfill(*, effort: str = "low", limit: int | None = None, worke
         done = _done_hashes(version)
         pending = []
         for analysis in _analyses():
+            if source_hashes is not None and analysis.content_hash not in source_hashes:
+                continue
             if analysis.content_hash in done:
                 summary["already_done"] += 1
             elif reason := _skip_reason(analysis):
@@ -151,7 +169,7 @@ def run_profile_backfill(*, effort: str = "low", limit: int | None = None, worke
 
         consecutive_errors = 0
         queue = iter(batch)
-        in_flight: dict[Future, PDFAnalysis] = {}
+        in_flight: dict[Future, PDFAnalysis | HtmlMarkdownAnalysis] = {}
         with ThreadPoolExecutor(max_workers=workers) as executor:
             while True:
                 # At most `workers` calls in flight, so an early stop leaves no queued model calls.
@@ -197,8 +215,7 @@ def recheck_evidence(*, dry_run: bool = False) -> dict:
     summary = {"documents": 0, "changed": 0, "issues_before": 0, "issues_after": 0, "missing_pages": 0,
                "flags": {}, "dry_run": dry_run}
     with session_factory()() as session:
-        analyses = {analysis.content_hash: analysis for analysis in session.scalars(
-            select(PDFAnalysis).where(PDFAnalysis.extracted_markdown_pages.is_not(None)))}
+        analyses = {analysis.content_hash: analysis for analysis in _analyses()}
         pages = {content_hash: analysis.extracted_markdown_pages for content_hash, analysis in analyses.items()}
         for row in session.scalars(select(PDFProfileExtraction).where(PDFProfileExtraction.document.is_not(None))):
             if row.document is None:  # JSON null passes the SQL filter

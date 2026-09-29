@@ -23,6 +23,7 @@ from .adapters import Candidate, parser_for
 from .documents import extract
 from .fetcher import Fetched, PoliteFetcher
 from .pdf_backfill import is_pdf_url, store_pdf_url
+from .profile_sources import html_description_hash
 from .registry import ALL_REGISTRY, ChairAdapter, DEPARTMENTS
 from .service import publication_from_title
 
@@ -132,7 +133,8 @@ def _version(session, listing: Listing, digest: str, normalized: dict, source_te
     session.add(ListingVersion(
         listing_id=listing.id, content_hash=digest,
         extracted={"title": listing.title, "summary": listing.summary, **normalized},
-        evidence={"source_url": normalized["artifact_url"] or normalized["source_url"],
+        evidence={"source_url": (normalized["source_url"] if normalized.get("description_markdown")
+                                  else normalized["artifact_url"] or normalized["source_url"]),
                   "excerpt": source_text[:1000]},
     ))
 
@@ -179,6 +181,11 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
                           "source_url": listing_page_url, "artifact_url": artifact_url,
                           "application_url": None, "topics": [], "language": None,
                           "opportunity_type": adapter.opportunity_type}
+            if candidate.description_markdown:
+                normalized["description_markdown"] = candidate.description_markdown
+                normalized["description_hash"] = html_description_hash(listing_page_url, candidate.description_markdown)
+            if candidate.pdf_url:
+                normalized["pdf_url"] = candidate.pdf_url
             listing = session.scalar(select(Listing).where(
                 Listing.chair_id == chair_id, Listing.stable_source_key == candidate.stable_source_key,
             ))
@@ -260,7 +267,7 @@ def _persist_failure(adapter: ChairAdapter, source_id, run_id, started_at: datet
     return {"crawl_run_id": str(run_id), "status": "failed", **stats, "error": message}
 
 
-async def ingest_adapter_live(adapter: ChairAdapter, fetcher: PoliteFetcher) -> dict:
+async def ingest_adapter_live(adapter: ChairAdapter, fetcher: PoliteFetcher, *, force: bool = False) -> dict:
     started_at = datetime.now(timezone.utc)
     source_id, chair_id = _ensure_source(adapter)
     with session_factory()() as session:
@@ -271,8 +278,8 @@ async def ingest_adapter_live(adapter: ChairAdapter, fetcher: PoliteFetcher) -> 
             log_event(logging.INFO, "source_crawl_skipped", **outcome)
             return outcome
         # A partial run must re-fetch the top page so failed children are attempted again.
-        etag = source.etag if source.consecutive_failures == 0 else None
-        last_modified = source.last_modified if source.consecutive_failures == 0 else None
+        etag = source.etag if source.consecutive_failures == 0 and not force else None
+        last_modified = source.last_modified if source.consecutive_failures == 0 and not force else None
     run_id = _start_run(adapter, source_id, started_at)
     log_event(logging.INFO, "source_crawl_started", crawl_run_id=run_id, chair=adapter.slug,
               url=adapter.source_urls[0])
@@ -307,7 +314,8 @@ def ingestion_lock():
         connection.close()
 
 
-async def ingest_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY, fetcher: PoliteFetcher | None = None) -> dict:
+async def ingest_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY, fetcher: PoliteFetcher | None = None,
+                      *, force: bool = False) -> dict:
     Base.metadata.create_all(engine())
     selected = tuple(adapters)
     if fetcher is None:
@@ -323,7 +331,7 @@ async def ingest_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY, fetcher: 
             return result
         started_at = datetime.now(timezone.utc)
         log_event(logging.INFO, "ingestion_started", sources=len(selected), started_at=started_at)
-        results = [await ingest_adapter_live(adapter, fetcher) for adapter in selected]
+        results = [await ingest_adapter_live(adapter, fetcher, force=force) for adapter in selected]
         failures = sum(row["status"] == "failed" for row in results)
         partial = sum(row["status"] == "partial" for row in results)
         summary = {
@@ -339,5 +347,5 @@ async def ingest_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY, fetcher: 
         return summary
 
 
-def run_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY) -> dict:
-    return asyncio.run(ingest_live(adapters))
+def run_live(adapters: Iterable[ChairAdapter] = ALL_REGISTRY, *, force: bool = False) -> dict:
+    return asyncio.run(ingest_live(adapters, force=force))

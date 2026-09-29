@@ -71,6 +71,16 @@ def test_ok_result_is_stored_and_not_extracted_again(database):
     assert extract.calls == ["a" * 64]
 
 
+def test_source_hashes_limit_extraction_to_requested_markdown(database):
+    add_analysis("a" * 64, [SECRET_PAGE])
+    add_analysis("b" * 64, ["Another offer description. " * 20])
+    extract = FakeExtract()
+    result = profile_backfill.run_profile_backfill(source_hashes={"b" * 64}, extract=extract)
+    assert result["scheduled"] == result["ok"] == 1
+    assert extract.calls == ["b" * 64]
+    assert [row.content_hash for row in rows()] == ["b" * 64]
+
+
 def test_other_effort_is_not_treated_as_done(database):
     add_analysis("a" * 64, [SECRET_PAGE])
     profile_backfill.run_profile_backfill(extract=FakeExtract())

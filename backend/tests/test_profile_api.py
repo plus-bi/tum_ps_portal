@@ -1,10 +1,13 @@
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
+from types import SimpleNamespace
 
 import app.db as db
 from app.db import Base, Chair, Department, Listing, PDFArtifact, PDFProfileExtraction
 from app.ingestion import profile_backfill
 from app.ingestion.project_profile import PdfTextCoverage
+from app.ingestion.project_profile import Evidence, ProgrammingWork
+from app.api import persisted_projects, projects as list_projects
 from app.main import app
 from app.schemas import Status
 from profile_builders import document, empty_offer
@@ -49,3 +52,49 @@ def test_profiles_needing_ocr_are_hidden_and_unverified_ones_are_flagged(tmp_pat
     detail = client.get("/api/v1/projects/unverified/profile").json()
     assert detail["review_flags"] == ["unverified_citations"] and detail["evidence_issues"] == [issue]
     assert client.get("/api/v1/projects/ocr/profile").status_code == 404
+
+
+def test_catalog_includes_evidenced_filter_values_only_for_unambiguous_profiles(tmp_path, monkeypatch):
+    engine = create_engine(f"sqlite:///{tmp_path / 'catalog-filters.db'}")
+    monkeypatch.setattr(db, "_engine", engine)
+    config = SimpleNamespace(organization_attribution_preview=False,
+                             public_url="http://localhost:8080")
+    monkeypatch.setattr("app.api.settings", lambda: config)
+    Base.metadata.create_all(engine)
+    add_project("single", "d" * 64, [])
+    add_project("multi", "e" * 64, [])
+    evidence = [Evidence(page=1, excerpt="No programming is involved.")]
+    single = empty_offer(programming_performed=ProgrammingWork(level="none", evidence=evidence))
+    with db.session_factory()() as session:
+        for row in session.query(PDFProfileExtraction).all():
+            extracted = document(single) if row.content_hash == "d" * 64 else document(empty_offer(), empty_offer())
+            row.document = extracted.model_dump(mode="json")
+        session.commit()
+    projects = {project.slug: project for project in persisted_projects()}
+    assert projects["single"].filter_values.programming_performed == "none"
+    assert projects["single"].filter_values.working_language is None
+    assert projects["multi"].filter_values is None
+    response = list_projects(status=Status.active, department=[], chair=[], topic=[], sort="relevance", page=1, page_size=50)
+    assert len(response["published_profile_filters"]) == 6
+
+
+def test_hub_listings_do_not_claim_the_hub_as_their_chair(tmp_path, monkeypatch):
+    engine = create_engine(f"sqlite:///{tmp_path / 'hub-chair.db'}")
+    monkeypatch.setattr(db, "_engine", engine)
+    monkeypatch.setattr("app.api.settings", lambda: SimpleNamespace(
+        organization_attribution_preview=False, public_url="http://localhost:8080"))
+    Base.metadata.create_all(engine)
+    add_project("hub", "f" * 64, [])
+    add_project("own-chair", "a" * 64, [])
+    with db.session_factory()() as session:
+        hub_chair = session.query(Chair).filter(Chair.slug == "chair-hub").one()
+        hub_chair.slug = "informatics-idp-hub"
+        hub_chair.name = "Informatics IDP Hub"
+        session.commit()
+    projects = {project.slug: project for project in persisted_projects()}
+    assert projects["hub"].chair is None
+    assert projects["hub"].source_name == "Informatics IDP Hub"
+    assert projects["own-chair"].chair == "Chair"
+    assert projects["own-chair"].source_name == "Chair"
+    sorted_projects = list_projects(status=Status.active, department=[], chair=[], topic=[], sort="chair", page=1, page_size=20)
+    assert [project.slug for project in sorted_projects["items"]] == ["own-chair", "hub"]

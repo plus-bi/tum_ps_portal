@@ -48,6 +48,8 @@ caddy_config/
 compose.override.yaml
 
 # Temporary and generated files
+organization-candidates.jsonl
+organization-uncovered-projects.jsonl
 .cache/
 .tmp/
 tmp/
@@ -60,3 +62,6 @@ portal-current.png
 .vscode/
 .DS_Store
 Thumbs.db
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
+.playwright/

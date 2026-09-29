@@ -1244,9 +1244,9 @@
       "status": 200,
       "final_url": "https://www.ce.cit.tum.de/en/lmt/student-thesis/",
       "media_type": "text/html; charset=utf-8",
-      "sha256": "0e13c7e9a915f364058f3994eb21b89579161e1a15a5e5148754f0214753ae43",
+      "sha256": "06094944bd661516cface731cca018055294f1f2c6ba7b328b2a21e4584779b1",
       "fixture": "idp-chair-of-media-technology.html",
-      "candidates": 1,
+      "candidates": 5,
       "child_links": 1,
       "children": []
     },
