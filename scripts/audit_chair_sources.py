@@ -45,7 +45,10 @@ async def audit(selected_slugs: set[str] | None = None):
                 if child_url in seen: continue
                 seen.add(child_url); child = {"url": child_url, "depth": depth}
                 try:
-                    item = await asyncio.wait_for(fetcher.fetch(child_url), timeout=35)
+                    # A redirect on the external wiki makes two requests to an
+                    # origin whose cached policy requires 60 seconds between them.
+                    policy_delay = fetcher.robots.crawl_delay(child_url) or 0
+                    item = await asyncio.wait_for(fetcher.fetch(child_url), timeout=35 + 2 * policy_delay)
                     media = item.media_type.split(";", 1)[0]; extension = ".html" if "html" in media else ".pdf" if media == "application/pdf" else ".docx" if "wordprocessingml" in media else ".bin"
                     child_dir = FIXTURES / adapter.slug; child_dir.mkdir(exist_ok=True)
                     child_path = child_dir / f"{item.content_hash[:16]}{extension}"; child_path.write_bytes(item.content)

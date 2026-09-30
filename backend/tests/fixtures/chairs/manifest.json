@@ -260,7 +260,7 @@
       "media_type": "text/html; charset=utf-8",
       "sha256": "4fb30826e1179804388339236ca62128de76349b31dca853daf5a87b1a6f9594",
       "fixture": "management-accounting.html",
-      "candidates": 1,
+      "candidates": 52,
       "child_links": 88,
       "children": []
     },
@@ -1153,20 +1153,6 @@
       "children": []
     },
     {
-      "slug": "idp-chair-for-data-processing",
-      "name": "Chair for Data Processing",
-      "url": "https://www.ei.tum.de/ldv/studentische-arbeiten/",
-      "family": "typo3",
-      "status": 200,
-      "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "media_type": "text/html; charset=utf-8",
-      "sha256": "4b7de86f932939ae84e501be97cd0b05b4a069eae42fe6c422ec157a50d5a4d8",
-      "fixture": "idp-chair-for-data-processing.html",
-      "candidates": 0,
-      "child_links": 0,
-      "children": []
-    },
-    {
       "slug": "idp-chair-for-entrepreneurial-finance",
       "name": "Chair for Entrepreneurial Finance",
       "url": "https://www.fa.mgt.tum.de/ef/teaching/project-studies/",
@@ -1206,34 +1192,6 @@
       "fixture": "idp-chair-of-financial-management-and-capital-markets.html",
       "candidates": 1,
       "child_links": 2,
-      "children": []
-    },
-    {
-      "slug": "idp-chair-of-human-machine-communication",
-      "name": "Chair of Human-Machine Communication",
-      "url": "http://www.mmk.ei.tum.de/studentische-arbeiten/themen-fuer-studentische-arbeiten/",
-      "family": "typo3",
-      "status": 200,
-      "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "media_type": "text/html; charset=utf-8",
-      "sha256": "42e563b176d3534d38b27b5832874454afba8ff8f321fdf04605cad6d93c41b4",
-      "fixture": "idp-chair-of-human-machine-communication.html",
-      "candidates": 0,
-      "child_links": 0,
-      "children": []
-    },
-    {
-      "slug": "idp-chair-for-information-systems",
-      "name": "Chair for Information Systems",
-      "url": "https://www.in.tum.de/i17/news/news-single-view/article/student-projects-and-theses-develop-a-business-game/",
-      "family": "typo3",
-      "status": 200,
-      "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "media_type": "text/html; charset=utf-8",
-      "sha256": "e98f52136df2b47ba997d9b7f338a213543484e99e661a7fe6a2d8064e20e14a",
-      "fixture": "idp-chair-for-information-systems.html",
-      "candidates": 0,
-      "child_links": 0,
       "children": []
     },
     {
@@ -1322,7 +1280,7 @@
     },
     {
       "slug": "idp-dr-theo-sch-ller-stiftungslehrstuhl-f-r-technologie-und-innovationsmanagement",
-      "name": "Dr. Theo Sch\u00f6ller-Stiftungslehrstuhl f\u00fcr Technologie- und Innovationsmanagement",
+      "name": "Dr. Theo Schöller-Stiftungslehrstuhl für Technologie- und Innovationsmanagement",
       "url": "https://www.ie.mgt.tum.de/en/tim/teaching/project-studiesidp/",
       "family": "typo3",
       "status": 200,
@@ -1475,7 +1433,7 @@
       "children": []
     },
     {
-      "slug": "idp-tum-data-innovation-lab",
+      "slug": "other-tum-data-innovation-lab",
       "name": "TUM Data Innovation Lab",
       "url": "https://www.mdsi.tum.de/en/di-lab/projects/",
       "family": "typo3",

@@ -30,3 +30,9 @@ class CachedRobotsPolicy:
 
     def require_allowed(self, url: str) -> None:
         if not self.allowed(url): raise RobotsDenied(f"robots.txt disallows {url}")
+
+    def crawl_delay(self, url: str) -> float | None:
+        parsed = urlparse(url)
+        record = self.records.get(f"{parsed.scheme}://{parsed.netloc}")
+        delay = record.get("crawl_delay") if record else None
+        return float(delay) if isinstance(delay, (int, float)) and delay > 0 else None

@@ -36,7 +36,10 @@ class PoliteFetcher:
         domain = urlparse(url).netloc.casefold()
         lock = self._locks.setdefault(domain, asyncio.Lock())
         async with lock:
-            loop = asyncio.get_running_loop(); wait = self.delay - (loop.time() - self._last.get(domain, 0))
+            loop = asyncio.get_running_loop()
+            policy_delay = self.robots.crawl_delay(url) if hasattr(self.robots, "crawl_delay") else None
+            required_delay = max(self.delay, policy_delay or 0)
+            wait = required_delay - (loop.time() - self._last.get(domain, 0))
             if wait > 0: await asyncio.sleep(wait)
             try:
                 response = await client.get(url, headers=headers, follow_redirects=False)

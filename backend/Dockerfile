@@ -4,6 +4,7 @@ COPY pyproject.toml .
 COPY alembic.ini .
 COPY tum_project_study_chairs.json .
 COPY tum_idp_sources.json .
+COPY tum_other_sources.json .
 COPY compliance /app/compliance
 COPY backend /app/backend
 RUN pip install --no-cache-dir .

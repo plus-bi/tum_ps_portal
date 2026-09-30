@@ -53,6 +53,7 @@ DEPARTMENTS = {
     "marketing-strategy-leadership": "Marketing, Strategy and Leadership",
     "operations-technology": "Operations and Technology",
     "interdisciplinary-projects": "Interdisciplinary Projects",
+    "other-projects": "Other Projects",
 }
 
 
@@ -119,7 +120,9 @@ def _load_registry() -> tuple[ChairAdapter, ...]:
     ) for row in rows)
     if len({a.slug for a in adapters}) != 32 or len({a.source_urls[0] for a in adapters}) != 32:
         raise RuntimeError("Chair slugs and source URLs must be unique")
-    if set(a.department for a in adapters) != set(DEPARTMENTS.values()) - {DEPARTMENTS["interdisciplinary-projects"]}:
+    if set(a.department for a in adapters) != set(DEPARTMENTS.values()) - {
+        DEPARTMENTS["interdisciplinary-projects"], DEPARTMENTS["other-projects"]
+    }:
         raise RuntimeError("Unexpected department in chair inventory")
     return adapters
 
@@ -129,6 +132,8 @@ BY_SLUG = {adapter.slug: adapter for adapter in REGISTRY}
 
 
 IDP_HUB_URL = "https://www.cit.tum.de/en/cit/studies/degree-programs/master-informatics/interdisciplinary-project/"
+IDP_ENERGY_WIKI_URL = "https://collab.dvb.bayern/pages/viewpage.action?pageId=76053729"
+IDP_HCTL_PROJECTS_URL = "https://www.edu.sot.tum.de/en/hctl/teaching/interdisciplinary-projects/"
 IDP_MARKERS = ("idp", "interdisciplinary project", "interdisziplinäres projekt")
 IDP_EXCLUDED_TITLES = {
     "Chair of Aerodynamics and Fluid Mechanics": ("interdisciplinary project (idp)",),
@@ -151,6 +156,12 @@ IDP_EXCLUDED_TITLES = {
 }
 
 IDP_SOURCE_OVERRIDES = {
+    "Professorship of Energy Management Technologies": {
+        "child_url_patterns": (IDP_ENERGY_WIKI_URL,),
+    },
+    "Human-Centered Technologies for Learning": {
+        "child_url_patterns": (IDP_HCTL_PROJECTS_URL,),
+    },
     "Chair of Aerodynamics and Fluid Mechanics": {
         "candidate_selectors": ("table.ce-table tr",),
         "title_selector": "td a",
@@ -201,11 +212,22 @@ def _load_idp_registry() -> tuple[ChairAdapter, ...]:
         **IDP_SOURCE_OVERRIDES.get(row["chair_name"], {}),
     ) for row in rows)
     adapters = (hub, *chairs)
-    if len(adapters) != 31 or len({adapter.slug for adapter in adapters}) != len(adapters):
-        raise RuntimeError("IDP inventory must contain the hub and 30 unique chair records")
+    if len(adapters) != 29 or len({adapter.slug for adapter in adapters}) != len(adapters):
+        raise RuntimeError("IDP inventory must contain the hub and 28 unique chair records")
     return adapters
 
 
+def _load_other_registry() -> tuple[ChairAdapter, ...]:
+    rows = json.loads(_inventory_path("tum_other_sources.json").read_text(encoding="utf-8"))
+    if len(rows) != 1 or any(set(row) != {"name", "url"} for row in rows):
+        raise RuntimeError("Other source inventory must contain its audited name and URL")
+    return tuple(ChairAdapter(slug=f"other-{_slug(row['name'])}", name=row["name"],
+                              department=DEPARTMENTS["other-projects"], source_urls=(row["url"],),
+                              family=_family(row["url"]), opportunity_type="other", state=SourceState.active)
+                 for row in rows)
+
+
 IDP_REGISTRY = _load_idp_registry()
-ALL_REGISTRY = (*REGISTRY, *IDP_REGISTRY)
+OTHER_REGISTRY = _load_other_registry()
+ALL_REGISTRY = (*REGISTRY, *IDP_REGISTRY, *OTHER_REGISTRY)
 ALL_BY_SLUG = {adapter.slug: adapter for adapter in ALL_REGISTRY}

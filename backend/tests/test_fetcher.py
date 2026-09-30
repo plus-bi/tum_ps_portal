@@ -55,3 +55,18 @@ def test_retryable_status_is_retried(monkeypatch):
     result = asyncio.run(fetcher.fetch("https://one.test/start"))
     assert result.content == b"ok"
     assert attempts == 2
+
+
+def test_cached_robots_delay_is_used_for_second_request(monkeypatch):
+    waits = []
+    class DelayedRobots(RecordingRobots):
+        def crawl_delay(self, url): return 60
+    async def record_sleep(seconds): waits.append(seconds)
+    monkeypatch.setattr("app.ingestion.fetcher.asyncio.sleep", record_sleep)
+    fetcher = PoliteFetcher(delay_seconds=1, robots=DelayedRobots(),
+                            transport=httpx.MockTransport(lambda request: httpx.Response(200, content=b"ok")))
+    async def fetch_twice():
+        await fetcher.fetch("https://example.test/one")
+        await fetcher.fetch("https://example.test/two")
+    asyncio.run(fetch_twice())
+    assert len(waits) == 1 and waits[0] > 59

@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-09-23T08:27:44.467187+00:00",
+  "generated_at": "2026-09-30T08:31:20.558867+00:00",
   "user_agent": "TUM-Project-Studies-Portal",
   "origins": [
     {
-      "origin": "http://www.mmk.ei.tum.de",
-      "robots_url": "http://www.mmk.ei.tum.de/robots.txt",
+      "origin": "https://collab.dvb.bayern",
+      "robots_url": "https://collab.dvb.bayern/robots.txt",
       "status": 200,
-      "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "sha256": "e92accc2a064853008dd51b0c29c9468933cff5f3b6709aa92e535bb9d22d605",
+      "final_url": "https://collab.dvb.bayern/robots.txt",
+      "sha256": "f76dab8dc50e99cd0fca02f7a3c78d1d4647d5770337eab2256c270d235f63f2",
       "policy": "rules_applied",
-      "crawl_delay": null,
+      "crawl_delay": 60,
       "urls": [
         {
-          "url": "http://www.mmk.ei.tum.de/studentische-arbeiten/themen-fuer-studentische-arbeiten/",
+          "url": "https://collab.dvb.bayern/pages/viewpage.action?pageId=76053729",
           "allowed": true
         }
       ],
@@ -57,46 +57,6 @@
       "policy": "rules_applied",
       "crawl_delay": null,
       "urls": [
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1575380/6xleach3yut50zxd52g4ej5nq.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1575381/l3ody4q77qz50tj1t26w2s744.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1621022/a3uqny5wsoeo2ah6zkw543dvz.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1699966/8fwiqa8onqgdail0kgkcbn10c.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1699967/81in9wtdfjq7f2ajor5oc2aq3.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1747541/quomwz47su8is8b14q93twhaw.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1793522/gtuyl9vb8movrm64zf3mvtco8.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1834953/4zqlrau32gucu4ibrrqm56yxt.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1849823/m46regio0b749vnm7d2ccbojj.PS%20Zooplus_parcel%20forecasting.pdf",
-          "allowed": true
-        },
-        {
-          "url": "https://mediatum.ub.tum.de/doc/1856972/cr38x6qii2oi3jm427ddi66s1.pdf",
-          "allowed": true
-        },
         {
           "url": "https://mediatum.ub.tum.de/doc/1859843/7s972sbn3fn9o6em4gh3qbs4k.pdf",
           "allowed": true
@@ -154,7 +114,15 @@
           "allowed": true
         },
         {
+          "url": "https://www.ce.cit.tum.de/en/ldv/studentische-arbeiten/idp/",
+          "allowed": true
+        },
+        {
           "url": "https://www.ce.cit.tum.de/en/lmt/student-thesis/",
+          "allowed": true
+        },
+        {
+          "url": "https://www.ce.cit.tum.de/mmk/studentische-arbeiten/",
           "allowed": true
         }
       ],
@@ -202,23 +170,11 @@
       "crawl_delay": null,
       "urls": [
         {
-          "url": "https://www.edu.sot.tum.de/hctl/teaching/idp-projects/",
+          "url": "https://www.edu.sot.tum.de/en/hctl/teaching/interdisciplinary-projects/",
           "allowed": true
-        }
-      ],
-      "compliant": true
-    },
-    {
-      "origin": "https://www.ei.tum.de",
-      "robots_url": "https://www.ei.tum.de/robots.txt",
-      "status": 200,
-      "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "sha256": "5e1d6ea14203049945c1baba9ff1caac6ba613fe79e701e6ea3cbaa00a30a6fd",
-      "policy": "rules_applied",
-      "crawl_delay": null,
-      "urls": [
+        },
         {
-          "url": "https://www.ei.tum.de/ldv/studentische-arbeiten/",
+          "url": "https://www.edu.sot.tum.de/hctl/teaching/",
           "allowed": true
         }
       ],
@@ -423,22 +379,6 @@
         },
         {
           "url": "https://www.ie.mgt.tum.de/tim/teaching/project-studiesidp/",
-          "allowed": true
-        }
-      ],
-      "compliant": true
-    },
-    {
-      "origin": "https://www.in.tum.de",
-      "robots_url": "https://www.in.tum.de/robots.txt",
-      "status": 200,
-      "final_url": "https://www.cit.tum.de/cit/startseite/",
-      "sha256": "90a3bee3c565f89c96ab44c233bf21ff8d3e5aafb25b1b539a2407e10a5386c7",
-      "policy": "rules_applied",
-      "crawl_delay": null,
-      "urls": [
-        {
-          "url": "https://www.in.tum.de/i17/news/news-single-view/article/student-projects-and-theses-develop-a-business-game/",
           "allowed": true
         }
       ],

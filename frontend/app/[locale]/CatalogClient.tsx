@@ -12,7 +12,7 @@ import styles from "./CatalogClient.module.css";
 type ProfileFilters = {degree_level: ("bachelor" | "master" | "any")[] | null; work_modes: string[] | null; programming_performed: "none" | "some" | "central" | "unknown"; programming_required: "required" | "recommended" | "not_stated"; work_location_mode: "on_site" | "hybrid" | "remote" | "unknown"; working_language: ("en" | "de" | "other")[] | null};
 type ProfileField = keyof ProfileFilters;
 type OrganizationMention = {name: string; canonical_name: string | null; evidence: {page: number; excerpt: string}; method: string};
-export type Project = {slug: string; reference_code: string; title: string; summary?: string; department: string; chair: string | null; source_name?: string | null; academic_units?: OrganizationMention[]; project_partners?: OrganizationMention[]; opportunity_type: "project_study" | "idp"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; has_description?: boolean; filter_values?: ProfileFilters | null; published_at?: string; first_seen_at: string};
+export type Project = {slug: string; reference_code: string; title: string; summary?: string; department: string; chair: string | null; source_name?: string | null; academic_units?: OrganizationMention[]; project_partners?: OrganizationMention[]; opportunity_type: "project_study" | "idp" | "other"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; has_description?: boolean; filter_values?: ProfileFilters | null; published_at?: string; first_seen_at: string};
 export type Chair = {slug: string; name: string; department: string; source_state: string};
 
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
@@ -87,7 +87,7 @@ function matchesProfileFacet(project: Project, field: ProfileField, selected: Se
 export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, chairs, publishedProfileFilters, initialSavedOnly = false}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; chairs: Chair[]; publishedProfileFilters: string[]; initialSavedOnly?: boolean}) {
   const [query, setQuery] = useState("");
   const [selectedAgeBands, setSelectedAgeBands] = useState<Set<AgeBand>>(() => new Set());
-  const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp"]));
+  const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp", "other"]));
   const [selectedProfileValues, setSelectedProfileValues] = useState<Record<ProfileField, Set<string>>>(() => Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
   const [includeUnknown, setIncludeUnknown] = useState<Set<ProfileField>>(() => new Set());
   const [sortBy, setSortBy] = useState<SortBy>("publication_date");
@@ -174,13 +174,13 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
     setCurrentPage(1);
     setQuery("");
     setSelectedAgeBands(new Set());
-    setSelectedTypes(new Set(["project_study", "idp"]));
+    setSelectedTypes(new Set(["project_study", "idp", "other"]));
     setSelectedProfileValues(Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
     setIncludeUnknown(new Set());
     setSavedOnly(false);
   }
 
-  const filtersActive = query !== "" || selectedAgeBands.size > 0 || selectedTypes.size !== 2 || savedOnly || publishedFields.some((field) => selectedProfileValues[field].size > 0 || includeUnknown.has(field));
+  const filtersActive = query !== "" || selectedAgeBands.size > 0 || selectedTypes.size !== 3 || savedOnly || publishedFields.some((field) => selectedProfileValues[field].size > 0 || includeUnknown.has(field));
   const ageLabels: Record<AgeBand, string> = {lt3: copy.under3, lt30: copy.under30, lt60: copy.under60, lt180: copy.under180, gt180: copy.over180};
 
   function renderProfileFacet(field: ProfileField) {
@@ -224,6 +224,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
             <fieldset><legend>{copy.type}</legend><div className="chips">
               <label className="chip"><input type="checkbox" checked={selectedTypes.has("project_study")} onChange={(event) => toggleType("project_study", event.target.checked)}/><span>Project Study</span></label>
               <label className="chip"><input type="checkbox" checked={selectedTypes.has("idp")} onChange={(event) => toggleType("idp", event.target.checked)}/><span>IDP</span></label>
+              <label className="chip"><input type="checkbox" checked={selectedTypes.has("other")} onChange={(event) => toggleType("other", event.target.checked)}/><span>{lang === "de" ? "Sonstige" : "Others"}</span></label>
             </div></fieldset>
             <fieldset><legend>{copy.age}</legend><div className="chips">{ageBands.map((band) => <label className="chip" key={band}><input type="checkbox" checked={selectedAgeBands.has(band)} onChange={(event) => toggleAgeBand(band, event.target.checked)}/><span>{ageLabels[band]}</span></label>)}</div></fieldset>
             {publishedFields.map(renderProfileFacet)}
@@ -245,7 +246,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
             <p className="meta">{organizationNames(project).length ? organizationNames(project).map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
             <h2>{project.title}</h2>
             <p className="card-summary">{project.summary || copy.unknown}</p>
-            <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
+            <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : project.opportunity_type === "other" ? (lang === "de" ? "Sonstige" : "Others") : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
             <p className="links">
               <BookmarkButton slug={project.slug} lang={lang} saved={savedSlugs.has(project.slug)} onToggle={toggleBookmark} disabled={!bookmarksLoaded}/>
               {(project.has_profile || project.has_description) && <Link className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}

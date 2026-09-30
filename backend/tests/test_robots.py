@@ -20,3 +20,9 @@ def test_cached_rules_are_enforced(tmp_path):
 def test_404_allows_and_missing_cache_fails_closed(tmp_path):
     assert policy(tmp_path, 404, "allow_all_no_policy").allowed("https://example.test/anything")
     with pytest.raises(RobotsPolicyUnavailable): CachedRobotsPolicy(tmp_path / "missing").allowed("https://example.test/")
+
+
+def test_cached_crawl_delay_is_available_to_fetcher(tmp_path):
+    rules = policy(tmp_path, 200, "rules_applied", "User-agent: *\nCrawl-delay: 60\n")
+    rules.records["https://example.test"]["crawl_delay"] = 60
+    assert rules.crawl_delay("https://example.test/topics") == 60

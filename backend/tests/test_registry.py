@@ -1,5 +1,5 @@
 from collections import Counter
-from app.ingestion.registry import ALL_REGISTRY, BY_SLUG, IDP_REGISTRY, REGISTRY, SourceState
+from app.ingestion.registry import ALL_REGISTRY, BY_SLUG, IDP_REGISTRY, OTHER_REGISTRY, REGISTRY, SourceState
 
 
 def test_all_32_chairs_have_dedicated_entries():
@@ -16,13 +16,21 @@ def test_all_32_chairs_have_dedicated_entries():
 
 
 def test_official_informatics_idp_hub_and_all_published_chair_sources_are_registered():
-    assert len(IDP_REGISTRY) == 31
-    assert len(ALL_REGISTRY) == 63
+    assert len(IDP_REGISTRY) == 29
+    assert len(OTHER_REGISTRY) == 1
+    assert len(ALL_REGISTRY) == 62
     hub = IDP_REGISTRY[0]
     assert hub.slug == "informatics-idp-hub"
     assert hub.opportunity_type == "idp"
     assert hub.source_implies_active_type
     assert all(adapter.opportunity_type == "idp" for adapter in IDP_REGISTRY)
+    assert "idp-chair-for-information-systems" not in {adapter.slug for adapter in IDP_REGISTRY}
+    assert next(a for a in IDP_REGISTRY if a.slug == "idp-chair-for-data-processing").source_urls == (
+        "https://www.ce.cit.tum.de/en/ldv/studentische-arbeiten/idp/",)
+    assert next(a for a in IDP_REGISTRY if a.slug == "idp-chair-of-human-machine-communication").source_urls == (
+        "https://www.ce.cit.tum.de/mmk/studentische-arbeiten/",)
+    assert OTHER_REGISTRY[0].slug == "other-tum-data-innovation-lab"
+    assert OTHER_REGISTRY[0].opportunity_type == "other"
 
 
 def test_approved_placeholder_titles_are_excluded_by_their_owning_chairs():

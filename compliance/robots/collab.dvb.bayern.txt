@@ -1,0 +1,28 @@
+User-agent: *
+crawl-delay:  60
+
+
+Disallow: /pages/createpage.action
+Disallow: /pages/diffpagesbyversion.action
+Disallow: /pages/doexportpage.action
+Disallow: /pages/downloadallattachments.action
+Disallow: /pages/listorphanedpages.action
+Disallow: /pages/reorderpages.action
+Disallow: /pages/viewinfo.action
+Disallow: /pages/viewpageattachments.action
+Disallow: /pages/viewpreviousversions.action
+Disallow: /plugins/viewsource/viewpagesrc.action
+Disallow: /spaces/browsespace.action?key=~
+Disallow: /spaces/createrssfeed.action
+Disallow: /spaces/flyingpdf
+Disallow: /spaces/listattachmentsforspace.action
+Disallow: /spaces/listrssfeeds.action
+Disallow: /spaces/scroll-viewport/config.action
+Disallow: /spaces/spacetools.action
+Disallow: /spaces/viewspacesummary.action
+Disallow: /spaces/viewstylesheet.action
+
+# LRZ
+Disallow: /pages/diffpages.action
+#Disallow: /favicon.ico
+Disallow: /login

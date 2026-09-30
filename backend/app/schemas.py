@@ -23,6 +23,7 @@ class Freshness(StrEnum):
 class OpportunityType(StrEnum):
     project_study = "project_study"
     idp = "idp"
+    other = "other"
 
 
 class Topic(StrEnum):

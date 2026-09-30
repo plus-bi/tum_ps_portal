@@ -4,12 +4,12 @@ from sqlalchemy.orm import Session
 from .db import Listing
 
 
-_REFERENCE_LOCKS = {"ps": 1_879_001, "idp": 1_879_002}
+_REFERENCE_LOCKS = {"ps": 1_879_001, "idp": 1_879_002, "oth": 1_879_003}
 
 
 def next_reference_code(session: Session, opportunity_type: str) -> str:
     """Allocate a stable, per-type public reference code in the current transaction."""
-    prefix = "idp" if opportunity_type == "idp" else "ps"
+    prefix = {"project_study": "ps", "idp": "idp", "other": "oth"}[opportunity_type]
     bind = session.get_bind()
     if bind.dialect.name == "postgresql":
         session.execute(text("SELECT pg_advisory_xact_lock(:lock_id)"), {"lock_id": _REFERENCE_LOCKS[prefix]})

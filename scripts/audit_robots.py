@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import asyncio
+import argparse
 import hashlib
 import json
 import sys
@@ -43,13 +44,22 @@ def policy_result(text: str, url: str) -> tuple[bool, float | None]:
     return parser.can_fetch(USER_AGENT, url), parser.crawl_delay(USER_AGENT) or parser.crawl_delay("*")
 
 
-async def main() -> int:
+async def main(selected_origins: set[str] | None = None) -> int:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     urls = crawl_urls()
     origins = sorted({f"{urlparse(url).scheme}://{urlparse(url).netloc}" for url in urls} | {"https://www.tum.de"})
-    records = []
+    if selected_origins is not None:
+        unknown = selected_origins - set(origins)
+        if unknown:
+            raise ValueError(f"No configured crawl URL for: {', '.join(sorted(unknown))}")
+    existing_path = OUTPUT / "manifest.json"
+    existing = (json.loads(existing_path.read_text(encoding="utf-8"))["origins"]
+                if selected_origins is not None and existing_path.exists() else [])
+    by_origin = {record["origin"]: record for record in existing}
     async with httpx.AsyncClient(follow_redirects=True, timeout=20, headers={"User-Agent": f"{USER_AGENT}/1.0"}) as client:
         for origin in origins:
+            if selected_origins is not None and origin not in selected_origins:
+                continue
             robots_url = f"{origin}/robots.txt"; host = urlparse(origin).netloc
             relevant = [url for url in sorted(urls) if urlparse(url).netloc == host]
             record = {"origin": origin, "robots_url": robots_url}
@@ -73,9 +83,10 @@ async def main() -> int:
                 (OUTPUT / f"{host}.txt").write_text("", encoding="utf-8")
                 record.update(status="error", policy="temporarily_unavailable_defer_crawl", compliant=False,
                               error=f"{type(error).__name__}: {error}", urls=[{"url": url, "allowed": False} for url in relevant])
-            records.append(record)
+            by_origin[origin] = record
             print(f"{host}: {record['status']} ({record['policy']})", flush=True)
 
+    records = [by_origin[origin] for origin in origins if origin in by_origin]
     generated = datetime.now(timezone.utc).isoformat()
     report = {"generated_at": generated, "user_agent": USER_AGENT, "origins": records}
     (OUTPUT / "manifest.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
@@ -97,4 +108,8 @@ async def main() -> int:
     return 0 if all(r["compliant"] for r in records) else 1
 
 
-if __name__ == "__main__": raise SystemExit(asyncio.run(main()))
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--origin", action="append", help="Refresh only this configured origin")
+    args = parser.parse_args()
+    raise SystemExit(asyncio.run(main(set(args.origin) if args.origin else None)))

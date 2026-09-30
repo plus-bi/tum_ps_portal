@@ -84,7 +84,7 @@ class HtmlParser:
         soup = BeautifulSoup(content, "html.parser"); links = set()
         for anchor in soup.find_all("a", href=True):
             absolute = urljoin(source_url, anchor["href"]); label = f"{' '.join(anchor.stripped_strings)} {absolute}".casefold()
-            matches = (any(pattern in absolute.casefold() for pattern in adapter.child_url_patterns)
+            matches = (any(pattern.casefold() in absolute.casefold() for pattern in adapter.child_url_patterns)
                        if adapter.child_url_patterns else any(marker in label for marker in adapter.child_link_markers))
             if matches and not any(marker in label for marker in adapter.excluded_markers): links.add(absolute)
         return sorted(links)
@@ -94,6 +94,53 @@ class Typo3Parser(HtmlParser): pass
 class SquarespaceParser(HtmlParser): pass
 class LegacyHtmlParser(HtmlParser): pass
 PARSERS = {"typo3": Typo3Parser(), "squarespace": SquarespaceParser(), "legacy_html": LegacyHtmlParser()}
+
+
+class ManagementAccountingParser(HtmlParser):
+    """Extract the chair's linked proposals, excluding completed project studies."""
+
+    _proposal_sections = {"recent proposals", "older proposals"}
+    _document_suffixes = (".pdf", ".doc", ".docx", ".png")
+
+    def discover(self, adapter: ChairAdapter, source_url: str, content: bytes) -> list[Candidate]:
+        soup = BeautifulSoup(content, "html.parser")
+        results: dict[str, Candidate] = {}
+
+        def add(link: Tag) -> None:
+            document_url = urljoin(source_url, link["href"])
+            if not urlparse(document_url).path.casefold().endswith(self._document_suffixes):
+                return
+            title = " ".join(link.stripped_strings)
+            if not title or document_url in results:
+                return
+            key = adapter.stable_key(document_url, title)
+            results[document_url] = Candidate(key, title, document_url, document_url, title)
+
+        for frame in soup.select("div.frame"):
+            for heading in frame.find_all("p", recursive=False):
+                strong = heading.find("strong")
+                if strong is None:
+                    continue
+                label = " ".join(strong.stripped_strings).casefold().rstrip(":")
+                if label in {"current topics", "aktuelle themen"}:
+                    for sibling in heading.next_siblings:
+                        if not isinstance(sibling, Tag):
+                            continue
+                        if sibling.name not in {"p", "ul"} or sibling.find("strong") and not sibling.find("a"):
+                            break
+                        for link in sibling.find_all("a", href=True):
+                            add(link)
+                    continue
+                if label not in self._proposal_sections:
+                    continue
+                proposals = heading.find_next_sibling()
+                if proposals is None or proposals.name != "ul":
+                    continue
+                for item in proposals.find_all("li", recursive=False):
+                    link = item.find("a", href=True)
+                    if link is not None:
+                        add(link)
+        return list(results.values())
 
 
 class LmtIdpParser(HtmlParser):
@@ -175,6 +222,7 @@ class LmtIdpParser(HtmlParser):
 
 
 def parser_for(adapter: ChairAdapter) -> HtmlParser:
-    if adapter.slug == "idp-chair-of-media-technology":
-        return LmtIdpParser()
+    from .specialized import SPECIALIZED_PARSERS
+    if adapter.slug in SPECIALIZED_PARSERS:
+        return SPECIALIZED_PARSERS[adapter.slug]
     return PARSERS[adapter.family]
