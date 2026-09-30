@@ -12,7 +12,7 @@ import styles from "./CatalogClient.module.css";
 type ProfileFilters = {degree_level: ("bachelor" | "master" | "any")[] | null; work_modes: string[] | null; programming_performed: "none" | "some" | "central" | "unknown"; programming_required: "required" | "recommended" | "not_stated"; work_location_mode: "on_site" | "hybrid" | "remote" | "unknown"; working_language: ("en" | "de" | "other")[] | null};
 type ProfileField = keyof ProfileFilters;
 type OrganizationMention = {name: string; canonical_name: string | null; evidence: {page: number; excerpt: string}; method: string};
-export type Project = {slug: string; reference_code: string; title: string; summary?: string; department: string; chair: string | null; source_name?: string | null; academic_units?: OrganizationMention[]; project_partners?: OrganizationMention[]; opportunity_type: "project_study" | "idp" | "other"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; has_description?: boolean; filter_values?: ProfileFilters | null; published_at?: string; first_seen_at: string};
+export type Project = {slug: string; reference_code: string; title: string; summary?: string; search_summary_en?: string; department: string; chair: string | null; source_name?: string | null; academic_units?: OrganizationMention[]; project_partners?: OrganizationMention[]; opportunity_type: "project_study" | "idp" | "other"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; has_description?: boolean; filter_values?: ProfileFilters | null; published_at?: string; first_seen_at: string};
 export type Chair = {slug: string; name: string; department: string; source_state: string};
 
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
@@ -238,7 +238,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
             <span className={styles.referenceCode}>{project.reference_code}</span>
             <p className="meta">{organizationNames(project).length ? organizationNames(project).map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
             <h2>{project.title}</h2>
-            <p className="card-summary">{project.summary || copy.unknown}</p>
+            <p className="card-summary">{project.search_summary_en || project.summary || copy.unknown}</p>
             <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : project.opportunity_type === "other" ? (lang === "de" ? "Sonstige" : "Others") : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
             <p className="links">
               <BookmarkButton slug={project.slug} lang={lang} saved={savedSlugs.has(project.slug)} onToggle={toggleBookmark} disabled={!bookmarksLoaded}/>

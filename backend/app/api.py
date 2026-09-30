@@ -28,6 +28,7 @@ PROJECTS = [Project(
 
 def _project_from_listing(listing: Listing, chair: Chair, department: Department,
                           *, has_profile: bool = False,
+                          search_summary_en: str | None = None,
                           filter_values: ProfileFilterValues | None = None,
                           academic_units: list[OrganizationMention] | None = None,
                           project_partners: list[OrganizationMention] | None = None) -> Project:
@@ -39,6 +40,7 @@ def _project_from_listing(listing: Listing, chair: Chair, department: Department
                        == html_description_hash(source_url, markdown))
     return Project(slug=listing.slug, reference_code=listing.reference_code,
                    title=listing.title, summary=listing.summary,
+                   search_summary_en=search_summary_en,
                    department=department.name,
                    chair=((units[0].canonical_name or units[0].name) if units else None)
                    if chair.slug == "informatics-idp-hub" else chair.name,
@@ -128,6 +130,7 @@ def persisted_projects() -> list[Project]:
                 projects.append(_project_from_listing(
                     listing, chair, department,
                     has_profile=content_hash in profile_ids,
+                    search_summary_en=(offer.search_summary_en if offer and offer.search_summary_en.strip() else None),
                     filter_values=values_from_offer(offer) if offer else None,
                     academic_units=_mentions(organizations.get((listing.id, pdf_hash)), "academic_units"),
                     project_partners=_mentions(organizations.get((listing.id, pdf_hash)), "project_partners"),

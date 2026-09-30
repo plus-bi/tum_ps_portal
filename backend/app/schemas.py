@@ -71,6 +71,7 @@ class Project(BaseModel):
     reference_code: str
     title: str
     summary: str | None = None
+    search_summary_en: str | None = None
     department: str
     chair: str | None
     source_name: str | None = None
