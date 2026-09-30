@@ -1,4 +1,5 @@
 import Link from "next/link";
+import {AnalyticsSettingsButton} from "../AnalyticsConsent";
 import Disclaimer from "./Disclaimer";
 
 export default function SiteFooter({lang}: {lang: "en" | "de"}) {
@@ -7,6 +8,7 @@ export default function SiteFooter({lang}: {lang: "en" | "de"}) {
     <nav className="footer-links" aria-label={lang === "de" ? "Rechtliche Informationen" : "Legal information"}>
       <Link href={`/${lang}/terms`}>{lang === "de" ? "Nutzungsbedingungen" : "Terms of service"}</Link>
       <Link href={`/${lang}/privacy`}>{lang === "de" ? "Datenschutzerklärung" : "Privacy policy"}</Link>
+      <AnalyticsSettingsButton lang={lang}/>
     </nav>
   </div></footer>;
 }
