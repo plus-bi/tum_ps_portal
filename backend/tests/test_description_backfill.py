@@ -137,6 +137,33 @@ def test_unapproved_child_url_is_never_fetched():
     assert not description_backfill._allowed(target)
 
 
+def test_description_backfill_can_be_scoped_to_crawled_chairs(tmp_path, monkeypatch):
+    test_engine = create_engine(f"sqlite:///{tmp_path / 'chair-scoped-descriptions.db'}")
+    monkeypatch.setattr(db, "_engine", test_engine)
+    Base.metadata.create_all(test_engine)
+    with db.session_factory()() as session:
+        department = Department(slug="idp", name="Interdisciplinary Projects")
+        session.add(department)
+        session.flush()
+        selected = Chair(department_id=department.id, slug="other-tum-data-innovation-lab",
+                         name="TUM Data Innovation Lab")
+        excluded = Chair(department_id=department.id, slug="another-chair", name="Another Chair")
+        session.add_all([selected, excluded])
+        session.flush()
+        for chair, slug, reference in ((selected, "selected-project", "oth-101"),
+                                       (excluded, "excluded-project", "oth-102")):
+            session.add(Listing(chair_id=chair.id, stable_source_key=slug, slug=slug,
+                                reference_code=reference, title="Project offer", summary="Short summary.",
+                                normalized={"source_url": "https://www.mdsi.tum.de/en/di-lab/projects/"},
+                                content_hash=slug, status=Status.active))
+        session.commit()
+
+    selected_targets = description_backfill._targets(chair_slugs={"other-tum-data-innovation-lab"})
+    assert [target.listing_id for target in selected_targets]
+    assert all(target.chair_slug == "other-tum-data-innovation-lab" for target in selected_targets)
+    assert description_backfill._targets(chair_slugs=set()) == []
+
+
 def test_failed_description_fetch_keeps_active_listing(tmp_path, monkeypatch):
     test_engine = create_engine(f"sqlite:///{tmp_path / 'failed-description.db'}")
     monkeypatch.setattr(db, "_engine", test_engine)

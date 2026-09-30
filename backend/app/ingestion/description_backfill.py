@@ -91,10 +91,15 @@ def _allowed(target: DescriptionTarget) -> bool:
                for prefix in CHILD_URL_PATTERNS.get(target.chair_slug, ()))
 
 
-def _targets() -> list[DescriptionTarget]:
+def _targets(*, chair_slugs: set[str] | None = None) -> list[DescriptionTarget]:
     with session_factory()() as session:
-        rows = session.execute(select(Listing, Chair).join(Chair, Listing.chair_id == Chair.id)
-                               .where(Listing.status == Status.active)).all()
+        statement = (select(Listing, Chair).join(Chair, Listing.chair_id == Chair.id)
+                     .where(Listing.status == Status.active))
+        if chair_slugs is not None:
+            if not chair_slugs:
+                return []
+            statement = statement.where(Chair.slug.in_(chair_slugs))
+        rows = session.execute(statement).all()
         targets = []
         for listing, chair in rows:
             normalized = listing.normalized or {}
@@ -135,9 +140,10 @@ def _store(target: DescriptionTarget, markdown: str, source_url: str, fetched_ha
 
 
 async def run_description_backfill(*, limit: int | None = None, dry_run: bool = False,
+                                   chair_slugs: set[str] | None = None,
                                    fetcher: PoliteFetcher | None = None) -> dict:
     """Convert each eligible active listing; leave failures and lifecycle untouched."""
-    targets = _targets()
+    targets = _targets(chair_slugs=chair_slugs)
     if limit is not None:
         targets = targets[:limit]
     summary = {"selected": len(targets), "converted": 0, "fallback_inline": 0,

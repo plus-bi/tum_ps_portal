@@ -23,10 +23,22 @@ def classify_stored_pdfs() -> dict[str, int]:
         artifacts = list(session.scalars(select(PDFArtifact).where(
             PDFArtifact.content_hash.is_not(None), PDFArtifact.storage_key.is_not(None),
         )))
+        analyses = {content_hash: (classifier_version, has_pages)
+                    for content_hash, classifier_version, has_pages in session.execute(select(
+                        PDFAnalysis.content_hash, PDFAnalysis.classifier_version,
+                        PDFAnalysis.extracted_markdown_pages.is_not(None),
+                    ))}
 
     unique_artifacts = {artifact.content_hash: artifact for artifact in artifacts}
-    summary = {"digital_native": 0, "scanned": 0, "mixed": 0, "unknown": 0}
-    for content_hash, artifact in unique_artifacts.items():
+    pending = {
+        content_hash: artifact for content_hash, artifact in unique_artifacts.items()
+        if (content_hash not in analyses
+            or analyses[content_hash][0] != CLASSIFIER_VERSION
+            or not analyses[content_hash][1])
+    }
+    summary = {"digital_native": 0, "scanned": 0, "mixed": 0, "unknown": 0,
+               "already_current": len(unique_artifacts) - len(pending)}
+    for content_hash, artifact in pending.items():
         classification = "unknown"
         details: dict[str, int | str] = {"useful_text_threshold_characters_per_page": USEFUL_TEXT_THRESHOLD}
         pages: list[str] | None = None

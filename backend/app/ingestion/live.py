@@ -8,6 +8,7 @@ from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from typing import Iterable
+from urllib.parse import urlparse
 
 from sqlalchemy import select, text
 
@@ -67,6 +68,33 @@ def _deduplicate(candidates: Iterable[Candidate]) -> tuple[Candidate, ...]:
         if previous is None or len(candidate.source_text) < len(previous.source_text):
             chosen[identity] = candidate
     return tuple(chosen.values())
+
+
+def _project_source_types(candidate: Candidate, listing_page_url: str) -> list[str]:
+    """Return compact source-type labels for a newly discovered listing."""
+    source_types: set[str] = set()
+    urls = (candidate.source_url, candidate.pdf_url)
+    for url in urls:
+        if not url:
+            continue
+        path = urlparse(url).path.casefold()
+        if path.endswith(".pdf"):
+            source_types.add("pdf")
+        elif path.endswith((".doc", ".docx", ".odt", ".rtf")):
+            source_types.add("doc")
+        elif path.endswith((".png", ".jpg", ".jpeg", ".gif", ".webp")):
+            source_types.add("png" if path.endswith(".png") else "image")
+        elif path.endswith((".html", ".htm")):
+            source_types.add("html")
+        elif url != listing_page_url:
+            # Chair detail pages commonly have extensionless URLs.
+            source_types.add("html")
+        elif candidate.description_markdown:
+            source_types.add("html")
+        else:
+            # The project was found as a card on its chair's HTML listing.
+            source_types.add("html")
+    return sorted(source_types or {"other"})
 
 
 async def discover_adapter(adapter: ChairAdapter, fetcher: PoliteFetcher, *, etag: str | None = None,
@@ -169,6 +197,7 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
                                            extracted_text=artifact.extracted_text))
 
         seen_keys: set[str] = set()
+        new_projects: list[dict[str, object]] = []
         created = updated = unchanged = 0
         for candidate in result.candidates:
             seen_keys.add(candidate.stable_source_key)
@@ -200,6 +229,12 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
                 )
                 session.add(listing); session.flush(); _version(session, listing, digest, normalized, candidate.source_text)
                 created += 1
+                new_projects.append({
+                    "slug": listing.slug,
+                    "reference_code": listing.reference_code,
+                    "title": display_title,
+                    "source_types": _project_source_types(candidate, listing_page_url),
+                })
             else:
                 changed = listing.content_hash != digest
                 previous = listing.normalized or {}
@@ -243,7 +278,7 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
         run.error = json.dumps(result.failures)[:5000] if result.failures else None
         run.finished_at = now
         session.commit()
-    return {"crawl_run_id": str(run_id), "status": status, **stats}
+    return {"crawl_run_id": str(run_id), "status": status, **stats, "new_projects": new_projects}
 
 
 def _persist_not_modified(adapter: ChairAdapter, source_id, chair_id, run_id, result: DiscoveryResult,
@@ -305,7 +340,8 @@ async def ingest_adapter_live(adapter: ChairAdapter, fetcher: PoliteFetcher, *, 
                 stored_pdfs += int(await store_pdf_url(url, fetcher))
             outcome["pdf_artifacts_stored"] = stored_pdfs
         level = logging.WARNING if outcome["status"] == "partial" else logging.INFO
-        log_event(level, "source_crawl_finished", **outcome)
+        log_event(level, "source_crawl_finished",
+                  **{key: value for key, value in outcome.items() if key != "new_projects"})
         return outcome
     except Exception as error:
         return _persist_failure(adapter, source_id, run_id, started_at, error)

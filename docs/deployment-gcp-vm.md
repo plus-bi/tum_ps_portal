@@ -4,11 +4,15 @@ This runbook deploys the portal as the existing Docker Compose stack on one Comp
 
 ## Daily ingestion behavior
 
-Celery Beat enqueues `app.tasks.ingest_all` every day at 03:00 Europe/Berlin. The task fetches the live chair sources through the cached robots policy, follows only adapter-scoped child links, extracts supported HTML/PDF/DOCX content, and writes results through the Celery worker. A PostgreSQL advisory lock prevents overlapping full or manual ingestion runs. Do not run a second external scheduler for the same task.
+Celery Beat enqueues `app.tasks.ingest_all` every day at 03:00 Europe/Berlin. The task fetches all live chair sources through the cached robots policy and follows only adapter-scoped child links. After the crawl, it converts pending PDF artifacts to page Markdown, converts eligible HTML/DOCX/PNG or inline chair descriptions to Markdown, then runs the LLM profile backfill for pending Markdown linked to active projects in chairs whose crawl succeeded, was unchanged, or was partial. Existing successful profiles for the current schema, prompt, model, and effort are skipped. Azure OpenAI credentials are required for profile extraction; PNG transcription also uses the configured Azure OpenAI client. Scanned PDFs without a readable text layer remain flagged for OCR.
+
+A PostgreSQL advisory lock prevents overlapping full or manual ingestion runs. A failed or partial source crawl does not archive listings; successfully observed listings from a partial crawl can still be converted and profiled. Do not run a second external scheduler for the same task.
 
 HTTP requests use per-domain throttling, timeouts, retries, redirect-policy checks, response-size limits, and conditional `ETag`/`Last-Modified` headers for chair pages. Configure these with the `CRAWLER_*` values in `.env`.
 
 Every source attempt creates a `crawl_runs` record with status `success`, `not_modified`, `partial`, or `failed`. Failures are also emitted as structured JSON log messages. A failed or partial crawl never increments a listing's missing count, so a temporary source problem cannot archive a project. Administrators can inspect `/api/v1/admin/source-health` and `/api/v1/admin/crawl-history`, then queue a single-source retry with `POST /api/v1/admin/sources/{source_id}/rescrape`.
+
+Each scheduled or manually queued ingestion task writes a timestamped JSON summary to `/var/lib/portal/artifacts/reports/` on the persistent `artifact_data` volume. Reports include per-chair crawl status, newly created project references/titles, counts of associated PDFs, documents, images, and HTML pages, Markdown/profile totals, and sanitized error types. Source documents, response bodies, provider messages, and credentials are excluded. The source-type counts are per project and may overlap when a project has multiple source types. Include this reports directory in artifact-volume backups if the run history must survive VM or disk loss.
 
 For manual inspection directly on the VM:
 
@@ -26,6 +30,13 @@ docker compose exec -T worker celery -A app.tasks call app.tasks.ingest_source \
 ```
 
 Docker JSON logs are rotated at 10 MB with five files retained per service. The database crawl history remains available after log rotation.
+
+List and inspect recent run summaries:
+
+```bash
+docker compose exec -T worker sh -c 'ls -1t /var/lib/portal/artifacts/reports | head -10'
+docker compose exec -T worker sh -c 'cat "$(ls -1t /var/lib/portal/artifacts/reports/*.json | head -1)"'
+```
 
 ## 1. Create the VM and DNS
 
