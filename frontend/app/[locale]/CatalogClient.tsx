@@ -17,8 +17,7 @@ export type Chair = {slug: string; name: string; department: string; source_stat
 
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
 type OpportunityType = Project["opportunity_type"];
-type SortBy = "publication_date" | "recently_added";
-type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; entitySearch: string; noEntities: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string; noSaved: string; bookmarkError: string};
+type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; entitySearch: string; noEntities: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string; noSaved: string; bookmarkError: string};
 const ageBands: AgeBand[] = ["lt3", "lt30", "lt60", "lt180", "gt180"];
 
 type FacetOption = {value: string; en: string; de: string};
@@ -90,7 +89,6 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
   const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp", "other"]));
   const [selectedProfileValues, setSelectedProfileValues] = useState<Record<ProfileField, Set<string>>>(() => Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
   const [includeUnknown, setIncludeUnknown] = useState<Set<ProfileField>>(() => new Set());
-  const [sortBy, setSortBy] = useState<SortBy>("publication_date");
   const [displayCount, setDisplayCount] = useState("20");
   const [currentPage, setCurrentPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -111,15 +109,11 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
       return matchesAge && matchesType && matchesProfile && (!savedOnly || savedSlugs.has(project.slug)) && (!needle || text.includes(needle));
     });
     return filtered.sort((a, b) => {
-      if (sortBy === "recently_added") {
-        return Date.parse(b.first_seen_at) - Date.parse(a.first_seen_at);
-      }
-      if (!a.published_at && !b.published_at) return Date.parse(b.first_seen_at) - Date.parse(a.first_seen_at);
-      if (!a.published_at) return 1;
-      if (!b.published_at) return -1;
-      return Date.parse(`${b.published_at}T00:00:00Z`) - Date.parse(`${a.published_at}T00:00:00Z`);
+      const aDate = a.published_at ? Date.parse(`${a.published_at}T00:00:00Z`) : Date.parse(a.first_seen_at);
+      const bDate = b.published_at ? Date.parse(`${b.published_at}T00:00:00Z`) : Date.parse(b.first_seen_at);
+      return bDate - aDate || Date.parse(b.first_seen_at) - Date.parse(a.first_seen_at);
     });
-  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, sortBy, savedOnly, savedSlugs]);
+  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, savedOnly, savedSlugs]);
   const pageSize = displayCount === "all" ? displayedProjects.length || 1 : Number(displayCount);
   const pageCount = Math.max(1, Math.ceil(displayedProjects.length / pageSize));
   const activePage = Math.min(currentPage, pageCount);
@@ -207,7 +201,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
     <main>
       <section className="hero"><div className="shell">
         {lastUpdated && <p className="pill"><span className="pill-dot" aria-hidden="true"/>{copy.lastUpdated}: <time dateTime={lastUpdatedAt}>{lastUpdated}</time></p>}
-        <h1>{copy.titleBefore}<span className="highlight">{copy.titleHighlight}</span>{copy.titleAfter}</h1>
+        <h1>{copy.titleBefore}{copy.titleHighlight && <span className="highlight">{copy.titleHighlight}</span>}{copy.titleAfter}</h1>
         <p className="lede">{copy.lede}</p>
         <div className="hero-search"><SearchIcon size={20}/><input className="search" value={query} onChange={(event) => { setQuery(event.target.value); setCurrentPage(1); }} type="search" placeholder={copy.search} aria-label={copy.search}/></div>
         <ul className="trust">
@@ -236,7 +230,6 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
           <div className="results-head">
             <p className="results-count"><strong>{displayedProjects.length}</strong> {displayedProjects.length === 1 ? copy.foundOne : copy.foundMany}</p>
             <div className="controls">
-              <label>{copy.sort} <select value={sortBy} onChange={(event) => { setSortBy(event.target.value as SortBy); setCurrentPage(1); }} aria-label={copy.sort}><option value="publication_date">{copy.publicationDate}</option><option value="recently_added">{copy.recentlyAdded}</option></select></label>
               <label>{copy.display} <select value={displayCount} onChange={(event) => { setDisplayCount(event.target.value); setCurrentPage(1); }} aria-label={copy.display}><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option><option value="all">{copy.all}</option></select></label>
             </div>
           </div>
