@@ -16,6 +16,7 @@ import httpx
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
 from app.ingestion.adapters import parser_for
+from app.ingestion.description_backfill import CHILD_URL_PATTERNS
 from app.ingestion.registry import ALL_REGISTRY
 
 OUTPUT = ROOT / "compliance/robots"
@@ -25,6 +26,7 @@ USER_AGENT = "TUM-Project-Studies-Portal"
 
 def crawl_urls() -> set[str]:
     urls = {adapter.source_urls[0] for adapter in ALL_REGISTRY}
+    urls.update(prefix for patterns in CHILD_URL_PATTERNS.values() for prefix in patterns)
     manifest_path = FIXTURES / "manifest.json"
     if not manifest_path.exists(): return urls
     rows = {row["slug"]: row for row in json.loads(manifest_path.read_text())["sources"]}

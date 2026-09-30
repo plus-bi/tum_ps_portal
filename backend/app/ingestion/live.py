@@ -23,7 +23,7 @@ from .adapters import Candidate, parser_for
 from .documents import extract
 from .fetcher import Fetched, PoliteFetcher
 from .pdf_backfill import is_pdf_url, store_pdf_url
-from .profile_sources import html_description_hash
+from .profile_sources import description_source_url, html_description_hash
 from .registry import ALL_REGISTRY, ChairAdapter, DEPARTMENTS
 from .service import publication_from_title
 
@@ -133,7 +133,7 @@ def _version(session, listing: Listing, digest: str, normalized: dict, source_te
     session.add(ListingVersion(
         listing_id=listing.id, content_hash=digest,
         extracted={"title": listing.title, "summary": listing.summary, **normalized},
-        evidence={"source_url": (normalized["source_url"] if normalized.get("description_markdown")
+            evidence={"source_url": (description_source_url(normalized) if normalized.get("description_markdown")
                                   else normalized["artifact_url"] or normalized["source_url"]),
                   "excerpt": source_text[:1000]},
     ))
@@ -202,6 +202,16 @@ def _persist_success(adapter: ChairAdapter, source_id, chair_id, run_id, result:
                 created += 1
             else:
                 changed = listing.content_hash != digest
+                previous = listing.normalized or {}
+                if (not changed and not candidate.description_markdown and
+                        previous.get("artifact_url") == artifact_url):
+                    # A separate, source-scoped description conversion survives a
+                    # conditional or unchanged chair crawl. Changed offers must be
+                    # converted again so stale detail text is never shown.
+                    for field in ("description_markdown", "description_hash",
+                                  "description_source_url", "description_content_hash"):
+                        if field in previous:
+                            normalized[field] = previous[field]
                 overrides = manual_text_overrides(session, listing.id)
                 listing.title = overrides.get("title", display_title)
                 listing.summary = overrides.get("summary", display_summary)

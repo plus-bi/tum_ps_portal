@@ -27,7 +27,7 @@ from . import llm_client
 from .pdf_reader import render_for_llm
 from .profile_evidence import check_profile_evidence
 from .project_profile import SCHEMA_VERSION, DocumentExtraction, PdfTextCoverage, ProfileExtraction
-from .profile_sources import HtmlMarkdownAnalysis, html_description_hash
+from .profile_sources import HtmlMarkdownAnalysis, description_source_url, html_description_hash
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +84,7 @@ def _analyses() -> list[PDFAnalysis | HtmlMarkdownAnalysis]:
             if not isinstance(normalized, dict):
                 continue
             markdown = normalized.get("description_markdown")
-            source_url = normalized.get("source_url")
+            source_url = description_source_url(normalized)
             content_hash = normalized.get("description_hash")
             if (not isinstance(markdown, str) or not markdown.strip() or not isinstance(source_url, str)
                     or content_hash != html_description_hash(source_url, markdown)):

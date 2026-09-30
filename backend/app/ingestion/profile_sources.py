@@ -8,6 +8,12 @@ from dataclasses import dataclass
 HTML_MARKDOWN_VERSION = "html-description-markdown-v1"
 
 
+def description_source_url(normalized: dict) -> str | None:
+    """The exact document/page used for Markdown, falling back to legacy chair pages."""
+    value = normalized.get("description_source_url") or normalized.get("source_url")
+    return value if isinstance(value, str) else None
+
+
 def html_description_hash(source_url: str, markdown: str) -> str:
     return hashlib.sha256(f"{HTML_MARKDOWN_VERSION}|{source_url}|{markdown}".encode()).hexdigest()
 

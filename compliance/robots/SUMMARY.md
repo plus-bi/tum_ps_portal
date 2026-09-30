@@ -1,6 +1,6 @@
 # Robots.txt compliance audit
 
-Generated: `2026-09-30T08:31:20.558867+00:00`
+Generated: `2026-09-30T09:07:47.262515+00:00`
 
 Crawler token: `TUM-Project-Studies-Portal`
 
@@ -8,6 +8,7 @@ Robots rules are origin-specific. HTTP 4xx responses other than 401/403 are trea
 
 | Origin | HTTP | Policy | Registered/traversed URLs | Allowed |
 |---|---:|---|---:|---:|
+| https://classic.fsmb.de | 404 | allow_all_no_policy | 1 | 1/1 |
 | https://collab.dvb.bayern | 200 | rules_applied | 1 | 1/1 |
 | https://eco.cs.tum.de | 404 | allow_all_no_policy | 1 | 1/1 |
 | https://ede.cs.tum.de | 404 | allow_all_no_policy | 1 | 1/1 |

@@ -5,7 +5,7 @@ from .config import settings
 from .db import Chair, Listing, session_factory
 from .ingestion.live import run_live
 from .ingestion.profile_backfill import run_profile_backfill
-from .ingestion.profile_sources import html_description_hash
+from .ingestion.profile_sources import description_source_url, html_description_hash
 from .ingestion.registry import ALL_BY_SLUG, ALL_REGISTRY, DEPARTMENTS
 from .schemas import Status
 
@@ -38,7 +38,7 @@ def _extract_lmt_after_crawl(outcome: dict) -> dict:
         hashes = set()
         for (normalized,) in normalized_rows:
             markdown = normalized.get("description_markdown")
-            source_url = normalized.get("source_url")
+            source_url = description_source_url(normalized)
             if (isinstance(markdown, str) and markdown.strip() and isinstance(source_url, str)
                     and normalized.get("description_hash") == html_description_hash(source_url, markdown)):
                 hashes.add(normalized["description_hash"])

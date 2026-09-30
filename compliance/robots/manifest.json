@@ -1,7 +1,22 @@
 {
-  "generated_at": "2026-09-30T08:31:20.558867+00:00",
+  "generated_at": "2026-09-30T09:07:47.262515+00:00",
   "user_agent": "TUM-Project-Studies-Portal",
   "origins": [
+    {
+      "origin": "https://classic.fsmb.de",
+      "robots_url": "https://classic.fsmb.de/robots.txt",
+      "status": 404,
+      "final_url": "https://classic.fsmb.de/robots.txt",
+      "sha256": "26c0a96ae799076ca6ddec4ff39649f4e0073256ff67f017b45f3647f84d762c",
+      "policy": "allow_all_no_policy",
+      "compliant": true,
+      "urls": [
+        {
+          "url": "https://classic.fsmb.de/basama-hiwi/entry/",
+          "allowed": true
+        }
+      ]
+    },
     {
       "origin": "https://collab.dvb.bayern",
       "robots_url": "https://collab.dvb.bayern/robots.txt",

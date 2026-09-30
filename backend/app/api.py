@@ -6,7 +6,7 @@ from .ingestion.registry import ALL_REGISTRY, DEPARTMENTS
 from .ingestion.project_profile import DocumentExtraction, EvidenceIssue, PdfTextCoverage, SCHEMA_VERSION
 from .profile_filters import ProfileFilterValues, available_fields, local_preview_enabled, offer_for_listing, values_from_offer
 from .ingestion.organization_attribution import EXTRACTOR_VERSION, OrganizationMention
-from .ingestion.profile_sources import html_description_hash
+from .ingestion.profile_sources import description_source_url, html_description_hash
 from .config import settings
 from .schemas import Freshness, Project, ProjectDescriptionDetail, ProjectProfileDetail, Status, Topic
 from .db import Chair, Department, Listing, OrganizationAttribution, PDFArtifact, PDFProfileExtraction, session_factory
@@ -33,7 +33,7 @@ def _project_from_listing(listing: Listing, chair: Chair, department: Department
                           project_partners: list[OrganizationMention] | None = None) -> Project:
     units = academic_units or []
     markdown = listing.normalized.get("description_markdown")
-    source_url = listing.normalized.get("source_url")
+    source_url = description_source_url(listing.normalized)
     has_description = (isinstance(markdown, str) and bool(markdown.strip())
                        and isinstance(source_url, str) and listing.normalized.get("description_hash")
                        == html_description_hash(source_url, markdown))
