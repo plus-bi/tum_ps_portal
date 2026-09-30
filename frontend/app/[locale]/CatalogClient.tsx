@@ -209,7 +209,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
           <li><LinkIcon/>{copy.trustSources}</li>
           {chairs.length > 0 && <li><FileIcon/>{chairs.length} {copy.trustChairs}</li>}
         </ul>
-        <p className="notice"><InfoIcon/><span><Disclaimer lang={lang}/></span></p>
+        <p className={`notice${lang === "de" ? " notice-de" : ""}`}><InfoIcon/><span><Disclaimer lang={lang}/></span></p>
       </div></section>
       <div className="shell catalog">
         <aside className="filters">
