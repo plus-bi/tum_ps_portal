@@ -114,7 +114,7 @@ def persisted_projects() -> list[Project]:
             documents = {}
             for content_hash, extraction_id in profile_ids.items():
                 extraction = extractions.get(extraction_id)
-                if extraction is None or not extraction.document or extraction.review_flags:
+                if extraction is None or not extraction.document:
                     continue
                 try:
                     documents[content_hash] = DocumentExtraction.model_validate(extraction.document)
