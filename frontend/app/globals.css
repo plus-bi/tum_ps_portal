@@ -54,6 +54,8 @@ input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading-stack); font-size: 18px; font-weight: 700; text-decoration: none; }
 .brand-mark { display: block; width: 30px; height: 30px; flex: none; border-radius: 8px; }
 .top-actions, .auth-controls { display: flex; align-items: center; gap: 10px; }
+.saved-pill { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 6px 12px; border: 1px solid var(--primary-border); border-radius: 999px; background: var(--primary-soft); color: var(--primary); font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap; }
+.saved-pill:hover, .saved-pill[aria-current] { border-color: var(--primary); background: hsl(168 100% 42% / .2); }
 .lang { display: flex; padding: 3px; border: 1px solid var(--border); border-radius: 999px; }
 .lang a { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; color: var(--muted-foreground); font-size: 13px; font-weight: 600; text-decoration: none; transition: color .2s var(--ease), background .2s var(--ease); }
 .lang a:hover { color: var(--foreground); }
@@ -194,6 +196,8 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 }
 @media (max-width: 560px) {
   .brand-text { display: none; }
+  .top-actions { gap: 6px; }
+  .saved-pill { padding: 6px 8px; font-size: 12px; }
   .auth-button-primary { display: none; }
   .card { padding: 20px; }
   .controls { width: 100%; }

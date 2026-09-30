@@ -1,0 +1,23 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted-foreground);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.button:hover, .button:focus-visible { color: var(--foreground); border-color: var(--primary); }
+.button:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.button:disabled { opacity: .6; cursor: default; }
+.saved { color: var(--primary); border-color: var(--primary-border); background: var(--primary-soft); }
+.detailControl { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.error { color: var(--amber); font-size: 13px; }

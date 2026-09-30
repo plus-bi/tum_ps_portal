@@ -16,10 +16,14 @@ function DeFlag() {
   </svg>;
 }
 
-export default function SiteHeader({lang, brand, enHref, deHref}: {lang: "en" | "de"; brand: string; enHref: string; deHref: string}) {
+export default function SiteHeader({lang, brand, enHref, deHref, savedActive = false}: {lang: "en" | "de"; brand: string; enHref: string; deHref: string; savedActive?: boolean}) {
   return <header className="top"><div className="shell">
     <Link className="brand" href={`/${lang}`}><Image className="brand-mark" src={plusBiLogo} alt="Plus BI" width={30} height={30} priority unoptimized/><span className="brand-text">{brand}</span></Link>
     <div className="top-actions">
+      <a className="saved-pill" href={`/${lang}?saved=1`} aria-current={savedActive ? "page" : undefined}>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3.75h12v16.5l-6-4-6 4z"/></svg>
+        {lang === "de" ? "Gemerkte Projekte" : "Saved projects"}
+      </a>
       <nav className="lang" aria-label="Language">
         <Link href={enHref} lang="en" aria-current={lang === "en" ? "true" : undefined}><UsFlag/>EN</Link>
         <Link href={deHref} lang="de" aria-current={lang === "de" ? "true" : undefined}><DeFlag/>DE</Link>

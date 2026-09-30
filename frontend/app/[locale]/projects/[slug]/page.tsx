@@ -2,6 +2,7 @@ import Link from "next/link";
 import {notFound} from "next/navigation";
 import Disclaimer from "../../Disclaimer";
 import SiteHeader from "../../SiteHeader";
+import {ProjectBookmark} from "../../Bookmarks";
 import {AlertIcon, ArrowLeftIcon, ExternalIcon, FileIcon} from "../../Icons";
 import type {Project} from "../../CatalogClient";
 import styles from "./ProfileDetail.module.css";
@@ -319,7 +320,7 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
         <div className={styles.intro}>
           <p className={styles.eyebrow}>{description.project.reference_code} · {description.project.chair || description.project.source_name || copy.htmlDescription}</p>
           <h1>{description.project.title}</h1><p>{copy.htmlIntro}</p>
-          <div className={styles.links}>{sourceUrl && <a className={styles.primaryLink} href={sourceUrl} target="_blank" rel="noopener noreferrer">{copy.source}<ExternalIcon size={14}/></a>}</div>
+          <div className={styles.links}><ProjectBookmark slug={description.project.slug} lang={lang}/>{sourceUrl && <a className={styles.primaryLink} href={sourceUrl} target="_blank" rel="noopener noreferrer">{copy.source}<ExternalIcon size={14}/></a>}</div>
         </div>
         <section className={styles.section}><h2>{copy.htmlDescription}</h2><DescriptionContent markdown={description.markdown}/></section>
       </div></main>
@@ -350,7 +351,7 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
       <Link className={styles.back} href={`/${lang}`}><ArrowLeftIcon/>{copy.back}</Link>
       <div className={styles.intro}><p className={styles.eyebrow}>{detail.project.reference_code} · {organizationNames.join(" / ") || (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}</p>
         <h1>{detail.project.title}</h1><p>{isHtml ? copy.htmlIntro : copy.intro}</p>
-        <div className={styles.links}>{artifactUrl && <a className={styles.primaryLink} href={artifactUrl} target="_blank" rel="noopener noreferrer"><FileIcon/>{copy.document}</a>}
+        <div className={styles.links}><ProjectBookmark slug={detail.project.slug} lang={lang}/>{artifactUrl && <a className={styles.primaryLink} href={artifactUrl} target="_blank" rel="noopener noreferrer"><FileIcon/>{copy.document}</a>}
           {sourceUrl && <a href={sourceUrl} target="_blank" rel="noopener noreferrer">{copy.source}<ExternalIcon size={14}/></a>}</div>
         <p className={styles.documentMeta}>{copy.documentLanguage}: {label(detail.document.document_language, lang)} · {copy.pages}: {detail.coverage.page_count} · {copy.extracted}: {extractedAt}</p>
       </div>

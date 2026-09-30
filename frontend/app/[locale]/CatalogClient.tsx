@@ -4,6 +4,7 @@ import {useMemo, useState} from "react";
 import Link from "next/link";
 import Disclaimer from "./Disclaimer";
 import SiteHeader from "./SiteHeader";
+import {BookmarkButton, useBookmarks} from "./Bookmarks";
 import {ArrowRightIcon, ExternalIcon, FileIcon, FilterIcon, InfoIcon, LinkIcon, RefreshIcon, SearchIcon} from "./Icons";
 import styles from "./CatalogClient.module.css";
 
@@ -16,7 +17,7 @@ export type Chair = {slug: string; name: string; department: string; source_stat
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
 type OpportunityType = Project["opportunity_type"];
 type SortBy = "publication_date" | "recently_added";
-type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; entitySearch: string; noEntities: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string};
+type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; entitySearch: string; noEntities: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string; savedOnly: string; savedNote: string; noSaved: string; bookmarkError: string};
 const ageBands: AgeBand[] = ["lt3", "lt30", "lt60", "lt180", "gt180"];
 
 type FacetOption = {value: string; en: string; de: string};
@@ -82,7 +83,7 @@ function matchesProfileFacet(project: Project, field: ProfileField, selected: Se
   return values.some((value) => selected.has(value));
 }
 
-export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, chairs, publishedProfileFilters}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; chairs: Chair[]; publishedProfileFilters: string[]}) {
+export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, chairs, publishedProfileFilters, initialSavedOnly = false}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; chairs: Chair[]; publishedProfileFilters: string[]; initialSavedOnly?: boolean}) {
   const [query, setQuery] = useState("");
   const [selectedAgeBands, setSelectedAgeBands] = useState<Set<AgeBand>>(() => new Set());
   const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp"]));
@@ -92,6 +93,9 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
   const [displayCount, setDisplayCount] = useState("20");
   const [currentPage, setCurrentPage] = useState(1);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [savedOnly, setSavedOnly] = useState(initialSavedOnly);
+  const {bookmarks, loaded: bookmarksLoaded, error: bookmarkError, toggle: toggleBookmark} = useBookmarks();
+  const savedSlugs = useMemo(() => new Set(bookmarks), [bookmarks]);
   const publishedFields = useMemo(() => profileFieldOrder.filter((field) => publishedProfileFilters.includes(field)), [publishedProfileFilters]);
   const displayedProjects = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
@@ -103,7 +107,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
       const matchesType = selectedTypes.has(project.opportunity_type);
       const matchesProfile = publishedFields.every((field) => matchesProfileFacet(project, field, selectedProfileValues[field], includeUnknown.has(field)));
       const text = `${project.reference_code} ${project.title} ${project.summary || ""} ${organizationNames(project).map(({name}) => name).join(" ")} ${project.source_name || ""} ${project.department}`.toLocaleLowerCase();
-      return matchesAge && matchesType && matchesProfile && (!needle || text.includes(needle));
+      return matchesAge && matchesType && matchesProfile && (!savedOnly || savedSlugs.has(project.slug)) && (!needle || text.includes(needle));
     });
     return filtered.sort((a, b) => {
       if (sortBy === "recently_added") {
@@ -114,7 +118,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
       if (!b.published_at) return -1;
       return Date.parse(`${b.published_at}T00:00:00Z`) - Date.parse(`${a.published_at}T00:00:00Z`);
     });
-  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, sortBy]);
+  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, sortBy, savedOnly, savedSlugs]);
   const pageSize = displayCount === "all" ? displayedProjects.length || 1 : Number(displayCount);
   const pageCount = Math.max(1, Math.ceil(displayedProjects.length / pageSize));
   const activePage = Math.min(currentPage, pageCount);
@@ -172,9 +176,10 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
     setSelectedTypes(new Set(["project_study", "idp"]));
     setSelectedProfileValues(Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
     setIncludeUnknown(new Set());
+    setSavedOnly(false);
   }
 
-  const filtersActive = query !== "" || selectedAgeBands.size > 0 || selectedTypes.size !== 2 || publishedFields.some((field) => selectedProfileValues[field].size > 0 || includeUnknown.has(field));
+  const filtersActive = query !== "" || selectedAgeBands.size > 0 || selectedTypes.size !== 2 || savedOnly || publishedFields.some((field) => selectedProfileValues[field].size > 0 || includeUnknown.has(field));
   const ageLabels: Record<AgeBand, string> = {lt3: copy.under3, lt30: copy.under30, lt60: copy.under60, lt180: copy.under180, gt180: copy.over180};
 
   function renderProfileFacet(field: ProfileField) {
@@ -197,7 +202,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
   }
 
   return <>
-    <SiteHeader lang={lang} brand={copy.brand} enHref="/en" deHref="/de"/>
+    <SiteHeader lang={lang} brand={copy.brand} enHref={savedOnly ? "/en?saved=1" : "/en"} deHref={savedOnly ? "/de?saved=1" : "/de"} savedActive={savedOnly}/>
     <main>
       <section className="hero"><div className="shell">
         {lastUpdated && <p className="pill"><span className="pill-dot" aria-hidden="true"/>{copy.lastUpdated}: <time dateTime={lastUpdatedAt}>{lastUpdated}</time></p>}
@@ -215,6 +220,10 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
         <aside className="filters">
           <button type="button" className="filters-toggle" aria-expanded={filtersOpen} aria-controls="filters-body" onClick={() => setFiltersOpen((open) => !open)}><FilterIcon/>{copy.filterToggle}</button>
           <div id="filters-body" className={`filters-body${filtersOpen ? " open" : ""}`}>
+            <fieldset><legend>{copy.savedOnly}</legend>
+              <label className="chip"><input type="checkbox" checked={savedOnly} disabled={!bookmarksLoaded} onChange={(event) => { setSavedOnly(event.target.checked); setCurrentPage(1); }}/><span>{copy.savedOnly} ({initialProjects.filter((project) => savedSlugs.has(project.slug)).length})</span></label>
+              <p className={styles.savedNote}>{copy.savedNote}</p>
+            </fieldset>
             <fieldset><legend>{copy.type}</legend><div className="chips">
               <label className="chip"><input type="checkbox" checked={selectedTypes.has("project_study")} onChange={(event) => toggleType("project_study", event.target.checked)}/><span>Project Study</span></label>
               <label className="chip"><input type="checkbox" checked={selectedTypes.has("idp")} onChange={(event) => toggleType("idp", event.target.checked)}/><span>IDP</span></label>
@@ -225,6 +234,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
           </div>
         </aside>
         <section aria-live="polite">
+          {bookmarkError && <p role="alert" className={styles.bookmarkError}>{copy.bookmarkError}</p>}
           <div className="results-head">
             <p className="results-count"><strong>{displayedProjects.length}</strong> {displayedProjects.length === 1 ? copy.foundOne : copy.foundMany}</p>
             <div className="controls">
@@ -232,7 +242,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
               <label>{copy.display} <select value={displayCount} onChange={(event) => { setDisplayCount(event.target.value); setCurrentPage(1); }} aria-label={copy.display}><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option><option value="all">{copy.all}</option></select></label>
             </div>
           </div>
-          {visibleProjects.length === 0 && <div className="empty"><h2>{copy.noResults}</h2><p>{copy.noResultsHint}</p>{filtersActive && <button type="button" onClick={resetFilters}>{copy.reset}</button>}</div>}
+          {visibleProjects.length === 0 && <div className="empty"><h2>{copy.noResults}</h2><p>{savedOnly && bookmarks.length === 0 ? copy.noSaved : copy.noResultsHint}</p>{filtersActive && <button type="button" onClick={resetFilters}>{copy.reset}</button>}</div>}
           {visibleProjects.map((project) => <article className={`card ${styles.cardWithReference}`} key={project.slug}>
             <span className={styles.referenceCode}>{project.reference_code}</span>
             <p className="meta">{organizationNames(project).length ? organizationNames(project).map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
@@ -240,6 +250,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
             <p className="card-summary">{project.summary || copy.unknown}</p>
             <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
             <p className="links">
+              <BookmarkButton slug={project.slug} lang={lang} saved={savedSlugs.has(project.slug)} onToggle={toggleBookmark} disabled={!bookmarksLoaded}/>
               {(project.has_profile || project.has_description) && <Link className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}
               <a className="source" href={project.source_url} target="_blank" rel="noopener noreferrer">{project.chair ? copy.source : (lang === "de" ? "Originale Angebotsseite" : "Original listing page")}<ExternalIcon size={14}/></a>
               {project.artifact_url && <a className="source" href={project.artifact_url} target="_blank" rel="noopener noreferrer">{copy.artifact}<ExternalIcon size={14}/></a>}
