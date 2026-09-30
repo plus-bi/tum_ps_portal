@@ -64,6 +64,22 @@ export function BookmarkButton({slug, lang, saved, onToggle, disabled = false}: 
   </button>;
 }
 
+export function SavedProjectsPill({lang, active}: {lang: "en" | "de"; active: boolean}) {
+  const {bookmarks, loaded} = useBookmarks();
+  const note = lang === "de"
+    ? "In einem Cookie dieses Browsers gespeichert. Beim Löschen der Cookies gehen die Lesezeichen verloren."
+    : "Stored in a cookie on this browser. Clearing cookies removes bookmarks.";
+  return <span className="saved-pill-wrapper">
+    <a className="saved-pill" href={active ? `/${lang}` : `/${lang}?saved=1`}
+      aria-current={active ? "page" : undefined} aria-describedby="saved-projects-note">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3.75h12v16.5l-6-4-6 4z"/></svg>
+      {lang === "de" ? "Gemerkte Projekte" : "Saved projects"}
+      <span className="saved-count">{loaded ? bookmarks.length : "…"}</span>
+    </a>
+    <span className="saved-tooltip" id="saved-projects-note" role="tooltip">{note}</span>
+  </span>;
+}
+
 export function ProjectBookmark({slug, lang}: {slug: string; lang: "en" | "de"}) {
   const {bookmarks, loaded, error, toggle} = useBookmarks();
   return <span className={styles.detailControl}>

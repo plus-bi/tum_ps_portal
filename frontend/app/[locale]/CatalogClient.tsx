@@ -17,7 +17,7 @@ export type Chair = {slug: string; name: string; department: string; source_stat
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
 type OpportunityType = Project["opportunity_type"];
 type SortBy = "publication_date" | "recently_added";
-type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; entitySearch: string; noEntities: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string; savedOnly: string; savedNote: string; noSaved: string; bookmarkError: string};
+type Copy = {brand: string; titleBefore: string; titleHighlight: string; titleAfter: string; lede: string; search: string; filters: string; entitySearch: string; noEntities: string; lastUpdated: string; age: string; under3: string; under30: string; under60: string; under180: string; over180: string; type: string; sort: string; publicationDate: string; recentlyAdded: string; display: string; all: string; previous: string; next: string; foundOne: string; foundMany: string; profile: string; source: string; artifact: string; unknown: string; published: string; added: string; filterToggle: string; reset: string; noResults: string; noResultsHint: string; trustDaily: string; trustSources: string; trustChairs: string; pagination: string; noSaved: string; bookmarkError: string};
 const ageBands: AgeBand[] = ["lt3", "lt30", "lt60", "lt180", "gt180"];
 
 type FacetOption = {value: string; en: string; de: string};
@@ -220,10 +220,6 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
         <aside className="filters">
           <button type="button" className="filters-toggle" aria-expanded={filtersOpen} aria-controls="filters-body" onClick={() => setFiltersOpen((open) => !open)}><FilterIcon/>{copy.filterToggle}</button>
           <div id="filters-body" className={`filters-body${filtersOpen ? " open" : ""}`}>
-            <fieldset><legend>{copy.savedOnly}</legend>
-              <label className="chip"><input type="checkbox" checked={savedOnly} disabled={!bookmarksLoaded} onChange={(event) => { setSavedOnly(event.target.checked); setCurrentPage(1); }}/><span>{copy.savedOnly} ({initialProjects.filter((project) => savedSlugs.has(project.slug)).length})</span></label>
-              <p className={styles.savedNote}>{copy.savedNote}</p>
-            </fieldset>
             <fieldset><legend>{copy.type}</legend><div className="chips">
               <label className="chip"><input type="checkbox" checked={selectedTypes.has("project_study")} onChange={(event) => toggleType("project_study", event.target.checked)}/><span>Project Study</span></label>
               <label className="chip"><input type="checkbox" checked={selectedTypes.has("idp")} onChange={(event) => toggleType("idp", event.target.checked)}/><span>IDP</span></label>

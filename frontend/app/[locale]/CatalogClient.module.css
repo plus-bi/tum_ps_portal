@@ -17,7 +17,6 @@
   font-weight: 600;
 }
 
-.savedNote { margin: 8px 0 0; color: var(--muted-foreground); font-size: 12px; line-height: 1.5; }
 .bookmarkError { color: var(--amber); font-size: 13px; }
 
 @media (max-width: 560px) {

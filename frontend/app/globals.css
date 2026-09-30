@@ -54,8 +54,12 @@ input[type="checkbox"] { accent-color: var(--primary); width: 16px; height: 16px
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--font-heading-stack); font-size: 18px; font-weight: 700; text-decoration: none; }
 .brand-mark { display: block; width: 30px; height: 30px; flex: none; border-radius: 8px; }
 .top-actions, .auth-controls { display: flex; align-items: center; gap: 10px; }
+.saved-pill-wrapper { position: relative; display: inline-flex; }
 .saved-pill { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; padding: 6px 12px; border: 1px solid var(--primary-border); border-radius: 999px; background: var(--primary-soft); color: var(--primary); font-size: 13px; font-weight: 600; text-decoration: none; white-space: nowrap; }
 .saved-pill:hover, .saved-pill[aria-current] { border-color: var(--primary); background: hsl(168 100% 42% / .2); }
+.saved-count { display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--primary); color: var(--primary-foreground); font-size: 11px; line-height: 1; }
+.saved-tooltip { position: absolute; top: calc(100% + 10px); right: 0; z-index: 30; width: min(290px, calc(100vw - 32px)); padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--card-raised); color: var(--foreground); box-shadow: 0 8px 24px hsl(224 35% 4% / .35); font-size: 12px; font-weight: 400; line-height: 1.5; white-space: normal; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(-4px); transition: opacity .15s var(--ease), transform .15s var(--ease), visibility .15s; }
+.saved-pill-wrapper:hover .saved-tooltip, .saved-pill-wrapper:focus-within .saved-tooltip { opacity: 1; visibility: visible; transform: translateY(0); }
 .lang { display: flex; padding: 3px; border: 1px solid var(--border); border-radius: 999px; }
 .lang a { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; border-radius: 999px; color: var(--muted-foreground); font-size: 13px; font-weight: 600; text-decoration: none; transition: color .2s var(--ease), background .2s var(--ease); }
 .lang a:hover { color: var(--foreground); }
