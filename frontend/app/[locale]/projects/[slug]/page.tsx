@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {notFound} from "next/navigation";
-import Disclaimer from "../../Disclaimer";
+import SiteFooter from "../../SiteFooter";
 import SiteHeader from "../../SiteHeader";
 import {ProjectBookmark} from "../../Bookmarks";
 import {AlertIcon, ArrowLeftIcon, ExternalIcon, FileIcon} from "../../Icons";
@@ -324,7 +324,7 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
         </div>
         <section className={styles.section}><h2>{copy.htmlDescription}</h2><DescriptionContent markdown={description.markdown}/></section>
       </div></main>
-      <footer className="footer"><div className="shell"><Disclaimer lang={lang}/></div></footer>
+      <SiteFooter lang={lang}/>
     </>;
   }
   if (!response.ok) throw new Error(`Project profile API returned ${response.status}`);
@@ -373,6 +373,6 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
       {detail.document.offers.map((offer, index) => <OfferView key={index} offer={offer} index={index} project={detail.project}
         sourceKind={detail.source_kind} issues={detail.evidence_issues} copy={detailCopy} lang={lang}/>)}
     </div></main>
-    <footer className="footer"><div className="shell"><Disclaimer lang={lang}/></div></footer>
+    <SiteFooter lang={lang}/>
   </>;
 }

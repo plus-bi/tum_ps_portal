@@ -105,9 +105,11 @@ h1 { font-size: clamp(36px, 5.5vw, 60px); line-height: 1.05; max-width: 860px; m
 .trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 24px; margin: 28px 0 0; padding: 0; list-style: none; color: var(--muted-foreground); font-size: 14px; }
 .trust li { display: inline-flex; align-items: center; gap: 7px; }
 .trust .icon { color: var(--primary); }
-.notice { display: flex; gap: 8px; justify-content: center; align-items: flex-start; max-width: 720px; margin: 22px auto 0; color: var(--muted-foreground); font-size: 13px; line-height: 1.5; }
-.notice .icon { margin-top: 2px; }
-.notice a, .footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
+.notice { display: flex; gap: 10px; justify-content: center; align-items: flex-start; max-width: 780px; margin: 24px auto 0; padding: 14px 18px; border: 1px solid hsl(38 92% 50% / .55); border-radius: var(--radius-sm); background: var(--amber-soft); color: hsl(38 100% 83%); font-size: 14px; line-height: 1.5; text-align: left; }
+.notice .icon { margin-top: 2px; color: var(--amber); }
+.notice a, .footer a { font-weight: 600; text-decoration: none; }
+.notice a { color: hsl(38 100% 88%); }
+.footer a { color: var(--primary); }
 .notice a:hover, .footer a:hover { text-decoration: underline; }
 
 /* Catalog layout */
@@ -187,6 +189,16 @@ button:disabled { opacity: .45; cursor: not-allowed; }
 .pagination button[aria-current="page"] { background: var(--primary); border-color: var(--primary); color: var(--primary-foreground); font-weight: 700; }
 
 .footer { border-top: 1px solid var(--border); padding: 28px 0; color: var(--muted-foreground); font-size: 13px; line-height: 1.5; background: var(--background-deep); }
+.footer-content { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px 32px; }
+.footer-disclaimer { max-width: 740px; margin: 0; padding-left: 14px; border-left: 3px solid var(--amber); color: hsl(38 100% 83%); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 10px 22px; }
+.legal-page { max-width: 820px; padding-block: 56px 80px; }
+.legal-page h1 { max-width: none; margin: 0 0 16px; font-size: clamp(32px, 5vw, 48px); }
+.legal-page h2 { margin: 36px 0 10px; font-size: 22px; }
+.legal-page p, .legal-page li { color: var(--muted-foreground); line-height: 1.75; }
+.legal-page p { margin: 0 0 14px; }
+.legal-page a { color: var(--primary); }
+.legal-page .legal-intro { color: var(--foreground); font-size: 17px; }
 
 @media (max-width: 860px) {
   .catalog { grid-template-columns: 1fr; gap: 20px; padding-top: 24px; }

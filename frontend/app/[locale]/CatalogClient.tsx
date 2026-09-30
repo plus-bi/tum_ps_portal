@@ -3,6 +3,7 @@
 import {useMemo, useState} from "react";
 import Link from "next/link";
 import Disclaimer from "./Disclaimer";
+import SiteFooter from "./SiteFooter";
 import SiteHeader from "./SiteHeader";
 import {BookmarkButton, useBookmarks} from "./Bookmarks";
 import {ArrowRightIcon, ExternalIcon, FileIcon, FilterIcon, InfoIcon, LinkIcon, RefreshIcon, SearchIcon} from "./Icons";
@@ -256,6 +257,6 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
         </section>
       </div>
     </main>
-    <footer className="footer"><div className="shell"><Disclaimer lang={lang}/></div></footer>
+    <SiteFooter lang={lang}/>
   </>;
 }
