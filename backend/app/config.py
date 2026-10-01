@@ -20,6 +20,9 @@ class Settings(BaseSettings):
     clerk_issuer: str | None = None
     resend_api_key: str | None = None
     resend_webhook_secret: str | None = None
+    turnstile_site_key: str | None = None
+    turnstile_secret_key: str | None = None
+    pinned_projects: str = ""
     # Keep requests to the same origin deliberately sparse. Increase this for
     # manual audits of larger source sets or when a site's robots policy asks
     # for a longer crawl delay.
@@ -30,6 +33,11 @@ class Settings(BaseSettings):
     artifact_storage_path: Path = Path("/var/lib/portal/artifacts")
     # Show unapproved organization candidates only in a local review session.
     organization_attribution_preview: bool = False
+
+    @property
+    def pinned_project_codes(self) -> tuple[str, ...]:
+        values = (value.strip().casefold() for value in self.pinned_projects.split(","))
+        return tuple(dict.fromkeys(value for value in values if value))
 
 
 @lru_cache

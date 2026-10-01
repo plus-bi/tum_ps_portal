@@ -25,7 +25,7 @@ def test_management_accounting_live_crawl_retains_listings_after_partial_and_fai
     test_engine = create_engine(f"sqlite:///{tmp_path / 'management-accounting.db'}")
     monkeypatch.setattr(db, "_engine", test_engine)
     Base.metadata.create_all(test_engine)
-    adapter = replace(ALL_BY_SLUG["management-accounting"], child_url_patterns=("/detail/",))
+    adapter = replace(ALL_BY_SLUG["controlling"], source_urls=("https://www.fa.mgt.tum.de/en/controlling/teaching/projektstudien/",), child_url_patterns=("/detail/",))
     full_page = (Path(__file__).parent / "fixtures/chairs/management-accounting.html").read_bytes()
     partial_page = b'''<div class="frame"><p><strong>Recent Proposals:</strong></p>
         <ul><li><a href="/files/new.pdf">New proposal</a></li></ul></div>

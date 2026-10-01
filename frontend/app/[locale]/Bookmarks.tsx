@@ -7,6 +7,22 @@ const COOKIE_NAME = "project_bookmarks";
 const CHANGE_EVENT = "project-bookmarks-change";
 const MAX_COOKIE_VALUE_LENGTH = 3500;
 const SLUG_PATTERN = /^[a-z0-9][a-z0-9-]{0,127}$/;
+let aliasRequest: Promise<Record<string, string>> | undefined;
+
+function bookmarkAliases(): Promise<Record<string, string>> {
+  aliasRequest ||= fetch("/api/v1/project-aliases").then(async (response) => {
+    if (!response.ok) throw new Error("Alias lookup unavailable");
+    return await response.json() as Record<string, string>;
+  }).catch(() => { aliasRequest = undefined; return {}; });
+  return aliasRequest;
+}
+
+function writeBookmarks(bookmarks: string[]): boolean {
+  const value = encodeURIComponent(JSON.stringify(bookmarks));
+  if (value.length > MAX_COOKIE_VALUE_LENGTH) return false;
+  document.cookie = `${COOKIE_NAME}=${value}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
+  return document.cookie.split("; ").some((part) => part === `${COOKIE_NAME}=${value}`);
+}
 
 function readBookmarks(): string[] {
   const value = document.cookie.split("; ").find((part) => part.startsWith(`${COOKIE_NAME}=`))?.slice(COOKIE_NAME.length + 1);
@@ -25,11 +41,20 @@ export function useBookmarks() {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const sync = () => { setBookmarks(readBookmarks()); setLoaded(true); };
+    let mounted = true;
+    const sync = async () => {
+      const aliases = await bookmarkAliases();
+      if (!mounted) return;
+      const stored = readBookmarks();
+      const canonical = [...new Set(stored.map((slug) => SLUG_PATTERN.test(aliases[slug] || "") ? aliases[slug] : slug))];
+      if (JSON.stringify(stored) !== JSON.stringify(canonical)) writeBookmarks(canonical);
+      setBookmarks(canonical); setLoaded(true);
+    };
     sync();
     window.addEventListener(CHANGE_EVENT, sync);
     window.addEventListener("pageshow", sync);
     return () => {
+      mounted = false;
       window.removeEventListener(CHANGE_EVENT, sync);
       window.removeEventListener("pageshow", sync);
     };
@@ -39,10 +64,7 @@ export function useBookmarks() {
     if (!SLUG_PATTERN.test(slug)) return;
     const current = readBookmarks();
     const next = current.includes(slug) ? current.filter((item) => item !== slug) : [...current, slug];
-    const value = encodeURIComponent(JSON.stringify(next));
-    if (value.length > MAX_COOKIE_VALUE_LENGTH) { setError(true); return; }
-    document.cookie = `${COOKIE_NAME}=${value}; Path=/; Max-Age=31536000; SameSite=Lax${location.protocol === "https:" ? "; Secure" : ""}`;
-    if (document.cookie.split("; ").some((part) => part === `${COOKIE_NAME}=${value}`)) {
+    if (writeBookmarks(next)) {
       setError(false);
       window.dispatchEvent(new Event(CHANGE_EVENT));
     } else {

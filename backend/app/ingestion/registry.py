@@ -79,8 +79,8 @@ def _inventory_path(filename: str) -> Path:
 def _load_registry() -> tuple[ChairAdapter, ...]:
     rows = json.loads(_inventory_path("tum_project_study_chairs.json").read_text(encoding="utf-8"))
     required = {"department", "chair_name", "project_study_url"}
-    if len(rows) != 32 or any(set(row) != required for row in rows):
-        raise RuntimeError("Chair inventory must contain exactly 32 normalized records")
+    if len(rows) != 31 or any(set(row) != required for row in rows):
+        raise RuntimeError("Chair inventory must contain exactly 31 normalized records")
     audited_children = {
         "global-center-for-family-enterprise": ("/project_studies/",),
         "economics-of-energy-markets": ("/open-project-studies/",),
@@ -93,7 +93,7 @@ def _load_registry() -> tuple[ChairAdapter, ...]:
         "business-analytics-and-intelligent-systems": ("project_study_", "project-study-"),
         "management-of-digital-food-businesses": ("/project_studies/project_study_",),
     }
-    known_direct = {"economics-of-innovation", "management-accounting", "corporate-governance-and-capital-markets-law",
+    known_direct = {"economics-of-innovation", "corporate-governance-and-capital-markets-law",
                     "corporate-management", "controlling", "technology-and-innovation-management", "marketing-and-technology",
                     "family-business-culture-and-ownership", "digital-marketing"}
     excluded_titles = {
@@ -118,7 +118,7 @@ def _load_registry() -> tuple[ChairAdapter, ...]:
                SourceState.empty),
         **source_overrides.get(row["chair_name"], {}),
     ) for row in rows)
-    if len({a.slug for a in adapters}) != 32 or len({a.source_urls[0] for a in adapters}) != 32:
+    if len({a.slug for a in adapters}) != 31 or len({a.source_urls[0] for a in adapters}) != 31:
         raise RuntimeError("Chair slugs and source URLs must be unique")
     if set(a.department for a in adapters) != set(DEPARTMENTS.values()) - {
         DEPARTMENTS["interdisciplinary-projects"], DEPARTMENTS["other-projects"]

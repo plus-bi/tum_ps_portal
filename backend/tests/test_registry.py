@@ -2,10 +2,12 @@ from collections import Counter
 from app.ingestion.registry import ALL_REGISTRY, BY_SLUG, IDP_REGISTRY, OTHER_REGISTRY, REGISTRY, SourceState
 
 
-def test_all_32_chairs_have_dedicated_entries():
-    assert len(REGISTRY) == len(BY_SLUG) == 32
-    assert sorted(Counter(a.department for a in REGISTRY).values()) == [5, 6, 7, 7, 7]
+def test_all_31_chairs_have_dedicated_entries():
+    assert len(REGISTRY) == len(BY_SLUG) == 31
+    assert sorted(Counter(a.department for a in REGISTRY).values()) == [5, 6, 6, 7, 7]
     assert all(a.source_urls and a.stable_key(a.source_urls[0], "A") for a in REGISTRY)
+    assert "management-accounting" not in BY_SLUG
+    assert BY_SLUG["controlling"].source_urls == ("https://www.fa.mgt.tum.de/controlling/lehre/projektstudien/",)
     assert BY_SLUG["economics-of-innovation"].source_urls == ("https://www.ep.mgt.tum.de/en/eoi/teaching/project-studies/",)
     assert BY_SLUG["marketing-and-technology"].source_urls == ("https://www.msl.mgt.tum.de/en/mt/teaching-student-matters/project-studies-idp/",)
     assert BY_SLUG["marketing-and-technology"].state == SourceState.active
@@ -18,7 +20,7 @@ def test_all_32_chairs_have_dedicated_entries():
 def test_official_informatics_idp_hub_and_all_published_chair_sources_are_registered():
     assert len(IDP_REGISTRY) == 29
     assert len(OTHER_REGISTRY) == 1
-    assert len(ALL_REGISTRY) == 62
+    assert len(ALL_REGISTRY) == 61
     hub = IDP_REGISTRY[0]
     assert hub.slug == "informatics-idp-hub"
     assert hub.opportunity_type == "idp"

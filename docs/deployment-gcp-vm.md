@@ -80,7 +80,7 @@ PORTAL_HTTPS_PORT=443
 PUBLIC_URL=https://projects.example.org
 ```
 
-If the database password contains URL-special characters, percent-encode it in `DATABASE_URL`. Add Clerk, OpenAI, and Resend credentials only when those integrations are enabled. Never commit `.env`; it is excluded by `.gitignore`. For stricter secret management, render `.env` at deployment time from Google Secret Manager.
+If the database password contains URL-special characters, percent-encode it in `DATABASE_URL`. Add Clerk, OpenAI, and Resend credentials only when those integrations are enabled. The contact form also needs `TURNSTILE_SITE_KEY` and `TURNSTILE_SECRET_KEY`; the site key is returned to the browser by the API, while the secret stays server-side. Set `PINNED_PROJECTS` to a comma-separated list of project reference codes to keep those catalog entries first, for example `ps-041,ps-043`. Never commit `.env`; it is excluded by `.gitignore`. For stricter secret management, render `.env` at deployment time from Google Secret Manager.
 
 `NEXT_PUBLIC_API_URL` is not needed for server-side requests in the current container setup; the web container uses `http://api:8000/api/v1` internally.
 
@@ -143,6 +143,17 @@ sudo systemctl enable --now tum-project-studies.service
 ## 5. Backups and monitoring
 
 Back up PostgreSQL daily to a private, versioned Cloud Storage bucket. A database dump can be produced without publishing the database port:
+
+The German `controlling` and former English `management-accounting` sources represent
+one chair. Only `controlling` remains in the active registry; the UI displays its
+name as Management Accounting in English and Controlling in German. Historical
+English fixtures and source records remain for audit purposes. The approved
+database consolidation is available as `python -m app.consolidate_controlling`
+(inspect) or `python -m app.consolidate_controlling --apply` (commit after backup).
+It acquires the ingestion lock, matches exact document URLs, archives duplicates
+with aliases, preserves history, transfers bookmarks, and disables the retired
+source. `/api/v1/project-aliases` resolves browser bookmarks; old detail URLs
+redirect to canonical project URLs. Repeating the consolidation is safe.
 
 ```bash
 mkdir -p backups

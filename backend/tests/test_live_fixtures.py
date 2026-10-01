@@ -1,11 +1,18 @@
 import hashlib, json
 from pathlib import Path
+from dataclasses import replace
 import pytest
 from app.ingestion.adapters import parser_for
 from app.ingestion.registry import ALL_BY_SLUG
 
 ROOT = Path(__file__).parent / "fixtures/chairs"
 MANIFEST = json.loads((ROOT / "manifest.json").read_text())
+# Keep the captured English page as a parser regression fixture for the same chair.
+ALL_BY_SLUG = dict(ALL_BY_SLUG)
+ALL_BY_SLUG["management-accounting"] = replace(
+    ALL_BY_SLUG["controlling"], slug="management-accounting", name="Management Accounting",
+    source_urls=("https://www.fa.mgt.tum.de/en/controlling/teaching/projektstudien/",),
+)
 CAPTURED = [row for row in MANIFEST["sources"] if "fixture" in row]
 
 @pytest.mark.parametrize("row", CAPTURED, ids=lambda row: row["slug"])

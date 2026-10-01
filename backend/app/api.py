@@ -12,8 +12,30 @@ from .schemas import Freshness, Project, ProjectDescriptionDetail, ProjectProfil
 from .db import Chair, Department, Listing, OrganizationAttribution, PDFArtifact, PDFProfileExtraction, session_factory
 from .ingestion.lifecycle import freshness
 from sqlalchemy import inspect, select
+from sqlalchemy.exc import SQLAlchemyError
 
 router = APIRouter(prefix="/api/v1")
+
+
+def canonical_project_slug(slug: str) -> str:
+    try:
+        with session_factory()() as session:
+            if not inspect(session.bind).has_table(Listing.__tablename__):
+                return slug
+            listing = session.scalar(select(Listing).where(Listing.slug == slug))
+            return (listing.normalized or {}).get("merged_into_slug", slug) if listing else slug
+    except SQLAlchemyError:
+        return slug
+
+
+@router.get("/project-aliases")
+def project_aliases():
+    with session_factory()() as session:
+        if not inspect(session.bind).has_table(Listing.__tablename__):
+            return {}
+        return {listing.slug: listing.normalized["merged_into_slug"]
+                for listing in session.scalars(select(Listing))
+                if (listing.normalized or {}).get("merged_into_slug")}
 
 # Demo data keeps the UI useful before the first database-backed crawl.
 PROJECTS = [Project(
@@ -122,6 +144,8 @@ def persisted_projects() -> list[Project]:
                     continue
             projects = []
             for listing, chair, department in rows:
+                if listing.normalized.get("merged_into_slug"):
+                    continue
                 pdf_hash = artifact_hashes.get(listing.normalized.get("artifact_url"))
                 html_hash = listing.normalized.get("description_hash")
                 content_hash = html_hash if html_hash in profile_ids else pdf_hash
@@ -144,6 +168,8 @@ def persisted_projects() -> list[Project]:
 def projects(q: str | None = None, status: Status = Status.active, department: list[str] = Query(default=[]),
              chair: list[str] = Query(default=[]), topic: list[Topic] = Query(default=[]),
              sort: str = "relevance", page: int = Query(1, ge=1), page_size: int = Query(20, ge=1, le=100)):
+    pinned_project_codes = settings().pinned_project_codes
+    pinned_order = {code: index for index, code in enumerate(pinned_project_codes)}
     stored = persisted_projects()
     last_updated_at = max((project.last_seen_at for project in stored), default=None)
     rows = [p for p in (stored or PROJECTS) if p.status == status]
@@ -156,14 +182,21 @@ def projects(q: str | None = None, status: Status = Status.active, department: l
     elif sort == "chair": rows.sort(key=lambda p: (p.chair is None, (p.chair or "").casefold()))
     elif sort == "deadline": rows.sort(key=lambda p: p.deadline or date.max)
     elif sort == "newest": rows.sort(key=lambda p: p.first_seen_at, reverse=True)
+    if pinned_order:
+        rows.sort(key=lambda project: (
+            project.reference_code.casefold() not in pinned_order,
+            pinned_order.get(project.reference_code.casefold(), 0),
+        ))
     start = (page - 1) * page_size
     return {"items": rows[start:start + page_size], "total": len(rows), "page": page, "page_size": page_size,
             "last_updated_at": last_updated_at,
-            "published_profile_filters": available_fields()}
+            "published_profile_filters": available_fields(),
+            "pinned_project_codes": list(pinned_project_codes)}
 
 
 @router.get("/projects/{slug}", response_model=Project)
 def project(slug: str):
+    slug = canonical_project_slug(slug)
     found = next((p for p in (persisted_projects() or PROJECTS) if p.slug == slug), None)
     if not found: raise HTTPException(404, "Project not found")
     return found
@@ -171,6 +204,7 @@ def project(slug: str):
 
 @router.get("/projects/{slug}/profile", response_model=ProjectProfileDetail)
 def project_profile(slug: str) -> ProjectProfileDetail:
+    slug = canonical_project_slug(slug)
     with session_factory()() as session:
         row = session.execute(select(Listing, Chair, Department)
                               .join(Chair, Listing.chair_id == Chair.id)
@@ -212,6 +246,7 @@ def project_profile(slug: str) -> ProjectProfileDetail:
 
 @router.get("/projects/{slug}/description", response_model=ProjectDescriptionDetail)
 def project_description(slug: str) -> ProjectDescriptionDetail:
+    slug = canonical_project_slug(slug)
     with session_factory()() as session:
         row = session.execute(select(Listing, Chair, Department)
                               .join(Chair, Listing.chair_id == Chair.id)

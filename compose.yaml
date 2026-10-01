@@ -50,6 +50,9 @@ services:
     env_file:
       - path: .env
         required: false
+    environment:
+      RESEND_API_KEY: ""
+      TURNSTILE_SECRET_KEY: ""
     restart: unless-stopped
     logging: *default-logging
     volumes: ["artifact_data:/var/lib/portal/artifacts"]
@@ -72,6 +75,9 @@ services:
     env_file:
       - path: .env
         required: false
+    environment:
+      RESEND_API_KEY: ""
+      TURNSTILE_SECRET_KEY: ""
     volumes: ["artifact_data:/var/lib/portal/artifacts"]
     restart: "no"
     profiles: ["maintenance"]
@@ -87,6 +93,9 @@ services:
     env_file:
       - path: .env
         required: false
+    environment:
+      RESEND_API_KEY: ""
+      TURNSTILE_SECRET_KEY: ""
     restart: "no"
     profiles: ["maintenance"]
     logging: *default-logging
@@ -99,6 +108,9 @@ services:
     env_file:
       - path: .env
         required: false
+    environment:
+      RESEND_API_KEY: ""
+      TURNSTILE_SECRET_KEY: ""
     restart: unless-stopped
     logging: *default-logging
     depends_on:

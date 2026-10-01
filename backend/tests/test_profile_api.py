@@ -57,7 +57,7 @@ def test_profiles_needing_ocr_are_hidden_and_unverified_ones_are_flagged(tmp_pat
 def test_catalog_includes_evidenced_filter_values_only_for_unambiguous_profiles(tmp_path, monkeypatch):
     engine = create_engine(f"sqlite:///{tmp_path / 'catalog-filters.db'}")
     monkeypatch.setattr(db, "_engine", engine)
-    config = SimpleNamespace(organization_attribution_preview=False,
+    config = SimpleNamespace(pinned_project_codes=(), organization_attribution_preview=False,
                              public_url="http://localhost:8080")
     monkeypatch.setattr("app.api.settings", lambda: config)
     Base.metadata.create_all(engine)
@@ -82,7 +82,7 @@ def test_hub_listings_do_not_claim_the_hub_as_their_chair(tmp_path, monkeypatch)
     engine = create_engine(f"sqlite:///{tmp_path / 'hub-chair.db'}")
     monkeypatch.setattr(db, "_engine", engine)
     monkeypatch.setattr("app.api.settings", lambda: SimpleNamespace(
-        organization_attribution_preview=False, public_url="http://localhost:8080"))
+        pinned_project_codes=(), organization_attribution_preview=False, public_url="http://localhost:8080"))
     Base.metadata.create_all(engine)
     add_project("hub", "f" * 64, [])
     add_project("own-chair", "a" * 64, [])

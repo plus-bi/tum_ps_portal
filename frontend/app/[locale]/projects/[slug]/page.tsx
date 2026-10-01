@@ -1,5 +1,6 @@
 import Link from "next/link";
-import {notFound} from "next/navigation";
+import {notFound, permanentRedirect} from "next/navigation";
+import {localizeProjectChair} from "../../chairNames";
 import SiteFooter from "../../SiteFooter";
 import SiteHeader from "../../SiteHeader";
 import {ProjectBookmark} from "../../Bookmarks";
@@ -301,6 +302,11 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
   const lang = locale === "de" ? "de" : "en";
   const copy = translations[lang];
   const base = process.env.NEXT_PUBLIC_API_URL || "http://api:8000/api/v1";
+  const projectResponse = await fetch(`${base}/projects/${encodeURIComponent(slug)}`, {cache: "no-store"});
+  if (projectResponse.ok) {
+    const project = await projectResponse.json() as Project;
+    if (project.slug !== slug) permanentRedirect(`/${lang}/projects/${encodeURIComponent(project.slug)}`);
+  }
   let response: Response;
   try {
     response = await fetch(`${base}/projects/${encodeURIComponent(slug)}/profile`, {cache: "no-store"});
@@ -312,6 +318,7 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
     if (descriptionResponse.status === 404) notFound();
     if (!descriptionResponse.ok) throw new Error(`Project description API returned ${descriptionResponse.status}`);
     const description = await descriptionResponse.json() as DescriptionDetail;
+    description.project = localizeProjectChair(description.project, lang);
     const sourceUrl = safeHttpUrl(description.project.source_url);
     return <>
       <SiteHeader lang={lang} brand={copy.brand} enHref={`/en/projects/${encodeURIComponent(slug)}`} deHref={`/de/projects/${encodeURIComponent(slug)}`}/>
@@ -329,6 +336,7 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
   }
   if (!response.ok) throw new Error(`Project profile API returned ${response.status}`);
   const detail = await response.json() as ProfileDetail;
+  detail.project = localizeProjectChair(detail.project, lang);
   const isHtml = detail.source_kind === "html";
   const detailCopy = isHtml ? {...copy, unknown: copy.htmlUnknown} : copy;
   const artifactUrl = safeHttpUrl(detail.project.artifact_url);

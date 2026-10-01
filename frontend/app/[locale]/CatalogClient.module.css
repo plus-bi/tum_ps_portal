@@ -3,6 +3,66 @@
   padding-right: 90px;
 }
 
+.cardWithReference.pinnedCard {
+  padding: 0;
+  border-color: var(--primary-border);
+  background: var(--primary-soft);
+}
+
+.cardWithReference.pinnedCard:hover {
+  border-color: var(--primary);
+  background: hsl(168 100% 42% / .16);
+}
+
+.pinnedSummary {
+  display: flex;
+  align-items: center;
+  min-height: 72px;
+  padding: 20px 24px;
+  color: var(--foreground);
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none;
+}
+
+.pinnedSummary::-webkit-details-marker {
+  display: none;
+}
+
+.pinnedSummary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin: 0 2px 0 auto;
+  flex: none;
+  border-right: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
+  transform: rotate(45deg);
+  transition: transform .2s var(--ease);
+}
+
+.pinnedDetails[open] > .pinnedSummary::after {
+  transform: rotate(225deg);
+}
+
+.pinnedSummary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: -4px;
+  border-radius: var(--radius);
+}
+
+.pinnedContent {
+  padding: 0 24px 24px;
+}
+
+.pinnedContent .referenceCode {
+  position: static;
+  display: table;
+  margin: 0 0 8px auto;
+}
+
 .referenceCode {
   position: absolute;
   right: 24px;
@@ -27,5 +87,15 @@
   .referenceCode {
     right: 20px;
     top: 20px;
+  }
+
+  .pinnedSummary {
+    min-height: 64px;
+    padding: 18px 20px;
+    font-size: 17px;
+  }
+
+  .pinnedContent {
+    padding: 0 20px 20px;
   }
 }

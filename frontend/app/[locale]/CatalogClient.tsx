@@ -83,7 +83,7 @@ function matchesProfileFacet(project: Project, field: ProfileField, selected: Se
   return values.some((value) => selected.has(value));
 }
 
-export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, chairs, publishedProfileFilters, initialSavedOnly = false}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; chairs: Chair[]; publishedProfileFilters: string[]; initialSavedOnly?: boolean}) {
+export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, chairs, publishedProfileFilters, pinnedProjectCodes, initialSavedOnly = false}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; chairs: Chair[]; publishedProfileFilters: string[]; pinnedProjectCodes: string[]; initialSavedOnly?: boolean}) {
   const [query, setQuery] = useState("");
   const [selectedAgeBands, setSelectedAgeBands] = useState<Set<AgeBand>>(() => new Set());
   const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp", "other"]));
@@ -96,6 +96,7 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
   const {bookmarks, loaded: bookmarksLoaded, error: bookmarkError, toggle: toggleBookmark} = useBookmarks();
   const savedSlugs = useMemo(() => new Set(bookmarks), [bookmarks]);
   const publishedFields = useMemo(() => profileFieldOrder.filter((field) => publishedProfileFilters.includes(field)), [publishedProfileFilters]);
+  const pinnedOrder = useMemo(() => new Map<string, number>(pinnedProjectCodes.map((code, index) => [code.toLowerCase(), index] as const)), [pinnedProjectCodes]);
   const displayedProjects = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase();
     const filtered = initialProjects.filter((project) => {
@@ -109,11 +110,18 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
       return matchesAge && matchesType && matchesProfile && (!savedOnly || savedSlugs.has(project.slug)) && (!needle || text.includes(needle));
     });
     return filtered.sort((a, b) => {
+      const aPin = pinnedOrder.get(a.reference_code.toLowerCase());
+      const bPin = pinnedOrder.get(b.reference_code.toLowerCase());
+      if (aPin !== undefined || bPin !== undefined) {
+        if (aPin === undefined) return 1;
+        if (bPin === undefined) return -1;
+        if (aPin !== bPin) return aPin - bPin;
+      }
       const aDate = a.published_at ? Date.parse(`${a.published_at}T00:00:00Z`) : Date.parse(a.first_seen_at);
       const bDate = b.published_at ? Date.parse(`${b.published_at}T00:00:00Z`) : Date.parse(b.first_seen_at);
       return bDate - aDate || Date.parse(b.first_seen_at) - Date.parse(a.first_seen_at);
     });
-  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, savedOnly, savedSlugs]);
+  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, savedOnly, savedSlugs, pinnedOrder]);
   const pageSize = displayCount === "all" ? displayedProjects.length || 1 : Number(displayCount);
   const pageCount = Math.max(1, Math.ceil(displayedProjects.length / pageSize));
   const activePage = Math.min(currentPage, pageCount);
@@ -196,6 +204,22 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
     </div></fieldset></details>;
   }
 
+  function renderProjectContent(project: Project, includeTitle = true) {
+    return <>
+      <span className={styles.referenceCode}>{project.reference_code}</span>
+      <p className="meta">{organizationNames(project).length ? organizationNames(project).map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
+      {includeTitle && <h2>{project.title}</h2>}
+      <p className="card-summary">{project.search_summary_en || project.summary || copy.unknown}</p>
+      <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : project.opportunity_type === "other" ? (lang === "de" ? "Sonstige" : "Others") : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
+      <p className="links">
+        <BookmarkButton slug={project.slug} lang={lang} saved={savedSlugs.has(project.slug)} onToggle={toggleBookmark} disabled={!bookmarksLoaded}/>
+        {(project.has_profile || project.has_description) && <Link className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}
+        <a className="source" href={project.source_url} target="_blank" rel="noopener noreferrer">{project.chair ? copy.source : (lang === "de" ? "Originale Angebotsseite" : "Original listing page")}<ExternalIcon size={14}/></a>
+        {project.artifact_url && <a className="source" href={project.artifact_url} target="_blank" rel="noopener noreferrer">{copy.artifact}<ExternalIcon size={14}/></a>}
+      </p>
+    </>;
+  }
+
   return <>
     <SiteHeader lang={lang} brand={copy.brand} enHref={savedOnly ? "/en?saved=1" : "/en"} deHref={savedOnly ? "/de?saved=1" : "/de"} savedActive={savedOnly}/>
     <main>
@@ -234,19 +258,17 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
             </div>
           </div>
           {visibleProjects.length === 0 && <div className="empty"><h2>{copy.noResults}</h2><p>{savedOnly && bookmarks.length === 0 ? copy.noSaved : copy.noResultsHint}</p>{filtersActive && <button type="button" onClick={resetFilters}>{copy.reset}</button>}</div>}
-          {visibleProjects.map((project) => <article className={`card ${styles.cardWithReference}`} key={project.slug}>
-            <span className={styles.referenceCode}>{project.reference_code}</span>
-            <p className="meta">{organizationNames(project).length ? organizationNames(project).map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
-            <h2>{project.title}</h2>
-            <p className="card-summary">{project.search_summary_en || project.summary || copy.unknown}</p>
-            <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : project.opportunity_type === "other" ? (lang === "de" ? "Sonstige" : "Others") : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
-            <p className="links">
-              <BookmarkButton slug={project.slug} lang={lang} saved={savedSlugs.has(project.slug)} onToggle={toggleBookmark} disabled={!bookmarksLoaded}/>
-              {(project.has_profile || project.has_description) && <Link className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}
-              <a className="source" href={project.source_url} target="_blank" rel="noopener noreferrer">{project.chair ? copy.source : (lang === "de" ? "Originale Angebotsseite" : "Original listing page")}<ExternalIcon size={14}/></a>
-              {project.artifact_url && <a className="source" href={project.artifact_url} target="_blank" rel="noopener noreferrer">{copy.artifact}<ExternalIcon size={14}/></a>}
-            </p>
-          </article>)}
+          {visibleProjects.map((project) => {
+            const isPinned = pinnedOrder.has(project.reference_code.toLowerCase());
+            return <article className={`card ${styles.cardWithReference} ${isPinned ? styles.pinnedCard : ""}`} key={project.slug}>
+              {isPinned
+                ? <details className={styles.pinnedDetails}>
+                    <summary className={styles.pinnedSummary}>{project.title}</summary>
+                    <div className={styles.pinnedContent}>{renderProjectContent(project, false)}</div>
+                  </details>
+                : renderProjectContent(project)}
+            </article>;
+          })}
           {displayCount !== "all" && pageCount > 1 && <nav className="pagination" aria-label={copy.pagination}><button type="button" onClick={() => setCurrentPage(activePage - 1)} disabled={activePage === 1}>{copy.previous}</button>{Array.from({length: pageCount}, (_, index) => index + 1).map((page) => <button type="button" key={page} onClick={() => setCurrentPage(page)} aria-current={page === activePage ? "page" : undefined}>{page}</button>)}<button type="button" onClick={() => setCurrentPage(activePage + 1)} disabled={activePage === pageCount}>{copy.next}</button></nav>}
         </section>
       </div>

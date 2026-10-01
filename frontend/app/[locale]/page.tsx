@@ -1,4 +1,5 @@
 import CatalogClient, {type Chair, type Project} from "./CatalogClient";
+import {localizeProjectChair, localizedChairName} from "./chairNames";
 
 const copy = {
   en: {brand: "Project Opportunities from TU Munich", titleBefore: "Find your next Project Study or IDP", titleHighlight: "", titleAfter: "", lede: "Search Project Studies, Informatics IDPs and other projects from audited TUM sources.", search: "Search title, company, topic or chair", filters: "Organizations", entitySearch: "Search organizations", noEntities: "No matching organizations", lastUpdated: "Last updated", age: "Age", under3: "< 3 days", under30: "< 30 days", under60: "< 60 days", under180: "< 180 days", over180: "> 180 days", type: "Type", display: "Display", all: "All", previous: "Previous", next: "Next", foundOne: "opportunity", foundMany: "opportunities", profile: "Project details", source: "Chair listing page", artifact: "Project document", unknown: "Not specified", published: "Published", added: "Added", filterToggle: "Filters", reset: "Reset filters", noResults: "No matching opportunities", noResultsHint: "Try a broader search or remove some filters.", trustDaily: "Refreshed daily from chair websites", trustSources: "Every listing links to its source", trustChairs: "chairs covered", pagination: "Pagination", noSaved: "Save a project to see it here.", bookmarkError: "Could not save the bookmark. Check cookie settings or the number of saved projects."},
@@ -16,16 +17,17 @@ async function load<T>(path: string, fallback: T): Promise<T> {
   return fallback;
 }
 
-type ProjectPage = {items: Project[]; total: number; page: number; page_size: number; last_updated_at?: string; published_profile_filters: string[]};
+type ProjectPage = {items: Project[]; total: number; page: number; page_size: number; last_updated_at?: string; published_profile_filters: string[]; pinned_project_codes: string[]};
 
 async function loadProjects(): Promise<ProjectPage> {
-  const first = await load<ProjectPage>("/projects?page_size=100", {items: [], total: 0, page: 1, page_size: 100, published_profile_filters: []});
+  const fallback: ProjectPage = {items: [], total: 0, page: 1, page_size: 100, published_profile_filters: [], pinned_project_codes: []};
+  const first = await load<ProjectPage>("/projects?page_size=100", fallback);
   const additionalPages = Math.ceil(first.total / first.page_size) - 1;
   if (additionalPages <= 0) return first;
 
   const remaining = await Promise.all(Array.from(
     {length: additionalPages},
-    (_, index) => load<ProjectPage>(`/projects?page=${index + 2}&page_size=${first.page_size}`, {items: [], total: 0, page: index + 2, page_size: first.page_size, published_profile_filters: []}),
+    (_, index) => load<ProjectPage>(`/projects?page=${index + 2}&page_size=${first.page_size}`, {...fallback, page: index + 2}),
   ));
   return {...first, items: [...first.items, ...remaining.flatMap((page) => page.items)]};
 }
@@ -38,5 +40,5 @@ export default async function Catalog({params, searchParams}: {params: Promise<{
     load<Chair[]>("/chairs", []),
   ]);
 
-  return <CatalogClient lang={lang} copy={copy[lang]} initialProjects={projectData.items} lastUpdatedAt={projectData.last_updated_at} chairs={chairs} publishedProfileFilters={projectData.published_profile_filters || []} initialSavedOnly={query.saved === "1"}/>;
+  return <CatalogClient lang={lang} copy={copy[lang]} initialProjects={projectData.items.map((project) => localizeProjectChair(project, lang))} lastUpdatedAt={projectData.last_updated_at} chairs={chairs.map((chair) => ({...chair, name: localizedChairName(chair.name, lang) || chair.name}))} publishedProfileFilters={projectData.published_profile_filters || []} pinnedProjectCodes={projectData.pinned_project_codes || []} initialSavedOnly={query.saved === "1"}/>;
 }
