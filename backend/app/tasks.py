@@ -10,6 +10,9 @@ from celery.schedules import crontab
 from sqlalchemy import select, text
 
 from .config import settings
+from .catalog_snapshot import pipeline_lock, publish_locked, current_version, read_data
+import httpx
+from pathlib import Path
 from .db import Chair, Listing, PDFArtifact, engine, session_factory
 from .ingestion.description_backfill import run_description_backfill
 from .ingestion.live import run_live
@@ -30,6 +33,7 @@ app.conf.enable_utc = True
 app.conf.task_track_started = True
 app.conf.worker_prefetch_multiplier = 1
 app.conf.beat_schedule = {
+    "catalog-reconciliation": {"task": "app.tasks.reconcile_catalog", "schedule": 300.0},
     "daily-ingestion": {"task": "app.tasks.ingest_all", "schedule": crontab(hour=3, minute=0)},
     "daily-alerts": {"task": "app.tasks.deliver_alerts", "schedule": crontab(hour=7, minute=0)},
     "weekly-alerts": {"task": "app.tasks.deliver_alerts", "schedule": crontab(hour=7, minute=0, day_of_week=1)},
@@ -138,7 +142,7 @@ def _run_project_enrichment(outcome: dict, completed_chairs: set[str]) -> dict:
     return outcome
 
 
-def _run_ingestion(adapters, *, trigger: str, force: bool = False) -> dict:
+def _run_ingestion_locked(adapters, *, trigger: str, force: bool = False) -> dict:
     """Run crawl and enrichment, then persist a metadata-only JSON run report."""
     selected = tuple(adapters)
     started_at = datetime.now(timezone.utc)
@@ -160,6 +164,18 @@ def _run_ingestion(adapters, *, trigger: str, force: bool = False) -> dict:
         outcome["project_enrichment"] = {"status": "failed", "error_type": type(error).__name__}
         logger.error(json.dumps({"event": "project_enrichment_failed", "trigger": trigger,
                                  "error_type": type(error).__name__}))
+    if any(row.get("status") in {"success", "not_modified", "partial"} for row in outcome.get("results", [])):
+        try:
+            bootstrap = publish_locked()
+            outcome["catalog_publication"] = {"status": "published", "version": bootstrap["version"]}
+        except Exception as error:
+            outcome["catalog_publication"] = {"status": "failed", "error_type": type(error).__name__}
+            logger.error(json.dumps({"event": "catalog_publication_failed", "error_type": type(error).__name__}))
+    if outcome.get("catalog_publication", {}).get("status") == "published":
+        try:
+            refresh_catalog.delay(outcome["catalog_publication"]["version"])
+        except Exception as error:
+            logger.error(json.dumps({"event": "catalog_notification_failed", "error_type": type(error).__name__}))
     finished_at = datetime.now(timezone.utc)
     try:
         report_path = write_run_summary(
@@ -178,6 +194,59 @@ def _run_ingestion(adapters, *, trigger: str, force: bool = False) -> dict:
         logger.error(json.dumps({"event": "ingestion_run_summary_failed", "trigger": trigger,
                                  "error_type": type(error).__name__}))
     return outcome
+
+
+def _run_ingestion(adapters, *, trigger: str, force: bool = False) -> dict:
+    with pipeline_lock() as acquired:
+        if not acquired:
+            return {"status": "skipped", "reason": "another catalog pipeline is running", "results": []}
+        return _run_ingestion_locked(adapters, trigger=trigger, force=force)
+
+
+@app.task(bind=True, autoretry_for=(Exception,), retry_backoff=True, retry_backoff_max=60,
+          retry_jitter=True, max_retries=8)
+def refresh_catalog(self, version: str):
+    config = settings()
+    if not config.catalog_revalidation_secret:
+        raise RuntimeError("Catalog revalidation secret is not configured")
+    # A superseded notification refreshes the latest publication instead.
+    version = current_version()
+    with httpx.Client(timeout=45) as client:
+        response = client.post(f"{config.catalog_web_url}/api/internal/revalidate",
+                               headers={"Authorization": f"Bearer {config.catalog_revalidation_secret}"},
+                               json={"version": version})
+        response.raise_for_status()
+        for locale in ("en", "de"):
+            response = client.get(f"{config.catalog_web_url}/{locale}")
+            response.raise_for_status()
+            if version not in response.text:
+                raise RuntimeError("Catalog prewarm did not render the published version")
+    from .catalog_snapshot import _write
+    _write(config.catalog_storage_path / "acknowledged.json", {"version": version})
+    logger.info(json.dumps({"event": "catalog_refresh_acknowledged", "version": version}))
+    return {"version": version}
+
+
+@app.task
+def reconcile_catalog():
+    config = settings()
+    try:
+        bootstrap = read_data(name="bootstrap")
+    except Exception as error:
+        logger.error(json.dumps({"event": "catalog_unavailable", "error_type": type(error).__name__}))
+        return {"status": "unavailable"}
+    age = (datetime.now(timezone.utc) - datetime.fromisoformat(bootstrap["published_at"])).total_seconds()
+    if age > 36 * 3600:
+        logger.error(json.dumps({"event": "catalog_publication_stale", "version": bootstrap["version"], "age_seconds": int(age)}))
+    try:
+        acknowledged = json.loads((config.catalog_storage_path / "acknowledged.json").read_text())["version"]
+    except (OSError, ValueError, KeyError):
+        acknowledged = None
+    if acknowledged != bootstrap["version"]:
+        if age > 300:
+            logger.error(json.dumps({"event": "catalog_refresh_overdue", "version": bootstrap["version"]}))
+        refresh_catalog.delay(bootstrap["version"])
+    return {"version": bootstrap["version"], "acknowledged": acknowledged}
 
 
 @app.task

@@ -2,6 +2,8 @@
 
 This runbook deploys the portal as the existing Docker Compose stack on one Compute Engine VM. Caddy is the only public container; Next.js, FastAPI, PostgreSQL, Redis, Celery Worker, and Celery Beat stay on the private Compose network.
 
+For the persistent catalog rollout and latency checks, follow [catalog-latency.md](catalog-latency.md). Preserve `catalog_data` alongside the original volumes.
+
 ## Daily ingestion behavior
 
 Celery Beat enqueues `app.tasks.ingest_all` every day at 03:00 Europe/Berlin. The task fetches all live chair sources through the cached robots policy and follows only adapter-scoped child links. After the crawl, it converts pending PDF artifacts to page Markdown, converts eligible HTML/DOCX/PNG or inline chair descriptions to Markdown, then runs the LLM profile backfill for pending Markdown linked to active projects in chairs whose crawl succeeded, was unchanged, or was partial. Existing successful profiles for the current schema, prompt, model, and effort are skipped. Azure OpenAI credentials are required for profile extraction; PNG transcription also uses the configured Azure OpenAI client. Scanned PDFs without a readable text layer remain flagged for OCR.

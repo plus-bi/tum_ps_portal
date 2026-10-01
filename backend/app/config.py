@@ -30,6 +30,9 @@ class Settings(BaseSettings):
     crawler_timeout_seconds: float = 30.0
     crawler_max_attempts: int = 3
     crawler_max_content_bytes: int = 25_000_000
+    catalog_storage_path: Path = Path("/var/lib/portal/catalog")
+    catalog_revalidation_secret: str = ""
+    catalog_web_url: str = "http://web:3000"
     artifact_storage_path: Path = Path("/var/lib/portal/artifacts")
     # Show unapproved organization candidates only in a local review session.
     organization_attribution_preview: bool = False

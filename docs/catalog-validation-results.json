@@ -1,0 +1,85 @@
+{
+  "staging_ttfb": {
+    "en": {
+      "sequential_p95_ms": 156.486,
+      "concurrent_p95_ms": 188.208
+    },
+    "de": {
+      "sequential_p95_ms": 28.471,
+      "concurrent_p95_ms": 182.745
+    }
+  },
+  "staging_restart": {
+    "en": {
+      "sequential_p95_ms": 167.41500000000002,
+      "concurrent_p95_ms": 198.98
+    },
+    "de": {
+      "sequential_p95_ms": 41.695,
+      "concurrent_p95_ms": 66.314
+    }
+  },
+  "production_loopback": {
+    "en": {
+      "sequential_p95_ms": 14.496,
+      "concurrent_p95_ms": 100.486
+    },
+    "de": {
+      "sequential_p95_ms": 12.722000000000001,
+      "concurrent_p95_ms": 49.482
+    }
+  },
+  "production_public": {
+    "en": {
+      "sequential_p95_ms": 64.004,
+      "concurrent_p95_ms": 275.719
+    },
+    "de": {
+      "sequential_p95_ms": 37.538000000000004,
+      "concurrent_p95_ms": 177.494
+    }
+  },
+  "production_browser": {
+    "total": 432,
+    "browser_checks": "passed",
+    "language_switch_p95_ms": 246.7230767942965,
+    "interactions": [
+      {
+        "display": 20,
+        "milliseconds": 66.67
+      },
+      {
+        "display": 100,
+        "milliseconds": 101.16
+      },
+      {
+        "display": "all",
+        "milliseconds": 97.15
+      }
+    ]
+  },
+  "production_mobile": {
+    "lcp_ms": [
+      1164,
+      1088,
+      1088,
+      1204,
+      1084
+    ],
+    "median_lcp_ms": 1088,
+    "network_latency_ms": 150,
+    "download_bytes_per_second": 200000,
+    "cpu_slowdown": 4
+  },
+  "staging_parser_workload": {
+    "en": {
+      "sequential_p95_ms": 10.073,
+      "concurrent_p95_ms": 75.569
+    },
+    "de": {
+      "sequential_p95_ms": 9.332999999999998,
+      "concurrent_p95_ms": 75.232
+    },
+    "fixture_parses": 767
+  }
+}

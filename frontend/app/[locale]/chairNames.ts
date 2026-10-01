@@ -7,7 +7,7 @@ export function localizedChairName(name: string | null | undefined, lang: "en" |
   return name;
 }
 
-export function localizeProjectChair(project: Project, lang: "en" | "de"): Project {
+export function localizeProjectChair<T extends Project>(project: T, lang: "en" | "de"): T {
   return {...project, chair: localizedChairName(project.chair, lang) || null,
     source_name: localizedChairName(project.source_name, lang),
     academic_units: project.academic_units?.map((unit) => ({...unit,

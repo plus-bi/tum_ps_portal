@@ -13,13 +13,14 @@ from .db import Chair, Department, Listing, OrganizationAttribution, PDFArtifact
 from .ingestion.lifecycle import freshness
 from sqlalchemy import inspect, select
 from sqlalchemy.exc import SQLAlchemyError
+from contextlib import nullcontext
 
 router = APIRouter(prefix="/api/v1")
 
 
-def canonical_project_slug(slug: str) -> str:
+def canonical_project_slug(slug: str, session=None) -> str:
     try:
-        with session_factory()() as session:
+        with (nullcontext(session) if session is not None else session_factory()()) as session:
             if not inspect(session.bind).has_table(Listing.__tablename__):
                 return slug
             listing = session.scalar(select(Listing).where(Listing.slug == slug))
@@ -28,25 +29,14 @@ def canonical_project_slug(slug: str) -> str:
         return slug
 
 
-@router.get("/project-aliases")
-def project_aliases():
-    with session_factory()() as session:
+
+def project_aliases(session=None):
+    with (nullcontext(session) if session is not None else session_factory()()) as session:
         if not inspect(session.bind).has_table(Listing.__tablename__):
             return {}
         return {listing.slug: listing.normalized["merged_into_slug"]
                 for listing in session.scalars(select(Listing))
                 if (listing.normalized or {}).get("merged_into_slug")}
-
-# Demo data keeps the UI useful before the first database-backed crawl.
-PROJECTS = [Project(
-    slug="example-project-study",
-    reference_code="ps-001",
-    title="Example Project Study",
-    summary="Run the ingestion worker to replace this development record with source-grounded listings.",
-    department="Operations and Technology", chair="Operations Management",
-    topics=[Topic.operations_supply_chain], language="English", source_url="https://www.mgt.tum.de/",
-    freshness=Freshness.undated,
-)]
 
 def _project_from_listing(listing: Listing, chair: Chair, department: Department,
                           *, has_profile: bool = False,
@@ -120,9 +110,9 @@ def _mentions(row: OrganizationAttribution | None, field: str) -> list[Organizat
         return []
 
 
-def persisted_projects() -> list[Project]:
+def persisted_projects(session=None) -> list[Project]:
     try:
-        with session_factory()() as session:
+        with (nullcontext(session) if session is not None else session_factory()()) as session:
             rows = session.execute(select(Listing, Chair, Department)
                                    .join(Chair, Listing.chair_id == Chair.id)
                                    .join(Department, Chair.department_id == Department.id)).all()
@@ -161,18 +151,20 @@ def persisted_projects() -> list[Project]:
                 ))
             return projects
     except Exception:
-        return []
+        raise
 
 
 @router.get("/projects")
 def projects(q: str | None = None, status: Status = Status.active, department: list[str] = Query(default=[]),
              chair: list[str] = Query(default=[]), topic: list[Topic] = Query(default=[]),
              sort: str = "relevance", page: int = Query(1, ge=1), page_size: int = Query(20, ge=1, le=100)):
-    pinned_project_codes = settings().pinned_project_codes
+    from .catalog_snapshot import current_data
+    data = current_data()
+    pinned_project_codes = data["bootstrap"]["pinned_project_codes"]
     pinned_order = {code: index for index, code in enumerate(pinned_project_codes)}
-    stored = persisted_projects()
+    stored = [Project.model_validate(value) for value in data["projects"]]
     last_updated_at = max((project.last_seen_at for project in stored), default=None)
-    rows = [p for p in (stored or PROJECTS) if p.status == status]
+    rows = [p for p in stored if p.status == status]
     if q:
         needle = q.casefold(); rows = [p for p in rows if needle in f"{p.reference_code} {p.title} {p.summary or ''} {p.chair or ''} {p.source_name or ''}".casefold()]
     if department: rows = [p for p in rows if p.department in department]
@@ -190,22 +182,19 @@ def projects(q: str | None = None, status: Status = Status.active, department: l
     start = (page - 1) * page_size
     return {"items": rows[start:start + page_size], "total": len(rows), "page": page, "page_size": page_size,
             "last_updated_at": last_updated_at,
-            "published_profile_filters": available_fields(),
+            "published_profile_filters": data["bootstrap"]["published_profile_filters"],
             "pinned_project_codes": list(pinned_project_codes)}
 
 
 @router.get("/projects/{slug}", response_model=Project)
 def project(slug: str):
-    slug = canonical_project_slug(slug)
-    found = next((p for p in (persisted_projects() or PROJECTS) if p.slug == slug), None)
-    if not found: raise HTTPException(404, "Project not found")
-    return found
+    from .catalog_snapshot import detail_data
+    return detail_data(slug)["project"]
 
 
-@router.get("/projects/{slug}/profile", response_model=ProjectProfileDetail)
-def project_profile(slug: str) -> ProjectProfileDetail:
-    slug = canonical_project_slug(slug)
-    with session_factory()() as session:
+def project_profile(slug: str, session=None) -> ProjectProfileDetail:
+    slug = canonical_project_slug(slug, session)
+    with (nullcontext(session) if session is not None else session_factory()()) as session:
         row = session.execute(select(Listing, Chair, Department)
                               .join(Chair, Listing.chair_id == Chair.id)
                               .join(Department, Chair.department_id == Department.id)
@@ -244,10 +233,10 @@ def project_profile(slug: str) -> ProjectProfileDetail:
         )
 
 
-@router.get("/projects/{slug}/description", response_model=ProjectDescriptionDetail)
-def project_description(slug: str) -> ProjectDescriptionDetail:
-    slug = canonical_project_slug(slug)
-    with session_factory()() as session:
+
+def project_description(slug: str, session=None) -> ProjectDescriptionDetail:
+    slug = canonical_project_slug(slug, session)
+    with (nullcontext(session) if session is not None else session_factory()()) as session:
         row = session.execute(select(Listing, Chair, Department)
                               .join(Chair, Listing.chair_id == Chair.id)
                               .join(Department, Chair.department_id == Department.id)
@@ -271,6 +260,46 @@ def chairs(): return [{"slug": a.slug, "name": a.name, "department": a.departmen
 
 @router.get("/facets")
 def facets():
-    rows = persisted_projects() or PROJECTS
-    return {"departments": {d: sum(p.department == d for p in rows) for d in DEPARTMENTS.values()},
-            "topics": {t.value: sum(t in p.topics for p in rows) for t in Topic}}
+    from .catalog_snapshot import current_data
+    return current_data()["bootstrap"]["facets"]
+
+
+
+@router.get("/catalog")
+def catalog_bootstrap():
+    from .catalog_snapshot import read_data
+    return read_data(name="bootstrap")
+
+
+@router.get("/catalog/{version}")
+def catalog_index(version: str):
+    from .catalog_snapshot import read_data
+    return read_data(version, "catalog")
+
+
+@router.get("/projects/{slug}/detail")
+def published_detail(slug: str, version: str | None = None):
+    from .catalog_snapshot import detail_data
+    return detail_data(slug, version)
+
+
+@router.get("/project-aliases")
+def published_aliases():
+    from .catalog_snapshot import read_data
+    return read_data(name="bootstrap")["aliases"]
+
+
+@router.get("/projects/{slug}/profile", response_model=ProjectProfileDetail)
+def published_profile(slug: str):
+    result = published_detail(slug)["profile"]
+    if result is None:
+        raise HTTPException(404, "No extracted profile for this project")
+    return result
+
+
+@router.get("/projects/{slug}/description", response_model=ProjectDescriptionDetail)
+def published_description(slug: str):
+    result = published_detail(slug)["description"]
+    if result is None:
+        raise HTTPException(404, "No chair-page description for this project")
+    return result

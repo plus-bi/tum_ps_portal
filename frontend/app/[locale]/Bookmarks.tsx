@@ -1,22 +1,14 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
+import Link from "next/link";
 import styles from "./Bookmarks.module.css";
 
 const COOKIE_NAME = "project_bookmarks";
 const CHANGE_EVENT = "project-bookmarks-change";
 const MAX_COOKIE_VALUE_LENGTH = 3500;
+const EMPTY_ALIASES: Record<string, string> = {};
 const SLUG_PATTERN = /^[a-z0-9][a-z0-9-]{0,127}$/;
-let aliasRequest: Promise<Record<string, string>> | undefined;
-
-function bookmarkAliases(): Promise<Record<string, string>> {
-  aliasRequest ||= fetch("/api/v1/project-aliases").then(async (response) => {
-    if (!response.ok) throw new Error("Alias lookup unavailable");
-    return await response.json() as Record<string, string>;
-  }).catch(() => { aliasRequest = undefined; return {}; });
-  return aliasRequest;
-}
-
 function writeBookmarks(bookmarks: string[]): boolean {
   const value = encodeURIComponent(JSON.stringify(bookmarks));
   if (value.length > MAX_COOKIE_VALUE_LENGTH) return false;
@@ -35,15 +27,14 @@ function readBookmarks(): string[] {
   }
 }
 
-export function useBookmarks() {
+export function useBookmarks(aliases: Record<string, string> = EMPTY_ALIASES) {
   const [bookmarks, setBookmarks] = useState<string[]>([]);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     let mounted = true;
-    const sync = async () => {
-      const aliases = await bookmarkAliases();
+    const sync = () => {
       if (!mounted) return;
       const stored = readBookmarks();
       const canonical = [...new Set(stored.map((slug) => SLUG_PATTERN.test(aliases[slug] || "") ? aliases[slug] : slug))];
@@ -58,9 +49,9 @@ export function useBookmarks() {
       window.removeEventListener(CHANGE_EVENT, sync);
       window.removeEventListener("pageshow", sync);
     };
-  }, []);
+  }, [aliases]);
 
-  function toggle(slug: string) {
+  const toggle = useCallback((slug: string) => {
     if (!SLUG_PATTERN.test(slug)) return;
     const current = readBookmarks();
     const next = current.includes(slug) ? current.filter((item) => item !== slug) : [...current, slug];
@@ -70,7 +61,7 @@ export function useBookmarks() {
     } else {
       setError(true);
     }
-  }
+  }, []);
 
   return {bookmarks, loaded, error, toggle};
 }
@@ -92,12 +83,12 @@ export function SavedProjectsPill({lang, active}: {lang: "en" | "de"; active: bo
     ? "In einem Cookie dieses Browsers gespeichert. Beim Löschen der Cookies gehen die Lesezeichen verloren."
     : "Stored in a cookie on this browser. Clearing cookies removes bookmarks.";
   return <span className="saved-pill-wrapper">
-    <a className="saved-pill" href={active ? `/${lang}` : `/${lang}?saved=1`}
+    <Link className="saved-pill" href={active ? `/${lang}` : `/${lang}?saved=1`}
       aria-current={active ? "page" : undefined} aria-describedby="saved-projects-note">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 3.75h12v16.5l-6-4-6 4z"/></svg>
       {lang === "de" ? "Gemerkte Projekte" : "Saved projects"}
       <span className="saved-count">{loaded ? bookmarks.length : "…"}</span>
-    </a>
+    </Link>
     <span className="saved-tooltip" id="saved-projects-note" role="tooltip">{note}</span>
   </span>;
 }

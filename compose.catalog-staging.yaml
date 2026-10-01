@@ -1,0 +1,41 @@
+# Explicitly isolated fixtures; never loads .env or production volumes.
+services:
+  caddy:
+    image: caddy:2.8-alpine
+    ports: ["127.0.0.1:8187:80"]
+    environment: {PORTAL_DOMAIN: ":80"}
+    volumes: ["./Caddyfile:/etc/caddy/Caddyfile:ro"]
+    depends_on: [web, api]
+  web:
+    build: {context: ., dockerfile: frontend/Dockerfile}
+    environment:
+      NEXT_PUBLIC_API_URL: "http://api:8000/api/v1"
+      CATALOG_REVALIDATION_SECRET: "isolated-fixture-secret"
+  api:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    volumes: ["catalog_data:/var/lib/portal/catalog:ro"]
+  publisher:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    user: root
+    cpus: 1.0
+    entrypoint: ["python", "/app/scripts/catalog_fixture.py"]
+    environment:
+      DATABASE_URL: "sqlite:////var/lib/portal/catalog/fixture.db"
+      REDIS_URL: "redis://redis:6379/0"
+      CATALOG_REVALIDATION_SECRET: "isolated-fixture-secret"
+    volumes: ["catalog_data:/var/lib/portal/catalog", "./scripts:/app/scripts:ro"]
+    profiles: ["maintenance"]
+  redis:
+    image: redis:7-alpine
+  worker:
+    build: {context: ., dockerfile: backend/Dockerfile}
+    cpus: 1.0
+    command: ["celery", "-A", "app.tasks", "worker", "--concurrency=1", "--loglevel=INFO"]
+    environment:
+      DATABASE_URL: "sqlite:////var/lib/portal/catalog/fixture.db"
+      REDIS_URL: "redis://redis:6379/0"
+      CATALOG_REVALIDATION_SECRET: "isolated-fixture-secret"
+    volumes: ["catalog_data:/var/lib/portal/catalog"]
+    depends_on: [redis]
+volumes:
+  catalog_data: {}

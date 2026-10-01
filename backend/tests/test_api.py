@@ -6,13 +6,10 @@ client = TestClient(app)
 
 def test_catalog_and_reference_endpoints():
     assert client.get("/health").status_code == 200
-    assert client.get("/api/v1/projects").json()["total"] == 1
-    assert client.get("/api/v1/projects?q=PS-001").json()["total"] == 1
+    assert client.get("/api/v1/catalog").status_code == 503
+    assert client.get("/api/v1/projects").status_code == 503
     assert len(client.get("/api/v1/chairs").json()) == 61
     assert len(client.get("/api/v1/departments").json()) == 7
-    assert client.get("/api/v1/projects/missing").status_code == 404
-    assert "artifact_url" in client.get("/api/v1/projects/example-project-study").json()
-    assert client.get("/api/v1/projects/example-project-study").json()["reference_code"] == "ps-001"
     assert client.get("/api/v1/bookmarks").status_code == 401
     assert client.get("/api/v1/admin/source-health").status_code == 401
 

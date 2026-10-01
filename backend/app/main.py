@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .catalog_cache import CatalogCacheMiddleware
 from .api import router
 from .account_api import router as account_router
 from .contact_api import router as contact_router
 
 app = FastAPI(title="TUM Project Studies Portal", version="1.0.0", docs_url="/api/docs")
 app.add_middleware(CORSMiddleware, allow_origins=["http://localhost", "http://localhost:3000"], allow_methods=["GET"], allow_headers=["*"])
+app.add_middleware(CatalogCacheMiddleware)
 app.include_router(router)
 app.include_router(account_router)
 app.include_router(contact_router)

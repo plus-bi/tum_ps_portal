@@ -5,7 +5,8 @@ import SiteFooter from "../../SiteFooter";
 import SiteHeader from "../../SiteHeader";
 import {ProjectBookmark} from "../../Bookmarks";
 import {AlertIcon, ArrowLeftIcon, ExternalIcon, FileIcon} from "../../Icons";
-import type {Project} from "../../CatalogClient";
+import type {DetailProject as Project} from "../../CatalogClient";
+import {catalogBase, loadBootstrap} from "../../../catalogServer";
 import styles from "./ProfileDetail.module.css";
 
 type Evidence = {page: number; excerpt: string};
@@ -295,29 +296,28 @@ function OfferView({offer, index, project, sourceKind, issues, copy, lang}: {
   </article>;
 }
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
+export function generateStaticParams() { return []; }
 
 export default async function ProjectDetails({params}: {params: Promise<{locale: string; slug: string}>}) {
   const {locale, slug} = await params;
   const lang = locale === "de" ? "de" : "en";
   const copy = translations[lang];
-  const base = process.env.NEXT_PUBLIC_API_URL || "http://api:8000/api/v1";
-  const projectResponse = await fetch(`${base}/projects/${encodeURIComponent(slug)}`, {cache: "no-store"});
-  if (projectResponse.ok) {
-    const project = await projectResponse.json() as Project;
-    if (project.slug !== slug) permanentRedirect(`/${lang}/projects/${encodeURIComponent(project.slug)}`);
+  let bootstrap = await loadBootstrap();
+  let response = await fetch(`${catalogBase}/projects/${encodeURIComponent(slug)}/detail?version=${bootstrap.version}`, {next: {revalidate: 86400, tags: ["project-details"]}});
+  if (response.status === 410) {
+    const latest = await fetch(`${catalogBase}/catalog`, {cache: "no-store"});
+    if (!latest.ok) throw new Error("Catalog unavailable");
+    bootstrap = await latest.json();
+    response = await fetch(`${catalogBase}/projects/${encodeURIComponent(slug)}/detail?version=${bootstrap.version}`, {next: {revalidate: 86400, tags: ["project-details"]}});
   }
-  let response: Response;
-  try {
-    response = await fetch(`${base}/projects/${encodeURIComponent(slug)}/profile`, {cache: "no-store"});
-  } catch {
-    throw new Error("Project profile API is unavailable");
-  }
-  if (response.status === 404) {
-    const descriptionResponse = await fetch(`${base}/projects/${encodeURIComponent(slug)}/description`, {cache: "no-store"});
-    if (descriptionResponse.status === 404) notFound();
-    if (!descriptionResponse.ok) throw new Error(`Project description API returned ${descriptionResponse.status}`);
-    const description = await descriptionResponse.json() as DescriptionDetail;
+  if (response.status === 404) notFound();
+  if (!response.ok) throw new Error(`Project details unavailable (${response.status})`);
+  const payload = await response.json() as {project: Project; profile: ProfileDetail | null; description: DescriptionDetail | null};
+  if (payload.project.slug !== slug) permanentRedirect(`/${lang}/projects/${encodeURIComponent(payload.project.slug)}`);
+  if (!payload.profile) {
+    if (!payload.description) notFound();
+    const description = payload.description;
     description.project = localizeProjectChair(description.project, lang);
     const sourceUrl = safeHttpUrl(description.project.source_url);
     return <>
@@ -335,7 +335,7 @@ export default async function ProjectDetails({params}: {params: Promise<{locale:
     </>;
   }
   if (!response.ok) throw new Error(`Project profile API returned ${response.status}`);
-  const detail = await response.json() as ProfileDetail;
+  const detail = payload.profile;
   detail.project = localizeProjectChair(detail.project, lang);
   const isHtml = detail.source_kind === "html";
   const detailCopy = isHtml ? {...copy, unknown: copy.htmlUnknown} : copy;

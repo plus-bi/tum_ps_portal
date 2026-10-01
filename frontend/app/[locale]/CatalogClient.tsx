@@ -1,6 +1,10 @@
 "use client";
 
-import {useMemo, useState} from "react";
+import {memo, Suspense, useDeferredValue, useEffect, useMemo, useState} from "react";
+import {useSearchParams, useRouter} from "next/navigation";
+import {useCatalog, useCatalogState} from "../CatalogProvider";
+import {localizeProjectChair, localizedChairName} from "./chairNames";
+import type {Bootstrap} from "../catalogTypes";
 import Link from "next/link";
 import Disclaimer from "./Disclaimer";
 import SiteFooter from "./SiteFooter";
@@ -11,8 +15,9 @@ import styles from "./CatalogClient.module.css";
 
 type ProfileFilters = {degree_level: ("bachelor" | "master" | "any")[] | null; work_modes: string[] | null; programming_performed: "none" | "some" | "central" | "unknown"; programming_required: "required" | "recommended" | "not_stated"; work_location_mode: "on_site" | "hybrid" | "remote" | "unknown"; working_language: ("en" | "de" | "other")[] | null};
 type ProfileField = keyof ProfileFilters;
-type OrganizationMention = {name: string; canonical_name: string | null; evidence: {page: number; excerpt: string}; method: string};
-export type Project = {slug: string; reference_code: string; title: string; summary?: string; search_summary_en?: string; department: string; chair: string | null; source_name?: string | null; academic_units?: OrganizationMention[]; project_partners?: OrganizationMention[]; opportunity_type: "project_study" | "idp" | "other"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; has_description?: boolean; filter_values?: ProfileFilters | null; published_at?: string; first_seen_at: string};
+export type OrganizationMention = {name: string; canonical_name: string | null; evidence: {page: number; excerpt: string}; method: string};
+export type DetailProject = {slug: string; reference_code: string; title: string; summary?: string; search_summary_en?: string; department: string; chair: string | null; source_name?: string | null; academic_units?: OrganizationMention[]; project_partners?: OrganizationMention[]; opportunity_type: "project_study" | "idp" | "other"; language?: string; topics: string[]; freshness: string; source_url: string; artifact_url?: string; has_profile: boolean; has_description?: boolean; filter_values?: ProfileFilters | null; published_at?: string; first_seen_at: string};
+export type Project = Omit<DetailProject, "academic_units" | "project_partners"> & {academic_units?: {name: string; canonical_name: string | null}[]; project_partners?: {name: string; canonical_name: string | null}[]};
 export type Chair = {slug: string; name: string; department: string; source_state: string};
 
 type AgeBand = "lt3" | "lt30" | "lt60" | "lt180" | "gt180";
@@ -83,30 +88,50 @@ function matchesProfileFacet(project: Project, field: ProfileField, selected: Se
   return values.some((value) => selected.has(value));
 }
 
-export default function CatalogClient({lang, copy, initialProjects, lastUpdatedAt, chairs, publishedProfileFilters, pinnedProjectCodes, initialSavedOnly = false}: {lang: "en" | "de"; copy: Copy; initialProjects: Project[]; lastUpdatedAt?: string; chairs: Chair[]; publishedProfileFilters: string[]; pinnedProjectCodes: string[]; initialSavedOnly?: boolean}) {
-  const [query, setQuery] = useState("");
-  const [selectedAgeBands, setSelectedAgeBands] = useState<Set<AgeBand>>(() => new Set());
-  const [selectedTypes, setSelectedTypes] = useState<Set<OpportunityType>>(() => new Set(["project_study", "idp", "other"]));
-  const [selectedProfileValues, setSelectedProfileValues] = useState<Record<ProfileField, Set<string>>>(() => Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
-  const [includeUnknown, setIncludeUnknown] = useState<Set<ProfileField>>(() => new Set());
-  const [displayCount, setDisplayCount] = useState("20");
-  const [currentPage, setCurrentPage] = useState(1);
+function SavedQuery({setSavedOnly}: {setSavedOnly: (value: boolean) => void}) {
+  const params = useSearchParams();
+  const saved = params.get("saved");
+  useEffect(() => { setSavedOnly(saved === "1"); }, [saved, setSavedOnly]);
+  return null;
+}
+
+export default function CatalogClient({lang, copy, bootstrap}: {lang: "en" | "de"; copy: Copy; bootstrap: Bootstrap}) {
+  const catalog = useCatalog(bootstrap);
+  const {ready, error, retry} = catalog;
+  const activeBootstrap = catalog.bootstrap;
+  const router = useRouter();
+  const initialProjects = useMemo(() => catalog.items.map((project) => localizeProjectChair(project, lang)), [catalog.items, lang]);
+  const chairs = useMemo(() => activeBootstrap.chairs.map((chair) => ({...chair, name: localizedChairName(chair.name, lang) || chair.name})), [activeBootstrap.chairs, lang]);
+  const {last_updated_at: lastUpdatedAt, published_profile_filters: publishedProfileFilters, pinned_project_codes: pinnedProjectCodes} = activeBootstrap;
+  const [query, setQuery] = useCatalogState("query", "");
+  const deferredQuery = useDeferredValue(query);
+  const [selectedAgeBands, setSelectedAgeBands] = useCatalogState<Set<AgeBand>>("ages", new Set());
+  const [selectedTypes, setSelectedTypes] = useCatalogState<Set<OpportunityType>>("types", new Set(["project_study", "idp", "other"]));
+  const [selectedProfileValues, setSelectedProfileValues] = useCatalogState<Record<ProfileField, Set<string>>>("profiles", Object.fromEntries(profileFieldOrder.map((field) => [field, new Set<string>()])) as Record<ProfileField, Set<string>>);
+  const [includeUnknown, setIncludeUnknown] = useCatalogState<Set<ProfileField>>("unknown", new Set());
+  const [displayCount, setDisplayCount] = useCatalogState("display", "20");
+  const [currentPage, setCurrentPage] = useCatalogState("page", 1);
   const [filtersOpen, setFiltersOpen] = useState(false);
-  const [savedOnly, setSavedOnly] = useState(initialSavedOnly);
-  const {bookmarks, loaded: bookmarksLoaded, error: bookmarkError, toggle: toggleBookmark} = useBookmarks();
+  const [savedOnly, setSavedOnly] = useCatalogState("saved", false);
+  const {bookmarks, loaded: bookmarksLoaded, error: bookmarkError, toggle: toggleBookmark} = useBookmarks(activeBootstrap.aliases);
+  useEffect(() => { if (ready) router.prefetch(lang === "en" ? "/de" : "/en"); }, [ready, router, lang]);
+  const prepared = useMemo(() => new Map(initialProjects.map((project) => [project.slug, {
+    text: `${project.reference_code} ${project.title} ${project.summary || ""} ${organizationNames(project).map(({name}) => name).join(" ")} ${project.source_name || ""} ${project.department}`.toLocaleLowerCase(),
+    timestamp: project.published_at ? Date.parse(`${project.published_at}T00:00:00Z`) : Date.parse(project.first_seen_at),
+  }])), [initialProjects]);
   const savedSlugs = useMemo(() => new Set(bookmarks), [bookmarks]);
   const publishedFields = useMemo(() => profileFieldOrder.filter((field) => publishedProfileFilters.includes(field)), [publishedProfileFilters]);
   const pinnedOrder = useMemo(() => new Map<string, number>(pinnedProjectCodes.map((code, index) => [code.toLowerCase(), index] as const)), [pinnedProjectCodes]);
   const displayedProjects = useMemo(() => {
-    const needle = query.trim().toLocaleLowerCase();
+    const needle = deferredQuery.trim().toLocaleLowerCase();
     const filtered = initialProjects.filter((project) => {
-      const ageTimestamp = project.published_at ? Date.parse(`${project.published_at}T00:00:00Z`) : Date.parse(project.first_seen_at);
+      const ageTimestamp = prepared.get(project.slug)!.timestamp;
       const daysOld = Math.floor((Date.now() - ageTimestamp) / 86_400_000);
       const ageBand = daysOld < 3 ? "lt3" : daysOld < 30 ? "lt30" : daysOld < 60 ? "lt60" : daysOld < 180 ? "lt180" : "gt180";
       const matchesAge = selectedAgeBands.size === 0 || selectedAgeBands.has(ageBand);
       const matchesType = selectedTypes.has(project.opportunity_type);
       const matchesProfile = publishedFields.every((field) => matchesProfileFacet(project, field, selectedProfileValues[field], includeUnknown.has(field)));
-      const text = `${project.reference_code} ${project.title} ${project.summary || ""} ${organizationNames(project).map(({name}) => name).join(" ")} ${project.source_name || ""} ${project.department}`.toLocaleLowerCase();
+      const text = prepared.get(project.slug)!.text;
       return matchesAge && matchesType && matchesProfile && (!savedOnly || savedSlugs.has(project.slug)) && (!needle || text.includes(needle));
     });
     return filtered.sort((a, b) => {
@@ -117,13 +142,14 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
         if (bPin === undefined) return -1;
         if (aPin !== bPin) return aPin - bPin;
       }
-      const aDate = a.published_at ? Date.parse(`${a.published_at}T00:00:00Z`) : Date.parse(a.first_seen_at);
-      const bDate = b.published_at ? Date.parse(`${b.published_at}T00:00:00Z`) : Date.parse(b.first_seen_at);
+      const aDate = prepared.get(a.slug)!.timestamp;
+      const bDate = prepared.get(b.slug)!.timestamp;
       return bDate - aDate || Date.parse(b.first_seen_at) - Date.parse(a.first_seen_at);
     });
-  }, [initialProjects, query, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, savedOnly, savedSlugs, pinnedOrder]);
+  }, [initialProjects, prepared, deferredQuery, selectedAgeBands, selectedTypes, selectedProfileValues, includeUnknown, publishedFields, savedOnly, savedSlugs, pinnedOrder]);
+  const resultTotal = ready ? displayedProjects.length : activeBootstrap.total;
   const pageSize = displayCount === "all" ? displayedProjects.length || 1 : Number(displayCount);
-  const pageCount = Math.max(1, Math.ceil(displayedProjects.length / pageSize));
+  const pageCount = Math.max(1, Math.ceil(resultTotal / pageSize));
   const activePage = Math.min(currentPage, pageCount);
   const visibleProjects = displayCount === "all" ? displayedProjects : displayedProjects.slice((activePage - 1) * pageSize, activePage * pageSize);
   const date = (value: string) => new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-GB", {day: "numeric", month: "short", year: "numeric", timeZone: "UTC"}).format(new Date(value.includes("T") ? value : `${value}T00:00:00Z`));
@@ -185,49 +211,37 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
   const filtersActive = query !== "" || selectedAgeBands.size > 0 || selectedTypes.size !== 3 || savedOnly || publishedFields.some((field) => selectedProfileValues[field].size > 0 || includeUnknown.has(field));
   const ageLabels: Record<AgeBand, string> = {lt3: copy.under3, lt30: copy.under30, lt60: copy.under60, lt180: copy.under180, gt180: copy.over180};
 
+  const facetCounts = useMemo(() => Object.fromEntries(publishedFields.map((field) => [field,
+    Object.fromEntries([...profileFacets[field].options.map((option) => option.value), "unknown"].map((value) => [value,
+      initialProjects.filter((project) => value === "unknown" ? profileFieldValues(project, field) === null : matchesProfileFacet(project, field, new Set([value]), false)).length]))
+  ])), [initialProjects, publishedFields]);
+
   function renderProfileFacet(field: ProfileField) {
     const definition = profileFacets[field];
     const label = lang === "de" ? definition.de : definition.en;
     const unknownLabel = field === "programming_performed" || field === "work_location_mode"
       ? (lang === "de" ? "Unbekannt einbeziehen" : "Include unknown")
       : (lang === "de" ? "Nicht angegeben einbeziehen" : "Include not specified");
-    const count = (value: string | null) => initialProjects.filter((project) => {
-      if (value === null) return profileFieldValues(project, field) === null;
-      return matchesProfileFacet(project, field, new Set([value]), false);
-    }).length;
+    const count = (value: string | null) => (ready ? facetCounts[field] : activeBootstrap.facets.profiles[field])?.[value || "unknown"] || 0;
     return <details className="department-filter profile-filter" key={field}><summary>{label}</summary><fieldset><legend className="visually-hidden">{label}</legend><div className="chips">
       {definition.options.map((option) => <label className="chip" key={option.value}>
-        <input type="checkbox" checked={selectedProfileValues[field].has(option.value)} onChange={(event) => toggleProfileValue(field, option.value, event.target.checked)}/>
+        <input disabled={!ready} type="checkbox" checked={selectedProfileValues[field].has(option.value)} onChange={(event) => toggleProfileValue(field, option.value, event.target.checked)}/>
         <span>{lang === "de" ? option.de : option.en} ({count(option.value)})</span>
       </label>)}
-      <label className="chip"><input type="checkbox" checked={includeUnknown.has(field)} onChange={(event) => toggleProfileUnknown(field, event.target.checked)}/><span>{unknownLabel} ({count(null)})</span></label>
+      <label className="chip"><input disabled={!ready} type="checkbox" checked={includeUnknown.has(field)} onChange={(event) => toggleProfileUnknown(field, event.target.checked)}/><span>{unknownLabel} ({count(null)})</span></label>
     </div></fieldset></details>;
   }
 
-  function renderProjectContent(project: Project, includeTitle = true) {
-    return <>
-      <span className={styles.referenceCode}>{project.reference_code}</span>
-      <p className="meta">{organizationNames(project).length ? organizationNames(project).map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
-      {includeTitle && <h2>{project.title}</h2>}
-      <p className="card-summary">{project.search_summary_en || project.summary || copy.unknown}</p>
-      <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : project.opportunity_type === "other" ? (lang === "de" ? "Sonstige" : "Others") : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
-      <p className="links">
-        <BookmarkButton slug={project.slug} lang={lang} saved={savedSlugs.has(project.slug)} onToggle={toggleBookmark} disabled={!bookmarksLoaded}/>
-        {(project.has_profile || project.has_description) && <Link className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}
-        <a className="source" href={project.source_url} target="_blank" rel="noopener noreferrer">{project.chair ? copy.source : (lang === "de" ? "Originale Angebotsseite" : "Original listing page")}<ExternalIcon size={14}/></a>
-        {project.artifact_url && <a className="source" href={project.artifact_url} target="_blank" rel="noopener noreferrer">{copy.artifact}<ExternalIcon size={14}/></a>}
-      </p>
-    </>;
-  }
 
   return <>
+    <Suspense><SavedQuery setSavedOnly={setSavedOnly}/></Suspense>
     <SiteHeader lang={lang} brand={copy.brand} enHref={savedOnly ? "/en?saved=1" : "/en"} deHref={savedOnly ? "/de?saved=1" : "/de"} savedActive={savedOnly}/>
     <main>
       <section className="hero"><div className="shell">
         {lastUpdated && <p className="pill"><span className="pill-dot" aria-hidden="true"/>{copy.lastUpdated}: <time dateTime={lastUpdatedAt}>{lastUpdated}</time></p>}
         <h1>{copy.titleBefore}{copy.titleHighlight && <span className="highlight">{copy.titleHighlight}</span>}{copy.titleAfter}</h1>
         <p className="lede">{copy.lede}</p>
-        <div className="hero-search"><SearchIcon size={20}/><input className="search" value={query} onChange={(event) => { setQuery(event.target.value); setCurrentPage(1); }} type="search" placeholder={copy.search} aria-label={copy.search}/></div>
+        <div className="hero-search"><SearchIcon size={20}/><input disabled={!ready} className="search" value={query} onChange={(event) => { setQuery(event.target.value); setCurrentPage(1); }} type="search" placeholder={copy.search} aria-label={copy.search}/></div>
         <ul className="trust">
           <li><RefreshIcon/>{copy.trustDaily}</li>
           <li><LinkIcon/>{copy.trustSources}</li>
@@ -240,39 +254,63 @@ export default function CatalogClient({lang, copy, initialProjects, lastUpdatedA
           <button type="button" className="filters-toggle" aria-expanded={filtersOpen} aria-controls="filters-body" onClick={() => setFiltersOpen((open) => !open)}><FilterIcon/>{copy.filterToggle}</button>
           <div id="filters-body" className={`filters-body${filtersOpen ? " open" : ""}`}>
             <fieldset><legend>{copy.type}</legend><div className="chips">
-              <label className="chip"><input type="checkbox" checked={selectedTypes.has("project_study")} onChange={(event) => toggleType("project_study", event.target.checked)}/><span>Project Study</span></label>
-              <label className="chip"><input type="checkbox" checked={selectedTypes.has("idp")} onChange={(event) => toggleType("idp", event.target.checked)}/><span>IDP</span></label>
-              <label className="chip"><input type="checkbox" checked={selectedTypes.has("other")} onChange={(event) => toggleType("other", event.target.checked)}/><span>{lang === "de" ? "Sonstige" : "Others"}</span></label>
+              <label className="chip"><input disabled={!ready} type="checkbox" checked={selectedTypes.has("project_study")} onChange={(event) => toggleType("project_study", event.target.checked)}/><span>Project Study</span></label>
+              <label className="chip"><input disabled={!ready} type="checkbox" checked={selectedTypes.has("idp")} onChange={(event) => toggleType("idp", event.target.checked)}/><span>IDP</span></label>
+              <label className="chip"><input disabled={!ready} type="checkbox" checked={selectedTypes.has("other")} onChange={(event) => toggleType("other", event.target.checked)}/><span>{lang === "de" ? "Sonstige" : "Others"}</span></label>
             </div></fieldset>
-            <fieldset><legend>{copy.age}</legend><div className="chips">{ageBands.map((band) => <label className="chip" key={band}><input type="checkbox" checked={selectedAgeBands.has(band)} onChange={(event) => toggleAgeBand(band, event.target.checked)}/><span>{ageLabels[band]}</span></label>)}</div></fieldset>
+            <fieldset><legend>{copy.age}</legend><div className="chips">{ageBands.map((band) => <label className="chip" key={band}><input disabled={!ready} type="checkbox" checked={selectedAgeBands.has(band)} onChange={(event) => toggleAgeBand(band, event.target.checked)}/><span>{ageLabels[band]}</span></label>)}</div></fieldset>
             {publishedFields.map(renderProfileFacet)}
             {filtersActive && <button type="button" className="reset" onClick={resetFilters}>{copy.reset}</button>}
           </div>
         </aside>
-        <section aria-live="polite">
+        <section aria-live="polite" data-catalog-version={activeBootstrap.version} data-catalog-ready={ready}>
+          {!ready && <p role="status">{error ? (lang === "de" ? "Katalog konnte nicht geladen werden." : "Could not load the full catalog.") : (lang === "de" ? "Alle Angebote werden geladen …" : "Loading all opportunities …")} {error && <button type="button" onClick={retry}>{lang === "de" ? "Erneut versuchen" : "Retry"}</button>}</p>}
           {bookmarkError && <p role="alert" className={styles.bookmarkError}>{copy.bookmarkError}</p>}
           <div className="results-head">
-            <p className="results-count"><strong>{displayedProjects.length}</strong> {displayedProjects.length === 1 ? copy.foundOne : copy.foundMany}</p>
+            <p className="results-count"><strong>{resultTotal}</strong> {resultTotal === 1 ? copy.foundOne : copy.foundMany}</p>
             <div className="controls">
-              <label>{copy.display} <select value={displayCount} onChange={(event) => { setDisplayCount(event.target.value); setCurrentPage(1); }} aria-label={copy.display}><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option><option value="all">{copy.all}</option></select></label>
+              <label>{copy.display} <select disabled={!ready} value={displayCount} onChange={(event) => { setDisplayCount(event.target.value); setCurrentPage(1); }} aria-label={copy.display}><option value="10">10</option><option value="20">20</option><option value="50">50</option><option value="100">100</option><option value="all">{copy.all}</option></select></label>
             </div>
           </div>
           {visibleProjects.length === 0 && <div className="empty"><h2>{copy.noResults}</h2><p>{savedOnly && bookmarks.length === 0 ? copy.noSaved : copy.noResultsHint}</p>{filtersActive && <button type="button" onClick={resetFilters}>{copy.reset}</button>}</div>}
-          {visibleProjects.map((project) => {
-            const isPinned = pinnedOrder.has(project.reference_code.toLowerCase());
-            return <article className={`card ${styles.cardWithReference} ${isPinned ? styles.pinnedCard : ""}`} key={project.slug}>
-              {isPinned
-                ? <details className={styles.pinnedDetails}>
-                    <summary className={styles.pinnedSummary}>{project.title}</summary>
-                    <div className={styles.pinnedContent}>{renderProjectContent(project, false)}</div>
-                  </details>
-                : renderProjectContent(project)}
-            </article>;
-          })}
-          {displayCount !== "all" && pageCount > 1 && <nav className="pagination" aria-label={copy.pagination}><button type="button" onClick={() => setCurrentPage(activePage - 1)} disabled={activePage === 1}>{copy.previous}</button>{Array.from({length: pageCount}, (_, index) => index + 1).map((page) => <button type="button" key={page} onClick={() => setCurrentPage(page)} aria-current={page === activePage ? "page" : undefined}>{page}</button>)}<button type="button" onClick={() => setCurrentPage(activePage + 1)} disabled={activePage === pageCount}>{copy.next}</button></nav>}
+          {visibleProjects.map((project) => <ProjectCard key={project.slug} project={project} lang={lang} copy={copy}
+            isPinned={pinnedOrder.has(project.reference_code.toLowerCase())} saved={savedSlugs.has(project.slug)}
+            bookmarksLoaded={bookmarksLoaded} toggleBookmark={toggleBookmark}/>)}
+          {displayCount !== "all" && pageCount > 1 && <nav className="pagination" aria-label={copy.pagination}><button type="button" onClick={() => setCurrentPage(activePage - 1)} disabled={!ready || activePage === 1}>{copy.previous}</button>{Array.from({length: pageCount}, (_, index) => index + 1).map((page) => <button type="button" key={page} disabled={!ready} onClick={() => setCurrentPage(page)} aria-current={page === activePage ? "page" : undefined}>{page}</button>)}<button type="button" onClick={() => setCurrentPage(activePage + 1)} disabled={!ready || activePage === pageCount}>{copy.next}</button></nav>}
         </section>
       </div>
     </main>
     <SiteFooter lang={lang}/>
   </>;
 }
+
+
+const ProjectCard = memo(function ProjectCard({project, lang, copy, isPinned, saved, bookmarksLoaded, toggleBookmark}: {
+  project: Project; lang: "en" | "de"; copy: Copy; isPinned: boolean; saved: boolean;
+  bookmarksLoaded: boolean; toggleBookmark: (slug: string) => void;
+}) {
+  const organizations = organizationNames(project);
+  const date = (value: string) => new Intl.DateTimeFormat(lang === "de" ? "de-DE" : "en-GB", {day: "numeric", month: "short", year: "numeric", timeZone: "UTC"}).format(new Date(value.includes("T") ? value : `${value}T00:00:00Z`));
+  function renderProjectContent(includeTitle = true) {
+    return <>
+      <span className={styles.referenceCode}>{project.reference_code}</span>
+      <p className="meta">{organizations.length ? organizations.map(({name}) => name).join(" / ") : (lang === "de" ? "Organisation nicht angegeben" : "Organization not specified")}{project.source_name === "Informatics IDP Hub" && ` · ${lang === "de" ? "Quelle" : "Source"}: ${project.source_name}`}</p>
+      {includeTitle && <h2>{project.title}</h2>}
+      <p className="card-summary">{project.search_summary_en || project.summary || copy.unknown}</p>
+      <div className="tags"><span className="tag tag-type">{project.opportunity_type === "idp" ? "IDP" : project.opportunity_type === "other" ? (lang === "de" ? "Sonstige" : "Others") : "Project Study"}</span>{project.language && <span className="tag">{project.language}</span>}{project.topics.map((topic) => <span className="tag" key={topic}>{topic.replaceAll("_", " / ")}</span>)}<span className="tag tag-date">{project.published_at ? `${copy.published} ${date(project.published_at)}` : `${copy.added} ${date(project.first_seen_at)}`}</span></div>
+      <p className="links">
+        <BookmarkButton slug={project.slug} lang={lang} saved={saved} onToggle={toggleBookmark} disabled={!bookmarksLoaded}/>
+        {(project.has_profile || project.has_description) && <Link prefetch={false} className="source source-primary" href={`/${lang}/projects/${encodeURIComponent(project.slug)}`}>{copy.profile}<ArrowRightIcon/></Link>}
+        <a className="source" href={project.source_url} target="_blank" rel="noopener noreferrer">{project.chair ? copy.source : (lang === "de" ? "Originale Angebotsseite" : "Original listing page")}<ExternalIcon size={14}/></a>
+        {project.artifact_url && <a className="source" href={project.artifact_url} target="_blank" rel="noopener noreferrer">{copy.artifact}<ExternalIcon size={14}/></a>}
+      </p>
+    </>;
+  }
+
+  return <article className={`card ${styles.cardWithReference} ${isPinned ? styles.pinnedCard : ""}`}>
+    {isPinned ? <details className={styles.pinnedDetails}>
+      <summary className={styles.pinnedSummary}>{project.title}</summary>
+      <div className={styles.pinnedContent}>{renderProjectContent(false)}</div>
+    </details> : renderProjectContent()}
+  </article>;
+});

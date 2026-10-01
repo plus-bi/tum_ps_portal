@@ -1,3 +1,6 @@
+"use client";
+
+import {useRouter} from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {SavedProjectsPill} from "./Bookmarks";
@@ -18,13 +21,14 @@ function DeFlag() {
 }
 
 export default function SiteHeader({lang, brand, enHref, deHref, savedActive = false}: {lang: "en" | "de"; brand: string; enHref: string; deHref: string; savedActive?: boolean}) {
+  const router = useRouter();
   return <header className="top"><div className="shell">
     <Link className="brand" href={`/${lang}`}><Image className="brand-mark" src={plusBiLogo} alt="Plus BI" width={30} height={30} priority unoptimized/><span className="brand-text">{brand}</span></Link>
     <div className="top-actions">
       <SavedProjectsPill lang={lang} active={savedActive}/>
       <nav className="lang" aria-label="Language">
-        <Link href={enHref} lang="en" aria-current={lang === "en" ? "true" : undefined}><UsFlag/>EN</Link>
-        <Link href={deHref} lang="de" aria-current={lang === "de" ? "true" : undefined}><DeFlag/>DE</Link>
+        <Link prefetch={false} onMouseEnter={() => router.prefetch(enHref)} onFocus={() => router.prefetch(enHref)} onTouchStart={() => router.prefetch(enHref)} href={enHref} lang="en" aria-current={lang === "en" ? "true" : undefined}><UsFlag/>EN</Link>
+        <Link prefetch={false} onMouseEnter={() => router.prefetch(deHref)} onFocus={() => router.prefetch(deHref)} onTouchStart={() => router.prefetch(deHref)} href={deHref} lang="de" aria-current={lang === "de" ? "true" : undefined}><DeFlag/>DE</Link>
       </nav>
     </div>
   </div></header>;

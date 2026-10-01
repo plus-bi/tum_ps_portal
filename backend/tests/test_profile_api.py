@@ -45,6 +45,7 @@ def test_profiles_needing_ocr_are_hidden_and_unverified_ones_are_flagged(tmp_pat
     add_project("unverified", "b" * 64, ["unverified_citations"], [issue])
     add_project("ocr", "c" * 64, ["requires_ocr", "unverified_citations"])
 
+    publish(tmp_path, monkeypatch)
     projects = {project["slug"]: project["has_profile"] for project in client.get("/api/v1/projects?page_size=50").json()["items"]}
     assert projects == {"clean": True, "unverified": True, "ocr": False}
 
@@ -74,6 +75,7 @@ def test_catalog_includes_evidenced_filter_values_only_for_unambiguous_profiles(
     assert projects["single"].filter_values.programming_performed == "none"
     assert projects["single"].filter_values.working_language is None
     assert projects["multi"].filter_values is None
+    publish(tmp_path, monkeypatch)
     response = list_projects(status=Status.active, department=[], chair=[], topic=[], sort="relevance", page=1, page_size=50)
     assert len(response["published_profile_filters"]) == 6
 
@@ -96,5 +98,14 @@ def test_hub_listings_do_not_claim_the_hub_as_their_chair(tmp_path, monkeypatch)
     assert projects["hub"].source_name == "Informatics IDP Hub"
     assert projects["own-chair"].chair == "Chair"
     assert projects["own-chair"].source_name == "Chair"
+    publish(tmp_path, monkeypatch)
     sorted_projects = list_projects(status=Status.active, department=[], chair=[], topic=[], sort="chair", page=1, page_size=20)
     assert [project.slug for project in sorted_projects["items"]] == ["own-chair", "hub"]
+
+
+def publish(tmp_path, monkeypatch):
+    from app.catalog_snapshot import publish_locked
+    from app.config import settings
+    config = settings().model_copy(update={"catalog_storage_path": tmp_path / "catalog", "pinned_projects": ""})
+    monkeypatch.setattr("app.catalog_snapshot.settings", lambda: config)
+    publish_locked()

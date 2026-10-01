@@ -31,9 +31,11 @@ services:
       NEXT_PUBLIC_API_URL: "http://api:8000/api/v1"
       NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}"
       CLERK_SECRET_KEY: "${CLERK_SECRET_KEY}"
+      CATALOG_REVALIDATION_SECRET: "${CATALOG_REVALIDATION_SECRET:-}"
     restart: unless-stopped
     logging: *default-logging
   api:
+    volumes: ["catalog_data:/var/lib/portal/catalog:ro"]
     build: {context: ., dockerfile: backend/Dockerfile}
     env_file:
       - path: .env
@@ -46,7 +48,8 @@ services:
     healthcheck: {test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"], interval: 30s, timeout: 5s, retries: 3}
   worker:
     build: {context: ., dockerfile: backend/Dockerfile}
-    command: ["celery", "-A", "app.tasks", "worker", "--loglevel=INFO", "--concurrency=${CELERY_WORKER_CONCURRENCY:-2}"]
+    cpus: 1.0
+    command: ["celery", "-A", "app.tasks", "worker", "--loglevel=INFO", "--concurrency=1"]
     env_file:
       - path: .env
         required: false
@@ -55,7 +58,7 @@ services:
       TURNSTILE_SECRET_KEY: ""
     restart: unless-stopped
     logging: *default-logging
-    volumes: ["artifact_data:/var/lib/portal/artifacts"]
+    volumes: ["artifact_data:/var/lib/portal/artifacts", "catalog_data:/var/lib/portal/catalog"]
     depends_on:
       artifact-init:
         condition: service_completed_successfully
@@ -66,10 +69,11 @@ services:
   artifact-init:
     build: {context: ., dockerfile: backend/Dockerfile}
     user: root
-    command: ["sh", "-c", "mkdir -p /var/lib/portal/artifacts && chown app:app /var/lib/portal/artifacts"]
-    volumes: ["artifact_data:/var/lib/portal/artifacts"]
+    command: ["sh", "-c", "mkdir -p /var/lib/portal/artifacts /var/lib/portal/catalog && chown app:app /var/lib/portal/artifacts /var/lib/portal/catalog"]
+    volumes: ["artifact_data:/var/lib/portal/artifacts", "catalog_data:/var/lib/portal/catalog"]
     restart: "no"
   pdf-backfill:
+    cpus: 1.0
     build: {context: ., dockerfile: backend/Dockerfile}
     command: ["python", "-m", "app.ingestion.pdf_backfill", "--interval-seconds=30", "--jitter-seconds=10"]
     env_file:
@@ -88,6 +92,7 @@ services:
       postgres:
         condition: service_healthy
   profile-backfill:
+    cpus: 1.0
     build: {context: ., dockerfile: backend/Dockerfile}
     command: ["python", "-m", "app.ingestion.profile_backfill", "--dry-run"]
     env_file:
@@ -136,3 +141,4 @@ volumes:
   caddy_data: {}
   caddy_config: {}
   artifact_data: {}
+  catalog_data: {}

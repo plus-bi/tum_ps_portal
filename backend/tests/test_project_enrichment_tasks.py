@@ -84,6 +84,9 @@ def test_nightly_task_converts_all_crawled_chairs_before_llm_profiles(tmp_path, 
         assert slugs == chairs
         return {"hash-a", "hash-b"}
 
+    monkeypatch.setattr(tasks, "pipeline_lock", lambda: nullcontext(True))
+    monkeypatch.setattr(tasks, "publish_locked", lambda: {"version": "test"})
+    monkeypatch.setattr(tasks.refresh_catalog, "delay", lambda version: None)
     monkeypatch.setattr(tasks, "run_live", fake_live)
     monkeypatch.setattr(tasks, "classify_stored_pdfs", lambda: order.append("pdf_markdown") or {"digital_native": 1})
     monkeypatch.setattr(tasks, "run_description_backfill", fake_markdown)
